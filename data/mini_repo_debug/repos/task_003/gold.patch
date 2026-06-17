@@ -1,0 +1,13 @@
+diff --git a/src/summarizer.py b/src/summarizer.py
+index f9bc942..8d2e271 100644
+--- a/src/summarizer.py
++++ b/src/summarizer.py
+@@ -8,5 +8,7 @@ def total_amount(csv_text: str) -> int:
+     reader = csv.DictReader(StringIO(csv_text))
+     total = 0
+     for row in reader:
+-        total += int(row["amount"])
++        amount = (row.get("amount") or "").strip()
++        if amount:
++            total += int(amount)
+     return total

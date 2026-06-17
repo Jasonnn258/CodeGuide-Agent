@@ -1,0 +1,14 @@
+diff --git a/src/text_cli.py b/src/text_cli.py
+index 27d88c2..29bc7e3 100644
+--- a/src/text_cli.py
++++ b/src/text_cli.py
+@@ -5,7 +5,7 @@ import argparse
+ 
+ 
+ def transform(text: str, uppercase: bool = False) -> str:
+     if uppercase:
+-        return text
++        return text.upper()
+     return text.lower()
+ 
+ 

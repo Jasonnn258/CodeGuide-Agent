@@ -1,0 +1,3 @@
+dataset_root: data/mini_repo_debug
+default_eval_mode: noop
+timeout_seconds: 30

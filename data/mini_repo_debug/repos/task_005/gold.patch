@@ -1,0 +1,10 @@
+diff --git a/src/calculator.py b/src/calculator.py
+index e7ae93a..bf1a290 100644
+--- a/src/calculator.py
++++ b/src/calculator.py
+@@ -5,4 +5,4 @@ def subtotal(items: list[dict]) -> int:
+ 
+ 
+ def final_total(items: list[dict], discount: int = 0) -> int:
+-    return subtotal(items) + discount
++    return subtotal(items) - discount

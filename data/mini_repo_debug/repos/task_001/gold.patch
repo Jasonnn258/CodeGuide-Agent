@@ -1,0 +1,30 @@
+diff --git a/src/config_loader.py b/src/config_loader.py
+index 50dc86a..2ba4c71 100644
+--- a/src/config_loader.py
++++ b/src/config_loader.py
+@@ -4,6 +4,24 @@
+ from pathlib import Path
+ 
+ 
++def _parse_scalar(value: str):
++    if value.lower() == "true":
++        return True
++    if value.lower() == "false":
++        return False
++    try:
++        return int(value)
++    except ValueError:
++        return value
++
++
+ def load_config(path: str) -> dict:
+-    text = Path(path).read_text(encoding="utf-8")
++    config_path = Path(path)
++    text = config_path.read_text(encoding="utf-8")
++    if config_path.suffix in {".yaml", ".yml"}:
++        result = {}
++        for line in text.splitlines():
++            key, value = line.split(":", 1)
++            result[key.strip()] = _parse_scalar(value.strip())
++        return result
+     return json.loads(text)

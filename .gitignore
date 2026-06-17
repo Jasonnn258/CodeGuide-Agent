@@ -1,0 +1,14 @@
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# local tool/config artifacts
+.brv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.env
+.venv/
