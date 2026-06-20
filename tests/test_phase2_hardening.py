@@ -7,7 +7,7 @@ from codeguide_agent.baselines.prompt_only import run_baseline
 from codeguide_agent.eval.run_eval import compute_repo_checksum
 from codeguide_agent.eval_mini_repo import evaluate_one
 from codeguide_agent.datasets.mini_repo_debug import load_tasks
-from codeguide_agent.training_data.build_sft_from_trajectories import build_sft_dataset
+from codeguide_agent.data_builders.build_sft import build_sft_dataset
 
 
 def _copy_task_with_git(source: Path, destination: Path) -> Path:

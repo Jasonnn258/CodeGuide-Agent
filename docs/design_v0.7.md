@@ -9,10 +9,12 @@ interfaces:
 - baseline runners for deterministic local policies,
 - trajectory logs suitable for future SFT/DPO/GRPO data builders.
 
-The runtime should remain modular. A forge-agent-style runtime provides the
-agent loop, event log, tool registry, repo context, LLM backend boundary, and
-CLI entry points. CodeGuide-Agent owns the dataset, evaluation, reward, and data
-builder layers.
+The runtime should remain modular. The forge-style runtime package provides a
+baseline/demo implementation of an agent loop, event log, tool registry, repo
+context, LLM backend boundary, and CLI entry points. The canonical
+Mini-Repo-Debug rollout path uses `RolloutCollector` plus
+`codeguide_agent/tools/*`. CodeGuide-Agent owns the dataset, evaluation, reward,
+and data builder layers.
 
 Aider is treated as a strong baseline, teacher, and repo-map/edit-format
 reference, not as the main implementation base.

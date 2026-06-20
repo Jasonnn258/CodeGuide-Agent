@@ -20,7 +20,7 @@ The current first target is verifier-driven repo-level debugging on Mini-Repo-De
 
 ## Current Project Stage
 
-The project is currently in **Phase 1 → Phase 2 transition**.
+The project is currently in **P2 cleanup before Phase 2 expansion**.
 
 Phase 1 has already implemented:
 
@@ -35,14 +35,16 @@ Phase 1 has already implemented:
 * SFT/DPO/GRPO data-builder skeletons;
 * docs for forge runtime migration and Aider positioning.
 
-Phase 2 should focus on:
+Completed hardening:
 
-* expanding Mini-Repo-Debug from 5 tasks to 20+ tasks;
-* adding no-leakage evaluation;
-* implementing real non-gold baseline policies;
-* adding Aider baseline runner;
-* building baseline comparison reports;
-* turning verified trajectories into SFT/DPO data.
+* Phase 1.5 / P0 hardening is complete.
+* P1 infrastructure hardening is complete.
+
+Current next priorities:
+
+* P2 cleanup: provenance/positioning and data-builder consolidation.
+* P3 non-gold policy plus Aider baseline.
+* Then expand Mini-Repo-Debug beyond the current 5 tasks.
 
 ---
 
@@ -155,11 +157,16 @@ baselines/           = how we compare against other systems
 
 ## Runtime Base Policy
 
-The project uses a compact forge-agent-style runtime as the engineering base.
+The project includes a compact forge-style runtime package, but the canonical
+Mini-Repo-Debug rollout path currently uses `RolloutCollector` and
+`codeguide_agent/tools/*`.
 
-The runtime is adapted from the local `/Users/yjx/Code/forge-agent` project for research use. Respect the license and attribution constraints. If license is unclear, avoid blindly copying large source files without a clear notice.
+The runtime package is adapted from an earlier local prototype at
+`/Users/yjx/Code/forge-agent`. The inspected local checkout has a GitHub remote
+but no local license file, so do not describe it as an open-source dependency
+or as the sole engineering base.
 
-The runtime should provide:
+The runtime package provides a baseline/demo implementation of:
 
 * agent loop boundary;
 * task/action/observation dataclasses;
@@ -283,10 +290,18 @@ Preferred bug categories:
 Core metrics:
 
 ```text
-gold_file_hit@k
-gold_function_hit@k
+gold_file_hit_at_3
+gold_file_hit_at_5
+gold_function_hit_at_3
+gold_function_hit_at_5
+gold_file_patched
+gold_function_patched
 public_test_pass
 hidden_test_pass
+pre_public_pass_count
+pre_public_fail_count
+post_public_pass_count
+post_public_fail_count
 patch_size
 no_test_deletion
 no_hardcode
@@ -302,8 +317,10 @@ Useful aggregate metrics:
 task_success_rate
 public_test_pass_rate
 hidden_test_pass_rate
-gold_file_hit_rate
-gold_function_hit_rate
+gold_file_hit_at_3_rate
+gold_function_hit_at_3_rate
+gold_file_patched_rate
+gold_function_patched_rate
 average_patch_size
 no_test_deletion_rate
 no_hardcode_rate
@@ -328,6 +345,12 @@ Validate dataset:
 python -m codeguide_agent.dataset.validate_mini_repo_task --root data/mini_repo_debug
 ```
 
+Run leakage audit:
+
+```bash
+python -m codeguide_agent.dataset.audit_leakage --root data/mini_repo_debug
+```
+
 Run Mini-Repo-Debug evaluation:
 
 ```bash
@@ -345,7 +368,7 @@ python -m codeguide_agent.rollout.run_rollout --root data/mini_repo_debug --poli
 Build SFT-style data from trajectories:
 
 ```bash
-python -m codeguide_agent.training_data.build_sft_from_trajectories \
+python -m codeguide_agent.data_builders.build_sft \
   --input data/mini_repo_debug/trajectories \
   --output data/mini_repo_debug/sft/phase2_sft.jsonl
 ```
@@ -461,14 +484,13 @@ When adding major functionality, update README and docs together.
 
 ## Current Next Priorities
 
-1. Expand Mini-Repo-Debug to 20+ tasks.
-2. Add no-leakage guard and `leakage_detected` metric.
+1. Finish P2 cleanup: conservative runtime provenance and canonical data-builder paths.
+2. Implement P3 non-gold heuristic/localize-only policy.
 3. Implement Aider baseline runner.
-4. Add non-gold heuristic/localize-only policy.
-5. Add `eval_compare` for baseline comparison.
-6. Extend SFT builder for successful verified trajectories.
-7. Add DPO pair builder with chosen/rejected filtering.
-8. Generate a Phase 2 baseline evaluation report.
+4. Add `eval_compare` for baseline comparison.
+5. Expand Mini-Repo-Debug to 20+ tasks after P2/P3 foundations are stable.
+6. Add DPO pair builder with chosen/rejected filtering.
+7. Generate a Phase 2 baseline evaluation report.
 
 ---
 

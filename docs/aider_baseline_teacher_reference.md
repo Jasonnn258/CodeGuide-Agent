@@ -16,8 +16,10 @@ In CodeGuide-Agent, Aider has three roles:
 - Teacher/data generator after verifier filtering.
 - Repo-map and edit-format design reference.
 
-The main runtime base is forge-agent style because it has clearer boundaries
-for event logs, tool execution, and research trajectories.
+CodeGuide-Agent keeps a forge-style runtime package as a baseline/demo runtime
+and reference for event logs, tool execution, and research trajectories. The
+canonical Mini-Repo-Debug rollout path is `RolloutCollector` plus
+`codeguide_agent/tools/*`.
 
 ## Why Not Directly Fork Aider?
 

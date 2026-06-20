@@ -4,6 +4,10 @@
 
 The Phase 2A rollout collector creates an isolated temporary copy of each Mini-Repo-Debug task, initializes rollout state, asks a deterministic local policy for structured actions, validates those actions, executes existing tools, logs action-observation steps, computes reward, and verifies the original task repo checksum is unchanged.
 
+P1 hardening adds process localization metrics, regression-detectable public
+test accounting, and static leakage checks. This is still infrastructure
+hardening, not evidence of real LLM repair capability.
+
 Supported policy backends:
 
 - `noop`: emits `stop`.
@@ -35,10 +39,30 @@ Useful flags:
 - `--keep-temp` to inspect temp repos after rollout.
 - `--output data/mini_repo_debug/rollouts/phase2_rollouts.jsonl` to save rollout summaries.
 
+## P1 Metrics And Audits
+
+Localization metrics are split into two families:
+
+- `gold_file_hit_at_3`, `gold_file_hit_at_5`, `gold_function_hit_at_3`, and
+  `gold_function_hit_at_5` measure whether exploration surfaced or opened the
+  gold location before patching.
+- `gold_file_patched` and `gold_function_patched` measure whether the final
+  diff landed on the gold location.
+
+Each public test suite should contain at least one test that passes before the
+bug fix. The validator warns when this is not true because regression detection
+depends on comparing pre-patch and post-patch public pass counts.
+
+Run the static issue leakage audit with:
+
+```bash
+python -m codeguide_agent.dataset.audit_leakage --root data/mini_repo_debug
+```
+
 ## How To Build SFT Data
 
 ```bash
-python -m codeguide_agent.training_data.build_sft_from_trajectories \
+python -m codeguide_agent.data_builders.build_sft \
   --input data/mini_repo_debug/trajectories \
   --output data/mini_repo_debug/sft/phase2_sft.jsonl
 ```

@@ -6,5 +6,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from text_cli import transform
 
 
+def test_default_lowercase_still_works():
+    assert transform("Hello", uppercase=False) == "hello"
+
+
 def test_uppercase_flag_transforms_text():
     assert transform("Hello", uppercase=True) == "HELLO"

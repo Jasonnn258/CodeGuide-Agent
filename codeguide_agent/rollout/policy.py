@@ -54,7 +54,7 @@ class ScriptedSearchPatchPolicy(BasePolicy):
         if state.step_id == 0:
             return Action("Inspect repository layout.", "repo_tree", {"max_depth": 4})
         if not state.searched_queries:
-            return Action("Search for issue keywords.", "search_repo", {"query": _issue_query(state.issue_text), "file_glob": "*.py"})
+            return Action("Search for issue keywords.", "search_repo", {"query": _issue_query(state.issue_text), "path": "src", "file_glob": "*.py"})
         if state.searched_queries and not state.opened_files:
             match_file = _first_match_file(state.observations)
             if match_file:

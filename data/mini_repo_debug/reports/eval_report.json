@@ -1,0 +1,443 @@
+{
+  "created_at": "2026-06-20T05:27:48.999632+00:00",
+  "results": [
+    {
+      "agent_result": {
+        "error": null,
+        "patch": "diff --git a/src/config_loader.py b/src/config_loader.py\nindex 9e9812a..c446b28 100644\n--- a/src/config_loader.py\n+++ b/src/config_loader.py\n@@ -4,6 +4,24 @@ import json\n from pathlib import Path\n \n \n+def _parse_scalar(value: str):\n+    if value.lower() == \"true\":\n+        return True\n+    if value.lower() == \"false\":\n+        return False\n+    try:\n+        return int(value)\n+    except ValueError:\n+        return value\n+\n+\n def load_config(path: str) -> dict:\n-    text = Path(path).read_text(encoding=\"utf-8\")\n+    config_path = Path(path)\n+    text = config_path.read_text(encoding=\"utf-8\")\n+    if config_path.suffix in {\".yaml\", \".yml\"}:\n+        result = {}\n+        for line in text.splitlines():\n+            key, value = line.split(\":\", 1)\n+            result[key.strip()] = _parse_scalar(value.strip())\n+        return result\n     return json.loads(text)\n",
+        "status": "success",
+        "steps_taken": 4,
+        "summary": "forge-style deterministic run complete",
+        "task_id": "task_001",
+        "trajectory_path": "data/mini_repo_debug/trajectories/task_001_forge.jsonl"
+      },
+      "metrics": {
+        "action_stats": {
+          "duplicate_tool_calls": 0,
+          "invalid_json_count": 0,
+          "timeout_count": 0,
+          "unknown_tool_count": 0
+        },
+        "allowed_files": [
+          "src/config_loader.py"
+        ],
+        "allowed_overlap_ratio": 1.0,
+        "changed_files": [
+          "src/config_loader.py"
+        ],
+        "changed_files_count": 1,
+        "changed_lines_count": 20,
+        "gold_file_hit": true,
+        "gold_file_patched": true,
+        "gold_function_hit": true,
+        "gold_function_patched": true,
+        "hardcode_reasons": [],
+        "hardcode_suspicion": false,
+        "hidden_pass": true,
+        "hidden_test_pass": true,
+        "invalid_action_count": 0,
+        "no_hardcode": true,
+        "no_test_deletion": true,
+        "patch_size": 20,
+        "post_public_fail_count": 0,
+        "post_public_pass_count": 2,
+        "pre_public_fail_count": 1,
+        "pre_public_pass_count": 1,
+        "public_pass": true,
+        "public_test_pass": true,
+        "regression": false,
+        "task_id": "task_001",
+        "test_file_modified": false,
+        "total_reward": 1.2,
+        "unrelated_edit_flag": false,
+        "unrelated_files": []
+      },
+      "original_checksum_after": "45fd6a134653d60e26bfe34e9d6fbe73e06ac251f8b984590cf043e5ce54d4c2",
+      "original_checksum_before": "45fd6a134653d60e26bfe34e9d6fbe73e06ac251f8b984590cf043e5ce54d4c2",
+      "original_repo_unchanged": true,
+      "safety_error": "",
+      "task_id": "task_001",
+      "tests": {
+        "hidden": {
+          "cmd": "python -m pytest tests_hidden -q",
+          "exit_code": 0,
+          "normalized_cmd": "python -m codeguide_agent.testing.simple_pytest tests_hidden -q",
+          "stderr": "",
+          "stdout": "2 passed\n",
+          "timeout": false
+        },
+        "pre_public": {
+          "cmd": "python -m pytest tests -q",
+          "exit_code": 1,
+          "normalized_cmd": "python -m codeguide_agent.testing.simple_pytest tests -q",
+          "stderr": "",
+          "stdout": "\nFAILED tests/test_config_loader.py::test_loads_yaml_config\nTraceback (most recent call last):\n  File \"/Users/yjx/Code/CodeGuide-Agent/codeguide_agent/testing/simple_pytest.py\", line 63, in main\n    run_test_function(func)\n    ~~~~~~~~~~~~~~~~~^^^^^^\n  File \"/Users/yjx/Code/CodeGuide-Agent/codeguide_agent/testing/simple_pytest.py\", line 41, in run_test_function\n    func(**kwargs)\n    ~~~~^^^^^^^^^^\n  File \"/private/tmp/codeguide_mini_repo_eval/task_001/tests/test_config_loader.py\", line 20, in test_loads_yaml_config\n    assert load_config(str(config)) == {\"name\": \"demo\", \"retries\": 3, \"enabled\": True}\n           ~~~~~~~~~~~^^^^^^^^^^^^^\n  File \"/private/tmp/codeguide_mini_repo_eval/task_001/src/config_loader.py\", line 9, in load_config\n    return json.loads(text)\n           ~~~~~~~~~~^^^^^^\n  File \"/Users/yjx/miniconda3/lib/python3.13/json/__init__.py\", line 352, in loads\n    return _default_decoder.decode(s)\n           ~~~~~~~~~~~~~~~~~~~~~~~^^^\n  File \"/Users/yjx/miniconda3/lib/python3.13/json/decoder.py\", line 345, in decode\n    obj, end = self.raw_decode(s, idx=_w(s, 0).end())\n               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/yjx/miniconda3/lib/python3.13/json/decoder.py\", line 363, in raw_decode\n    raise JSONDecodeError(\"Expecting value\", s, err.value) from None\njson.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)\n\n1 failed, 1 passed\n",
+          "timeout": false
+        },
+        "public": {
+          "cmd": "python -m pytest tests -q",
+          "exit_code": 0,
+          "normalized_cmd": "python -m codeguide_agent.testing.simple_pytest tests -q",
+          "stderr": "",
+          "stdout": "2 passed\n",
+          "timeout": false
+        }
+      },
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_001_forge.jsonl",
+      "workspace": "/tmp/codeguide_mini_repo_eval/task_001"
+    },
+    {
+      "agent_result": {
+        "error": null,
+        "patch": "diff --git a/src/text_cli.py b/src/text_cli.py\nindex cb8ef45..c712642 100644\n--- a/src/text_cli.py\n+++ b/src/text_cli.py\n@@ -5,7 +5,7 @@ import argparse\n \n def transform(text: str, uppercase: bool = False) -> str:\n     if uppercase:\n-        return text\n+        return text.upper()\n     return text.lower()\n \n \n",
+        "status": "success",
+        "steps_taken": 4,
+        "summary": "forge-style deterministic run complete",
+        "task_id": "task_002",
+        "trajectory_path": "data/mini_repo_debug/trajectories/task_002_forge.jsonl"
+      },
+      "metrics": {
+        "action_stats": {
+          "duplicate_tool_calls": 0,
+          "invalid_json_count": 0,
+          "timeout_count": 0,
+          "unknown_tool_count": 0
+        },
+        "allowed_files": [
+          "src/text_cli.py"
+        ],
+        "allowed_overlap_ratio": 1.0,
+        "changed_files": [
+          "src/text_cli.py"
+        ],
+        "changed_files_count": 1,
+        "changed_lines_count": 2,
+        "gold_file_hit": true,
+        "gold_file_patched": true,
+        "gold_function_hit": true,
+        "gold_function_patched": true,
+        "hardcode_reasons": [],
+        "hardcode_suspicion": false,
+        "hidden_pass": true,
+        "hidden_test_pass": true,
+        "invalid_action_count": 0,
+        "no_hardcode": true,
+        "no_test_deletion": true,
+        "patch_size": 2,
+        "post_public_fail_count": 0,
+        "post_public_pass_count": 2,
+        "pre_public_fail_count": 1,
+        "pre_public_pass_count": 1,
+        "public_pass": true,
+        "public_test_pass": true,
+        "regression": false,
+        "task_id": "task_002",
+        "test_file_modified": false,
+        "total_reward": 1.2,
+        "unrelated_edit_flag": false,
+        "unrelated_files": []
+      },
+      "original_checksum_after": "9b3def5d2977c0708d7040182d7d7e0aabc109018d39dfac82226d0f253d5b01",
+      "original_checksum_before": "9b3def5d2977c0708d7040182d7d7e0aabc109018d39dfac82226d0f253d5b01",
+      "original_repo_unchanged": true,
+      "safety_error": "",
+      "task_id": "task_002",
+      "tests": {
+        "hidden": {
+          "cmd": "python -m pytest tests_hidden -q",
+          "exit_code": 0,
+          "normalized_cmd": "python -m codeguide_agent.testing.simple_pytest tests_hidden -q",
+          "stderr": "",
+          "stdout": "2 passed\n",
+          "timeout": false
+        },
+        "pre_public": {
+          "cmd": "python -m pytest tests -q",
+          "exit_code": 1,
+          "normalized_cmd": "python -m codeguide_agent.testing.simple_pytest tests -q",
+          "stderr": "",
+          "stdout": "\nFAILED tests/test_text_cli.py::test_uppercase_flag_transforms_text\nTraceback (most recent call last):\n  File \"/Users/yjx/Code/CodeGuide-Agent/codeguide_agent/testing/simple_pytest.py\", line 63, in main\n    run_test_function(func)\n    ~~~~~~~~~~~~~~~~~^^^^^^\n  File \"/Users/yjx/Code/CodeGuide-Agent/codeguide_agent/testing/simple_pytest.py\", line 41, in run_test_function\n    func(**kwargs)\n    ~~~~^^^^^^^^^^\n  File \"/private/tmp/codeguide_mini_repo_eval/task_002/tests/test_text_cli.py\", line 14, in test_uppercase_flag_transforms_text\n    assert transform(\"Hello\", uppercase=True) == \"HELLO\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n\n1 failed, 1 passed\n",
+          "timeout": false
+        },
+        "public": {
+          "cmd": "python -m pytest tests -q",
+          "exit_code": 0,
+          "normalized_cmd": "python -m codeguide_agent.testing.simple_pytest tests -q",
+          "stderr": "",
+          "stdout": "2 passed\n",
+          "timeout": false
+        }
+      },
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_002_forge.jsonl",
+      "workspace": "/tmp/codeguide_mini_repo_eval/task_002"
+    },
+    {
+      "agent_result": {
+        "error": null,
+        "patch": "diff --git a/src/summarizer.py b/src/summarizer.py\nindex 235e102..5b06fcd 100644\n--- a/src/summarizer.py\n+++ b/src/summarizer.py\n@@ -8,5 +8,7 @@ def total_amount(csv_text: str) -> int:\n     reader = csv.DictReader(StringIO(csv_text))\n     total = 0\n     for row in reader:\n-        total += int(row[\"amount\"])\n+        amount = (row.get(\"amount\") or \"\").strip()\n+        if amount:\n+            total += int(amount)\n     return total\n",
+        "status": "success",
+        "steps_taken": 4,
+        "summary": "forge-style deterministic run complete",
+        "task_id": "task_003",
+        "trajectory_path": "data/mini_repo_debug/trajectories/task_003_forge.jsonl"
+      },
+      "metrics": {
+        "action_stats": {
+          "duplicate_tool_calls": 0,
+          "invalid_json_count": 0,
+          "timeout_count": 0,
+          "unknown_tool_count": 0
+        },
+        "allowed_files": [
+          "src/summarizer.py"
+        ],
+        "allowed_overlap_ratio": 1.0,
+        "changed_files": [
+          "src/summarizer.py"
+        ],
+        "changed_files_count": 1,
+        "changed_lines_count": 4,
+        "gold_file_hit": true,
+        "gold_file_patched": true,
+        "gold_function_hit": true,
+        "gold_function_patched": true,
+        "hardcode_reasons": [],
+        "hardcode_suspicion": false,
+        "hidden_pass": true,
+        "hidden_test_pass": true,
+        "invalid_action_count": 0,
+        "no_hardcode": true,
+        "no_test_deletion": true,
+        "patch_size": 4,
+        "post_public_fail_count": 0,
+        "post_public_pass_count": 2,
+        "pre_public_fail_count": 1,
+        "pre_public_pass_count": 1,
+        "public_pass": true,
+        "public_test_pass": true,
+        "regression": false,
+        "task_id": "task_003",
+        "test_file_modified": false,
+        "total_reward": 1.2,
+        "unrelated_edit_flag": false,
+        "unrelated_files": []
+      },
+      "original_checksum_after": "3fd5b9f1989b89409a2393f6402a78f01c1757c9385bf26001294b303d800e55",
+      "original_checksum_before": "3fd5b9f1989b89409a2393f6402a78f01c1757c9385bf26001294b303d800e55",
+      "original_repo_unchanged": true,
+      "safety_error": "",
+      "task_id": "task_003",
+      "tests": {
+        "hidden": {
+          "cmd": "python -m pytest tests_hidden -q",
+          "exit_code": 0,
+          "normalized_cmd": "python -m codeguide_agent.testing.simple_pytest tests_hidden -q",
+          "stderr": "",
+          "stdout": "2 passed\n",
+          "timeout": false
+        },
+        "pre_public": {
+          "cmd": "python -m pytest tests -q",
+          "exit_code": 1,
+          "normalized_cmd": "python -m codeguide_agent.testing.simple_pytest tests -q",
+          "stderr": "",
+          "stdout": "\nFAILED tests/test_summarizer.py::test_ignores_empty_amount_rows\nTraceback (most recent call last):\n  File \"/Users/yjx/Code/CodeGuide-Agent/codeguide_agent/testing/simple_pytest.py\", line 63, in main\n    run_test_function(func)\n    ~~~~~~~~~~~~~~~~~^^^^^^\n  File \"/Users/yjx/Code/CodeGuide-Agent/codeguide_agent/testing/simple_pytest.py\", line 41, in run_test_function\n    func(**kwargs)\n    ~~~~^^^^^^^^^^\n  File \"/private/tmp/codeguide_mini_repo_eval/task_003/tests/test_summarizer.py\", line 16, in test_ignores_empty_amount_rows\n    assert total_amount(csv_text) == 5\n           ~~~~~~~~~~~~^^^^^^^^^^\n  File \"/private/tmp/codeguide_mini_repo_eval/task_003/src/summarizer.py\", line 11, in total_amount\n    total += int(row[\"amount\"])\n             ~~~^^^^^^^^^^^^^^^\nValueError: invalid literal for int() with base 10: ''\n\n1 failed, 1 passed\n",
+          "timeout": false
+        },
+        "public": {
+          "cmd": "python -m pytest tests -q",
+          "exit_code": 0,
+          "normalized_cmd": "python -m codeguide_agent.testing.simple_pytest tests -q",
+          "stderr": "",
+          "stdout": "2 passed\n",
+          "timeout": false
+        }
+      },
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_003_forge.jsonl",
+      "workspace": "/tmp/codeguide_mini_repo_eval/task_003"
+    },
+    {
+      "agent_result": {
+        "error": null,
+        "patch": "diff --git a/src/pricing.py b/src/pricing.py\nindex f425b0d..287ccd2 100644\n--- a/src/pricing.py\n+++ b/src/pricing.py\n@@ -4,10 +4,10 @@ from __future__ import annotations\n class PriceService:\n     def __init__(self, prices: dict[tuple[str, str], int]):\n         self.prices = prices\n-        self.cache: dict[str, int] = {}\n+        self.cache: dict[tuple[str, str], int] = {}\n \n     def get_price(self, item: str, region: str) -> int:\n-        key = item\n+        key = (item, region)\n         if key not in self.cache:\n             self.cache[key] = self.prices[(item, region)]\n         return self.cache[key]\n",
+        "status": "success",
+        "steps_taken": 4,
+        "summary": "forge-style deterministic run complete",
+        "task_id": "task_004",
+        "trajectory_path": "data/mini_repo_debug/trajectories/task_004_forge.jsonl"
+      },
+      "metrics": {
+        "action_stats": {
+          "duplicate_tool_calls": 0,
+          "invalid_json_count": 0,
+          "timeout_count": 0,
+          "unknown_tool_count": 0
+        },
+        "allowed_files": [
+          "src/pricing.py"
+        ],
+        "allowed_overlap_ratio": 1.0,
+        "changed_files": [
+          "src/pricing.py"
+        ],
+        "changed_files_count": 1,
+        "changed_lines_count": 4,
+        "gold_file_hit": true,
+        "gold_file_patched": true,
+        "gold_function_hit": true,
+        "gold_function_patched": true,
+        "hardcode_reasons": [],
+        "hardcode_suspicion": false,
+        "hidden_pass": true,
+        "hidden_test_pass": true,
+        "invalid_action_count": 0,
+        "no_hardcode": true,
+        "no_test_deletion": true,
+        "patch_size": 4,
+        "post_public_fail_count": 0,
+        "post_public_pass_count": 2,
+        "pre_public_fail_count": 1,
+        "pre_public_pass_count": 1,
+        "public_pass": true,
+        "public_test_pass": true,
+        "regression": false,
+        "task_id": "task_004",
+        "test_file_modified": false,
+        "total_reward": 1.2,
+        "unrelated_edit_flag": false,
+        "unrelated_files": []
+      },
+      "original_checksum_after": "b0e5354a8b9acd82ef75f7cfe0906265034ca29fc59383995ef4d1cb1596c3ba",
+      "original_checksum_before": "b0e5354a8b9acd82ef75f7cfe0906265034ca29fc59383995ef4d1cb1596c3ba",
+      "original_repo_unchanged": true,
+      "safety_error": "",
+      "task_id": "task_004",
+      "tests": {
+        "hidden": {
+          "cmd": "python -m pytest tests_hidden -q",
+          "exit_code": 0,
+          "normalized_cmd": "python -m codeguide_agent.testing.simple_pytest tests_hidden -q",
+          "stderr": "",
+          "stdout": "1 passed\n",
+          "timeout": false
+        },
+        "pre_public": {
+          "cmd": "python -m pytest tests -q",
+          "exit_code": 1,
+          "normalized_cmd": "python -m codeguide_agent.testing.simple_pytest tests -q",
+          "stderr": "",
+          "stdout": "\nFAILED tests/test_pricing.py::test_cache_key_includes_region\nTraceback (most recent call last):\n  File \"/Users/yjx/Code/CodeGuide-Agent/codeguide_agent/testing/simple_pytest.py\", line 63, in main\n    run_test_function(func)\n    ~~~~~~~~~~~~~~~~~^^^^^^\n  File \"/Users/yjx/Code/CodeGuide-Agent/codeguide_agent/testing/simple_pytest.py\", line 41, in run_test_function\n    func(**kwargs)\n    ~~~~^^^^^^^^^^\n  File \"/private/tmp/codeguide_mini_repo_eval/task_004/tests/test_pricing.py\", line 21, in test_cache_key_includes_region\n    assert service.get_price(\"book\", \"eu\") == 12\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n\n1 failed, 1 passed\n",
+          "timeout": false
+        },
+        "public": {
+          "cmd": "python -m pytest tests -q",
+          "exit_code": 0,
+          "normalized_cmd": "python -m codeguide_agent.testing.simple_pytest tests -q",
+          "stderr": "",
+          "stdout": "2 passed\n",
+          "timeout": false
+        }
+      },
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_004_forge.jsonl",
+      "workspace": "/tmp/codeguide_mini_repo_eval/task_004"
+    },
+    {
+      "agent_result": {
+        "error": null,
+        "patch": "diff --git a/src/calculator.py b/src/calculator.py\nindex 72e8caa..4f317ad 100644\n--- a/src/calculator.py\n+++ b/src/calculator.py\n@@ -6,4 +6,4 @@ def subtotal(items: list[dict]) -> int:\n \n \n def final_total(items: list[dict], discount: int = 0) -> int:\n-    return subtotal(items) + discount\n+    return subtotal(items) - discount\n",
+        "status": "success",
+        "steps_taken": 4,
+        "summary": "forge-style deterministic run complete",
+        "task_id": "task_005",
+        "trajectory_path": "data/mini_repo_debug/trajectories/task_005_forge.jsonl"
+      },
+      "metrics": {
+        "action_stats": {
+          "duplicate_tool_calls": 0,
+          "invalid_json_count": 0,
+          "timeout_count": 0,
+          "unknown_tool_count": 0
+        },
+        "allowed_files": [
+          "src/calculator.py"
+        ],
+        "allowed_overlap_ratio": 1.0,
+        "changed_files": [
+          "src/calculator.py"
+        ],
+        "changed_files_count": 1,
+        "changed_lines_count": 2,
+        "gold_file_hit": true,
+        "gold_file_patched": true,
+        "gold_function_hit": true,
+        "gold_function_patched": true,
+        "hardcode_reasons": [],
+        "hardcode_suspicion": false,
+        "hidden_pass": true,
+        "hidden_test_pass": true,
+        "invalid_action_count": 0,
+        "no_hardcode": true,
+        "no_test_deletion": true,
+        "patch_size": 2,
+        "post_public_fail_count": 0,
+        "post_public_pass_count": 2,
+        "pre_public_fail_count": 1,
+        "pre_public_pass_count": 1,
+        "public_pass": true,
+        "public_test_pass": true,
+        "regression": false,
+        "task_id": "task_005",
+        "test_file_modified": false,
+        "total_reward": 1.2,
+        "unrelated_edit_flag": false,
+        "unrelated_files": []
+      },
+      "original_checksum_after": "8f032c66067f047b05065d9237911d43ff6cdafe18b104510882e9ac086b2701",
+      "original_checksum_before": "8f032c66067f047b05065d9237911d43ff6cdafe18b104510882e9ac086b2701",
+      "original_repo_unchanged": true,
+      "safety_error": "",
+      "task_id": "task_005",
+      "tests": {
+        "hidden": {
+          "cmd": "python -m pytest tests_hidden -q",
+          "exit_code": 0,
+          "normalized_cmd": "python -m codeguide_agent.testing.simple_pytest tests_hidden -q",
+          "stderr": "",
+          "stdout": "1 passed\n",
+          "timeout": false
+        },
+        "pre_public": {
+          "cmd": "python -m pytest tests -q",
+          "exit_code": 1,
+          "normalized_cmd": "python -m codeguide_agent.testing.simple_pytest tests -q",
+          "stderr": "",
+          "stdout": "\nFAILED tests/test_service.py::test_order_summary_applies_discount\nTraceback (most recent call last):\n  File \"/Users/yjx/Code/CodeGuide-Agent/codeguide_agent/testing/simple_pytest.py\", line 63, in main\n    run_test_function(func)\n    ~~~~~~~~~~~~~~~~~^^^^^^\n  File \"/Users/yjx/Code/CodeGuide-Agent/codeguide_agent/testing/simple_pytest.py\", line 41, in run_test_function\n    func(**kwargs)\n    ~~~~^^^^^^^^^^\n  File \"/private/tmp/codeguide_mini_repo_eval/task_005/tests/test_service.py\", line 18, in test_order_summary_applies_discount\n    assert order_summary(order) == \"$17\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n\n1 failed, 1 passed\n",
+          "timeout": false
+        },
+        "public": {
+          "cmd": "python -m pytest tests -q",
+          "exit_code": 0,
+          "normalized_cmd": "python -m codeguide_agent.testing.simple_pytest tests -q",
+          "stderr": "",
+          "stdout": "2 passed\n",
+          "timeout": false
+        }
+      },
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_005_forge.jsonl",
+      "workspace": "/tmp/codeguide_mini_repo_eval/task_005"
+    }
+  ],
+  "summary": {
+    "average_patch_size": 6.4,
+    "average_total_reward": 1.2,
+    "gold_file_hit_rate": 1.0,
+    "gold_function_hit_rate": 1.0,
+    "hidden_test_pass_rate": 1.0,
+    "no_hardcode_rate": 1.0,
+    "no_test_deletion_rate": 1.0,
+    "num_tasks": 5,
+    "public_test_pass_rate": 1.0,
+    "regression_rate": 0.0
+  },
+  "tasks_path": "data/mini_repo_debug/tasks.jsonl"
+}

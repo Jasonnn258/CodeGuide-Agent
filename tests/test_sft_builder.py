@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-from codeguide_agent.training_data.build_sft_from_trajectories import build_sft_dataset
+from codeguide_agent.data_builders.build_sft import build_sft_dataset
 
 
 def test_sft_builder_writes_valid_jsonl_messages(tmp_path: Path):

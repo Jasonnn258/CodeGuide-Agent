@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import re
+import json
 from pathlib import Path
 from typing import Any
 
@@ -12,6 +13,7 @@ HARDCODE_PATTERNS = [
     re.compile(r"==\s*['\"][^'\"]{20,}['\"]"),
 ]
 CONDITION_RE = re.compile(r"^\s*(if|elif|while)\s+(.+):")
+FORBIDDEN_ACCESS_PATTERNS = ("metadata.json", "gold.patch", "tests_hidden")
 
 
 def changed_files_from_diff(diff_text: str) -> list[str]:
@@ -147,3 +149,33 @@ def verify_citation(
 def existing_file_modified(repo_path: str | Path, diff_text: str) -> bool:
     root = Path(repo_path)
     return any((root / file_name).exists() for file_name in changed_files_from_diff(diff_text))
+
+
+def leakage_detected(
+    trajectory_rows: list[dict[str, Any]],
+    gold_files: list[str],
+    gold_functions: list[str],
+) -> dict[str, Any]:
+    visible_parts: list[str] = []
+    forbidden_file_access = False
+    for row in trajectory_rows:
+        payload = {
+            "action_input": row.get("action_input", {}),
+            "observation": row.get("observation", {}),
+        }
+        text = json.dumps(payload, sort_keys=True)
+        visible_parts.append(text)
+        lowered = text.lower()
+        if any(pattern in lowered for pattern in FORBIDDEN_ACCESS_PATTERNS):
+            forbidden_file_access = True
+
+    visible_text = "\n".join(visible_parts)
+    leaked_gold_files = sorted({file_name for file_name in gold_files if file_name and file_name in visible_text})
+    leaked_gold_functions = sorted({name for name in gold_functions if name and name in visible_text})
+    leakage = bool(leaked_gold_files or leaked_gold_functions or forbidden_file_access)
+    return {
+        "leakage_detected": leakage,
+        "forbidden_file_access": forbidden_file_access,
+        "leaked_gold_files": leaked_gold_files,
+        "leaked_gold_functions": leaked_gold_functions,
+    }

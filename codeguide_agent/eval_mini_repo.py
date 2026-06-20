@@ -11,6 +11,7 @@ so its reward totals stay comparable.
 import argparse
 import json
 import os
+import re
 import shutil
 import subprocess
 from datetime import datetime, timezone
@@ -118,6 +119,8 @@ def evaluate_one(
     public_result = run_command(metadata["public_test_cmd"], workspace, timeout=timeout)
     hidden_result = run_command(metadata["hidden_test_cmd"], workspace, timeout=timeout)
     diff_text = git_diff(workspace)
+    pre_counts = public_test_counts(pre_public)
+    post_counts = public_test_counts(public_result)
 
     patch_metrics = evaluate_patch(
         diff_text=diff_text,
@@ -125,7 +128,7 @@ def evaluate_one(
         gold_files=metadata.get("gold_files", []),
         gold_functions=metadata.get("gold_functions", []),
     )
-    regression = pre_public["exit_code"] == 0 and public_result["exit_code"] != 0
+    regression = post_counts["pass_count"] < pre_counts["pass_count"]
     canonical_reward = calculate_reward(
         public_result,
         hidden_result,
@@ -139,6 +142,10 @@ def evaluate_one(
         "public_test_pass": public_result["exit_code"] == 0,
         "hidden_test_pass": hidden_result["exit_code"] == 0,
         "regression": regression,
+        "pre_public_pass_count": pre_counts["pass_count"],
+        "pre_public_fail_count": pre_counts["fail_count"],
+        "post_public_pass_count": post_counts["pass_count"],
+        "post_public_fail_count": post_counts["fail_count"],
         **patch_metrics,
         **canonical_reward,
     }
@@ -185,6 +192,20 @@ def summarize(results: list[dict[str, Any]]) -> dict[str, Any]:
         "regression_rate": rate("regression"),
         "average_total_reward": avg("total_reward"),
     }
+
+
+def public_test_counts(result: dict[str, Any] | None) -> dict[str, int]:
+    if not result:
+        return {"pass_count": 0, "fail_count": 0}
+    text = f"{result.get('stdout', '')}\n{result.get('stderr', '')}"
+    pass_count = sum(int(value) for value in re.findall(r"(\d+)\s+passed", text))
+    fail_count = sum(int(value) for value in re.findall(r"(\d+)\s+failed", text))
+    if pass_count == 0 and fail_count == 0:
+        if result.get("exit_code") == 0:
+            pass_count = 1
+        else:
+            fail_count = 1
+    return {"pass_count": pass_count, "fail_count": fail_count}
 
 
 def main() -> int:

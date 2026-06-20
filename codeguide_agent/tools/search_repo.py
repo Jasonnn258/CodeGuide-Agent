@@ -8,6 +8,10 @@ import subprocess
 from codeguide_agent.tools.common import CHECKPOINT_DIR, resolve_repo_path
 
 
+IGNORED_PARTS = {CHECKPOINT_DIR, ".git", "__pycache__", ".pytest_cache", "tests_hidden"}
+IGNORED_FILES = {"metadata.json", "gold.patch"}
+
+
 def _rg_search(root: Path, query: str, path: str, file_glob: str | None, max_matches: int) -> list[dict]:
     command = ["rg", "--line-number", "--no-heading", query, path]
     if file_glob:
@@ -20,6 +24,8 @@ def _rg_search(root: Path, query: str, path: str, file_glob: str | None, max_mat
             continue
         file_name, line_no, text = pieces
         file_name = file_name.removeprefix("./")
+        if _ignored_path(file_name):
+            continue
         matches.append({"file": file_name, "line": int(line_no), "text": text})
         if len(matches) >= max_matches:
             break
@@ -32,7 +38,7 @@ def _python_search(root: Path, query: str, path: str, file_glob: str | None, max
     matches = []
     for file_path in files:
         relative = file_path.relative_to(root)
-        if CHECKPOINT_DIR in relative.parts or not file_path.is_file():
+        if _ignored_path(str(relative)) or not file_path.is_file():
             continue
         if file_glob and not fnmatch.fnmatch(str(relative), file_glob):
             continue
@@ -66,3 +72,8 @@ def search_repo(
         return {"tool_name": "search_repo", "status": "success", "engine": engine, "matches": matches}
     except Exception as exc:
         return {"tool_name": "search_repo", "status": "error", "error": str(exc), "matches": []}
+
+
+def _ignored_path(path: str) -> bool:
+    relative = Path(path)
+    return any(part in IGNORED_PARTS for part in relative.parts) or relative.name in IGNORED_FILES

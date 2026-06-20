@@ -23,11 +23,18 @@ Issue + Mini Repo + Failing Tests
 → verifier reward
 ```
 
-## Runtime Base
+## Runtime Components
 
-CodeGuide-Agent now includes a compact forge-agent-style runtime under
-`codeguide_agent/runtime/`. It is adapted from the local
-`/Users/yjx/Code/forge-agent` runtime for research use:
+CodeGuide-Agent includes a compact forge-style runtime under
+`codeguide_agent/runtime/`. It was adapted from an earlier local prototype
+available in this workspace as `/Users/yjx/Code/forge-agent`. No license file
+is present in that local checkout, so this repository does not claim to be
+based on an open-source forge-agent dependency.
+
+The canonical Mini-Repo-Debug rollout path currently uses `RolloutCollector`
+and the CodeGuide tool layer under `codeguide_agent/tools/*`. The
+`codeguide_agent/runtime/` package is retained as a baseline/demo runtime and
+as a reference implementation for these runtime ideas:
 
 - agent loop boundary,
 - task/action/observation dataclasses,
@@ -61,7 +68,7 @@ Implemented components include:
 - Reward calculator v1 with test pass flags, patch size metrics, test modification flag, hardcode suspicion flag, regression flag, and total reward.
 - Deterministic prompt-only baseline with `noop` and `gold` simulation modes.
 - Evaluation runner and aggregate metrics.
-- Forge-style runtime package under `codeguide_agent/runtime/`.
+- Forge-style baseline/demo runtime package under `codeguide_agent/runtime/`.
 - Mini-Repo-Debug evaluator entry point at `codeguide_agent/eval_mini_repo.py`.
 - Skeleton SFT/DPO/GRPO data builder modules.
 - Aider and forge baseline runner entry points.
@@ -80,7 +87,16 @@ Or:
 bash scripts/validate_mini_repo_debug.sh
 ```
 
-The validator checks each task for required files, metadata commands, gold files/functions, forbidden behaviors, and a valid repo path.
+The validator checks each task for required files, metadata commands, gold files/functions, forbidden behaviors, and a valid repo path. It also warns if a task has zero public tests passing before any patch, because regression detection needs at least one public behavior that already works in the buggy state.
+
+Run the static issue-text leakage audit:
+
+```bash
+python -m codeguide_agent.dataset.audit_leakage --root data/mini_repo_debug
+```
+
+The audit checks that `issue.md` does not reveal evaluator-only gold files,
+gold functions, `metadata.json`, `gold.patch`, or `tests_hidden`.
 
 ## Evaluation
 
@@ -93,6 +109,14 @@ python -m codeguide_agent.rollout.run_rollout --root data/mini_repo_debug --poli
 This path uses `RolloutCollector`, isolated temp workspaces, original-repo
 checksum verification, `codeguide_agent/tools/*`, JSONL trajectory logging, and
 the canonical reward formula in `codeguide_agent.reward.calculator`.
+
+Localization reports distinguish process discovery from patch landing:
+
+- `gold_file_hit_at_3` / `gold_function_hit_at_3`: the agent surfaced or opened the gold location during exploration.
+- `gold_file_patched` / `gold_function_patched`: the final patch touched the gold location.
+
+These can disagree. A blind gold-style patch can have `gold_file_patched=True`
+while `gold_file_hit_at_3=False`.
 
 For forge-runtime baseline comparison only, run:
 
@@ -133,11 +157,13 @@ python -m codeguide_agent.rollout.run_rollout --root data/mini_repo_debug --poli
 ```
 
 Supported Phase 2A policies are `noop`, `scripted`, and `gold`. They are local and deterministic; no paid APIs are required.
+P1 remains infrastructure hardening. Gold/scripted results validate the pipeline
+and should not be presented as real LLM agent capability.
 
 Build SFT-style chat data from trajectory JSONL files:
 
 ```bash
-python -m codeguide_agent.training_data.build_sft_from_trajectories \
+python -m codeguide_agent.data_builders.build_sft \
   --input data/mini_repo_debug/trajectories \
   --output data/mini_repo_debug/sft/phase2_sft.jsonl
 ```
@@ -159,8 +185,7 @@ such as `apply_gold_patch` that a real agent must not learn to imitate.
 
 ## Next Steps
 
-- Replace deterministic gold-patch mock repair with a real LLM backend.
-- Add Aider baseline execution and verifier-filtered teacher data export.
+- Complete P2 cleanup, then add non-gold policy and Aider baseline comparisons.
 - Mine successful trajectories into SFT examples.
 - Build DPO pairs from verified good/bad patch attempts.
 - Add GRPO rollout grouping after stochastic policy sampling exists.

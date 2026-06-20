@@ -2,10 +2,12 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 from pathlib import Path
 from typing import Any
 
 from codeguide_agent.dataset.schemas import REQUIRED_METADATA_FIELDS, MiniRepoTask, load_metadata
+from codeguide_agent.tools.run_test import run_test
 
 
 REQUIRED_PATHS = ["metadata.json", "issue.md", "tests", "tests_hidden", "gold.patch"]
@@ -18,6 +20,7 @@ def _is_non_empty_list(value: Any) -> bool:
 def validate_task(task_dir: str | Path) -> dict[str, Any]:
     task_path = Path(task_dir)
     errors: list[str] = []
+    warnings: list[str] = []
 
     for relative in REQUIRED_PATHS:
         path = task_path / relative
@@ -67,7 +70,12 @@ def validate_task(task_dir: str | Path) -> dict[str, Any]:
         except (TypeError, ValueError) as exc:
             errors.append(str(exc))
 
-    return {"task_dir": str(task_path), "valid": not errors, "errors": errors}
+        if not errors and metadata.get("public_test_cmd"):
+            public_result = run_test(task_path, metadata["public_test_cmd"], timeout=30)
+            if _public_pass_count(public_result) == 0:
+                warnings.append("public test suite has zero passing tests in the pre-patch state; regression detection will be weak")
+
+    return {"task_dir": str(task_path), "valid": not errors, "errors": errors, "warnings": warnings}
 
 
 def iter_task_dirs(root: str | Path) -> list[Path]:
@@ -104,7 +112,17 @@ def main() -> int:
             print(f"{status} {task['task_dir']}")
             for error in task["errors"]:
                 print(f"  - {error}")
+            for warning in task.get("warnings", []):
+                print(f"  warning: {warning}")
     return 0 if result["valid"] else 1
+
+
+def _public_pass_count(result: dict[str, Any]) -> int:
+    text = f"{result.get('stdout', '')}\n{result.get('stderr', '')}"
+    matches = re.findall(r"(\d+)\s+passed", text)
+    if matches:
+        return sum(int(value) for value in matches)
+    return 1 if result.get("exit_code") == 0 else 0
 
 
 if __name__ == "__main__":

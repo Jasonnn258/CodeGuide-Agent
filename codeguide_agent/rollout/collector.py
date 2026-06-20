@@ -2,12 +2,15 @@ from __future__ import annotations
 
 from pathlib import Path
 from typing import Any
+import re
 import shutil
 import subprocess
 
 from codeguide_agent.dataset.schemas import load_metadata
+from codeguide_agent.evaluators.localization_eval import localization_process_metrics, patch_localization_metrics
 from codeguide_agent.eval.run_eval import compute_repo_checksum, copy_task_to_temp
 from codeguide_agent.reward.calculator import calculate_reward
+from codeguide_agent.reward.hacking_checks import leakage_detected
 from codeguide_agent.rollout.actions import Action, parse_action
 from codeguide_agent.rollout.policy import BasePolicy
 from codeguide_agent.rollout.state import RolloutState
@@ -47,10 +50,20 @@ class RolloutCollector:
         logger = TrajectoryLogger(self.trajectories_dir / f"{trajectory_id}.jsonl", task_id, trajectory_id, model=f"rollout_{policy.name}")
         state = RolloutState(task_id=task_id, repo_path=temp_repo, issue_text=issue_text, step_id=0, max_steps=max_steps)
         public_result: dict[str, Any] | None = None
+        pre_public_result: dict[str, Any] | None = None
         hidden_result: dict[str, Any] | None = None
         final_diff = ""
 
         try:
+            pre_public_result = run_test(temp_repo, metadata["public_test_cmd"], timeout=self.timeout)
+            state.observations.append(
+                logger.log_step(
+                    "run_test",
+                    {"command": metadata["public_test_cmd"], "phase": "pre_public"},
+                    pre_public_result,
+                    "Run pre-patch public verifier for regression baseline.",
+                )
+            )
             seen_calls: set[tuple[str, str]] = set()
             while not state.done and state.step_id < max_steps:
                 raw_action = policy.next_action(state)
@@ -113,13 +126,46 @@ class RolloutCollector:
                 final_diff = (temp_repo / "gold.patch").read_text(encoding="utf-8")
             state.observations.append(logger.log_step("git_diff", {"phase": "final"}, {**diff_result, "diff": final_diff}, "Collect final rollout diff."))
 
+            pre_counts = public_test_counts(pre_public_result)
+            post_counts = public_test_counts(public_result)
+            regression = post_counts["pass_count"] < pre_counts["pass_count"]
+            patch_localization = patch_localization_metrics(
+                final_diff,
+                temp_repo,
+                metadata.get("gold_files", []),
+                metadata.get("gold_functions", []),
+            )
+            process_localization = localization_process_metrics(
+                state.observations,
+                temp_repo,
+                metadata.get("gold_files", []),
+                metadata.get("gold_functions", []),
+            )
+            leakage = leakage_detected(
+                state.observations,
+                metadata.get("gold_files", []),
+                metadata.get("gold_functions", []),
+            )
             reward = calculate_reward(
                 public_result,
                 hidden_result,
                 final_diff,
+                regression=regression,
                 gold_files=metadata.get("gold_files", []),
                 suspicious_files=list(dict.fromkeys(metadata.get("gold_files", []) + state.opened_files)),
                 action_stats=state.action_stats(),
+            )
+            reward.update(
+                {
+                    **patch_localization,
+                    **process_localization,
+                    **leakage,
+                    "pre_public_pass_count": pre_counts["pass_count"],
+                    "pre_public_fail_count": pre_counts["fail_count"],
+                    "post_public_pass_count": post_counts["pass_count"],
+                    "post_public_fail_count": post_counts["fail_count"],
+                    "regression": regression,
+                }
             )
             final_status = "success" if reward["public_pass"] and (reward["hidden_pass"] or not run_hidden) else "fail"
             logger.log_final(final_diff, reward, final_status)
@@ -209,6 +255,25 @@ class RolloutCollector:
     def _last_test_result(self, state: RolloutState) -> dict[str, Any] | None:
         for row in reversed(state.observations):
             observation = row.get("observation", {})
-            if observation.get("tool_name") == "run_test":
+            if observation.get("tool_name") == "run_test" and row.get("action_input", {}).get("phase") != "pre_public":
                 return observation
         return None
+
+
+def public_test_counts(result: dict[str, Any] | None) -> dict[str, int]:
+    if not result:
+        return {"pass_count": 0, "fail_count": 0}
+    text = f"{result.get('stdout', '')}\n{result.get('stderr', '')}"
+    pass_count = _extract_count(text, "passed")
+    fail_count = _extract_count(text, "failed")
+    if pass_count == 0 and fail_count == 0:
+        if result.get("exit_code") == 0:
+            pass_count = 1
+        else:
+            fail_count = 1
+    return {"pass_count": pass_count, "fail_count": fail_count}
+
+
+def _extract_count(text: str, label: str) -> int:
+    matches = re.findall(rf"(\d+)\s+{label}", text)
+    return sum(int(value) for value in matches)

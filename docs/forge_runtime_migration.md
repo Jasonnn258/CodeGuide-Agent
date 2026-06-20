@@ -2,10 +2,11 @@
 
 ## Purpose
 
-CodeGuide-Agent uses `/Users/yjx/Code/forge-agent` as the engineering
-base/runtime because its architecture is close to the research loop this
-project needs: task input, ReAct-style agent loop, tool registry, repository
-context, bounded shell/test tools, and append-only JSONL events.
+CodeGuide-Agent includes a forge-style runtime adapted from an earlier local
+prototype available as `/Users/yjx/Code/forge-agent`. The local checkout has a
+GitHub remote (`https://github.com/muk610648-design/forge-agent.git`) but no
+local license file was found, so the project uses conservative provenance
+wording and does not present forge-agent as an open-source dependency.
 
 This migration does not make CodeGuide-Agent a forked coding assistant. The
 runtime is only the execution substrate. The main project remains a Code
@@ -22,7 +23,7 @@ Intelligence and Coding Agent research platform for:
 
 ## What Was Adapted
 
-The first migration adds a compact forge-style runtime under
+The migration adds a compact forge-style baseline/demo runtime under
 `codeguide_agent/runtime/`:
 
 - `agent/types.py`: task/action/observation/event/run dataclasses.
@@ -39,6 +40,11 @@ an isolated temporary workspace. This is intentional for a robust first demo;
 future versions can replace this policy with actual model calls and patch
 generation while keeping the same event-log and evaluation interfaces.
 
+The canonical rollout/evaluation path is separate: `RolloutCollector` uses
+`codeguide_agent/tools/*` and `reward.calculator`. That path is the current
+main research execution path; `codeguide_agent/runtime/` is not the single
+engineering base for all evaluation.
+
 ## Safety Choices
 
 - Evaluation copies each task repo into `/tmp/codeguide_mini_repo_eval`.
@@ -51,7 +57,7 @@ generation while keeping the same event-log and evaluation interfaces.
 
 - The LLM router exposes only a mock backend.
 - The runtime does not yet implement Aider-style edit formats.
-- Data builders for SFT/DPO/GRPO are CLI skeletons only.
+- DPO/GRPO builders are CLI skeletons only.
 - The Aider runner is a documented TODO, not a full integration.
 
 ## Next Steps

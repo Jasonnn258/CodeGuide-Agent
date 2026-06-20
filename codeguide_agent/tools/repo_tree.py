@@ -8,7 +8,7 @@ from codeguide_agent.tools.common import CHECKPOINT_DIR, resolve_repo_path
 def repo_tree(repo_path: str | Path, max_depth: int = 4) -> dict:
     root = resolve_repo_path(repo_path)
     entries: list[str] = []
-    ignored = {".git", "__pycache__", ".pytest_cache", CHECKPOINT_DIR}
+    ignored = {".git", "__pycache__", ".pytest_cache", CHECKPOINT_DIR, "metadata.json", "gold.patch", "tests_hidden"}
 
     for path in sorted(root.rglob("*")):
         relative = path.relative_to(root)
