@@ -152,6 +152,71 @@ def test_editing_gold_file_after_legal_surface_is_not_leakage():
     assert result["oracle_metadata_leakage"] is False
 
 
+def test_reading_public_test_import_surfaces_source_module_for_later_read_and_edit():
+    rows = [
+        {
+            "type": "step",
+            "action_name": "read_file",
+            "action_input": {"file_path": "tests/test_pricing.py"},
+            "observation": {"content": "from pricing import PriceService\n\ndef test_cache():\n    assert PriceService({}).cache == {}\n"},
+        },
+        {
+            "type": "step",
+            "action_name": "read_file",
+            "action_input": {"file_path": "src/pricing.py"},
+            "observation": {"content": "class PriceService:\n    pass\n"},
+        },
+        {
+            "type": "step",
+            "action_name": "edit_file",
+            "action_input": {"file_path": "src/pricing.py", "old_text": "pass", "new_text": "return None"},
+            "observation": {"status": "success"},
+        },
+    ]
+
+    result = leakage_detected(rows, ["src/pricing.py"], ["get_price"])
+
+    assert result["leakage_detected"] is False
+    assert result["oracle_metadata_leakage"] is False
+    assert result["forbidden_file_access"] is False
+
+
+def test_simple_import_forms_surface_source_modules():
+    rows = [
+        {
+            "type": "step",
+            "action_name": "read_file",
+            "action_input": {"file_path": "tests/test_imports.py"},
+            "observation": {
+                "content": "\n".join(
+                    [
+                        "import pricing",
+                        "import package.module as mod",
+                        "from another.service import Foo",
+                    ]
+                )
+            },
+        },
+        {
+            "type": "step",
+            "action_name": "edit_file",
+            "action_input": {"file_path": "src/package/module.py", "old_text": "old", "new_text": "new"},
+            "observation": {"status": "success"},
+        },
+        {
+            "type": "step",
+            "action_name": "read_file",
+            "action_input": {"file_path": "src/another/service.py"},
+            "observation": {"content": "class Foo:\n    pass\n"},
+        },
+    ]
+
+    result = leakage_detected(rows, ["src/package/module.py", "src/another/service.py"], ["Foo"])
+
+    assert result["leakage_detected"] is False
+    assert result["oracle_metadata_leakage"] is False
+
+
 def test_editing_unsurfaced_gold_file_is_oracle_leakage():
     rows = [
         {

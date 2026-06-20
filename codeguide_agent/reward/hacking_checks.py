@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import re
 import json
+import ast
 from pathlib import Path
 from typing import Any
 
@@ -205,7 +206,9 @@ def leakage_detected(
                 oracle_metadata_leakage = True
             if file_path:
                 surfaced_files.add(file_path)
-            surfaced_functions.update(_gold_functions_in_text(str(observation.get("content", "")), gold_functions))
+            content = str(observation.get("content", ""))
+            surfaced_files.update(_source_paths_from_imports(content))
+            surfaced_functions.update(_gold_functions_in_text(content, gold_functions))
         elif action_name == "edit_file":
             file_path = str(action_input.get("file_path", ""))
             if file_path in gold_file_set and file_path not in surfaced_files:
@@ -242,3 +245,22 @@ def _gold_files_in_text(text: str, gold_files: list[str]) -> set[str]:
 
 def _gold_functions_in_text(text: str, gold_functions: list[str]) -> set[str]:
     return {name for name in gold_functions if name and name in text}
+
+
+def _source_paths_from_imports(source: str) -> set[str]:
+    try:
+        tree = ast.parse(source)
+    except SyntaxError:
+        return set()
+    paths: set[str] = set()
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Import):
+            for alias in node.names:
+                paths.add(_module_to_source_path(alias.name))
+        elif isinstance(node, ast.ImportFrom) and node.module:
+            paths.add(_module_to_source_path(node.module))
+    return paths
+
+
+def _module_to_source_path(module_name: str) -> str:
+    return "src/" + module_name.replace(".", "/") + ".py"
