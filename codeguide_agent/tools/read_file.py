@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from codeguide_agent.tools.common import resolve_repo_path
+from codeguide_agent.tools.common import normalize_repo_relative_path, resolve_repo_path
 
 
 def read_file(
@@ -12,7 +12,8 @@ def read_file(
     end_line: int | None = None,
 ) -> dict:
     try:
-        target = resolve_repo_path(repo_path, file_path)
+        normalized = normalize_repo_relative_path(repo_path, file_path)
+        target = resolve_repo_path(repo_path, normalized)
         lines = target.read_text(encoding="utf-8").splitlines(keepends=True)
         start = 1 if start_line is None else max(1, start_line)
         end = len(lines) if end_line is None else min(len(lines), end_line)
@@ -23,7 +24,7 @@ def read_file(
         return {
             "tool_name": "read_file",
             "status": "success",
-            "file": str(file_path),
+            "file": normalized,
             "start_line": start,
             "end_line": end,
             "content": content,

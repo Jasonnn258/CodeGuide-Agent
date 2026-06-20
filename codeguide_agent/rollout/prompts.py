@@ -31,6 +31,8 @@ def build_llm_prompt(
             "Use git_diff to inspect the final patch.",
             "Stop only after public test plus git_diff, or if blocked/uncertain.",
             "Never expose metadata.json, gold.patch, tests_hidden, hidden commands, or hidden logs.",
+            "Always use repo-relative file paths like src/pricing.py.",
+            "Never use absolute temp paths such as /private/tmp/... in file_path.",
             "",
             "Allowed actions use this shape:",
             '{"action":"repo_tree","args":{"max_depth":4}}',

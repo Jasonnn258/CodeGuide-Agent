@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from codeguide_agent.tools.common import create_checkpoint, resolve_repo_path
+from codeguide_agent.tools.common import create_checkpoint, normalize_repo_relative_path, resolve_repo_path
 
 
 def edit_file(
@@ -13,22 +13,23 @@ def edit_file(
     expected_replacements: int = 1,
 ) -> dict:
     try:
-        target = resolve_repo_path(repo_path, file_path)
+        normalized = normalize_repo_relative_path(repo_path, file_path)
+        target = resolve_repo_path(repo_path, normalized)
         content = target.read_text(encoding="utf-8")
         replacements = content.count(old_text)
         if replacements != expected_replacements:
             return {
                 "tool_name": "edit_file",
                 "status": "error",
-                "file": str(file_path),
+                "file": normalized,
                 "error": f"expected {expected_replacements} replacement(s), found {replacements}",
             }
-        checkpoint = create_checkpoint(repo_path, file_path)
+        checkpoint = create_checkpoint(repo_path, normalized)
         target.write_text(content.replace(old_text, new_text, expected_replacements), encoding="utf-8")
         return {
             "tool_name": "edit_file",
             "status": "success",
-            "file": str(file_path),
+            "file": normalized,
             "replacements": replacements,
             **checkpoint,
         }

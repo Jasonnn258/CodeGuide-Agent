@@ -278,13 +278,13 @@ class RolloutCollector:
         if action.action_name == "search_repo":
             state.searched_queries.append(action.action_input["query"])
         elif action.action_name == "read_file" and observation.get("status") == "success":
-            file_path = action.action_input["file_path"]
+            file_path = observation.get("file", action.action_input["file_path"])
             if file_path not in state.opened_files:
                 state.opened_files.append(file_path)
             state._requires_read_after_failed_edit = False
             state._requires_post_edit_check = False
         elif action.action_name == "edit_file" and observation.get("status") == "success":
-            file_path = action.action_input["file_path"]
+            file_path = observation.get("file", action.action_input["file_path"])
             if file_path not in state.edited_files:
                 state.edited_files.append(file_path)
             state._last_edit_status = "success"
@@ -332,7 +332,7 @@ class RolloutCollector:
     def _repair_loop_violation(self, policy: BasePolicy, action: Action, state: RolloutState) -> dict[str, Any] | None:
         if policy.name != "llm" or action.action_name != "edit_file":
             return None
-        file_path = str(action.action_input.get("file_path", ""))
+        file_path = self._normalized_action_file_path(state, action)
         old_text = str(action.action_input.get("old_text", ""))
         edit_key = (file_path, old_text)
         if file_path not in state.opened_files:
@@ -367,6 +367,17 @@ class RolloutCollector:
             )
         state._seen_edit_keys.add(edit_key)
         return None
+
+    def _normalized_action_file_path(self, state: RolloutState, action: Action) -> str:
+        from codeguide_agent.tools.common import normalize_repo_relative_path
+
+        raw_path = action.action_input.get("file_path", "")
+        try:
+            normalized = normalize_repo_relative_path(state.repo_path, raw_path)
+            action.action_input["file_path"] = normalized
+            return normalized
+        except Exception:
+            return str(raw_path)
 
     def _record_python_syntax_status(self, state: RolloutState, file_path: str) -> None:
         if not file_path.endswith(".py"):
