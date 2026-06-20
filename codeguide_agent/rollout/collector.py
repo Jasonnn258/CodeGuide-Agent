@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 from typing import Any
+import ast
 import re
 import shutil
 import subprocess
@@ -89,7 +90,12 @@ class RolloutCollector:
                     state.duplicate_tool_count += 1
                 seen_calls.add(call_key)
 
-                observation = self._execute_action(action, state)
+                violation = self._repair_loop_violation(policy, action, state)
+                if violation:
+                    self._record_invalid_action(state, "repair_loop")
+                    observation = violation
+                else:
+                    observation = self._execute_action(action, state)
                 if observation.get("status") == "timeout":
                     state.tool_timeout_count += 1
                 self._update_state_from_action(state, action, observation)
@@ -115,6 +121,7 @@ class RolloutCollector:
                 step = logger.log_step("run_test", {"command": metadata["public_test_cmd"], "phase": "final_public"}, public_result, "Run final public verifier.")
                 state.observations.append(step)
                 state.tests_run.append(metadata["public_test_cmd"])
+                state.final_test_ran = True
             else:
                 public_result = self._last_test_result(state)
 
@@ -129,6 +136,7 @@ class RolloutCollector:
             if policy.name == "gold" and not final_diff:
                 final_diff = (temp_repo / "gold.patch").read_text(encoding="utf-8")
             state.observations.append(logger.log_step("git_diff", {"phase": "final"}, {**diff_result, "diff": final_diff}, "Collect final rollout diff."))
+            state.final_diff_collected = True
 
             pre_counts = public_test_counts(pre_public_result)
             post_counts = public_test_counts(public_result)
@@ -169,6 +177,13 @@ class RolloutCollector:
                     "post_public_pass_count": post_counts["pass_count"],
                     "post_public_fail_count": post_counts["fail_count"],
                     "regression": regression,
+                    "syntax_error": state.syntax_error,
+                    "syntax_error_files": state.syntax_error_files,
+                    "repeated_edit_count": state.repeated_edit_count,
+                    "edit_retry_count": state.edit_retry_count,
+                    "incomplete_stop": state.incomplete_stop,
+                    "final_test_ran": state.final_test_ran,
+                    "final_diff_collected": state.final_diff_collected,
                 }
             )
             final_status = "success" if reward["public_pass"] and (reward["hidden_pass"] or not run_hidden) else "fail"
@@ -194,6 +209,13 @@ class RolloutCollector:
             "unknown_tool_count": state.unknown_tool_count,
             "tool_timeout_count": state.tool_timeout_count,
             "duplicate_tool_count": state.duplicate_tool_count,
+            "repeated_edit_count": state.repeated_edit_count,
+            "edit_retry_count": state.edit_retry_count,
+            "syntax_error": state.syntax_error,
+            "syntax_error_files": state.syntax_error_files,
+            "incomplete_stop": state.incomplete_stop,
+            "final_test_ran": state.final_test_ran,
+            "final_diff_collected": state.final_diff_collected,
             "opened_files": state.opened_files,
             "searched_queries": state.searched_queries,
             "edited_files": state.edited_files,
@@ -236,14 +258,34 @@ class RolloutCollector:
             file_path = action.action_input["file_path"]
             if file_path not in state.opened_files:
                 state.opened_files.append(file_path)
+            state._requires_read_after_failed_edit = False
+            state._requires_post_edit_check = False
         elif action.action_name == "edit_file" and observation.get("status") == "success":
             file_path = action.action_input["file_path"]
             if file_path not in state.edited_files:
                 state.edited_files.append(file_path)
+            state._last_edit_status = "success"
+            state._last_edit_file = file_path
+            state._requires_post_edit_check = True
+            state._requires_read_after_failed_edit = False
+            self._record_python_syntax_status(state, file_path)
+        elif action.action_name == "edit_file" and observation.get("status") == "error":
+            state._last_edit_status = "error"
+            state._last_edit_file = action.action_input.get("file_path", "")
+            state._requires_read_after_failed_edit = True
         elif action.action_name == "apply_gold_patch" and observation.get("status") == "success":
             state.edited_files.append("gold.patch")
         elif action.action_name == "run_test":
             state.tests_run.append(action.action_input["command"])
+            if action.action_input.get("phase") != "pre_public":
+                state.final_test_ran = True
+            state._requires_post_edit_check = False
+        elif action.action_name == "git_diff":
+            state.final_diff_collected = True
+            state._requires_post_edit_check = False
+        elif action.action_name == "stop":
+            if not (state.final_test_ran and state.final_diff_collected):
+                state.incomplete_stop = True
 
     def _record_invalid_action(self, state: RolloutState, error_type: str | None) -> None:
         state.invalid_action_count += 1
@@ -264,6 +306,40 @@ class RolloutCollector:
                 return observation
         return None
 
+    def _repair_loop_violation(self, policy: BasePolicy, action: Action, state: RolloutState) -> dict[str, Any] | None:
+        if policy.name != "llm" or action.action_name != "edit_file":
+            return None
+        file_path = str(action.action_input.get("file_path", ""))
+        old_text = str(action.action_input.get("old_text", ""))
+        edit_key = (file_path, old_text)
+        if file_path not in state.opened_files:
+            state.edit_retry_count += 1
+            return _repair_loop_error(file_path, "edit_file requires a successful read_file on the target first")
+        if edit_key in state._seen_edit_keys:
+            state.repeated_edit_count += 1
+            return _repair_loop_error(file_path, "repeated file_path + old_text edit rejected")
+        if state._requires_read_after_failed_edit:
+            state.edit_retry_count += 1
+            return _repair_loop_error(file_path, "failed edit_file must be followed by read_file before another edit")
+        if state._requires_post_edit_check:
+            state.edit_retry_count += 1
+            return _repair_loop_error(file_path, "successful edit_file must be followed by run_test, read_file, or git_diff before another edit")
+        state._seen_edit_keys.add(edit_key)
+        return None
+
+    def _record_python_syntax_status(self, state: RolloutState, file_path: str) -> None:
+        if not file_path.endswith(".py"):
+            return
+        target = state.repo_path / file_path
+        if not target.exists():
+            return
+        try:
+            ast.parse(target.read_text(encoding="utf-8"))
+        except SyntaxError:
+            state.syntax_error = True
+            if file_path not in state.syntax_error_files:
+                state.syntax_error_files.append(file_path)
+
 
 def public_test_counts(result: dict[str, Any] | None) -> dict[str, int]:
     if not result:
@@ -282,6 +358,15 @@ def public_test_counts(result: dict[str, Any] | None) -> dict[str, int]:
 def _extract_count(text: str, label: str) -> int:
     matches = re.findall(rf"(\d+)\s+{label}", text)
     return sum(int(value) for value in matches)
+
+
+def _repair_loop_error(file_path: str, error: str) -> dict[str, Any]:
+    return {
+        "tool_name": "repair_loop_guard",
+        "status": "error",
+        "file": file_path,
+        "error": error,
+    }
 
 
 def _policy_metadata(policy: BasePolicy) -> dict[str, Any]:

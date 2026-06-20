@@ -92,6 +92,10 @@ def summarize_policy(results: list[dict[str, Any]]) -> dict[str, Any]:
             "average_tool_calls": 0.0,
             "average_llm_calls": 0.0,
             "invalid_action_rate": 0.0,
+            "syntax_error_rate": 0.0,
+            "average_repeated_edit_count": 0.0,
+            "average_edit_retry_count": 0.0,
+            "incomplete_stop_rate": 0.0,
             "skip_reason": "",
         }
 
@@ -134,6 +138,16 @@ def summarize_policy(results: list[dict[str, Any]]) -> dict[str, Any]:
         ),
         "average_llm_calls": round(sum(float(result.get("llm_calls", 0)) for result in results) / count, 4),
         "invalid_action_rate": round(sum(1 for result in results if result.get("invalid_action_count", 0) > 0) / count, 4),
+        "syntax_error_rate": rate_result_or_reward("syntax_error"),
+        "average_repeated_edit_count": round(
+            sum(float(result.get("repeated_edit_count", result.get("reward", {}).get("repeated_edit_count", 0))) for result in results) / count,
+            4,
+        ),
+        "average_edit_retry_count": round(
+            sum(float(result.get("edit_retry_count", result.get("reward", {}).get("edit_retry_count", 0))) for result in results) / count,
+            4,
+        ),
+        "incomplete_stop_rate": rate_result_or_reward("incomplete_stop"),
     }
 
 
@@ -155,6 +169,10 @@ def print_table(report: dict[str, Any]) -> None:
         "average_steps",
         "average_llm_calls",
         "invalid_action_rate",
+        "syntax_error_rate",
+        "average_repeated_edit_count",
+        "average_edit_retry_count",
+        "incomplete_stop_rate",
         "skip_reason",
     ]
     print("\t".join(headers))
