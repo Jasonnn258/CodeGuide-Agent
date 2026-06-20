@@ -20,7 +20,7 @@ The current first target is verifier-driven repo-level debugging on Mini-Repo-De
 
 ## Current Project Stage
 
-The project is currently in **P2 cleanup before Phase 2 expansion**.
+The project is currently in **P3C small LLM-backed rollout policy**.
 
 Phase 1 has already implemented:
 
@@ -39,12 +39,17 @@ Completed hardening:
 
 * Phase 1.5 / P0 hardening is complete.
 * P1 infrastructure hardening is complete.
+* P2 provenance and SFT-builder cleanup is complete.
+* P3A heuristic/localize-only baseline is complete.
+* P3A-hotfix strict leakage semantics are complete.
+* P3B Aider baseline and canonical scoring are complete.
 
 Current next priorities:
 
-* P2 cleanup: provenance/positioning and data-builder consolidation.
-* P3 non-gold policy plus Aider baseline.
-* Then expand Mini-Repo-Debug beyond the current 5 tasks.
+* Finish P3C small LLM-backed non-gold rollout policy.
+* Expand Mini-Repo-Debug beyond the current 5 tasks after LLM policy stabilizes.
+* Build SFT/DPO data only after enough verified non-gold trajectories exist.
+* Defer GRPO until stochastic clean rollouts exist.
 
 ---
 
@@ -203,6 +208,13 @@ Aider should be used as:
 
 Do not position the project as “Aider wrapper”.
 
+In P3B, Aider is baseline evaluation only. The runner should skip cleanly when
+the `aider` CLI or required model/API configuration is unavailable. When it is
+available, it must run in an isolated sanitized temp workspace, must not expose
+`metadata.json`, `gold.patch`, `tests_hidden/`, hidden commands, or hidden logs
+to Aider, and must score patches through the canonical reward and leakage
+pipeline. Do not export Aider teacher data yet.
+
 See:
 
 ```text
@@ -240,10 +252,19 @@ Evaluator should track:
 ```text
 leakage_detected
 forbidden_file_access
+oracle_metadata_leakage
+gold_identifier_visible
 invalid_trajectory
 ```
 
-If leakage is detected, mark the trajectory invalid and apply reward penalty.
+Leakage means evaluator-oracle access, not successful repo localization.
+`forbidden_file_access` and `oracle_metadata_leakage` make
+`leakage_detected=True`. `gold_identifier_visible` is diagnostic only: gold
+file/function strings can legally appear in repo tree, source search, read-file
+observations, and public logs.
+
+If strict leakage is detected, mark the trajectory invalid and apply reward
+penalty.
 
 ---
 
@@ -362,7 +383,21 @@ Run deterministic rollouts:
 ```bash
 python -m codeguide_agent.rollout.run_rollout --root data/mini_repo_debug --policy noop
 python -m codeguide_agent.rollout.run_rollout --root data/mini_repo_debug --policy scripted --task-id task_001
+python -m codeguide_agent.rollout.run_rollout --root data/mini_repo_debug --policy heuristic
+python -m codeguide_agent.rollout.run_rollout --root data/mini_repo_debug --policy llm --limit 1
 python -m codeguide_agent.rollout.run_rollout --root data/mini_repo_debug --policy gold --run-hidden
+```
+
+Compare policies:
+
+```bash
+python -m codeguide_agent.eval_compare --root data/mini_repo_debug --policies noop,scripted,heuristic,gold,aider,llm --limit 5
+```
+
+Run the Aider baseline:
+
+```bash
+python -m codeguide_agent.baselines.aider_runner --root data/mini_repo_debug --limit 5
 ```
 
 Build SFT-style data from trajectories:
@@ -412,6 +447,7 @@ gold
 heuristic / localize_only
 forge runtime baseline
 Aider baseline
+LLM policy
 future LLM policy
 ```
 
@@ -428,6 +464,22 @@ Aider baseline performance
 vs
 future LLM policy performance
 ```
+
+`heuristic` / `localize_only` is the first non-gold process-localization
+baseline. It should not edit files or pass tests by design; use it to validate
+repo navigation metrics before LLM or Aider policies.
+
+The `aider` baseline is scored as an external baseline through the same
+canonical reward fields. It may be skipped when unavailable and should not be
+used as teacher data until a later export/filtering phase.
+
+The `llm` policy is the first patch-capable non-gold policy. It must use only
+allowed prompt context: issue text, public test command/output, repo tree,
+search results, and read-file output from allowed source/test files. It must
+never expose `metadata.json`, `gold.patch`, `tests_hidden/`, hidden commands or
+logs, gold files/functions from metadata, or gold patches. Local tests should
+use `CODEGUIDE_LLM_MOCK=1` or the default mock mode and must not require paid
+API access.
 
 ---
 
@@ -484,13 +536,11 @@ When adding major functionality, update README and docs together.
 
 ## Current Next Priorities
 
-1. Finish P2 cleanup: conservative runtime provenance and canonical data-builder paths.
-2. Implement P3 non-gold heuristic/localize-only policy.
-3. Implement Aider baseline runner.
-4. Add `eval_compare` for baseline comparison.
-5. Expand Mini-Repo-Debug to 20+ tasks after P2/P3 foundations are stable.
-6. Add DPO pair builder with chosen/rejected filtering.
-7. Generate a Phase 2 baseline evaluation report.
+1. Finish P3C small LLM-backed policy.
+2. Expand Mini-Repo-Debug to 20+ tasks after the LLM policy stabilizes.
+3. Generate filtered SFT/DPO data from verified non-gold trajectories.
+4. Add DPO pair builder with chosen/rejected filtering.
+5. Consider GRPO only after stochastic clean rollouts exist.
 
 ---
 

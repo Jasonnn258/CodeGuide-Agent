@@ -17,6 +17,7 @@ def summarize_rollouts(results: list[dict[str, Any]]) -> dict[str, Any]:
             "num_tasks": 0,
             "success_rate": 0.0,
             "average_steps": 0.0,
+            "average_llm_calls": 0.0,
             "invalid_action_rate": 0.0,
             "original_repo_unchanged_rate": 0.0,
         }
@@ -24,6 +25,7 @@ def summarize_rollouts(results: list[dict[str, Any]]) -> dict[str, Any]:
         "num_tasks": count,
         "success_rate": round(sum(1 for item in results if item.get("success")) / count, 4),
         "average_steps": round(sum(float(item.get("steps", 0)) for item in results) / count, 4),
+        "average_llm_calls": round(sum(float(item.get("llm_calls", 0)) for item in results) / count, 4),
         "invalid_action_rate": round(sum(1 for item in results if item.get("invalid_action_count", 0) > 0) / count, 4),
         "original_repo_unchanged_rate": round(sum(1 for item in results if item.get("original_repo_unchanged")) / count, 4),
     }
@@ -33,7 +35,8 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Collect deterministic Mini-Repo-Debug rollouts.")
     parser.add_argument("--root", default="data/mini_repo_debug")
     parser.add_argument("--task-id")
-    parser.add_argument("--policy", choices=["noop", "scripted", "gold"], default="noop")
+    parser.add_argument("--policy", choices=["noop", "scripted", "heuristic", "localize_only", "gold", "llm"], default="noop")
+    parser.add_argument("--limit", type=int)
     parser.add_argument("--max-steps", type=int, default=8)
     parser.add_argument("--temp-root", default=str(DEFAULT_TEMP_ROOT))
     parser.add_argument("--run-hidden", action="store_true")
@@ -43,6 +46,8 @@ def main() -> int:
     args = parser.parse_args()
 
     tasks = discover_tasks(args.root, task_id=args.task_id)
+    if args.limit is not None:
+        tasks = tasks[: args.limit]
     if not tasks:
         print(f"No tasks found for root={args.root!r} task_id={args.task_id!r}")
         return 1

@@ -66,8 +66,67 @@ def test_leakage_detected_flags_gold_values_and_forbidden_paths():
 
     assert result["leakage_detected"] is True
     assert result["forbidden_file_access"] is True
+    assert result["oracle_metadata_leakage"] is True
     assert result["leaked_gold_files"] == ["src/config_loader.py"]
     assert result["leaked_gold_functions"] == ["load_config"]
+
+
+def test_gold_identifier_visible_from_search_is_not_leakage():
+    rows = [
+        {
+            "type": "step",
+            "action_name": "search_repo",
+            "action_input": {"query": "yaml", "path": "src"},
+            "observation": {"matches": [{"file": "src/config_loader.py", "line": 7, "text": "def load_config(path):"}]},
+        },
+        {
+            "type": "step",
+            "action_name": "read_file",
+            "action_input": {"file_path": "src/config_loader.py"},
+            "observation": {"content": "def load_config(path):\n    return {}\n"},
+        },
+    ]
+
+    result = leakage_detected(rows, ["src/config_loader.py"], ["load_config"])
+
+    assert result["gold_identifier_visible"] is True
+    assert result["leakage_detected"] is False
+    assert result["forbidden_file_access"] is False
+    assert result["oracle_metadata_leakage"] is False
+
+
+def test_reading_unsurfaced_gold_file_is_oracle_leakage():
+    rows = [
+        {
+            "type": "step",
+            "action_name": "read_file",
+            "action_input": {"file_path": "src/config_loader.py"},
+            "observation": {"content": "def load_config(path):\n    return {}\n"},
+        }
+    ]
+
+    result = leakage_detected(rows, ["src/config_loader.py"], ["load_config"])
+
+    assert result["leakage_detected"] is True
+    assert result["oracle_metadata_leakage"] is True
+    assert result["forbidden_file_access"] is False
+    assert result["gold_identifier_visible"] is True
+
+
+def test_apply_gold_patch_is_oracle_leakage_for_non_gold_policy():
+    rows = [
+        {
+            "type": "step",
+            "action_name": "apply_gold_patch",
+            "action_input": {},
+            "observation": {"status": "success"},
+        }
+    ]
+
+    result = leakage_detected(rows, ["src/config_loader.py"], ["load_config"])
+
+    assert result["leakage_detected"] is True
+    assert result["oracle_metadata_leakage"] is True
 
 
 def test_rollout_detects_regression_when_bad_patch_breaks_previously_passing_public_test(tmp_path: Path):

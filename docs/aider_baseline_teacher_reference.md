@@ -45,13 +45,38 @@ Run Aider on the same Mini-Repo-Debug tasks as CodeGuide-Agent and compare:
 
 - task success rate,
 - public and hidden test pass rates,
-- gold file hit,
-- gold function hit,
+- patch landing metrics such as `gold_file_patched` and `gold_function_patched`,
 - patch size,
 - no-hardcode rate,
 - no-test-deletion rate,
 - regression rate,
+- leakage metrics,
 - tool/step cost.
+
+P3B implements baseline evaluation only:
+
+```bash
+python -m codeguide_agent.baselines.aider_runner \
+  --root data/mini_repo_debug \
+  --limit 5 \
+  --output data/mini_repo_debug/reports/aider_baseline_report.json
+```
+
+If the `aider` CLI or required model/API configuration is not available, the
+runner writes a skipped report and exits `0`. This keeps local validation
+independent of paid API access.
+
+The runner copies each task into an isolated temp workspace, removes
+`metadata.json`, `gold.patch`, and `tests_hidden/` before invoking Aider,
+builds the prompt only from `issue.md` and the public test command, and restores
+hidden tests only after Aider exits for evaluator-side scoring. Hidden test
+commands and logs are evaluator-only and must never be placed in the Aider
+prompt.
+
+Aider results are scored through the canonical CodeGuide reward and leakage
+pipeline, including `codeguide_agent.reward.calculator`, patch metrics, strict
+leakage metrics, and original-repo checksum checks. In `eval_compare`, Aider is
+a real external baseline row; `gold` remains pipeline validation only.
 
 ## Teacher and Data Generator
 
@@ -67,6 +92,7 @@ should only enter teacher datasets after verifier filtering:
 - no unrelated file modifications.
 
 Successful verified outputs can become SFT examples or DPO chosen responses.
+P3B does not export teacher data yet.
 
 ## Repo-Map and Edit-Format Reference
 
@@ -84,7 +110,8 @@ needed, subject to license compatibility and project scope.
 
 ## Minimal Runner Scope
 
-`codeguide_agent/baselines/aider_runner.py` is currently a CLI stub. The future
-runner should accept a task repo, issue text, public test command, and hidden
-test command, then return a patch, test results, and patch metrics using the
-same report schema as the forge baseline.
+`codeguide_agent/baselines/aider_runner.py` is now the canonical P3B Aider
+baseline runner. It accepts a dataset root, limit, output path, temp root, and
+timeout, then writes a JSON report with per-task skip/status, public and hidden
+test results, patch metrics, reward metrics, leakage metrics, diff path, and
+original-repo checksum status.

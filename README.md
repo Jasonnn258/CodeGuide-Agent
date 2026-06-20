@@ -70,8 +70,12 @@ Implemented components include:
 - Evaluation runner and aggregate metrics.
 - Forge-style baseline/demo runtime package under `codeguide_agent/runtime/`.
 - Mini-Repo-Debug evaluator entry point at `codeguide_agent/eval_mini_repo.py`.
+- Heuristic/localize-only rollout policy for non-gold process-localization baselines.
+- Small LLM-backed rollout policy with mock and OpenAI-compatible backends.
+- `eval_compare` policy comparison report.
+- Aider baseline runner with skipped-if-unavailable behavior and canonical scoring.
 - Skeleton SFT/DPO/GRPO data builder modules.
-- Aider and forge baseline runner entry points.
+- Forge baseline runner entry point.
 
 ## Dataset Validation
 
@@ -118,6 +122,13 @@ Localization reports distinguish process discovery from patch landing:
 These can disagree. A blind gold-style patch can have `gold_file_patched=True`
 while `gold_file_hit_at_3=False`.
 
+Leakage means evaluator-oracle access, not successful localization. Accessing
+`metadata.json`, `gold.patch`, `tests_hidden`, hidden-test payloads, or using a
+gold path/function before it was surfaced by legal tools is leakage. A gold
+file/function name appearing through `repo_tree`, `search_repo`, `read_file`, or
+public logs is recorded as `gold_identifier_visible` for diagnostics and does
+not by itself make `leakage_detected=True`.
+
 For forge-runtime baseline comparison only, run:
 
 ```bash
@@ -153,12 +164,74 @@ Collect local deterministic rollouts in isolated temp workspaces:
 ```bash
 python -m codeguide_agent.rollout.run_rollout --root data/mini_repo_debug --policy noop
 python -m codeguide_agent.rollout.run_rollout --root data/mini_repo_debug --policy scripted --task-id task_001
+python -m codeguide_agent.rollout.run_rollout --root data/mini_repo_debug --policy heuristic
+python -m codeguide_agent.rollout.run_rollout --root data/mini_repo_debug --policy llm --limit 1
 python -m codeguide_agent.rollout.run_rollout --root data/mini_repo_debug --policy gold --run-hidden
 ```
 
-Supported Phase 2A policies are `noop`, `scripted`, and `gold`. They are local and deterministic; no paid APIs are required.
-P1 remains infrastructure hardening. Gold/scripted results validate the pipeline
-and should not be presented as real LLM agent capability.
+Supported local policies are `noop`, `scripted`, `heuristic`, `localize_only`,
+`llm`, and `gold`. Gold/scripted results validate the pipeline and should not
+be presented as real LLM agent capability.
+
+`heuristic` is the first real non-gold process-localization baseline. It ranks
+source files from issue keywords, searches/reads likely files, and stops without
+editing. Its success rate is expected to remain `0.0`; its purpose is to test
+repo navigation and `gold_file_hit_at_k` / `gold_function_hit_at_k` metrics.
+
+`llm` is the first patch-capable non-gold rollout policy. In local validation it
+defaults to mock mode, so it does not require paid API access. Mock mode emits a
+small safe action sequence (`repo_tree`, `search_repo`, `read_file`, `stop`) and
+is meant to validate prompt boundaries, trajectories, reward, and comparison
+plumbing, not repair strength.
+
+To use a real OpenAI-compatible backend, configure:
+
+```bash
+export CODEGUIDE_LLM_BACKEND=openai_compatible
+export CODEGUIDE_LLM_BASE_URL=https://your-compatible-endpoint/v1
+export CODEGUIDE_LLM_API_KEY=...
+export CODEGUIDE_LLM_MODEL=...
+```
+
+Optional guards include `CODEGUIDE_LLM_TIMEOUT`,
+`CODEGUIDE_LLM_MAX_TOKENS`, `CODEGUIDE_LLM_TEMPERATURE`,
+`CODEGUIDE_LLM_BUDGET_USD`, `CODEGUIDE_LLM_MAX_CALLS_PER_TASK`,
+`CODEGUIDE_LLM_MAX_CONCURRENCY`, `CODEGUIDE_LLM_QPS_LIMIT`,
+`CODEGUIDE_LLM_DRY_RUN`, and `CODEGUIDE_LLM_MOCK`.
+
+The LLM prompt boundary excludes evaluator-only files and metadata:
+`metadata.json`, `gold.patch`, `tests_hidden/`, hidden test commands/logs,
+gold files/functions from task metadata, and gold patches. Hidden tests remain
+evaluator-only. P3C is rollout/evaluation infrastructure only, not training.
+
+Compare policies:
+
+```bash
+python -m codeguide_agent.eval_compare --root data/mini_repo_debug --policies noop,scripted,heuristic,gold,aider,llm --limit 5
+```
+
+The comparison report is written to `data/mini_repo_debug/reports/eval_compare.json`.
+Rows for `gold` are pipeline validation only. The `aider` row is a strong
+external baseline row, not CodeGuide-Agent's implementation base.
+
+## Aider Baseline
+
+Run the P3B Aider baseline with:
+
+```bash
+python -m codeguide_agent.baselines.aider_runner \
+  --root data/mini_repo_debug \
+  --limit 5 \
+  --output data/mini_repo_debug/reports/aider_baseline_report.json
+```
+
+If the `aider` CLI or required model/API configuration is unavailable, the
+runner writes a skipped report and exits `0` so local validation remains
+reproducible without paid APIs. When available, it copies each task into an
+isolated sanitized temp workspace, removes evaluator-only files before the
+Aider run, restores hidden tests only after Aider exits, and scores the result
+through `codeguide_agent.reward.calculator` plus the strict leakage checker.
+No teacher-data export is performed in P3B.
 
 Build SFT-style chat data from trajectory JSONL files:
 
@@ -180,12 +253,13 @@ such as `apply_gold_patch` that a real agent must not learn to imitate.
 - VLM or screenshot-based code understanding.
 - Generic multi-agent orchestration.
 - Paid or external API integrations.
-- Full Aider automation.
 - Real LLM patch generation in the migrated forge runtime.
+- Aider teacher-data export.
+- Strong LLM repair claims.
 
 ## Next Steps
 
-- Complete P2 cleanup, then add non-gold policy and Aider baseline comparisons.
+- Expand Mini-Repo-Debug after P3 foundations are stable.
 - Mine successful trajectories into SFT examples.
 - Build DPO pairs from verified good/bad patch attempts.
-- Add GRPO rollout grouping after stochastic policy sampling exists.
+- Add GRPO rollout grouping only after stochastic clean non-gold rollouts exist.

@@ -12,13 +12,22 @@ Supported policy backends:
 
 - `noop`: emits `stop`.
 - `scripted`: runs a deterministic repo-tree, search, and read flow.
+- `heuristic` / `localize_only`: ranks source files from issue keywords,
+  searches/reads likely files, and stops without editing.
 - `gold`: applies `gold.patch` only inside the temp workspace, then runs verifiers.
+- `aider`: external Aider baseline run through `codeguide_agent.baselines.aider_runner`
+  and canonical scoring. It is skipped if the CLI or API/model config is
+  unavailable.
+- `llm`: small non-gold LLM-backed policy. It defaults to mock mode for local
+  validation and can call an OpenAI-compatible endpoint when explicitly
+  configured.
 
 ## What It Does Not Do Yet
 
 - It does not train a model.
 - It does not implement GRPO.
-- It does not call paid APIs.
+- It does not require paid APIs for local validation; Aider is optional and
+  skips cleanly when unavailable, and LLM rollout defaults to mock mode.
 - It does not add IDE completion, VLM, or generic multi-agent workflows.
 - It does not expand beyond Mini-Repo-Debug.
 - It does not modify canonical dataset repos.
@@ -28,6 +37,8 @@ Supported policy backends:
 ```bash
 python -m codeguide_agent.rollout.run_rollout --root data/mini_repo_debug --policy noop
 python -m codeguide_agent.rollout.run_rollout --root data/mini_repo_debug --policy scripted --task-id task_001
+python -m codeguide_agent.rollout.run_rollout --root data/mini_repo_debug --policy heuristic
+python -m codeguide_agent.rollout.run_rollout --root data/mini_repo_debug --policy llm --limit 1
 python -m codeguide_agent.rollout.run_rollout --root data/mini_repo_debug --policy gold --run-hidden
 ```
 
@@ -49,6 +60,17 @@ Localization metrics are split into two families:
 - `gold_file_patched` and `gold_function_patched` measure whether the final
   diff landed on the gold location.
 
+Leakage metrics are split from localization metrics:
+
+- `forbidden_file_access` flags evaluator-only paths such as `metadata.json`,
+  `gold.patch`, and `tests_hidden`.
+- `oracle_metadata_leakage` flags actions that appear to use evaluator metadata
+  before the information was legally surfaced.
+- `gold_identifier_visible` is diagnostic only. Gold file/function strings that
+  appear through legal repo exploration are expected and should be measured by
+  localization metrics, not punished as leakage.
+- `leakage_detected` is strict: `forbidden_file_access or oracle_metadata_leakage`.
+
 Each public test suite should contain at least one test that passes before the
 bug fix. The validator warns when this is not true because regression detection
 depends on comparing pre-patch and post-patch public pass counts.
@@ -58,6 +80,64 @@ Run the static issue leakage audit with:
 ```bash
 python -m codeguide_agent.dataset.audit_leakage --root data/mini_repo_debug
 ```
+
+Compare policies with:
+
+```bash
+python -m codeguide_agent.eval_compare --root data/mini_repo_debug --policies noop,scripted,heuristic,gold,aider,llm --limit 5
+```
+
+The heuristic policy is the first non-gold process-localization baseline. It is
+not expected to pass tests because it does not patch. It exists to validate repo
+navigation and process localization metrics before LLM or Aider policies.
+
+Run the Aider baseline directly with:
+
+```bash
+python -m codeguide_agent.baselines.aider_runner \
+  --root data/mini_repo_debug \
+  --limit 5 \
+  --output data/mini_repo_debug/reports/aider_baseline_report.json
+```
+
+P3B uses Aider as a baseline only. The runner builds prompts from `issue.md`
+and the public test command, runs in a sanitized temp workspace without
+`metadata.json`, `gold.patch`, or `tests_hidden/`, restores hidden tests only
+after Aider exits, and scores through `codeguide_agent.reward.calculator` plus
+strict leakage checks. It does not export Aider teacher data.
+
+P3C adds a small LLM-backed policy for real non-gold action trajectories:
+
+```text
+issue -> repo_tree/search/read/edit/test -> trajectory -> reward -> eval_compare
+```
+
+Environment variables:
+
+```text
+CODEGUIDE_LLM_BACKEND
+CODEGUIDE_LLM_MODEL
+CODEGUIDE_LLM_BASE_URL
+CODEGUIDE_LLM_API_KEY
+CODEGUIDE_LLM_TIMEOUT
+CODEGUIDE_LLM_MAX_TOKENS
+CODEGUIDE_LLM_TEMPERATURE
+CODEGUIDE_LLM_BUDGET_USD
+CODEGUIDE_LLM_MAX_CALLS_PER_TASK
+CODEGUIDE_LLM_MAX_CONCURRENCY
+CODEGUIDE_LLM_QPS_LIMIT
+CODEGUIDE_LLM_DRY_RUN
+CODEGUIDE_LLM_MOCK
+```
+
+With no real backend configured, the policy runs in deterministic mock mode so
+tests and local validation require no paid API access. The prompt must include
+only allowed context: issue text, public test command/output, repo tree/search
+results, read-file output from allowed files, and recent observation summaries.
+It must not include evaluator-only metadata, hidden test commands/logs,
+`metadata.json`, `gold.patch`, `tests_hidden/`, gold files/functions from
+metadata, or gold patches. P3C is rollout/eval infrastructure only; it is not a
+training phase and should not be used to claim strong repair ability yet.
 
 ## How To Build SFT Data
 
@@ -92,4 +172,4 @@ Phase 2A produces the raw interface needed for later learning:
 - SFT JSONL for supervised tool-use formatting;
 - verifier reward outputs for future rollout ranking.
 
-Future phases can add SFT and distillation once the local rollout/eval path is stable. GRPO should remain deferred until there is enough clean trajectory data and reward-hacking analysis.
+Future phases can add SFT and distillation once the local rollout/eval path is stable. GRPO should remain deferred until stochastic clean non-gold rollouts exist and there is enough reward-hacking analysis.

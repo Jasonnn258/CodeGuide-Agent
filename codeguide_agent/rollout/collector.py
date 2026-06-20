@@ -45,9 +45,13 @@ class RolloutCollector:
         issue_text = (original_task / metadata.get("issue_path", "issue.md")).read_text(encoding="utf-8")
         before_checksum = compute_repo_checksum(original_task)
         temp_repo = copy_task_to_temp(original_task, temp_root, task_id)
+        _ensure_git_repo(temp_repo, timeout=self.timeout)
         should_keep_temp = self.keep_temp if keep_temp is None else keep_temp
         trajectory_id = f"{task_id}_{policy.name}"
-        logger = TrajectoryLogger(self.trajectories_dir / f"{trajectory_id}.jsonl", task_id, trajectory_id, model=f"rollout_{policy.name}")
+        trajectory_path = self.trajectories_dir / f"{trajectory_id}.jsonl"
+        if trajectory_path.exists():
+            trajectory_path.unlink()
+        logger = TrajectoryLogger(trajectory_path, task_id, trajectory_id, model=f"rollout_{policy.name}")
         state = RolloutState(task_id=task_id, repo_path=temp_repo, issue_text=issue_text, step_id=0, max_steps=max_steps)
         public_result: dict[str, Any] | None = None
         pre_public_result: dict[str, Any] | None = None
@@ -198,6 +202,7 @@ class RolloutCollector:
             "original_checksum_before": before_checksum,
             "original_checksum_after": after_checksum,
             "temp_repo_path": str(temp_repo),
+            **_policy_metadata(policy),
         }
 
     def _execute_action(self, action: Action, state: RolloutState) -> dict[str, Any]:
@@ -277,3 +282,27 @@ def public_test_counts(result: dict[str, Any] | None) -> dict[str, int]:
 def _extract_count(text: str, label: str) -> int:
     matches = re.findall(rf"(\d+)\s+{label}", text)
     return sum(int(value) for value in matches)
+
+
+def _policy_metadata(policy: BasePolicy) -> dict[str, Any]:
+    metadata = getattr(policy, "metadata", None)
+    if not callable(metadata):
+        return {}
+    data = metadata()
+    if not isinstance(data, dict):
+        return {}
+    return data
+
+
+def _ensure_git_repo(repo_path: Path, timeout: int) -> None:
+    if (repo_path / ".git").exists():
+        return
+    commands = [
+        ["git", "init"],
+        ["git", "config", "user.email", "codeguide@example.invalid"],
+        ["git", "config", "user.name", "CodeGuide Eval"],
+        ["git", "add", "."],
+        ["git", "commit", "-m", "baseline"],
+    ]
+    for command in commands:
+        subprocess.run(command, cwd=repo_path, text=True, capture_output=True, timeout=min(timeout, 30), check=False)

@@ -158,24 +158,54 @@ def leakage_detected(
 ) -> dict[str, Any]:
     visible_parts: list[str] = []
     forbidden_file_access = False
+    oracle_metadata_leakage = False
+    surfaced_files: set[str] = set()
     for row in trajectory_rows:
+        action_name = row.get("action_name", "")
+        action_input = row.get("action_input", {})
+        observation = row.get("observation", {})
         payload = {
-            "action_input": row.get("action_input", {}),
-            "observation": row.get("observation", {}),
+            "action_input": action_input,
+            "observation": observation,
         }
+        action_text = json.dumps(action_input, sort_keys=True).lower()
         text = json.dumps(payload, sort_keys=True)
         visible_parts.append(text)
         lowered = text.lower()
         if any(pattern in lowered for pattern in FORBIDDEN_ACCESS_PATTERNS):
             forbidden_file_access = True
+        if any(pattern in action_text for pattern in FORBIDDEN_ACCESS_PATTERNS):
+            oracle_metadata_leakage = True
+        if action_name == "apply_gold_patch":
+            oracle_metadata_leakage = True
+        if action_name == "repo_tree":
+            for entry in observation.get("entries", []):
+                normalized = str(entry).rstrip("/")
+                if normalized:
+                    surfaced_files.add(normalized)
+        elif action_name == "search_repo":
+            query = str(action_input.get("query", ""))
+            if query and query in set(gold_functions):
+                oracle_metadata_leakage = True
+            for match in observation.get("matches", []):
+                file_name = match.get("file")
+                if file_name:
+                    surfaced_files.add(str(file_name))
+        elif action_name == "read_file":
+            file_path = str(action_input.get("file_path", ""))
+            if file_path in set(gold_files) and file_path not in surfaced_files:
+                oracle_metadata_leakage = True
 
     visible_text = "\n".join(visible_parts)
     leaked_gold_files = sorted({file_name for file_name in gold_files if file_name and file_name in visible_text})
     leaked_gold_functions = sorted({name for name in gold_functions if name and name in visible_text})
-    leakage = bool(leaked_gold_files or leaked_gold_functions or forbidden_file_access)
+    gold_identifier_visible = bool(leaked_gold_files or leaked_gold_functions)
+    leakage = bool(forbidden_file_access or oracle_metadata_leakage)
     return {
         "leakage_detected": leakage,
         "forbidden_file_access": forbidden_file_access,
+        "oracle_metadata_leakage": oracle_metadata_leakage,
+        "gold_identifier_visible": gold_identifier_visible,
         "leaked_gold_files": leaked_gold_files,
         "leaked_gold_functions": leaked_gold_functions,
     }
