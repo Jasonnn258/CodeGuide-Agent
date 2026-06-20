@@ -56,7 +56,7 @@ def compare_policies(
                 policy=make_policy(policy_name),
                 temp_root=Path(temp_root) / policy_name,
                 max_steps=8,
-                run_hidden=policy_name == "gold",
+                run_hidden=policy_name in {"gold", "llm"},
             )
             results.append(result)
         report["results"][policy_name] = results
@@ -93,6 +93,10 @@ def summarize_policy(results: list[dict[str, Any]]) -> dict[str, Any]:
             "average_llm_calls": 0.0,
             "invalid_action_rate": 0.0,
             "syntax_error_rate": 0.0,
+            "public_pass_hidden_fail_rate": 0.0,
+            "hidden_failure_type_counts": {},
+            "patch_generalization_risk_counts": {},
+            "average_changed_lines_count": 0.0,
             "average_repeated_edit_count": 0.0,
             "average_edit_retry_count": 0.0,
             "average_repair_loop_violation_count": 0.0,
@@ -110,6 +114,16 @@ def summarize_policy(results: list[dict[str, Any]]) -> dict[str, Any]:
             sum(1 for result in results if result.get(result_key) or result.get("reward", {}).get(reward_key)) / count,
             4,
         )
+
+    def reward_counts(key: str) -> dict[str, int]:
+        counts: dict[str, int] = {}
+        for result in results:
+            value = str(result.get("reward", {}).get(key, "none"))
+            counts[value] = counts.get(value, 0) + 1
+        return dict(sorted(counts.items()))
+
+    def average_reward_number(key: str) -> float:
+        return round(sum(float(result.get("reward", {}).get(key, 0)) for result in results) / count, 4)
 
     skipped_count = sum(1 for result in results if result.get("status") == "skipped")
     availability = _availability(results, skipped_count)
@@ -141,6 +155,10 @@ def summarize_policy(results: list[dict[str, Any]]) -> dict[str, Any]:
         "average_llm_calls": round(sum(float(result.get("llm_calls", 0)) for result in results) / count, 4),
         "invalid_action_rate": round(sum(1 for result in results if result.get("invalid_action_count", 0) > 0) / count, 4),
         "syntax_error_rate": rate_result_or_reward("syntax_error"),
+        "public_pass_hidden_fail_rate": rate_reward("public_pass_hidden_fail"),
+        "hidden_failure_type_counts": reward_counts("hidden_failure_type"),
+        "patch_generalization_risk_counts": reward_counts("patch_generalization_risk"),
+        "average_changed_lines_count": average_reward_number("changed_lines_count"),
         "average_repeated_edit_count": round(
             sum(float(result.get("repeated_edit_count", result.get("reward", {}).get("repeated_edit_count", 0))) for result in results) / count,
             4,
@@ -180,6 +198,8 @@ def print_table(report: dict[str, Any]) -> None:
         "average_llm_calls",
         "invalid_action_rate",
         "syntax_error_rate",
+        "public_pass_hidden_fail_rate",
+        "average_changed_lines_count",
         "average_repeated_edit_count",
         "average_edit_retry_count",
         "average_repair_loop_violation_count",
@@ -225,7 +245,7 @@ def main() -> int:
     tasks = discover_tasks(args.root)
     if args.limit is not None:
         tasks = tasks[: args.limit]
-    if pytest_required(tasks, run_hidden=("gold" in policies or "aider" in policies)) and not pytest_available():
+    if pytest_required(tasks, run_hidden=bool({"gold", "aider", "llm"} & set(policies))) and not pytest_available():
         print(DEV_INSTALL_MESSAGE)
         return 2
 

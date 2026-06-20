@@ -68,7 +68,7 @@ def _safe_observation(row: dict[str, Any]) -> dict[str, Any]:
         return {}
     action_input = _filter_payload(row.get("action_input", {}))
     observation = _filter_payload(row.get("observation", {}))
-    if action_name == "run_test" and action_input.get("phase") == "final_hidden":
+    if action_name == "run_test" and _is_hidden_test_payload(action_input):
         return {}
     return {
         "action_name": action_name,
@@ -90,6 +90,12 @@ def _filter_payload(payload: Any) -> Any:
 def _allowed_text(text: str) -> bool:
     lowered = text.lower()
     return not any(term in lowered for term in FORBIDDEN_PROMPT_TERMS)
+
+
+def _is_hidden_test_payload(action_input: dict[str, Any]) -> bool:
+    phase = str(action_input.get("phase", "")).lower()
+    command = str(action_input.get("command", "")).lower()
+    return "hidden" in phase or "tests_hidden" in command
 
 
 def _redact_forbidden(text: str) -> str:

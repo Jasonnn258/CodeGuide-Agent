@@ -171,7 +171,7 @@ class RolloutCollector:
                 metadata.get("gold_functions", []),
             )
             leakage = leakage_detected(
-                state.observations,
+                _agent_visible_observations(state.observations),
                 metadata.get("gold_files", []),
                 metadata.get("gold_functions", []),
             )
@@ -405,6 +405,14 @@ def public_test_counts(result: dict[str, Any] | None) -> dict[str, int]:
         else:
             fail_count = 1
     return {"pass_count": pass_count, "fail_count": fail_count}
+
+
+def _agent_visible_observations(observations: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    return [
+        row
+        for row in observations
+        if not (row.get("action_name") == "run_test" and row.get("action_input", {}).get("phase") == "final_hidden")
+    ]
 
 
 def _extract_count(text: str, label: str) -> int:
