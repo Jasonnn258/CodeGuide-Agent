@@ -93,6 +93,7 @@ class RolloutCollector:
                 violation = self._repair_loop_violation(policy, action, state)
                 if violation:
                     self._record_invalid_action(state, "repair_loop")
+                    state.repair_loop_violation_count += 1
                     observation = violation
                 else:
                     observation = self._execute_action(action, state)
@@ -102,6 +103,22 @@ class RolloutCollector:
                 step = logger.log_step(action.action_name, action.action_input, observation, action.thought)
                 state.observations.append(step)
                 state.step_id += 1
+                if policy.name == "llm" and action.action_name == "edit_file" and observation.get("status") == "success":
+                    auto_result = run_test(temp_repo, metadata["public_test_cmd"], timeout=self.timeout)
+                    state.auto_public_test_after_edit_count += 1
+                    state.tests_run.append(metadata["public_test_cmd"])
+                    state.final_test_ran = True
+                    state._requires_post_edit_check = False
+                    auto_step = logger.log_step(
+                        "run_test",
+                        {"command": metadata["public_test_cmd"], "phase": "auto_public_after_edit"},
+                        auto_result,
+                        "Automatically run public verifier after successful LLM edit.",
+                    )
+                    state.observations.append(auto_step)
+                    if auto_result.get("exit_code") == 0:
+                        state.done = True
+                        state.stop_reason = "test_pass"
 
                 if action.action_name == "stop":
                     state.done = True
@@ -181,6 +198,8 @@ class RolloutCollector:
                     "syntax_error_files": state.syntax_error_files,
                     "repeated_edit_count": state.repeated_edit_count,
                     "edit_retry_count": state.edit_retry_count,
+                    "repair_loop_violation_count": state.repair_loop_violation_count,
+                    "auto_public_test_after_edit_count": state.auto_public_test_after_edit_count,
                     "incomplete_stop": state.incomplete_stop,
                     "final_test_ran": state.final_test_ran,
                     "final_diff_collected": state.final_diff_collected,
@@ -211,6 +230,8 @@ class RolloutCollector:
             "duplicate_tool_count": state.duplicate_tool_count,
             "repeated_edit_count": state.repeated_edit_count,
             "edit_retry_count": state.edit_retry_count,
+            "repair_loop_violation_count": state.repair_loop_violation_count,
+            "auto_public_test_after_edit_count": state.auto_public_test_after_edit_count,
             "syntax_error": state.syntax_error,
             "syntax_error_files": state.syntax_error_files,
             "incomplete_stop": state.incomplete_stop,
@@ -252,6 +273,8 @@ class RolloutCollector:
         return {"tool_name": name, "status": "error", "error": "unknown action"}
 
     def _update_state_from_action(self, state: RolloutState, action: Action, observation: dict[str, Any]) -> None:
+        if observation.get("repair_loop_violation"):
+            return
         if action.action_name == "search_repo":
             state.searched_queries.append(action.action_input["query"])
         elif action.action_name == "read_file" and observation.get("status") == "success":
@@ -314,16 +337,34 @@ class RolloutCollector:
         edit_key = (file_path, old_text)
         if file_path not in state.opened_files:
             state.edit_retry_count += 1
-            return _repair_loop_error(file_path, "edit_file requires a successful read_file on the target first")
+            return _repair_loop_error(
+                file_path,
+                "edit_file requires a successful read_file on the target first",
+                allowed_next_actions=["read_file"],
+                required_next_action="read_file",
+            )
         if edit_key in state._seen_edit_keys:
             state.repeated_edit_count += 1
-            return _repair_loop_error(file_path, "repeated file_path + old_text edit rejected")
+            return _repair_loop_error(
+                file_path,
+                "repeated file_path + old_text edit rejected",
+                allowed_next_actions=["run_test", "read_file", "git_diff"],
+            )
         if state._requires_read_after_failed_edit:
             state.edit_retry_count += 1
-            return _repair_loop_error(file_path, "failed edit_file must be followed by read_file before another edit")
+            return _repair_loop_error(
+                file_path,
+                "failed edit_file must be followed by read_file before another edit",
+                allowed_next_actions=["read_file"],
+                required_next_action="read_file",
+            )
         if state._requires_post_edit_check:
             state.edit_retry_count += 1
-            return _repair_loop_error(file_path, "successful edit_file must be followed by run_test, read_file, or git_diff before another edit")
+            return _repair_loop_error(
+                file_path,
+                "successful edit_file must be followed by run_test, read_file, or git_diff before another edit",
+                allowed_next_actions=["run_test", "read_file", "git_diff"],
+            )
         state._seen_edit_keys.add(edit_key)
         return None
 
@@ -360,12 +401,20 @@ def _extract_count(text: str, label: str) -> int:
     return sum(int(value) for value in matches)
 
 
-def _repair_loop_error(file_path: str, error: str) -> dict[str, Any]:
+def _repair_loop_error(
+    file_path: str,
+    error: str,
+    allowed_next_actions: list[str],
+    required_next_action: str | None = None,
+) -> dict[str, Any]:
     return {
         "tool_name": "repair_loop_guard",
         "status": "error",
         "file": file_path,
         "error": error,
+        "repair_loop_violation": True,
+        "allowed_next_actions": allowed_next_actions,
+        "required_next_action": required_next_action or "",
     }
 
 

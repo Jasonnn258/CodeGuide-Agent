@@ -62,14 +62,17 @@ def test_repeated_edit_is_counted_and_rejected(tmp_path: Path):
 
     assert result["repeated_edit_count"] == 1
     assert result["invalid_action_count"] >= 1
+    assert result["repair_loop_violation_count"] == 1
 
 
-def test_successful_edit_requires_test_read_or_diff_before_next_edit(tmp_path: Path):
+def test_rejected_edit_after_success_does_not_switch_to_failed_edit_state(tmp_path: Path):
+    old_text = "return json.loads(text)"
     policy = SequencePolicy(
         [
             Action("read first", "read_file", {"file_path": "src/config_loader.py"}),
-            Action("edit", "edit_file", {"file_path": "src/config_loader.py", "old_text": "return json.loads(text)", "new_text": "return {}"}),
-            Action("second edit too soon", "edit_file", {"file_path": "src/config_loader.py", "old_text": "return {}", "new_text": "return {'x': 1}"}),
+            Action("edit", "edit_file", {"file_path": "src/config_loader.py", "old_text": old_text, "new_text": "return {}"}),
+            Action("repeat rejected", "edit_file", {"file_path": "src/config_loader.py", "old_text": old_text, "new_text": "return {'x': 1}"}),
+            Action("read after rejection", "read_file", {"file_path": "src/config_loader.py"}),
             Action("stop", "stop", {"reason": "done"}),
         ]
     )
@@ -81,8 +84,29 @@ def test_successful_edit_requires_test_read_or_diff_before_next_edit(tmp_path: P
         max_steps=5,
     )
 
-    assert result["edit_retry_count"] == 1
-    assert result["invalid_action_count"] >= 1
+    assert result["repeated_edit_count"] == 1
+    assert result["edit_retry_count"] == 0
+    assert result["repair_loop_violation_count"] == 1
+
+
+def test_successful_edit_triggers_auto_public_test(tmp_path: Path):
+    policy = SequencePolicy(
+        [
+            Action("read first", "read_file", {"file_path": "src/config_loader.py"}),
+            Action("edit", "edit_file", {"file_path": "src/config_loader.py", "old_text": "return json.loads(text)", "new_text": "return {}"}),
+            Action("stop", "stop", {"reason": "done"}),
+        ]
+    )
+
+    result = RolloutCollector(trajectories_dir=tmp_path / "trajectories").collect(
+        TASK,
+        policy,
+        temp_root=tmp_path / "eval",
+        max_steps=4,
+    )
+
+    assert result["auto_public_test_after_edit_count"] == 1
+    assert result["final_test_ran"] is True
 
 
 def test_syntax_error_is_detected_without_leakage(tmp_path: Path):
@@ -127,3 +151,27 @@ def test_incomplete_stop_is_marked_before_public_test_and_diff(tmp_path: Path):
     assert result["reward"]["incomplete_stop"] is True
     assert result["reward"]["final_test_ran"] is True
     assert result["reward"]["final_diff_collected"] is True
+
+
+def test_real_edit_failure_still_requires_read_file_before_retry(tmp_path: Path):
+    policy = SequencePolicy(
+        [
+            Action("read first", "read_file", {"file_path": "src/config_loader.py"}),
+            Action("real failure", "edit_file", {"file_path": "src/config_loader.py", "old_text": "not present", "new_text": "x"}),
+            Action("retry blocked", "edit_file", {"file_path": "src/config_loader.py", "old_text": "return json.loads(text)", "new_text": "return {}"}),
+            Action("read required", "read_file", {"file_path": "src/config_loader.py"}),
+            Action("retry now allowed", "edit_file", {"file_path": "src/config_loader.py", "old_text": "return json.loads(text)", "new_text": "return {}"}),
+            Action("stop", "stop", {"reason": "done"}),
+        ]
+    )
+
+    result = RolloutCollector(trajectories_dir=tmp_path / "trajectories").collect(
+        TASK,
+        policy,
+        temp_root=tmp_path / "eval",
+        max_steps=7,
+    )
+
+    assert result["edit_retry_count"] == 1
+    assert result["repair_loop_violation_count"] == 1
+    assert result["edited_files"] == ["src/config_loader.py"]

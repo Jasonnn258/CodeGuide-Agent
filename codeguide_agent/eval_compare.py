@@ -95,6 +95,8 @@ def summarize_policy(results: list[dict[str, Any]]) -> dict[str, Any]:
             "syntax_error_rate": 0.0,
             "average_repeated_edit_count": 0.0,
             "average_edit_retry_count": 0.0,
+            "average_repair_loop_violation_count": 0.0,
+            "average_auto_public_test_after_edit_count": 0.0,
             "incomplete_stop_rate": 0.0,
             "skip_reason": "",
         }
@@ -147,6 +149,14 @@ def summarize_policy(results: list[dict[str, Any]]) -> dict[str, Any]:
             sum(float(result.get("edit_retry_count", result.get("reward", {}).get("edit_retry_count", 0))) for result in results) / count,
             4,
         ),
+        "average_repair_loop_violation_count": round(
+            sum(float(result.get("repair_loop_violation_count", result.get("reward", {}).get("repair_loop_violation_count", 0))) for result in results) / count,
+            4,
+        ),
+        "average_auto_public_test_after_edit_count": round(
+            sum(float(result.get("auto_public_test_after_edit_count", result.get("reward", {}).get("auto_public_test_after_edit_count", 0))) for result in results) / count,
+            4,
+        ),
         "incomplete_stop_rate": rate_result_or_reward("incomplete_stop"),
     }
 
@@ -172,6 +182,8 @@ def print_table(report: dict[str, Any]) -> None:
         "syntax_error_rate",
         "average_repeated_edit_count",
         "average_edit_retry_count",
+        "average_repair_loop_violation_count",
+        "average_auto_public_test_after_edit_count",
         "incomplete_stop_rate",
         "skip_reason",
     ]

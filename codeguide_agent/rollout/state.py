@@ -23,6 +23,8 @@ class RolloutState:
     duplicate_tool_count: int = 0
     repeated_edit_count: int = 0
     edit_retry_count: int = 0
+    repair_loop_violation_count: int = 0
+    auto_public_test_after_edit_count: int = 0
     syntax_error: bool = False
     syntax_error_files: list[str] = field(default_factory=list)
     incomplete_stop: bool = False
@@ -45,6 +47,8 @@ class RolloutState:
             "duplicate_tool_calls": self.duplicate_tool_count,
             "repeated_edit_count": self.repeated_edit_count,
             "edit_retry_count": self.edit_retry_count,
+            "repair_loop_violation_count": self.repair_loop_violation_count,
+            "auto_public_test_after_edit_count": self.auto_public_test_after_edit_count,
         }
 
     def to_dict(self) -> dict[str, Any]:
