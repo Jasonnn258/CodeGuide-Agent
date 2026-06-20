@@ -160,6 +160,9 @@ def leakage_detected(
     forbidden_file_access = False
     oracle_metadata_leakage = False
     surfaced_files: set[str] = set()
+    surfaced_functions: set[str] = set()
+    gold_file_set = set(gold_files)
+    gold_function_set = set(gold_functions)
     for row in trajectory_rows:
         action_name = row.get("action_name", "")
         action_input = row.get("action_input", {})
@@ -178,6 +181,9 @@ def leakage_detected(
             oracle_metadata_leakage = True
         if action_name == "apply_gold_patch":
             oracle_metadata_leakage = True
+        if action_name == "run_test" and _is_public_test_action(action_input):
+            surfaced_files.update(_gold_files_in_text(text, gold_files))
+            surfaced_functions.update(_gold_functions_in_text(text, gold_functions))
         if action_name == "repo_tree":
             for entry in observation.get("entries", []):
                 normalized = str(entry).rstrip("/")
@@ -185,16 +191,27 @@ def leakage_detected(
                     surfaced_files.add(normalized)
         elif action_name == "search_repo":
             query = str(action_input.get("query", ""))
-            if query and query in set(gold_functions):
+            if query and query in gold_function_set and query not in surfaced_functions:
                 oracle_metadata_leakage = True
             for match in observation.get("matches", []):
                 file_name = match.get("file")
                 if file_name:
                     surfaced_files.add(str(file_name))
+                text_value = str(match.get("text", ""))
+                surfaced_functions.update(_gold_functions_in_text(text_value, gold_functions))
         elif action_name == "read_file":
             file_path = str(action_input.get("file_path", ""))
-            if file_path in set(gold_files) and file_path not in surfaced_files:
+            if file_path in gold_file_set and file_path not in surfaced_files:
                 oracle_metadata_leakage = True
+            if file_path:
+                surfaced_files.add(file_path)
+            surfaced_functions.update(_gold_functions_in_text(str(observation.get("content", "")), gold_functions))
+        elif action_name == "edit_file":
+            file_path = str(action_input.get("file_path", ""))
+            if file_path in gold_file_set and file_path not in surfaced_files:
+                oracle_metadata_leakage = True
+            if file_path:
+                surfaced_files.add(file_path)
 
     visible_text = "\n".join(visible_parts)
     leaked_gold_files = sorted({file_name for file_name in gold_files if file_name and file_name in visible_text})
@@ -209,3 +226,19 @@ def leakage_detected(
         "leaked_gold_files": leaked_gold_files,
         "leaked_gold_functions": leaked_gold_functions,
     }
+
+
+def _is_public_test_action(action_input: dict[str, Any]) -> bool:
+    command = str(action_input.get("command", "")).lower()
+    phase = str(action_input.get("phase", "")).lower()
+    if "tests_hidden" in command or "hidden" in phase:
+        return False
+    return "test" in command or "public" in phase
+
+
+def _gold_files_in_text(text: str, gold_files: list[str]) -> set[str]:
+    return {file_name for file_name in gold_files if file_name and file_name in text}
+
+
+def _gold_functions_in_text(text: str, gold_functions: list[str]) -> set[str]:
+    return {name for name in gold_functions if name and name in text}

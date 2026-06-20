@@ -95,6 +95,119 @@ def test_gold_identifier_visible_from_search_is_not_leakage():
     assert result["oracle_metadata_leakage"] is False
 
 
+def test_public_traceback_can_legally_surface_gold_file_and_function():
+    rows = [
+        {
+            "type": "step",
+            "action_name": "run_test",
+            "action_input": {"command": "python -m pytest tests -q", "phase": "pre_public"},
+            "observation": {
+                "stdout": (
+                    "File \"/tmp/task/src/summarizer.py\", line 11, in total_amount\n"
+                    "ValueError: invalid literal for int()"
+                )
+            },
+        },
+        {
+            "type": "step",
+            "action_name": "read_file",
+            "action_input": {"file_path": "src/summarizer.py"},
+            "observation": {"content": "def total_amount(csv_text):\n    return 0\n"},
+        },
+    ]
+
+    result = leakage_detected(rows, ["src/summarizer.py"], ["total_amount"])
+
+    assert result["gold_identifier_visible"] is True
+    assert result["leakage_detected"] is False
+    assert result["oracle_metadata_leakage"] is False
+
+
+def test_editing_gold_file_after_legal_surface_is_not_leakage():
+    rows = [
+        {
+            "type": "step",
+            "action_name": "search_repo",
+            "action_input": {"query": "amount", "path": "src"},
+            "observation": {"matches": [{"file": "src/summarizer.py", "line": 7, "text": "def total_amount(csv_text):"}]},
+        },
+        {
+            "type": "step",
+            "action_name": "read_file",
+            "action_input": {"file_path": "src/summarizer.py"},
+            "observation": {"content": "def total_amount(csv_text):\n    return 0\n"},
+        },
+        {
+            "type": "step",
+            "action_name": "edit_file",
+            "action_input": {"file_path": "src/summarizer.py", "old_text": "return 0", "new_text": "return 1"},
+            "observation": {"status": "success"},
+        },
+    ]
+
+    result = leakage_detected(rows, ["src/summarizer.py"], ["total_amount"])
+
+    assert result["gold_identifier_visible"] is True
+    assert result["leakage_detected"] is False
+    assert result["oracle_metadata_leakage"] is False
+
+
+def test_editing_unsurfaced_gold_file_is_oracle_leakage():
+    rows = [
+        {
+            "type": "step",
+            "action_name": "edit_file",
+            "action_input": {"file_path": "src/summarizer.py", "old_text": "return 0", "new_text": "return 1"},
+            "observation": {"status": "success"},
+        },
+    ]
+
+    result = leakage_detected(rows, ["src/summarizer.py"], ["total_amount"])
+
+    assert result["leakage_detected"] is True
+    assert result["oracle_metadata_leakage"] is True
+    assert result["forbidden_file_access"] is False
+
+
+def test_broken_patch_syntax_does_not_imply_oracle_leakage():
+    rows = [
+        {
+            "type": "step",
+            "action_name": "run_test",
+            "action_input": {"command": "python -m pytest tests -q", "phase": "pre_public"},
+            "observation": {"stdout": "File \"/tmp/task/src/summarizer.py\", line 11, in total_amount"},
+        },
+        {
+            "type": "step",
+            "action_name": "read_file",
+            "action_input": {"file_path": "src/summarizer.py"},
+            "observation": {"content": "def total_amount(csv_text):\n    return 0\n"},
+        },
+        {
+            "type": "step",
+            "action_name": "edit_file",
+            "action_input": {
+                "file_path": "src/summarizer.py",
+                "old_text": "return 0",
+                "new_text": "if True:\nreturn 1",
+            },
+            "observation": {"status": "success"},
+        },
+        {
+            "type": "step",
+            "action_name": "run_test",
+            "action_input": {"command": "python -m pytest tests -q", "phase": "final_public"},
+            "observation": {"stdout": "IndentationError: expected an indented block"},
+        },
+    ]
+
+    result = leakage_detected(rows, ["src/summarizer.py"], ["total_amount"])
+
+    assert result["gold_identifier_visible"] is True
+    assert result["leakage_detected"] is False
+    assert result["oracle_metadata_leakage"] is False
+
+
 def test_reading_unsurfaced_gold_file_is_oracle_leakage():
     rows = [
         {
