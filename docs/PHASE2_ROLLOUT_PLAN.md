@@ -43,7 +43,8 @@ python -m codeguide_agent.training_data.build_sft_from_trajectories \
   --output data/mini_repo_debug/sft/phase2_sft.jsonl
 ```
 
-The builder reads trajectory JSONL files, keeps successful or gold trajectories, and writes chat-format samples with:
+The builder reads trajectory JSONL files, keeps successful non-gold
+trajectories, and writes chat-format samples with:
 
 - system message;
 - user task instruction;
@@ -53,6 +54,9 @@ The builder reads trajectory JSONL files, keeps successful or gold trajectories,
 - metadata outside the model-visible messages.
 
 Hidden test commands and hidden test logs are excluded from model-visible messages.
+Gold-policy trajectories are excluded entirely. They are pipeline-validation
+artifacts only and may contain synthetic actions such as `apply_gold_patch`;
+they must not enter SFT or DPO data.
 
 ## Path To Future SFT / Distillation / GRPO
 

@@ -27,7 +27,9 @@ def build_sample(rows: list[dict[str, Any]], source_path: str | Path) -> SFTSamp
     is_gold = "gold" in source_name or "gold" in final.get("trajectory_id", "")
     reward = final.get("reward", {})
     is_success = final_status == "success" or (reward.get("public_pass") and reward.get("hidden_pass"))
-    if not is_success and not is_gold:
+    if is_gold or not is_success:
+        return None
+    if any(row.get("action_name") == "apply_gold_patch" for row in rows if row.get("type") == "step"):
         return None
 
     task_id = final.get("task_id") or rows[0].get("task_id", "")

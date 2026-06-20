@@ -80,7 +80,7 @@ def pytest_required(tasks: list[Path], run_hidden: bool) -> bool:
 
 
 def pytest_available() -> bool:
-    return importlib.util.find_spec("pytest") is not None
+    return importlib.util.find_spec("pytest") is not None or importlib.util.find_spec("codeguide_agent.testing.simple_pytest") is not None
 
 
 def evaluate_task(

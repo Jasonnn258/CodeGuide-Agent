@@ -7,7 +7,7 @@ from codeguide_agent.training_data.build_sft_from_trajectories import build_sft_
 def test_sft_builder_writes_valid_jsonl_messages(tmp_path: Path):
     trajectories = tmp_path / "trajectories"
     trajectories.mkdir()
-    trajectory_file = trajectories / "task_001_gold.jsonl"
+    trajectory_file = trajectories / "task_001_scripted.jsonl"
     trajectory_file.write_text(
         "\n".join(
             [
@@ -51,7 +51,7 @@ def test_sft_builder_writes_valid_jsonl_messages(tmp_path: Path):
 def test_sft_builder_does_not_leak_hidden_test_content(tmp_path: Path):
     trajectories = tmp_path / "trajectories"
     trajectories.mkdir()
-    (trajectories / "task_001_gold.jsonl").write_text(
+    (trajectories / "task_001_scripted.jsonl").write_text(
         "\n".join(
             [
                 json.dumps(
