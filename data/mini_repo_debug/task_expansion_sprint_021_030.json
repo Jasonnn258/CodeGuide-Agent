@@ -1,0 +1,92 @@
+[
+  {
+    "task_id": "task_021",
+    "bug_type": "string_normalization",
+    "difficulty": "easy",
+    "public_gap": "lowercase input and simple whitespace",
+    "hidden_gap": "mixed case, repeated spaces, punctuation",
+    "expected_failure_mode": "patch only strips simple whitespace but misses robust normalization",
+    "hard_pair_potential": "medium"
+  },
+  {
+    "task_id": "task_022",
+    "bug_type": "path_handling",
+    "difficulty": "medium",
+    "public_gap": "simple relative path",
+    "hidden_gap": "nested paths, parent directories, absolute-like inputs",
+    "expected_failure_mode": "patch joins paths naively and allows wrong normalization",
+    "hard_pair_potential": "high"
+  },
+  {
+    "task_id": "task_023",
+    "bug_type": "cache_key",
+    "difficulty": "medium",
+    "public_gap": "one cached argument",
+    "hidden_gap": "different arguments collide under same cache key",
+    "expected_failure_mode": "patch caches by function name only instead of parameter-sensitive key",
+    "hard_pair_potential": "high"
+  },
+  {
+    "task_id": "task_024",
+    "bug_type": "optional_default_args",
+    "difficulty": "medium",
+    "public_gap": "omitted optional argument",
+    "hidden_gap": "explicit mutable argument should not be mutated",
+    "expected_failure_mode": "patch fixes None default but still mutates caller-provided list",
+    "hard_pair_potential": "high"
+  },
+  {
+    "task_id": "task_025",
+    "bug_type": "boundary_condition",
+    "difficulty": "easy",
+    "public_gap": "normal non-empty list",
+    "hidden_gap": "empty list, single item, last item",
+    "expected_failure_mode": "patch handles common case but misses empty/singleton boundaries",
+    "hard_pair_potential": "medium"
+  },
+  {
+    "task_id": "task_026",
+    "bug_type": "json_config_parsing",
+    "difficulty": "medium",
+    "public_gap": "valid JSON config",
+    "hidden_gap": "missing optional fields, bad types, blank config",
+    "expected_failure_mode": "patch assumes fields always exist",
+    "hard_pair_potential": "medium"
+  },
+  {
+    "task_id": "task_027",
+    "bug_type": "cli_argument_propagation",
+    "difficulty": "medium",
+    "public_gap": "direct function call",
+    "hidden_gap": "CLI flag must propagate into helper",
+    "expected_failure_mode": "patch fixes function but CLI path still ignores flag",
+    "hard_pair_potential": "high"
+  },
+  {
+    "task_id": "task_028",
+    "bug_type": "sorting_filtering",
+    "difficulty": "medium",
+    "public_gap": "simple sort and filter",
+    "hidden_gap": "duplicates, stable tie-breaking, None values",
+    "expected_failure_mode": "patch sorts but loses stable tie order or crashes on None",
+    "hard_pair_potential": "medium"
+  },
+  {
+    "task_id": "task_029",
+    "bug_type": "error_handling",
+    "difficulty": "easy",
+    "public_gap": "happy path",
+    "hidden_gap": "missing resource should raise specific error",
+    "expected_failure_mode": "patch returns None or generic exception instead of expected error",
+    "hard_pair_potential": "medium"
+  },
+  {
+    "task_id": "task_030",
+    "bug_type": "multi_file_integration",
+    "difficulty": "hard",
+    "public_gap": "helper function behavior",
+    "hidden_gap": "service wrapper must use helper consistently",
+    "expected_failure_mode": "patch fixes helper but wrapper still bypasses it",
+    "hard_pair_potential": "high"
+  }
+]
