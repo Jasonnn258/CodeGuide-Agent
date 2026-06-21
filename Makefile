@@ -1,4 +1,4 @@
-.PHONY: test clean-check audit scale-report task-skeletons promotion-report promotion-check validate-pipeline clean-generated p5 p6 p9 dry-run-sft dry-run-pref promote-task rollout-plan readiness training-data training-preflight train-sft train-sft-smoke dpo-readiness
+.PHONY: test clean-check audit scale-report task-skeletons promotion-report promotion-check validate-pipeline clean-generated p5 p6 p9 dry-run-sft dry-run-pref promote-task rollout-plan readiness training-data training-preflight train-sft train-sft-smoke dpo-readiness docs-check
 
 test:
 	python -m codeguide_agent.testing.simple_pytest tests -q
@@ -65,3 +65,6 @@ train-sft-smoke:
 
 dpo-readiness:
 	python -m codeguide_agent.training.real_dpo_train --data-dir data/mini_repo_debug/hf_training
+
+docs-check:
+	python scripts/check_doc_rendering.py

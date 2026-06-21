@@ -264,7 +264,42 @@ such as `apply_gold_patch` that a real agent must not learn to imitate.
 - Expand Mini-Repo-Debug after P3 foundations are stable.
 - Mine successful trajectories into SFT examples.
 - Build DPO pairs from verified good/bad patch attempts.
-- Add GRPO rollout grouping only after stochastic clean non-gold rollouts exist.\n\n<!-- P12_PROJECT_HIGHLIGHTS_START -->\n## Mini-Repo-Debug Pipeline Highlights\n\nCodeGuide-Agent includes a reproducible Mini-Repo-Debug pipeline for coding-agent training data construction.\n\nCore capabilities:\n\n- 20-task Mini-Repo-Debug benchmark for small-repo bug fixing.\n- Real rollout analysis with public-test and hidden-test diagnostics.\n- SFT candidate export from successful trajectories.\n- Preference pair mining from public-pass-hidden-fail trajectories.\n- Sanitization gates to avoid exposing hidden tests, metadata paths, gold patch paths, or raw test outputs.\n- Train-ready package generation with quality gate.\n- Dry-run trainer, replay eval, mock experiment artifact, and trained policy interface.\n- Clean-check validation showing unit tests do not depend on generated trajectories.\n\nUseful commands:\n\n- make test\n- make clean-check\n- make validate-pipeline\n- make clean-generated\n\nStable tag:\n\n- mini-repo-debug-p4-p11-stable\n\nSee also:\n\n- docs/PROJECT_STORY.md\n- docs/P11_REPRODUCIBLE_RUNBOOK.md\n<!-- P12_PROJECT_HIGHLIGHTS_END -->\n\n<!-- P14_INTERVIEW_DOCS_START -->
+- Add GRPO rollout grouping only after stochastic clean non-gold rollouts exist.
+
+<!-- P12_PROJECT_HIGHLIGHTS_START -->
+## Mini-Repo-Debug Pipeline Highlights
+
+CodeGuide-Agent includes a reproducible Mini-Repo-Debug pipeline for coding-agent training data construction.
+
+Core capabilities:
+
+- 20-task Mini-Repo-Debug benchmark for small-repo bug fixing.
+- Real rollout analysis with public-test and hidden-test diagnostics.
+- SFT candidate export from successful trajectories.
+- Preference pair mining from public-pass-hidden-fail trajectories.
+- Sanitization gates to avoid exposing hidden tests, metadata paths, gold patch paths, or raw test outputs.
+- Train-ready package generation with quality gate.
+- Dry-run trainer, replay eval, mock experiment artifact, and trained policy interface.
+- Clean-check validation showing unit tests do not depend on generated trajectories.
+
+Useful commands:
+
+- make test
+- make clean-check
+- make validate-pipeline
+- make clean-generated
+
+Stable tag:
+
+- mini-repo-debug-p4-p11-stable
+
+See also:
+
+- docs/PROJECT_STORY.md
+- docs/P11_REPRODUCIBLE_RUNBOOK.md
+<!-- P12_PROJECT_HIGHLIGHTS_END -->
+
+<!-- P14_INTERVIEW_DOCS_START -->
 ## Interview and Project Docs
 
 - docs/INTERVIEW_PROJECT_BRIEF.md
