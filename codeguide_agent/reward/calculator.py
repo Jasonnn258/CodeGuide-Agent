@@ -34,7 +34,8 @@ def classify_hidden_failure(public_pass: bool, hidden_result: dict[str, Any] | N
         return "none"
     text = "\n".join(str(hidden_result.get(key, "")) for key in ("status", "stdout", "stderr", "error"))
     lowered = text.lower()
-    if hidden_result.get("exit_code") == 124 or hidden_result.get("timeout") or "timeout" in lowered or "timed out" in lowered:
+    status = str(hidden_result.get("status", "")).lower()
+    if hidden_result.get("exit_code") == 124 or status == "timeout" or "timeout" in lowered or "timed out" in lowered:
         return "hidden_timeout"
     if any(token in text for token in ("SyntaxError", "IndentationError", "ImportError", "ModuleNotFoundError")):
         return "hidden_import_or_syntax"

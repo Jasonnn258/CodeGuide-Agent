@@ -21,7 +21,7 @@ SMALL_DIFF = """diff --git a/src/pricing.py b/src/pricing.py
 def test_public_pass_hidden_fail_sets_hidden_generalization_diagnostics():
     reward = calculate_reward(
         public_result={"exit_code": 0, "stdout": "1 passed"},
-        hidden_result={"exit_code": 1, "stdout": "E   AssertionError: edge case failed"},
+        hidden_result={"exit_code": 1, "stdout": "E   AssertionError: edge case failed", "timeout": 30},
         diff_text=SMALL_DIFF,
     )
 
@@ -29,6 +29,22 @@ def test_public_pass_hidden_fail_sets_hidden_generalization_diagnostics():
     assert reward["hidden_failure_type"] == "hidden_assertion_fail"
     assert reward["patch_generalization_risk"] == "medium"
     assert reward["patch_too_narrow"] is True
+
+
+def test_timeout_limit_field_alone_does_not_make_hidden_timeout():
+    reward = calculate_reward(
+        public_result={"exit_code": 0, "stdout": "1 passed"},
+        hidden_result={
+            "status": "success",
+            "exit_code": 1,
+            "timeout": 30,
+            "stdout": "FAILED tests_hidden/test_tags_hidden.py::test_tags\nAssertionError\n",
+            "stderr": "",
+        },
+        diff_text=SMALL_DIFF,
+    )
+
+    assert reward["hidden_failure_type"] == "hidden_assertion_fail"
 
 
 def test_hidden_failure_type_classifies_exception_import_syntax_and_timeout():
