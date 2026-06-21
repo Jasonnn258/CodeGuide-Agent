@@ -403,9 +403,9 @@ python -m codeguide_agent.baselines.aider_runner --root data/mini_repo_debug --l
 Build SFT-style data from trajectories:
 
 ```bash
-python -m codeguide_agent.data_builders.build_sft \
-  --input data/mini_repo_debug/trajectories \
-  --output data/mini_repo_debug/sft/phase2_sft.jsonl
+python -m codeguide_agent.dataset.export_training_candidates \
+  --root data/mini_repo_debug \
+  --out data/mini_repo_debug/exports
 ```
 
 ---

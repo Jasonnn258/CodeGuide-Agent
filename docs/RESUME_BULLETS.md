@@ -6,7 +6,7 @@
 - 基于真实 DeepSeek rollout 设计训练数据挖掘流程：成功轨迹导出为 SFT candidates，public-pass-hidden-fail 轨迹与 gold patch 构造 preference pairs，产出 19 条 SFT candidates、1 条 hard preference pair，并扩展 preference bank 至 23 条 candidates。
 - 实现训练数据 sanitization 与 quality gate，过滤 hidden tests、metadata、gold patch 路径和原始 stdout/stderr，降低数据泄漏和 oracle contamination 风险。
 - 搭建 train-ready package、dry-run trainer、replay eval、mock experiment artifact 与 trained policy interface，形成训练前 agent data pipeline 的可复现实验闭环。
-- 增加 Makefile、clean-check、release check 与 GitHub CI，验证单元测试在移除本地 generated trajectories 后仍可 98 passed，保证工程可复现性。
+- 增加 Makefile、clean-check、release check 与 GitHub CI，验证单元测试在移除本地 generated trajectories 后仍可 99 passed，保证工程可复现性。
 
 ## 英文简历版
 

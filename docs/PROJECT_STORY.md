@@ -30,7 +30,7 @@ CodeGuide-Agent 是一个面向小型代码仓库调试任务的 agent training 
 - P7 提供 dry-run training scaffold 和 replay eval。
 - P8 提供 mock artifact、trained policy interface 和 experiment eval scaffold。
 - P10 提供一键离线 pipeline validation。
-- P10.1 后，移走 data/mini_repo_debug/trajectories 后测试仍然 98 passed。
+- P10.1 后，移走 data/mini_repo_debug/trajectories 后测试仍然 99 passed。
 - P11 增加 Makefile、clean-check、clean-generated 和 reproducible runbook。
 
 ## 关键案例：task_009

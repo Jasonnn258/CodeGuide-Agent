@@ -125,3 +125,17 @@
 
 - legacy SFT builder 可以后续继续 wrapper 化，但当前 public docs 和 Makefile 已不再把它作为主入口。
 - 真正下一步应优先扩数据：100+ tasks、150+ SFT、100+ preference、30+ hard preference。
+
+## Round-2 review follow-up status
+
+已完成：
+
+- 修复 AGENTS.md 中遗留的 legacy SFT builder 命令，改为 canonical export_training_candidates.py 入口。
+- 扩大 canonical-check 覆盖范围，纳入 AGENTS.md 和核心展示文档。
+- 将 docs-check / canonical-check 接入 GitHub Actions workflow，避免只在手动 release_check 时生效。
+- 同步测试数量文案，从 98 passed 更新为 99 passed。
+
+剩余：
+
+- legacy SFT builder 后续可进一步 wrapper 化，但已经不再作为 public docs / AGENTS / README / Makefile 主入口。
+- 下一阶段重点应转向数据扩容，而不是继续补文档或直接正式训练。

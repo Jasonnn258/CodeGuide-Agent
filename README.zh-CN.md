@@ -83,7 +83,7 @@ Mini-Repo-Debug 是一个小仓库 bug 修复 benchmark。每个任务包含：
 - preference records：23
 - hard preference records：1
 - clean-check：通过
-- unit tests：98 passed
+- unit tests：99 passed
 - tests 移除 generated trajectories 后仍通过
 - 模型侧泄漏审计：已加入 make audit
 - 训练入口：已加入 make training-data / make train-sft

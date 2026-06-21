@@ -4,9 +4,14 @@ from __future__ import annotations
 from pathlib import Path
 
 CHECK_FILES = [
+    Path("AGENTS.md"),
     Path("README.md"),
     Path("README.zh-CN.md"),
     Path("docs/PHASE2_ROLLOUT_PLAN.md"),
+    Path("docs/PROJECT_STORY.md"),
+    Path("docs/RESUME_BULLETS.md"),
+    Path("docs/INTERVIEW_PROJECT_BRIEF.md"),
+    Path("docs/CANONICAL_TRAINING_DATA_PIPELINE.md"),
 ]
 
 LEGACY_COMMANDS = [

@@ -32,3 +32,6 @@ jobs:
 
       - name: Run leakage audit
         run: make audit
+
+      - name: Release check
+        run: scripts/release_check.sh
