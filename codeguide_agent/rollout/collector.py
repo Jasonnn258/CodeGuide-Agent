@@ -25,6 +25,50 @@ from codeguide_agent.tools.search_repo import search_repo
 from codeguide_agent.trajectory.logger import TrajectoryLogger
 
 
+
+def _policy_model_config(policy: object) -> dict[str, object]:
+    """Best-effort model/config metadata for trajectory provenance.
+
+    This is intentionally diagnostic metadata. It does not affect reward,
+    evaluation, or training labels.
+    """
+    policy_name = getattr(policy, "name", policy.__class__.__name__)
+
+    client = (
+        getattr(policy, "client", None)
+        or getattr(policy, "llm_client", None)
+        or getattr(policy, "_client", None)
+    )
+    config = (
+        getattr(policy, "config", None)
+        or getattr(client, "config", None)
+        or getattr(policy, "llm_config", None)
+    )
+
+    def pick(*names: str, default: object = "") -> object:
+        for obj in (config, client, policy):
+            if obj is None:
+                continue
+            for name in names:
+                if hasattr(obj, name):
+                    value = getattr(obj, name)
+                    if value not in (None, ""):
+                        return value
+        return default
+
+    model = pick("model", "model_name", default=f"rollout_{policy_name}")
+
+    return {
+        "provider": pick("provider", "backend", default="unknown"),
+        "model": model,
+        "policy_name": policy_name,
+        "temperature": pick("temperature", default=None),
+        "max_tokens": pick("max_tokens", "max_new_tokens", default=None),
+        "endpoint_profile": pick("endpoint_profile", "profile", "profile_name", default=""),
+        "run_id": pick("run_id", default=""),
+    }
+
+
 class RolloutCollector:
     def __init__(self, trajectories_dir: str | Path = "data/mini_repo_debug/trajectories", timeout: int = 30, keep_temp: bool = False):
         self.trajectories_dir = Path(trajectories_dir)
@@ -52,7 +96,14 @@ class RolloutCollector:
         trajectory_path = self.trajectories_dir / f"{trajectory_id}.jsonl"
         if trajectory_path.exists():
             trajectory_path.unlink()
-        logger = TrajectoryLogger(trajectory_path, task_id, trajectory_id, model=f"rollout_{policy.name}")
+        model_config = _policy_model_config(policy)
+        logger = TrajectoryLogger(
+            trajectory_path,
+            task_id,
+            trajectory_id,
+            model=str(model_config["model"]),
+            model_config=model_config,
+        )
         state = RolloutState(task_id=task_id, repo_path=temp_repo, issue_text=issue_text, step_id=0, max_steps=max_steps)
         public_result: dict[str, Any] | None = None
         pre_public_result: dict[str, Any] | None = None

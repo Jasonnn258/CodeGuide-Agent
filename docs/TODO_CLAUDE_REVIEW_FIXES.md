@@ -95,3 +95,14 @@
 4. 增加 docs/CANONICAL_TRAINING_DATA_PIPELINE.md。
 5. 扫描所有 SFT builder 引用。
 6. 再决定删除还是 wrapper 化 legacy builder。
+
+## P1-2 修复状态
+
+已补充 trajectory provenance：
+
+- TrajectoryLogger 支持 model_config。
+- rollout collector 会从 policy/client/config 中尽量记录 provider、model、temperature、max_tokens、endpoint_profile、run_id。
+- prompt_only baseline 记录 local prompt_only provenance。
+- 新增 tests/test_trajectory_logger_metadata.py，确保 trajectory JSONL 写入 model_config。
+
+注意：这只是可追溯性元信息，不参与 reward、eval 或训练标签。

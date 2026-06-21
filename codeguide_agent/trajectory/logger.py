@@ -8,12 +8,13 @@ from codeguide_agent.trajectory.schemas import TrajectoryStep
 
 
 class TrajectoryLogger:
-    def __init__(self, path: str | Path, task_id: str, trajectory_id: str, model: str = "deterministic_baseline"):
+    def __init__(self, path: str | Path, task_id: str, trajectory_id: str, model: str = "deterministic_baseline", model_config: dict[str, Any] | None = None):
         self.path = Path(path)
         self.path.parent.mkdir(parents=True, exist_ok=True)
         self.task_id = task_id
         self.trajectory_id = trajectory_id
         self.model = model
+        self.model_config = model_config or {}
         self.step_count = 0
 
     def log_step(
@@ -30,6 +31,7 @@ class TrajectoryLogger:
             "task_id": self.task_id,
             "trajectory_id": self.trajectory_id,
             "model": self.model,
+            "model_config": self.model_config,
             **step.to_dict(),
         }
         self._append(row)
@@ -41,6 +43,7 @@ class TrajectoryLogger:
             "task_id": self.task_id,
             "trajectory_id": self.trajectory_id,
             "model": self.model,
+            "model_config": self.model_config,
             "final_patch": final_patch,
             "reward": reward,
             "final_status": final_status,
