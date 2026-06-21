@@ -1,5 +1,7 @@
 # CodeGuide-Agent
 
+中文说明：README.zh-CN.md
+
 CodeGuide-Agent is a research-oriented Code Intelligence and Coding Agent
 platform. Its first target is verifier-driven repo-level debugging on
 Mini-Repo-Debug tasks.
