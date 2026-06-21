@@ -28,3 +28,4 @@ experiments/mini_repo_debug/p8_sft_smoke/
 data/mini_repo_debug/planned_task_skeletons/
 models/
 data/mini_repo_debug/hf_training/
+docs/TRAINING_PREFLIGHT_REPORT.json
