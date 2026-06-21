@@ -1,0 +1,31 @@
+{
+  "planned_root": "data/mini_repo_debug/planned_task_skeletons",
+  "checked": 1,
+  "ready_count": 0,
+  "blocked_count": 1,
+  "results": [
+    {
+      "task_id": "task_021",
+      "ready": false,
+      "errors": [
+        "issue.md still contains TODO",
+        "public test still contains TODO",
+        "hidden test still contains TODO",
+        "source file still contains TODO",
+        "gold.patch still contains TODO",
+        "public test still uses placeholder test",
+        "hidden test still uses placeholder test",
+        "source implementation still uses placeholder",
+        "gold.patch is not a real unified git diff",
+        "metadata status is still planned_skeleton",
+        "metadata target_files is empty",
+        "expected_failure_mode is not defined",
+        "generalization_axis is not defined"
+      ],
+      "warnings": [
+        "metadata target_functions is empty"
+      ],
+      "task_dir": "data/mini_repo_debug/planned_task_skeletons/task_021"
+    }
+  ]
+}

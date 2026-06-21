@@ -1,4 +1,4 @@
-.PHONY: test clean-check audit scale-report task-skeletons validate-pipeline clean-generated p5 p6 p9 dry-run-sft dry-run-pref
+.PHONY: test clean-check audit scale-report task-skeletons promotion-report promotion-check validate-pipeline clean-generated p5 p6 p9 dry-run-sft dry-run-pref
 
 test:
 	python -m codeguide_agent.testing.simple_pytest tests -q
@@ -14,6 +14,12 @@ scale-report:
 
 task-skeletons:
 	python scripts/generate_task_skeletons.py
+
+promotion-report:
+	python scripts/check_planned_task_ready.py
+
+promotion-check:
+	python scripts/check_planned_task_ready.py --task-id $(TASK)
 
 validate-pipeline:
 	bash scripts/validate_mini_repo_pipeline.sh
