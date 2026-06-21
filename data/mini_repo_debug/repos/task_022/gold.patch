@@ -1,0 +1,16 @@
+diff --git a/task_022_lib/paths.py b/task_022_lib/paths.py
+index 30dedd2..14d5884 100644
+--- a/task_022_lib/paths.py
++++ b/task_022_lib/paths.py
+@@ -4,4 +4,10 @@ from pathlib import Path
+ 
+ 
+ def safe_join(base_dir: str, user_path: str) -> str:
+-    return str(Path(base_dir) / user_path)
++    base = Path(base_dir).resolve()
++    candidate = (base / user_path).resolve()
++    try:
++        candidate.relative_to(base)
++    except ValueError as exc:
++        raise ValueError("path escapes base directory") from exc
++    return str(candidate)

@@ -1,0 +1,15 @@
+diff --git a/task_024_lib/tags.py b/task_024_lib/tags.py
+index 9983886..db9e464 100644
+--- a/task_024_lib/tags.py
++++ b/task_024_lib/tags.py
+@@ -2,7 +2,6 @@ from __future__ import annotations
+ 
+ 
+ def add_tag(tag: str, tags: list[str] | None = None) -> list[str]:
+-    if tags is None:
+-        tags = []
+-    tags.append(tag)
+-    return tags
++    result = list(tags) if tags is not None else []
++    result.append(tag)
++    return result

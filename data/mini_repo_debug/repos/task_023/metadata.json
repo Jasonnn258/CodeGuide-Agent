@@ -1,0 +1,32 @@
+{
+  "task_id": "task_023",
+  "bug_type": "cache_key",
+  "difficulty": "medium",
+  "issue_path": "issue.md",
+  "public_test_cmd": "python -m pytest tests -q",
+  "hidden_test_cmd": "python -m pytest tests_hidden -q",
+  "target_files": [
+    "task_023_lib/cache.py"
+  ],
+  "target_functions": [
+    "make_cache_key"
+  ],
+  "expected_failure_mode": "Patch keys only on function name or unsorted params, causing collisions or unstable keys.",
+  "generalization_axis": "Public covers simple param differences; hidden covers nested stable serialization and function-name separation.",
+  "repo_path": "data/mini_repo_debug/repos/task_023",
+  "source": "manual_p32_expansion",
+  "split": "train",
+  "scenario": "parameter-sensitive cache key generation",
+  "gold_patch": "gold.patch",
+  "gold_files": [
+    "task_023_lib/cache.py"
+  ],
+  "gold_functions": [
+    "make_cache_key"
+  ],
+  "forbidden_behaviors": [
+    "cache only by function name",
+    "use unstable dict ordering",
+    "ignore nested parameters"
+  ]
+}

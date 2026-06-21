@@ -1,0 +1,11 @@
+diff --git a/task_025_lib/stats.py b/task_025_lib/stats.py
+index 3af9996..743ceeb 100644
+--- a/task_025_lib/stats.py
++++ b/task_025_lib/stats.py
+@@ -8,5 +8,5 @@ def moving_average(values: list[float], window: int) -> list[float]:
+         return []
+     return [
+         sum(values[i : i + window]) / window
+-        for i in range(0, len(values) - window)
++        for i in range(0, len(values) - window + 1)
+     ]

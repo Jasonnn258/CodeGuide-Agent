@@ -1,0 +1,32 @@
+{
+  "task_id": "task_022",
+  "bug_type": "path_handling",
+  "difficulty": "medium",
+  "issue_path": "issue.md",
+  "public_test_cmd": "python -m pytest tests -q",
+  "hidden_test_cmd": "python -m pytest tests_hidden -q",
+  "target_files": [
+    "task_022_lib/paths.py"
+  ],
+  "target_functions": [
+    "safe_join"
+  ],
+  "expected_failure_mode": "Patch joins paths naively and does not prevent parent-directory or absolute path escape.",
+  "generalization_axis": "Public covers harmless normalization; hidden covers escaping the base directory.",
+  "repo_path": "data/mini_repo_debug/repos/task_022",
+  "source": "manual_p32_expansion",
+  "split": "train",
+  "scenario": "safe path handling and directory escape prevention",
+  "gold_patch": "gold.patch",
+  "gold_files": [
+    "task_022_lib/paths.py"
+  ],
+  "gold_functions": [
+    "safe_join"
+  ],
+  "forbidden_behaviors": [
+    "join paths without resolving",
+    "allow parent-directory escape",
+    "allow absolute path escape"
+  ]
+}

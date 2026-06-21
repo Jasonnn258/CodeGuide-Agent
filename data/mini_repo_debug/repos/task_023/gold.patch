@@ -1,0 +1,15 @@
+diff --git a/task_023_lib/cache.py b/task_023_lib/cache.py
+index 2dfdc1c..26b0b20 100644
+--- a/task_023_lib/cache.py
++++ b/task_023_lib/cache.py
+@@ -1,7 +1,9 @@
+ from __future__ import annotations
+ 
++import json
+ from typing import Any
+ 
+ 
+ def make_cache_key(name: str, params: dict[str, Any]) -> str:
+-    return name
++    encoded = json.dumps(params, sort_keys=True, separators=(",", ":"), default=str)
++    return f"{name}:{encoded}"

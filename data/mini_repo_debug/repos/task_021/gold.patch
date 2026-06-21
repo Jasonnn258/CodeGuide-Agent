@@ -1,0 +1,18 @@
+diff --git a/task_021_lib/normalizer.py b/task_021_lib/normalizer.py
+index 453d89d..d74b40b 100644
+--- a/task_021_lib/normalizer.py
++++ b/task_021_lib/normalizer.py
+@@ -1,6 +1,12 @@
+ from __future__ import annotations
+ 
++import re
++import string
++
+ 
+ def normalize_label(label: str) -> str:
+     """Return a normalized product label."""
+-    return label.lower()
++    cleaned = label.strip().lower()
++    cleaned = cleaned.translate(str.maketrans("", "", string.punctuation))
++    cleaned = re.sub(r"\s+", " ", cleaned)
++    return cleaned

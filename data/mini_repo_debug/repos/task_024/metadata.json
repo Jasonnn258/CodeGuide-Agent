@@ -1,0 +1,32 @@
+{
+  "task_id": "task_024",
+  "bug_type": "optional_default_args",
+  "difficulty": "medium",
+  "issue_path": "issue.md",
+  "public_test_cmd": "python -m pytest tests -q",
+  "hidden_test_cmd": "python -m pytest tests_hidden -q",
+  "target_files": [
+    "task_024_lib/tags.py"
+  ],
+  "target_functions": [
+    "add_tag"
+  ],
+  "expected_failure_mode": "Patch fixes None default but still mutates caller-provided list.",
+  "generalization_axis": "Public covers omitted and basic append; hidden covers explicit mutable input aliasing.",
+  "repo_path": "data/mini_repo_debug/repos/task_024",
+  "source": "manual_p32_expansion",
+  "split": "train",
+  "scenario": "optional mutable input aliasing",
+  "gold_patch": "gold.patch",
+  "gold_files": [
+    "task_024_lib/tags.py"
+  ],
+  "gold_functions": [
+    "add_tag"
+  ],
+  "forbidden_behaviors": [
+    "mutate caller-provided list",
+    "reuse mutable state",
+    "only handle omitted argument"
+  ]
+}

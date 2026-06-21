@@ -1,0 +1,32 @@
+{
+  "task_id": "task_025",
+  "bug_type": "boundary_condition",
+  "difficulty": "easy",
+  "issue_path": "issue.md",
+  "public_test_cmd": "python -m pytest tests -q",
+  "hidden_test_cmd": "python -m pytest tests_hidden -q",
+  "target_files": [
+    "task_025_lib/stats.py"
+  ],
+  "target_functions": [
+    "moving_average"
+  ],
+  "expected_failure_mode": "Patch handles common ranges but misses last valid window or boundary behavior.",
+  "generalization_axis": "Public covers final-window off-by-one; hidden covers too-short input and invalid window.",
+  "repo_path": "data/mini_repo_debug/repos/task_025",
+  "source": "manual_p32_expansion",
+  "split": "train",
+  "scenario": "moving average boundary condition",
+  "gold_patch": "gold.patch",
+  "gold_files": [
+    "task_025_lib/stats.py"
+  ],
+  "gold_functions": [
+    "moving_average"
+  ],
+  "forbidden_behaviors": [
+    "drop final valid window",
+    "ignore invalid window",
+    "special-case only public examples"
+  ]
+}
