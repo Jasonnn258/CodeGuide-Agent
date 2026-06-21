@@ -12,3 +12,8 @@ __pycache__/
 .ruff_cache/
 .env
 .venv/
+
+# Mini-Repo-Debug generated evaluation artifacts
+data/mini_repo_debug/reports/
+data/mini_repo_debug/trajectories/
+data/mini_repo_debug/rollouts/*.jsonl
