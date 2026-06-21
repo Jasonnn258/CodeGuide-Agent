@@ -17,3 +17,12 @@ __pycache__/
 data/mini_repo_debug/reports/
 data/mini_repo_debug/trajectories/
 data/mini_repo_debug/rollouts/*.jsonl
+
+# Mini-Repo-Debug generated evaluation artifacts
+data/mini_repo_debug/reports/
+data/mini_repo_debug/trajectories/
+data/mini_repo_debug/rollouts/*.jsonl
+data/mini_repo_debug/train_package/dry_runs/
+experiments/mini_repo_debug/p10_pipeline_smoke/
+__pycache__/
+*.pyc
