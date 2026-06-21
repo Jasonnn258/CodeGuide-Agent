@@ -1,4 +1,4 @@
-.PHONY: test clean-check audit scale-report task-skeletons promotion-report promotion-check validate-pipeline clean-generated p5 p6 p9 dry-run-sft dry-run-pref promote-task rollout-plan readiness training-data training-preflight train-sft train-sft-smoke dpo-readiness docs-check
+.PHONY: test clean-check audit scale-report task-skeletons promotion-report promotion-check validate-pipeline clean-generated p5 p6 p9 dry-run-sft dry-run-pref promote-task rollout-plan readiness training-data training-preflight train-sft train-sft-smoke dpo-readiness docs-check canonical-check
 
 test:
 	python -m codeguide_agent.testing.simple_pytest tests -q
@@ -68,3 +68,6 @@ dpo-readiness:
 
 docs-check:
 	python scripts/check_doc_rendering.py
+
+canonical-check:
+	python scripts/check_canonical_training_pipeline.py
