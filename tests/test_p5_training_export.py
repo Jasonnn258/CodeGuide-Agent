@@ -7,14 +7,20 @@ from codeguide_agent.dataset.export_training_candidates import (
     load_trajectory,
     sanitize_trajectory_rows,
 )
+from codeguide_agent.testing.mini_repo_trajectory_fixture import build_mini_repo_trajectory_fixture
 
 
 def _read_jsonl(path: Path) -> list[dict]:
     return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
 
 
+def _export_training_candidates_for_test(tmp_path: Path, out_dir: Path):
+    trajectories_dir = build_mini_repo_trajectory_fixture(tmp_path)
+    return export_training_candidates("data/mini_repo_debug", out_dir, trajectories_dir=trajectories_dir)
+
+
 def test_p5_export_writes_expected_files_and_schema(tmp_path: Path):
-    result = export_training_candidates("data/mini_repo_debug", tmp_path)
+    result = _export_training_candidates_for_test(tmp_path, tmp_path)
 
     sft_path = tmp_path / "p5_sft_rollouts.jsonl"
     prefs_path = tmp_path / "p5_preference_pairs.jsonl"
@@ -35,7 +41,7 @@ def test_p5_export_writes_expected_files_and_schema(tmp_path: Path):
 
 
 def test_p5_export_sanitizes_hidden_paths_and_outputs(tmp_path: Path):
-    export_training_candidates("data/mini_repo_debug", tmp_path)
+    _export_training_candidates_for_test(tmp_path, tmp_path)
 
     exported_text = "\n".join(path.read_text(encoding="utf-8") for path in tmp_path.glob("p5_*"))
 
@@ -46,7 +52,7 @@ def test_p5_export_sanitizes_hidden_paths_and_outputs(tmp_path: Path):
 
 
 def test_task_009_preference_pair_is_generated_when_failed_llm_exists(tmp_path: Path):
-    result = export_training_candidates("data/mini_repo_debug", tmp_path)
+    result = _export_training_candidates_for_test(tmp_path, tmp_path)
     pairs = _read_jsonl(tmp_path / "p5_preference_pairs.jsonl")
     task_009 = [pair for pair in pairs if pair["task_id"] == "task_009"]
 
@@ -84,8 +90,9 @@ def test_sanitize_trajectory_rows_drops_hidden_verifier_payloads():
     assert "tests_hidden" not in text
 
 
-def test_load_trajectory_reads_final_row():
-    rows = load_trajectory("data/mini_repo_debug/trajectories/task_009_llm.jsonl")
+def test_load_trajectory_reads_final_row(tmp_path: Path):
+    trajectories_dir = build_mini_repo_trajectory_fixture(tmp_path)
+    rows = load_trajectory(trajectories_dir / "task_009_llm.jsonl")
 
     assert rows[-1]["type"] == "final"
     assert rows[-1]["reward"]["public_pass_hidden_fail"] is True

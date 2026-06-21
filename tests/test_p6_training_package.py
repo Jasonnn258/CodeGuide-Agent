@@ -7,14 +7,20 @@ from codeguide_agent.dataset.prepare_training_package import (
     prepare_training_package,
     validate_training_package,
 )
+from codeguide_agent.testing.mini_repo_trajectory_fixture import build_mini_repo_trajectory_fixture
 
 
 def _read_jsonl(path: Path) -> list[dict]:
     return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
 
 
+def _export_training_candidates_for_test(tmp_path: Path, out_dir: Path):
+    trajectories_dir = build_mini_repo_trajectory_fixture(tmp_path)
+    return export_training_candidates("data/mini_repo_debug", out_dir, trajectories_dir=trajectories_dir)
+
+
 def test_prepare_training_package_writes_expected_files(tmp_path: Path):
-    export_training_candidates("data/mini_repo_debug", tmp_path / "exports")
+    _export_training_candidates_for_test(tmp_path, tmp_path / "exports")
     result = prepare_training_package("data/mini_repo_debug", tmp_path / "package", exports_dir=tmp_path / "exports")
 
     for name in [
@@ -32,7 +38,7 @@ def test_prepare_training_package_writes_expected_files(tmp_path: Path):
 
 
 def test_training_package_schema_and_success_filter(tmp_path: Path):
-    export_training_candidates("data/mini_repo_debug", tmp_path / "exports")
+    _export_training_candidates_for_test(tmp_path, tmp_path / "exports")
     prepare_training_package("data/mini_repo_debug", tmp_path / "package", exports_dir=tmp_path / "exports")
 
     sft_records = _read_jsonl(tmp_path / "package" / "sft_train.jsonl") + _read_jsonl(tmp_path / "package" / "sft_eval.jsonl")
@@ -48,7 +54,7 @@ def test_training_package_schema_and_success_filter(tmp_path: Path):
 
 
 def test_training_package_has_deterministic_task_split_without_overlap(tmp_path: Path):
-    export_training_candidates("data/mini_repo_debug", tmp_path / "exports")
+    _export_training_candidates_for_test(tmp_path, tmp_path / "exports")
     first = prepare_training_package("data/mini_repo_debug", tmp_path / "package_a", exports_dir=tmp_path / "exports")
     second = prepare_training_package("data/mini_repo_debug", tmp_path / "package_b", exports_dir=tmp_path / "exports")
 
@@ -58,7 +64,7 @@ def test_training_package_has_deterministic_task_split_without_overlap(tmp_path:
 
 
 def test_training_package_sanitizes_model_facing_files(tmp_path: Path):
-    export_training_candidates("data/mini_repo_debug", tmp_path / "exports")
+    _export_training_candidates_for_test(tmp_path, tmp_path / "exports")
     prepare_training_package("data/mini_repo_debug", tmp_path / "package", exports_dir=tmp_path / "exports")
 
     model_text = "\n".join(
@@ -73,7 +79,7 @@ def test_training_package_sanitizes_model_facing_files(tmp_path: Path):
 
 
 def test_task_009_preference_record_is_packaged(tmp_path: Path):
-    export_training_candidates("data/mini_repo_debug", tmp_path / "exports")
+    _export_training_candidates_for_test(tmp_path, tmp_path / "exports")
     result = prepare_training_package("data/mini_repo_debug", tmp_path / "package", exports_dir=tmp_path / "exports")
     prefs = _read_jsonl(tmp_path / "package" / "preference_train.jsonl") + _read_jsonl(
         tmp_path / "package" / "preference_eval.jsonl"

@@ -6,12 +6,13 @@ from codeguide_agent.dataset.prepare_training_package import prepare_training_pa
 from codeguide_agent.training.data import FORBIDDEN_MODEL_TERMS, load_training_package
 from codeguide_agent.training.dry_run_train import run_dry_train
 from codeguide_agent.training.replay_eval import replay_run
+from codeguide_agent.testing.mini_repo_trajectory_fixture import build_mini_repo_trajectory_fixture
 
 
 def _prepare_package(tmp_path: Path) -> Path:
     exports = tmp_path / "exports"
     package = tmp_path / "train_package"
-    export_training_candidates("data/mini_repo_debug", exports)
+    export_training_candidates("data/mini_repo_debug", exports, trajectories_dir=build_mini_repo_trajectory_fixture(tmp_path))
     prepare_training_package("data/mini_repo_debug", package, exports_dir=exports)
     return package
 
