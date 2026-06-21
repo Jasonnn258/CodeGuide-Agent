@@ -14,8 +14,8 @@ This package normalizes P5 Mini-Repo-Debug trajectory exports into train-ready S
 
 - SFT train: 16
 - SFT eval: 3
-- Preference train: 1
-- Preference eval: 0
+- Preference train: 19
+- Preference eval: 4
 
 ## Safety
 

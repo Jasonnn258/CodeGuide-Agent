@@ -1,8 +1,8 @@
 {
   "counts": {
-    "preference_eval": 0,
-    "preference_total": 1,
-    "preference_train": 1,
+    "preference_eval": 4,
+    "preference_total": 23,
+    "preference_train": 19,
     "sft_eval": 3,
     "sft_total": 19,
     "sft_train": 16
@@ -22,22 +22,47 @@
     "sft_train": "data/mini_repo_debug/train_package/sft_train.jsonl"
   },
   "package_version": "codeguide-mini-repo-debug-p6-v1",
+  "preference_source": {
+    "kind": "preference_bank",
+    "path": "data/mini_repo_debug/preference_bank/preference_candidates.jsonl"
+  },
   "quality_gate": {
     "errors": [],
     "passed": true,
     "replay": {
-      "checked_records": 21,
+      "checked_records": 65,
       "patch_inspection_failures": []
     },
-    "warnings": [
-      "preference dataset is tiny; use only for pipeline checks until more rejected trajectories exist"
-    ]
+    "warnings": []
   },
   "root": "data/mini_repo_debug",
   "splits": {
-    "preference_eval_task_ids": [],
+    "preference_eval_task_ids": [
+      "task_004",
+      "task_008",
+      "task_012",
+      "task_017"
+    ],
     "preference_train_task_ids": [
-      "task_009"
+      "task_001",
+      "task_001",
+      "task_002",
+      "task_003",
+      "task_005",
+      "task_005",
+      "task_006",
+      "task_007",
+      "task_009",
+      "task_009",
+      "task_010",
+      "task_011",
+      "task_013",
+      "task_014",
+      "task_015",
+      "task_016",
+      "task_018",
+      "task_019",
+      "task_020"
     ],
     "sft_eval_task_ids": [
       "task_005",

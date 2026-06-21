@@ -20,6 +20,7 @@ def prepare_training_package(
     root: str | Path,
     out: str | Path,
     exports_dir: str | Path = DEFAULT_EXPORTS_DIR,
+    preference_bank: str | Path | None = None,
 ) -> dict[str, Any]:
     root_path = Path(root)
     out_path = Path(out)
@@ -28,7 +29,8 @@ def prepare_training_package(
         export_training_candidates(root_path, exports_path)
 
     sft_candidates = _read_jsonl(exports_path / "p5_sft_rollouts.jsonl")
-    preference_candidates = _read_jsonl(exports_path / "p5_preference_pairs.jsonl")
+    preference_source_path = Path(preference_bank) if preference_bank is not None else exports_path / "p5_preference_pairs.jsonl"
+    preference_candidates = _read_jsonl(preference_source_path)
     sft_records = [_normalize_sft(record) for record in sft_candidates]
     preference_records = [_normalize_preference(record) for record in preference_candidates]
 
@@ -59,6 +61,7 @@ def prepare_training_package(
         preference_train,
         preference_eval,
         quality_gate,
+        preference_source_path,
     )
     paths["manifest"].write_text(json.dumps(manifest, indent=2, sort_keys=True), encoding="utf-8")
     paths["data_card"].write_text(_build_data_card(manifest), encoding="utf-8")
@@ -101,7 +104,10 @@ def validate_training_package(root: str | Path, package_dir: str | Path) -> dict
         for record in records_by_split.get(split, []):
             _validate_preference_record(record, known_task_ids, errors)
             _inspect_patch(record["chosen"], root_path, replay, errors, task_id=record.get("task_id"))
-            _inspect_patch(record["rejected"], root_path, replay, errors, task_id=record.get("task_id"))
+            if record.get("rejection_reason") == "no_patch" and not record["rejected"].get("final_patch"):
+                replay["checked_records"] += 1
+            else:
+                _inspect_patch(record["rejected"], root_path, replay, errors, task_id=record.get("task_id"))
 
     _validate_no_task_overlap(records_by_split.get("sft_train", []), records_by_split.get("sft_eval", []), "sft", errors)
     _validate_no_task_overlap(
@@ -160,6 +166,9 @@ def _normalize_preference(record: dict[str, Any]) -> dict[str, Any]:
         "chosen": _normalize_preference_side(record.get("chosen", {})),
         "rejected": _normalize_preference_side(record.get("rejected", {})),
         "reason_labels": list(record.get("reason_labels", [])),
+        "source_policy": record.get("source_policy", ""),
+        "rejection_reason": record.get("rejection_reason", ""),
+        "evaluator_metadata": record.get("evaluator_metadata", {}),
         "localization": record.get("localization", {}),
     }
 
@@ -223,6 +232,7 @@ def _build_manifest(
     preference_train: list[dict[str, Any]],
     preference_eval: list[dict[str, Any]],
     quality_gate: dict[str, Any],
+    preference_source_path: Path,
 ) -> dict[str, Any]:
     counts = {
         "sft_train": len(sft_train),
@@ -245,6 +255,10 @@ def _build_manifest(
         "outputs": {key: str(value) for key, value in paths.items()},
         "counts": counts,
         "splits": splits,
+        "preference_source": {
+            "kind": "preference_bank" if preference_source_path.name == "preference_candidates.jsonl" else "p5_exports",
+            "path": str(preference_source_path),
+        },
         "quality_gate": quality_gate,
         "limitations": [
             "No model training is included.",
@@ -310,9 +324,14 @@ def _validate_preference_record(record: dict[str, Any], known_task_ids: set[str]
     _validate_task_id(record, known_task_ids, errors)
     if not record.get("reason_labels"):
         errors.append(f"preference record {record.get('task_id')} has no reason_labels")
-    for side in ("chosen", "rejected"):
-        if not record.get(side, {}).get("final_patch", "").startswith("diff --git"):
-            errors.append(f"preference record {record.get('task_id')} {side} patch is missing")
+    if not record.get("chosen", {}).get("final_patch", "").startswith("diff --git"):
+        errors.append(f"preference record {record.get('task_id')} chosen patch is missing")
+    rejected_patch = record.get("rejected", {}).get("final_patch", "")
+    if record.get("rejection_reason") == "no_patch":
+        if rejected_patch:
+            errors.append(f"preference record {record.get('task_id')} no_patch rejected side should not include a patch")
+    elif not rejected_patch.startswith("diff --git"):
+        errors.append(f"preference record {record.get('task_id')} rejected patch is missing")
 
 
 def _validate_task_id(record: dict[str, Any], known_task_ids: set[str], errors: list[str]) -> None:
@@ -370,9 +389,10 @@ def main() -> int:
     parser.add_argument("--root", default="data/mini_repo_debug")
     parser.add_argument("--out", default="data/mini_repo_debug/train_package")
     parser.add_argument("--exports-dir", default=str(DEFAULT_EXPORTS_DIR))
+    parser.add_argument("--preference-bank", help="Optional expanded preference_candidates.jsonl to use instead of P5 pairs.")
     args = parser.parse_args()
 
-    manifest = prepare_training_package(args.root, args.out, args.exports_dir)
+    manifest = prepare_training_package(args.root, args.out, args.exports_dir, args.preference_bank)
     print(json.dumps(manifest, indent=2, sort_keys=True))
     return 0 if manifest["quality_gate"]["passed"] else 1
 

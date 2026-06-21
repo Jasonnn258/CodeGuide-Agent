@@ -1,0 +1,11 @@
+{
+  "generalization_risk": "Patch passes public tests but carries medium/high generalization risk.",
+  "incomplete_stop": "Trajectory stopped before the required final checks.",
+  "invalid_action": "Trajectory contains invalid tool/action behavior.",
+  "leakage": "Trajectory is excluded from model-facing preference data because evaluator-oracle leakage was detected.",
+  "no_patch": "Policy produced no patch or original buggy code is used as the rejected side.",
+  "public_fail": "Patch or trajectory does not pass public tests.",
+  "public_pass_hidden_assertion_fail": "Patch passes public tests but fails evaluator-only assertions.",
+  "syntax_error": "Patch introduces syntax or import-time failure.",
+  "wrong_file": "Patch touches no gold file when that can be inferred."
+}
