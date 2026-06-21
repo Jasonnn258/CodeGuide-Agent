@@ -1,4 +1,4 @@
-.PHONY: test clean-check audit scale-report task-skeletons promotion-report promotion-check validate-pipeline clean-generated p5 p6 p9 dry-run-sft dry-run-pref
+.PHONY: test clean-check audit scale-report task-skeletons promotion-report promotion-check validate-pipeline clean-generated p5 p6 p9 dry-run-sft dry-run-pref promote-task rollout-plan readiness
 
 test:
 	python -m codeguide_agent.testing.simple_pytest tests -q
@@ -41,3 +41,12 @@ dry-run-sft:
 
 dry-run-pref:
 	python -m codeguide_agent.training.dry_run_train --package data/mini_repo_debug/train_package --mode preference
+
+promote-task:
+	python scripts/promote_planned_task.py --task-id $(TASK)
+
+rollout-plan:
+	python scripts/build_rollout_batch_plan.py
+
+readiness:
+	python scripts/training_readiness_gate.py

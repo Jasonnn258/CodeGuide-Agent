@@ -1,0 +1,369 @@
+{
+  "task_count": 20,
+  "policy_count": 3,
+  "planned_rollout_jobs": 60,
+  "max_concurrency": 10,
+  "budget_note": "offline plan only; do not run paid APIs without explicit approval",
+  "jobs": [
+    {
+      "task_id": "task_001",
+      "policy": "prompt_only",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_001_prompt_only.jsonl"
+    },
+    {
+      "task_id": "task_001",
+      "policy": "llm_baseline",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_001_llm_baseline.jsonl"
+    },
+    {
+      "task_id": "task_001",
+      "policy": "strong_llm_optional",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_001_strong_llm_optional.jsonl"
+    },
+    {
+      "task_id": "task_002",
+      "policy": "prompt_only",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_002_prompt_only.jsonl"
+    },
+    {
+      "task_id": "task_002",
+      "policy": "llm_baseline",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_002_llm_baseline.jsonl"
+    },
+    {
+      "task_id": "task_002",
+      "policy": "strong_llm_optional",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_002_strong_llm_optional.jsonl"
+    },
+    {
+      "task_id": "task_003",
+      "policy": "prompt_only",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_003_prompt_only.jsonl"
+    },
+    {
+      "task_id": "task_003",
+      "policy": "llm_baseline",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_003_llm_baseline.jsonl"
+    },
+    {
+      "task_id": "task_003",
+      "policy": "strong_llm_optional",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_003_strong_llm_optional.jsonl"
+    },
+    {
+      "task_id": "task_004",
+      "policy": "prompt_only",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_004_prompt_only.jsonl"
+    },
+    {
+      "task_id": "task_004",
+      "policy": "llm_baseline",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_004_llm_baseline.jsonl"
+    },
+    {
+      "task_id": "task_004",
+      "policy": "strong_llm_optional",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_004_strong_llm_optional.jsonl"
+    },
+    {
+      "task_id": "task_005",
+      "policy": "prompt_only",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_005_prompt_only.jsonl"
+    },
+    {
+      "task_id": "task_005",
+      "policy": "llm_baseline",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_005_llm_baseline.jsonl"
+    },
+    {
+      "task_id": "task_005",
+      "policy": "strong_llm_optional",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_005_strong_llm_optional.jsonl"
+    },
+    {
+      "task_id": "task_006",
+      "policy": "prompt_only",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_006_prompt_only.jsonl"
+    },
+    {
+      "task_id": "task_006",
+      "policy": "llm_baseline",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_006_llm_baseline.jsonl"
+    },
+    {
+      "task_id": "task_006",
+      "policy": "strong_llm_optional",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_006_strong_llm_optional.jsonl"
+    },
+    {
+      "task_id": "task_007",
+      "policy": "prompt_only",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_007_prompt_only.jsonl"
+    },
+    {
+      "task_id": "task_007",
+      "policy": "llm_baseline",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_007_llm_baseline.jsonl"
+    },
+    {
+      "task_id": "task_007",
+      "policy": "strong_llm_optional",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_007_strong_llm_optional.jsonl"
+    },
+    {
+      "task_id": "task_008",
+      "policy": "prompt_only",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_008_prompt_only.jsonl"
+    },
+    {
+      "task_id": "task_008",
+      "policy": "llm_baseline",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_008_llm_baseline.jsonl"
+    },
+    {
+      "task_id": "task_008",
+      "policy": "strong_llm_optional",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_008_strong_llm_optional.jsonl"
+    },
+    {
+      "task_id": "task_009",
+      "policy": "prompt_only",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_009_prompt_only.jsonl"
+    },
+    {
+      "task_id": "task_009",
+      "policy": "llm_baseline",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_009_llm_baseline.jsonl"
+    },
+    {
+      "task_id": "task_009",
+      "policy": "strong_llm_optional",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_009_strong_llm_optional.jsonl"
+    },
+    {
+      "task_id": "task_010",
+      "policy": "prompt_only",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_010_prompt_only.jsonl"
+    },
+    {
+      "task_id": "task_010",
+      "policy": "llm_baseline",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_010_llm_baseline.jsonl"
+    },
+    {
+      "task_id": "task_010",
+      "policy": "strong_llm_optional",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_010_strong_llm_optional.jsonl"
+    },
+    {
+      "task_id": "task_011",
+      "policy": "prompt_only",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_011_prompt_only.jsonl"
+    },
+    {
+      "task_id": "task_011",
+      "policy": "llm_baseline",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_011_llm_baseline.jsonl"
+    },
+    {
+      "task_id": "task_011",
+      "policy": "strong_llm_optional",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_011_strong_llm_optional.jsonl"
+    },
+    {
+      "task_id": "task_012",
+      "policy": "prompt_only",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_012_prompt_only.jsonl"
+    },
+    {
+      "task_id": "task_012",
+      "policy": "llm_baseline",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_012_llm_baseline.jsonl"
+    },
+    {
+      "task_id": "task_012",
+      "policy": "strong_llm_optional",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_012_strong_llm_optional.jsonl"
+    },
+    {
+      "task_id": "task_013",
+      "policy": "prompt_only",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_013_prompt_only.jsonl"
+    },
+    {
+      "task_id": "task_013",
+      "policy": "llm_baseline",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_013_llm_baseline.jsonl"
+    },
+    {
+      "task_id": "task_013",
+      "policy": "strong_llm_optional",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_013_strong_llm_optional.jsonl"
+    },
+    {
+      "task_id": "task_014",
+      "policy": "prompt_only",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_014_prompt_only.jsonl"
+    },
+    {
+      "task_id": "task_014",
+      "policy": "llm_baseline",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_014_llm_baseline.jsonl"
+    },
+    {
+      "task_id": "task_014",
+      "policy": "strong_llm_optional",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_014_strong_llm_optional.jsonl"
+    },
+    {
+      "task_id": "task_015",
+      "policy": "prompt_only",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_015_prompt_only.jsonl"
+    },
+    {
+      "task_id": "task_015",
+      "policy": "llm_baseline",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_015_llm_baseline.jsonl"
+    },
+    {
+      "task_id": "task_015",
+      "policy": "strong_llm_optional",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_015_strong_llm_optional.jsonl"
+    },
+    {
+      "task_id": "task_016",
+      "policy": "prompt_only",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_016_prompt_only.jsonl"
+    },
+    {
+      "task_id": "task_016",
+      "policy": "llm_baseline",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_016_llm_baseline.jsonl"
+    },
+    {
+      "task_id": "task_016",
+      "policy": "strong_llm_optional",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_016_strong_llm_optional.jsonl"
+    },
+    {
+      "task_id": "task_017",
+      "policy": "prompt_only",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_017_prompt_only.jsonl"
+    },
+    {
+      "task_id": "task_017",
+      "policy": "llm_baseline",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_017_llm_baseline.jsonl"
+    },
+    {
+      "task_id": "task_017",
+      "policy": "strong_llm_optional",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_017_strong_llm_optional.jsonl"
+    },
+    {
+      "task_id": "task_018",
+      "policy": "prompt_only",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_018_prompt_only.jsonl"
+    },
+    {
+      "task_id": "task_018",
+      "policy": "llm_baseline",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_018_llm_baseline.jsonl"
+    },
+    {
+      "task_id": "task_018",
+      "policy": "strong_llm_optional",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_018_strong_llm_optional.jsonl"
+    },
+    {
+      "task_id": "task_019",
+      "policy": "prompt_only",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_019_prompt_only.jsonl"
+    },
+    {
+      "task_id": "task_019",
+      "policy": "llm_baseline",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_019_llm_baseline.jsonl"
+    },
+    {
+      "task_id": "task_019",
+      "policy": "strong_llm_optional",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_019_strong_llm_optional.jsonl"
+    },
+    {
+      "task_id": "task_020",
+      "policy": "prompt_only",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_020_prompt_only.jsonl"
+    },
+    {
+      "task_id": "task_020",
+      "policy": "llm_baseline",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_020_llm_baseline.jsonl"
+    },
+    {
+      "task_id": "task_020",
+      "policy": "strong_llm_optional",
+      "status": "planned",
+      "trajectory_path": "data/mini_repo_debug/trajectories/task_020_strong_llm_optional.jsonl"
+    }
+  ]
+}

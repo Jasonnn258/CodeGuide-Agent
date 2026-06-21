@@ -1,0 +1,21 @@
+{
+  "active_task_count": 20,
+  "planned_backlog_count": 80,
+  "planned_total_tasks": 100,
+  "sft_total": 19,
+  "preference_total": 23,
+  "preference_bank_total": 23,
+  "hard_preference_total": 1,
+  "checks": {
+    "active_task_count_ge_100": false,
+    "planned_total_ge_100": true,
+    "sft_total_ge_150": false,
+    "preference_total_ge_100": false,
+    "hard_preference_total_ge_30": false,
+    "clean_check_passed": true,
+    "audit_passed": true
+  },
+  "ready_for_real_training": false,
+  "decision": "NOT_READY",
+  "note": "Do not claim real training readiness until active tasks and hard preference data meet thresholds."
+}
