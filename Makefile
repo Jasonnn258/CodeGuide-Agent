@@ -1,4 +1,4 @@
-.PHONY: test clean-check audit scale-report validate-pipeline clean-generated p5 p6 p9 dry-run-sft dry-run-pref
+.PHONY: test clean-check audit scale-report task-skeletons validate-pipeline clean-generated p5 p6 p9 dry-run-sft dry-run-pref
 
 test:
 	python -m codeguide_agent.testing.simple_pytest tests -q
@@ -11,6 +11,9 @@ audit:
 
 scale-report:
 	python scripts/report_dataset_scale.py
+
+task-skeletons:
+	python scripts/generate_task_skeletons.py
 
 validate-pipeline:
 	bash scripts/validate_mini_repo_pipeline.sh
