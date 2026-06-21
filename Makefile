@@ -1,4 +1,4 @@
-.PHONY: test clean-check audit scale-report task-skeletons promotion-report promotion-check validate-pipeline clean-generated p5 p6 p9 dry-run-sft dry-run-pref promote-task rollout-plan readiness
+.PHONY: test clean-check audit scale-report task-skeletons promotion-report promotion-check validate-pipeline clean-generated p5 p6 p9 dry-run-sft dry-run-pref promote-task rollout-plan readiness training-data training-preflight train-sft train-sft-smoke dpo-readiness
 
 test:
 	python -m codeguide_agent.testing.simple_pytest tests -q
@@ -50,3 +50,18 @@ rollout-plan:
 
 readiness:
 	python scripts/training_readiness_gate.py
+
+training-data:
+	python -m codeguide_agent.training.build_hf_training_data --package data/mini_repo_debug/train_package --out data/mini_repo_debug/hf_training
+
+training-preflight:
+	python scripts/training_preflight.py
+
+train-sft:
+	python -m codeguide_agent.training.real_sft_lora_train --config configs/training/sft_qwen2_5_coder_lora.json
+
+train-sft-smoke:
+	python -m codeguide_agent.training.real_sft_lora_train --config configs/training/sft_smoke_tiny.json --max-steps 3
+
+dpo-readiness:
+	python -m codeguide_agent.training.real_dpo_train --data-dir data/mini_repo_debug/hf_training

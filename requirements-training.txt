@@ -1,0 +1,9 @@
+# Optional dependencies for real training.
+# Install only on a GPU machine when you are ready to run SFT/DPO.
+torch
+transformers
+datasets
+accelerate
+peft
+trl
+bitsandbytes
