@@ -1,0 +1,41 @@
+{
+  "preference_output": "data/mini_repo_debug/exports/p5_preference_pairs.jsonl",
+  "preference_pairs": 1,
+  "preference_task_ids": [
+    "task_009"
+  ],
+  "root": "data/mini_repo_debug",
+  "sanitization": {
+    "forbidden_path_terms_redacted": 3,
+    "hidden_verifier_rows_dropped": true,
+    "raw_test_stdout_stderr_exported": false
+  },
+  "sft_output": "data/mini_repo_debug/exports/p5_sft_rollouts.jsonl",
+  "sft_records": 19,
+  "sft_task_ids": [
+    "task_001",
+    "task_002",
+    "task_003",
+    "task_004",
+    "task_005",
+    "task_006",
+    "task_007",
+    "task_008",
+    "task_010",
+    "task_011",
+    "task_012",
+    "task_013",
+    "task_014",
+    "task_015",
+    "task_016",
+    "task_017",
+    "task_018",
+    "task_019",
+    "task_020"
+  ],
+  "skipped": {},
+  "summary_output": "data/mini_repo_debug/exports/p5_export_summary.json",
+  "task_009_preference_pair_generated": true,
+  "tasks_seen": 20,
+  "trajectories_dir": "data/mini_repo_debug/trajectories"
+}
