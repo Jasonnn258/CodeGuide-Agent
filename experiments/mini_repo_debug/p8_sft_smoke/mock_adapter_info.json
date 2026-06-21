@@ -1,0 +1,11 @@
+{
+  "artifact_type": "mock_adapter",
+  "candidate_count": 19,
+  "contains_model_weights": false,
+  "dataset_hash": "a08384ccc030f06549f322fe91d19695bbe7cad2f55f8308007ad9d985bd91c2",
+  "mode": "sft",
+  "notes": [
+    "Deterministic metadata-only artifact.",
+    "Real SFT/DPO adapters can replace this file later."
+  ]
+}

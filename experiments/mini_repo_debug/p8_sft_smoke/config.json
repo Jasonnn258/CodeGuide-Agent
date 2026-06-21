@@ -1,0 +1,31 @@
+{
+  "counts": {
+    "batch_count": 4,
+    "batch_size": 4,
+    "eval_records": 3,
+    "train_records": 16
+  },
+  "dataset_hash": "a08384ccc030f06549f322fe91d19695bbe7cad2f55f8308007ad9d985bd91c2",
+  "git_commit": "885effa792238acfb9f9514c9add8034ed801986",
+  "mode": "sft",
+  "package": "data/mini_repo_debug/train_package",
+  "package_counts": {
+    "preference_eval": 0,
+    "preference_total": 1,
+    "preference_train": 1,
+    "sft_eval": 3,
+    "sft_total": 19,
+    "sft_train": 16
+  },
+  "run_name": "p8_sft_smoke",
+  "sanitization": {
+    "forbidden_term_count": 4,
+    "model_facing_records_checked": 19,
+    "passed": true,
+    "raw_output_fields_exported": false
+  },
+  "training": {
+    "artifact_kind": "pending_mock_or_external",
+    "real_training_run": false
+  }
+}

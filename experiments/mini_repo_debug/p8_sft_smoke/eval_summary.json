@@ -1,0 +1,138 @@
+{
+  "artifact_type": "mock_adapter",
+  "checked_tasks": 20,
+  "contains_model_weights": false,
+  "hidden_tests_run": false,
+  "leakage_rate": 0.0,
+  "patch_failures": [
+    {
+      "reason": "missing_prediction",
+      "task_id": "task_009"
+    }
+  ],
+  "patch_inspection_pass_rate": 0.95,
+  "per_task": [
+    {
+      "changed_files_count": 1,
+      "patch_valid": true,
+      "status": "predicted",
+      "task_id": "task_001"
+    },
+    {
+      "changed_files_count": 1,
+      "patch_valid": true,
+      "status": "predicted",
+      "task_id": "task_002"
+    },
+    {
+      "changed_files_count": 1,
+      "patch_valid": true,
+      "status": "predicted",
+      "task_id": "task_003"
+    },
+    {
+      "changed_files_count": 1,
+      "patch_valid": true,
+      "status": "predicted",
+      "task_id": "task_004"
+    },
+    {
+      "changed_files_count": 1,
+      "patch_valid": true,
+      "status": "predicted",
+      "task_id": "task_005"
+    },
+    {
+      "changed_files_count": 1,
+      "patch_valid": true,
+      "status": "predicted",
+      "task_id": "task_006"
+    },
+    {
+      "changed_files_count": 1,
+      "patch_valid": true,
+      "status": "predicted",
+      "task_id": "task_007"
+    },
+    {
+      "changed_files_count": 1,
+      "patch_valid": true,
+      "status": "predicted",
+      "task_id": "task_008"
+    },
+    {
+      "patch_valid": false,
+      "status": "missing_prediction",
+      "task_id": "task_009"
+    },
+    {
+      "changed_files_count": 1,
+      "patch_valid": true,
+      "status": "predicted",
+      "task_id": "task_010"
+    },
+    {
+      "changed_files_count": 1,
+      "patch_valid": true,
+      "status": "predicted",
+      "task_id": "task_011"
+    },
+    {
+      "changed_files_count": 1,
+      "patch_valid": true,
+      "status": "predicted",
+      "task_id": "task_012"
+    },
+    {
+      "changed_files_count": 1,
+      "patch_valid": true,
+      "status": "predicted",
+      "task_id": "task_013"
+    },
+    {
+      "changed_files_count": 1,
+      "patch_valid": true,
+      "status": "predicted",
+      "task_id": "task_014"
+    },
+    {
+      "changed_files_count": 1,
+      "patch_valid": true,
+      "status": "predicted",
+      "task_id": "task_015"
+    },
+    {
+      "changed_files_count": 1,
+      "patch_valid": true,
+      "status": "predicted",
+      "task_id": "task_016"
+    },
+    {
+      "changed_files_count": 1,
+      "patch_valid": true,
+      "status": "predicted",
+      "task_id": "task_017"
+    },
+    {
+      "changed_files_count": 1,
+      "patch_valid": true,
+      "status": "predicted",
+      "task_id": "task_018"
+    },
+    {
+      "changed_files_count": 1,
+      "patch_valid": true,
+      "status": "predicted",
+      "task_id": "task_019"
+    },
+    {
+      "changed_files_count": 1,
+      "patch_valid": true,
+      "status": "predicted",
+      "task_id": "task_020"
+    }
+  ],
+  "policy": "trained",
+  "predicted_tasks": 19,
+  "status": "completed"
+}

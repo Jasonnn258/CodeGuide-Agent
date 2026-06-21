@@ -1,0 +1,11 @@
+{
+  "artifact_type": "mock_adapter",
+  "contains_model_weights": false,
+  "eval_records": 3,
+  "mode": "sft",
+  "patch_candidate_count": 19,
+  "quality_gate_passed": true,
+  "real_training_run": false,
+  "status": "mock_artifact_created",
+  "train_records": 16
+}

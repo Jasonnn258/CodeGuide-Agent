@@ -1,0 +1,12 @@
+{
+  "checked_records": 20,
+  "hidden_tests_run": false,
+  "passed": false,
+  "patch_failures": [
+    {
+      "reason": "missing_prediction",
+      "task_id": "task_009"
+    }
+  ],
+  "status": "completed"
+}
