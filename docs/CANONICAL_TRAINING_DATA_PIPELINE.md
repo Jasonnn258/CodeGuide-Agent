@@ -27,7 +27,7 @@ This document defines the canonical training-data path for CodeGuide-Agent.
 
 ## Source of truth
 
-The source of truth for SFT candidates is the P5 export output:
+The source of truth for SFT candidates is:
 
 - data/mini_repo_debug/exports/p5_sft_rollouts.jsonl
 

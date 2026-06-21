@@ -122,6 +122,8 @@ def evaluate_one(
     pre_counts = public_test_counts(pre_public)
     post_counts = public_test_counts(public_result)
 
+    # diagnostic-only: evaluate_patch is used for patch inspection metrics, not for final reward calculation.
+    # The canonical reward path remains reward.calculator.calculate_reward.
     patch_metrics = evaluate_patch(
         diff_text=diff_text,
         repo_path=str(workspace),
