@@ -1,10 +1,13 @@
-.PHONY: test clean-check validate-pipeline clean-generated p5 p6 p9 dry-run-sft dry-run-pref
+.PHONY: test clean-check audit validate-pipeline clean-generated p5 p6 p9 dry-run-sft dry-run-pref
 
 test:
 	python -m codeguide_agent.testing.simple_pytest tests -q
 
 clean-check:
 	bash scripts/check_tests_without_generated_trajectories.sh
+
+audit:
+	bash scripts/audit_model_facing_artifacts.sh
 
 validate-pipeline:
 	bash scripts/validate_mini_repo_pipeline.sh

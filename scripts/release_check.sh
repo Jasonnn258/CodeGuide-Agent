@@ -14,6 +14,9 @@ make test
 echo "== clean-check =="
 make clean-check
 
+echo "== audit =="
+make audit
+
 echo "== latest commits =="
 git log --oneline -8
 

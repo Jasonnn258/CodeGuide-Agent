@@ -29,3 +29,6 @@ jobs:
 
       - name: Run clean-check
         run: make clean-check
+
+      - name: Run leakage audit
+        run: make audit
