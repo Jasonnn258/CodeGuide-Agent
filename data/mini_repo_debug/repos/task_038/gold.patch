@@ -1,0 +1,12 @@
+diff --git a/task_038_lib/tags.py b/task_038_lib/tags.py
+index c21bf8b..b9fc35e 100644
+--- a/task_038_lib/tags.py
++++ b/task_038_lib/tags.py
+@@ -2,4 +2,6 @@ from __future__ import annotations
+ 
+ 
+ def ensure_tag(tags: list[str], tag: str) -> list[str]:
+-    return tags + [tag]
++    if tag in tags:
++        return list(tags)
++    return list(tags) + [tag]

@@ -1,0 +1,32 @@
+{
+  "task_id": "task_033",
+  "bug_type": "sorting_filtering",
+  "difficulty": "easy",
+  "issue_path": "issue.md",
+  "public_test_cmd": "python -m pytest tests -q",
+  "hidden_test_cmd": "python -m pytest tests_hidden -q",
+  "target_files": [
+    "task_033_lib/catalog.py"
+  ],
+  "target_functions": [
+    "visible_titles"
+  ],
+  "expected_failure_mode": "Filtering works, but ranking ignores priority.",
+  "generalization_axis": "Public covers filtering; hidden covers the sort key.",
+  "repo_path": "data/mini_repo_debug/repos/task_033",
+  "source": "manual_p42_expansion",
+  "split": "train",
+  "scenario": "sorting_filtering public-hidden generalization",
+  "gold_patch": "gold.patch",
+  "gold_files": [
+    "task_033_lib/catalog.py"
+  ],
+  "gold_functions": [
+    "visible_titles"
+  ],
+  "forbidden_behaviors": [
+    "hard-code public examples",
+    "modify tests",
+    "ignore hidden edge cases"
+  ]
+}

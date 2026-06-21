@@ -1,0 +1,15 @@
+diff --git a/task_037_lib/batches.py b/task_037_lib/batches.py
+index 0ab8625..a9c4a61 100644
+--- a/task_037_lib/batches.py
++++ b/task_037_lib/batches.py
+@@ -1,6 +1,7 @@
+ from __future__ import annotations
+ 
+ 
+-def add_batch_item(item: str, batch: list[str] = []) -> list[str]:
+-    batch.append(item)
+-    return batch
++def add_batch_item(item: str, batch: list[str] | None = None) -> list[str]:
++    values = list(batch) if batch is not None else []
++    values.append(item)
++    return values

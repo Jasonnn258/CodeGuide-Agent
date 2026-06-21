@@ -1,0 +1,10 @@
+diff --git a/task_048_lib/dates.py b/task_048_lib/dates.py
+index cbcf1e8..0c5d1cb 100644
+--- a/task_048_lib/dates.py
++++ b/task_048_lib/dates.py
+@@ -4,4 +4,4 @@ from datetime import date
+ 
+ 
+ def is_due(due_on: date, today: date) -> bool:
+-    return due_on < today
++    return due_on <= today

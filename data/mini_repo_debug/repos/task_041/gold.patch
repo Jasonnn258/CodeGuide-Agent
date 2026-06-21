@@ -1,0 +1,11 @@
+diff --git a/task_041_lib/parser.py b/task_041_lib/parser.py
+index 968e32a..8f18af9 100644
+--- a/task_041_lib/parser.py
++++ b/task_041_lib/parser.py
+@@ -2,5 +2,5 @@ from __future__ import annotations
+ 
+ 
+ def parse_assignment(line: str) -> tuple[str, str]:
+-    key, value = line.split("=")
++    key, value = line.split("=", 1)
+     return key.strip(), value.strip()

@@ -20,11 +20,13 @@ def _prepare_package(tmp_path: Path) -> Path:
 def test_sft_loader_reads_train_and_eval_records(tmp_path: Path):
     package = _prepare_package(tmp_path)
     dataset = load_training_package(package, mode="sft", batch_size=4)
+    manifest = json.loads((package / "manifest.json").read_text(encoding="utf-8"))
 
     assert dataset.mode == "sft"
-    assert len(dataset.train_records) == 16
-    assert len(dataset.eval_records) == 3
-    assert dataset.batch_count == 4
+    assert len(dataset.train_records) == manifest["counts"]["sft_train"]
+    assert len(dataset.eval_records) == manifest["counts"]["sft_eval"]
+    assert len(dataset.train_records) + len(dataset.eval_records) > 19
+    assert dataset.batch_count == (len(dataset.train_records) + 3) // 4
     assert dataset.preview_batch
     assert dataset.quality_gate["passed"] is True
 
@@ -61,14 +63,15 @@ def test_loader_sanitization_gate_rejects_forbidden_terms(tmp_path: Path):
 def test_dry_run_sft_creates_run_summary(tmp_path: Path):
     package = _prepare_package(tmp_path)
     result = run_dry_train(package, mode="sft", out_dir=tmp_path / "runs" / "sft")
+    manifest = json.loads((package / "manifest.json").read_text(encoding="utf-8"))
 
     summary_path = Path(result["summary_path"])
     assert summary_path.exists()
     summary = json.loads(summary_path.read_text(encoding="utf-8"))
     assert summary["mode"] == "sft"
     assert summary["dry_run"] is True
-    assert summary["train_records"] == 16
-    assert summary["batch_count"] == 4
+    assert summary["train_records"] == manifest["counts"]["sft_train"]
+    assert summary["batch_count"] == (manifest["counts"]["sft_train"] + 3) // 4
     assert Path(summary["formatted_preview_path"]).exists()
 
 

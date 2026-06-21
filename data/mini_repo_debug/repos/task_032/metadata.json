@@ -1,0 +1,32 @@
+{
+  "task_id": "task_032",
+  "bug_type": "numeric_edge_case",
+  "difficulty": "easy",
+  "issue_path": "issue.md",
+  "public_test_cmd": "python -m pytest tests -q",
+  "hidden_test_cmd": "python -m pytest tests_hidden -q",
+  "target_files": [
+    "task_032_lib/percent.py"
+  ],
+  "target_functions": [
+    "percent_change"
+  ],
+  "expected_failure_mode": "The formula divides by the new value and does not guard a zero baseline.",
+  "generalization_axis": "Public covers formula correctness; hidden covers zero baseline handling.",
+  "repo_path": "data/mini_repo_debug/repos/task_032",
+  "source": "manual_p42_expansion",
+  "split": "train",
+  "scenario": "numeric_edge_case public-hidden generalization",
+  "gold_patch": "gold.patch",
+  "gold_files": [
+    "task_032_lib/percent.py"
+  ],
+  "gold_functions": [
+    "percent_change"
+  ],
+  "forbidden_behaviors": [
+    "hard-code public examples",
+    "modify tests",
+    "ignore hidden edge cases"
+  ]
+}

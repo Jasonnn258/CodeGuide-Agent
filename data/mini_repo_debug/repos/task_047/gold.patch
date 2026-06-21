@@ -1,0 +1,13 @@
+diff --git a/task_047_lib/profiles.py b/task_047_lib/profiles.py
+index 9b2c49d..5e5eaf7 100644
+--- a/task_047_lib/profiles.py
++++ b/task_047_lib/profiles.py
+@@ -2,5 +2,6 @@ from __future__ import annotations
+ 
+ 
+ def with_status(profile: dict, status: str) -> dict:
+-    profile["status"] = status
+-    return profile
++    updated = dict(profile)
++    updated["status"] = status
++    return updated

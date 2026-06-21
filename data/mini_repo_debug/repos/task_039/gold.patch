@@ -1,0 +1,13 @@
+diff --git a/task_039_lib/usernames.py b/task_039_lib/usernames.py
+index 4c32e8c..3b57125 100644
+--- a/task_039_lib/usernames.py
++++ b/task_039_lib/usernames.py
+@@ -1,5 +1,7 @@
+ from __future__ import annotations
+ 
++import re
++
+ 
+ def is_valid_username(value: str) -> bool:
+-    return len(value) >= 3
++    return bool(re.fullmatch(r"[A-Za-z][A-Za-z0-9_]{2,15}", value))

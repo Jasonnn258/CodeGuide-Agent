@@ -1,0 +1,16 @@
+diff --git a/task_031_lib/ports.py b/task_031_lib/ports.py
+index 5edff78..1ae8742 100644
+--- a/task_031_lib/ports.py
++++ b/task_031_lib/ports.py
+@@ -6,4 +6,10 @@ class ConfigError(ValueError):
+ 
+ 
+ def parse_port(config: dict) -> int:
+-    return int(config.get("port", 8080))
++    try:
++        port = int(config.get("port", 8080))
++    except (TypeError, ValueError) as exc:
++        raise ConfigError("port must be an integer") from exc
++    if not 1 <= port <= 65535:
++        raise ConfigError("port out of range")
++    return port

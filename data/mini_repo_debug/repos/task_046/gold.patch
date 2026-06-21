@@ -1,0 +1,14 @@
+diff --git a/task_046_lib/slugs.py b/task_046_lib/slugs.py
+index c21ed81..c3bed3e 100644
+--- a/task_046_lib/slugs.py
++++ b/task_046_lib/slugs.py
+@@ -1,5 +1,8 @@
+ from __future__ import annotations
+ 
++import re
++
+ 
+ def slugify(value: str) -> str:
+-    return value.strip().lower().replace(" ", "-")
++    normalized = re.sub(r"[^a-z0-9]+", "-", value.strip().lower())
++    return normalized.strip("-")

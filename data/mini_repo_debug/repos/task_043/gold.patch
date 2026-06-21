@@ -1,0 +1,10 @@
+diff --git a/task_043_lib/cache.py b/task_043_lib/cache.py
+index e0f327c..681b886 100644
+--- a/task_043_lib/cache.py
++++ b/task_043_lib/cache.py
+@@ -4,4 +4,4 @@ import json
+ 
+ 
+ def make_cache_key(name: str, args: tuple = (), kwargs: dict | None = None) -> str:
+-    return json.dumps({"name": name, "args": args}, sort_keys=True)
++    return json.dumps({"name": name, "args": args, "kwargs": kwargs or {}}, sort_keys=True)

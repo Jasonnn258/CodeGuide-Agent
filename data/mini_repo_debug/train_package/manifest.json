@@ -1,15 +1,16 @@
 {
   "counts": {
-    "preference_eval": 7,
-    "preference_total": 37,
-    "preference_train": 30,
-    "sft_eval": 3,
-    "sft_total": 19,
-    "sft_train": 16
+    "preference_eval": 14,
+    "preference_total": 69,
+    "preference_train": 55,
+    "sft_eval": 10,
+    "sft_total": 50,
+    "sft_train": 40
   },
   "exports_dir": "data/mini_repo_debug/exports",
   "limitations": [
     "No model training is included.",
+    "Gold/reference SFT records are supervised patch examples, not model-generated rollouts.",
     "Preference data is intentionally tiny and currently useful only for pipeline checks.",
     "Evaluator-only pass/fail reward summaries are retained, but hidden verifier content is not model-facing."
   ],
@@ -30,12 +31,16 @@
     "errors": [],
     "passed": true,
     "replay": {
-      "checked_records": 93,
+      "checked_records": 188,
       "patch_inspection_failures": []
     },
     "warnings": []
   },
   "root": "data/mini_repo_debug",
+  "sft_source_counts": {
+    "gold_patch_sft_candidate": 31,
+    "sft_rollout_candidate": 19
+  },
   "splits": {
     "preference_eval_task_ids": [
       "task_005",
@@ -44,7 +49,14 @@
       "task_015",
       "task_020",
       "task_025",
-      "task_030"
+      "task_030",
+      "task_035",
+      "task_035",
+      "task_040",
+      "task_040",
+      "task_045",
+      "task_045",
+      "task_050"
     ],
     "preference_train_task_ids": [
       "task_001",
@@ -76,12 +88,44 @@
       "task_027",
       "task_028",
       "task_028",
-      "task_029"
+      "task_029",
+      "task_031",
+      "task_031",
+      "task_032",
+      "task_033",
+      "task_033",
+      "task_034",
+      "task_036",
+      "task_037",
+      "task_038",
+      "task_038",
+      "task_039",
+      "task_039",
+      "task_041",
+      "task_041",
+      "task_042",
+      "task_042",
+      "task_043",
+      "task_044",
+      "task_046",
+      "task_046",
+      "task_047",
+      "task_048",
+      "task_048",
+      "task_049",
+      "task_049"
     ],
     "sft_eval_task_ids": [
       "task_005",
-      "task_011",
-      "task_016"
+      "task_010",
+      "task_015",
+      "task_020",
+      "task_025",
+      "task_030",
+      "task_035",
+      "task_040",
+      "task_045",
+      "task_050"
     ],
     "sft_train_task_ids": [
       "task_001",
@@ -91,15 +135,39 @@
       "task_006",
       "task_007",
       "task_008",
-      "task_010",
+      "task_009",
+      "task_011",
       "task_012",
       "task_013",
       "task_014",
-      "task_015",
+      "task_016",
       "task_017",
       "task_018",
       "task_019",
-      "task_020"
+      "task_021",
+      "task_022",
+      "task_023",
+      "task_024",
+      "task_026",
+      "task_027",
+      "task_028",
+      "task_029",
+      "task_031",
+      "task_032",
+      "task_033",
+      "task_034",
+      "task_036",
+      "task_037",
+      "task_038",
+      "task_039",
+      "task_041",
+      "task_042",
+      "task_043",
+      "task_044",
+      "task_046",
+      "task_047",
+      "task_048",
+      "task_049"
     ]
   }
 }

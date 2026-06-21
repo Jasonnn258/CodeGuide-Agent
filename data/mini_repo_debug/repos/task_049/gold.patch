@@ -1,0 +1,13 @@
+diff --git a/task_049_lib/config.py b/task_049_lib/config.py
+index c6a3257..8f38b38 100644
+--- a/task_049_lib/config.py
++++ b/task_049_lib/config.py
+@@ -5,4 +5,7 @@ import json
+ 
+ def is_enabled(raw_json: str) -> bool:
+     config = json.loads(raw_json)
+-    return bool(config.get("enabled", False))
++    value = config.get("enabled", False)
++    if isinstance(value, str):
++        return value.strip().lower() in {"1", "true", "yes", "on"}
++    return bool(value)

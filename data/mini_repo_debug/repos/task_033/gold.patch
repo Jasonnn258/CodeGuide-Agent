@@ -1,0 +1,11 @@
+diff --git a/task_033_lib/catalog.py b/task_033_lib/catalog.py
+index cb0b023..d45bd57 100644
+--- a/task_033_lib/catalog.py
++++ b/task_033_lib/catalog.py
+@@ -3,4 +3,5 @@ from __future__ import annotations
+ 
+ def visible_titles(items: list[dict], category: str) -> list[str]:
+     visible = [item for item in items if item.get("visible") and item.get("category") == category]
+-    return [item["title"] for item in sorted(visible, key=lambda item: item["title"])]
++    ranked = sorted(visible, key=lambda item: (-item.get("priority", 0), item["title"]))
++    return [item["title"] for item in ranked]

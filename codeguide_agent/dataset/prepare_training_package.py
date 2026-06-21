@@ -262,6 +262,7 @@ def _build_manifest(
         "preference_eval": len(preference_eval),
         "preference_total": len(preference_train) + len(preference_eval),
     }
+    sft_source_counts = _source_counts(sft_train + sft_eval)
     splits = {
         "sft_train_task_ids": _task_ids(sft_train),
         "sft_eval_task_ids": _task_ids(sft_eval),
@@ -274,6 +275,7 @@ def _build_manifest(
         "exports_dir": str(exports_dir),
         "outputs": {key: str(value) for key, value in paths.items()},
         "counts": counts,
+        "sft_source_counts": sft_source_counts,
         "splits": splits,
         "preference_source": {
             "kind": "preference_bank" if preference_source_path.name == "preference_candidates.jsonl" else "p5_exports",
@@ -282,6 +284,7 @@ def _build_manifest(
         "quality_gate": quality_gate,
         "limitations": [
             "No model training is included.",
+            "Gold/reference SFT records are supervised patch examples, not model-generated rollouts.",
             "Preference data is intentionally tiny and currently useful only for pipeline checks.",
             "Evaluator-only pass/fail reward summaries are retained, but hidden verifier content is not model-facing.",
         ],
@@ -294,7 +297,8 @@ def _build_data_card(manifest: dict[str, Any]) -> str:
         [
             "# CodeGuide Mini-Repo-Debug P6 Training Package",
             "",
-            "This package normalizes P5 Mini-Repo-Debug trajectory exports into train-ready SFT and preference JSONL files.",
+            "This package normalizes Mini-Repo-Debug exports into train-ready SFT and preference JSONL files.",
+            "SFT records may come from successful model rollouts or from gold/reference patches used as supervised patch examples.",
             "",
             "## Files",
             "",
@@ -310,6 +314,8 @@ def _build_data_card(manifest: dict[str, Any]) -> str:
             f"- SFT eval: {counts['sft_eval']}",
             f"- Preference train: {counts['preference_train']}",
             f"- Preference eval: {counts['preference_eval']}",
+            f"- Gold/reference SFT: {manifest.get('sft_source_counts', {}).get('gold_patch_sft_candidate', 0)}",
+            f"- Rollout SFT: {manifest.get('sft_source_counts', {}).get('sft_rollout_candidate', 0)}",
             "",
             "## Safety",
             "",
@@ -392,6 +398,14 @@ def _inspect_patch(
 
 def _task_ids(records: list[dict[str, Any]]) -> list[str]:
     return [str(record.get("task_id", "")) for record in records]
+
+
+def _source_counts(records: list[dict[str, Any]]) -> dict[str, int]:
+    counts: dict[str, int] = {}
+    for record in records:
+        key = str(record.get("source_record_type", "unknown") or "unknown")
+        counts[key] = counts.get(key, 0) + 1
+    return counts
 
 
 def _read_jsonl(path: Path) -> list[dict[str, Any]]:

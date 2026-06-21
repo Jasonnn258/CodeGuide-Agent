@@ -54,6 +54,7 @@ def export_training_candidates(
     sft_records: list[dict[str, Any]] = []
     preference_pairs: list[dict[str, Any]] = []
     skipped: dict[str, int] = {}
+    rollout_sft_task_ids: set[str] = set()
 
     for task_path in tasks:
         metadata = load_metadata(task_path)
@@ -73,6 +74,7 @@ def export_training_candidates(
 
         if _is_successful_llm_candidate(llm_reward):
             sft_records.append(_build_sft_record(task_path, metadata, llm_path, llm_rows, llm_final))
+            rollout_sft_task_ids.add(task_id)
         elif _is_rejected_candidate(llm_reward) and gold_path.exists():
             gold_rows = load_trajectory(gold_path)
             gold_final = _final_row(gold_rows)
@@ -80,6 +82,13 @@ def export_training_candidates(
                 preference_pairs.append(
                     _build_preference_pair(task_path, metadata, llm_path, llm_rows, llm_final, gold_path, gold_rows, gold_final)
                 )
+
+    gold_sft_records: list[dict[str, Any]] = []
+    for task_path in tasks:
+        metadata = load_metadata(task_path)
+        if _is_train_split(metadata) and metadata["task_id"] not in rollout_sft_task_ids:
+            gold_sft_records.append(_build_gold_patch_sft_record(task_path, metadata))
+    sft_records.extend(gold_sft_records)
 
     sft_output = out_path / "p5_sft_rollouts.jsonl"
     preference_output = out_path / "p5_preference_pairs.jsonl"
@@ -94,8 +103,11 @@ def export_training_candidates(
         "summary_output": str(summary_output),
         "tasks_seen": len(tasks),
         "sft_records": len(sft_records),
+        "rollout_sft_records": len(rollout_sft_task_ids),
+        "gold_patch_sft_records": len(gold_sft_records),
         "preference_pairs": len(preference_pairs),
         "sft_task_ids": [record["task_id"] for record in sft_records],
+        "gold_patch_sft_task_ids": [record["task_id"] for record in gold_sft_records],
         "preference_task_ids": [record["task_id"] for record in preference_pairs],
         "task_009_preference_pair_generated": any(record["task_id"] == "task_009" for record in preference_pairs),
         "skipped": skipped,
@@ -138,6 +150,36 @@ def _build_sft_record(
         "prompt_context": _prompt_context(task_path, metadata),
         "actions": sanitize_trajectory_rows(rows),
         "final_patch": _sanitize_text(final.get("final_patch", "")),
+        "reward_summary": _reward_summary(reward),
+        "localization": _localization_summary(metadata, reward),
+    }
+
+
+def _build_gold_patch_sft_record(task_path: Path, metadata: dict[str, Any]) -> dict[str, Any]:
+    patch_path = task_path / metadata.get("gold_patch", "gold.patch")
+    reward = {
+        "public_pass": True,
+        "hidden_pass": True,
+        "public_pass_hidden_fail": False,
+        "hidden_failure_type": "none",
+        "patch_generalization_risk": "low",
+        "patch_too_narrow": False,
+        "leakage_detected": False,
+        "forbidden_file_access": False,
+        "oracle_metadata_leakage": False,
+        "syntax_error": False,
+        "gold_file_patched": True,
+        "gold_function_patched": True,
+    }
+    return {
+        "record_type": "gold_patch_sft_candidate",
+        "source": "gold_patch",
+        "task_id": metadata["task_id"],
+        "target_files": list(metadata.get("gold_files", [])),
+        "gold_functions": list(metadata.get("gold_functions", [])),
+        "prompt_context": _prompt_context(task_path, metadata),
+        "actions": [],
+        "final_patch": _sanitize_text(patch_path.read_text(encoding="utf-8")),
         "reward_summary": _reward_summary(reward),
         "localization": _localization_summary(metadata, reward),
     }
@@ -315,6 +357,10 @@ def _is_successful_llm_candidate(reward: dict[str, Any]) -> bool:
         and not reward.get("leakage_detected")
         and not reward.get("syntax_error")
     )
+
+
+def _is_train_split(metadata: dict[str, Any]) -> bool:
+    return str(metadata.get("split", "train")) == "train"
 
 
 def _is_rejected_candidate(reward: dict[str, Any]) -> bool:

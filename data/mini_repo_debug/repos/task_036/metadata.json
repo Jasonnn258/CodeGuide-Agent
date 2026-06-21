@@ -1,0 +1,36 @@
+{
+  "task_id": "task_036",
+  "bug_type": "multi_file_integration",
+  "difficulty": "easy",
+  "issue_path": "issue.md",
+  "public_test_cmd": "python -m pytest tests -q",
+  "hidden_test_cmd": "python -m pytest tests_hidden -q",
+  "target_files": [
+    "task_036_lib/formatters.py",
+    "task_036_lib/receipt.py"
+  ],
+  "target_functions": [
+    "render_receipt",
+    "format_currency"
+  ],
+  "expected_failure_mode": "Receipt bypasses the formatter and negative formatting is inconsistent.",
+  "generalization_axis": "Public covers integration; hidden covers helper behavior through both files.",
+  "repo_path": "data/mini_repo_debug/repos/task_036",
+  "source": "manual_p42_expansion",
+  "split": "train",
+  "scenario": "multi_file_integration public-hidden generalization",
+  "gold_patch": "gold.patch",
+  "gold_files": [
+    "task_036_lib/formatters.py",
+    "task_036_lib/receipt.py"
+  ],
+  "gold_functions": [
+    "render_receipt",
+    "format_currency"
+  ],
+  "forbidden_behaviors": [
+    "hard-code public examples",
+    "modify tests",
+    "ignore hidden edge cases"
+  ]
+}

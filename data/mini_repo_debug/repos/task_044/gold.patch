@@ -1,0 +1,15 @@
+diff --git a/task_044_lib/options.py b/task_044_lib/options.py
+index ae814b8..b96fae7 100644
+--- a/task_044_lib/options.py
++++ b/task_044_lib/options.py
+@@ -1,6 +1,7 @@
+ from __future__ import annotations
+ 
+ 
+-def add_flag(flag: str, flags: list[str] = []) -> list[str]:
+-    flags.append(flag)
+-    return flags
++def add_flag(flag: str, flags: list[str] | None = None) -> list[str]:
++    result = list(flags) if flags is not None else []
++    result.append(flag)
++    return result

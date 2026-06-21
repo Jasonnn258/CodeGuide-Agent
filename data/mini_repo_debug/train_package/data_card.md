@@ -1,6 +1,7 @@
 # CodeGuide Mini-Repo-Debug P6 Training Package
 
-This package normalizes P5 Mini-Repo-Debug trajectory exports into train-ready SFT and preference JSONL files.
+This package normalizes Mini-Repo-Debug exports into train-ready SFT and preference JSONL files.
+SFT records may come from successful model rollouts or from gold/reference patches used as supervised patch examples.
 
 ## Files
 
@@ -12,10 +13,12 @@ This package normalizes P5 Mini-Repo-Debug trajectory exports into train-ready S
 
 ## Counts
 
-- SFT train: 16
-- SFT eval: 3
-- Preference train: 30
-- Preference eval: 7
+- SFT train: 40
+- SFT eval: 10
+- Preference train: 55
+- Preference eval: 14
+- Gold/reference SFT: 31
+- Rollout SFT: 19
 
 ## Safety
 

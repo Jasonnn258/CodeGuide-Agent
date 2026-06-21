@@ -1,0 +1,12 @@
+diff --git a/task_032_lib/percent.py b/task_032_lib/percent.py
+index 5d074c9..6b5f6c5 100644
+--- a/task_032_lib/percent.py
++++ b/task_032_lib/percent.py
+@@ -2,4 +2,6 @@ from __future__ import annotations
+ 
+ 
+ def percent_change(old: float, new: float) -> float:
+-    return (new - old) / new * 100
++    if old == 0:
++        raise ValueError("old value must be non-zero")
++    return (new - old) / old * 100

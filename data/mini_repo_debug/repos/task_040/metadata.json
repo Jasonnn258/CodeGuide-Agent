@@ -1,0 +1,32 @@
+{
+  "task_id": "task_040",
+  "bug_type": "config_merge",
+  "difficulty": "easy",
+  "issue_path": "issue.md",
+  "public_test_cmd": "python -m pytest tests -q",
+  "hidden_test_cmd": "python -m pytest tests_hidden -q",
+  "target_files": [
+    "task_040_lib/merge.py"
+  ],
+  "target_functions": [
+    "merge_config"
+  ],
+  "expected_failure_mode": "Top-level merge works, but nested defaults are overwritten.",
+  "generalization_axis": "Public covers shallow merge; hidden covers recursive merge.",
+  "repo_path": "data/mini_repo_debug/repos/task_040",
+  "source": "manual_p42_expansion",
+  "split": "train",
+  "scenario": "config_merge public-hidden generalization",
+  "gold_patch": "gold.patch",
+  "gold_files": [
+    "task_040_lib/merge.py"
+  ],
+  "gold_functions": [
+    "merge_config"
+  ],
+  "forbidden_behaviors": [
+    "hard-code public examples",
+    "modify tests",
+    "ignore hidden edge cases"
+  ]
+}

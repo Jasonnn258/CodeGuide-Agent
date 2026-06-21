@@ -1,0 +1,13 @@
+diff --git a/task_042_lib/paths.py b/task_042_lib/paths.py
+index 5457f57..8dbaf2f 100644
+--- a/task_042_lib/paths.py
++++ b/task_042_lib/paths.py
+@@ -4,4 +4,7 @@ from pathlib import PurePosixPath
+ 
+ 
+ def safe_asset_path(path: str) -> str:
+-    return str(PurePosixPath(path))
++    normalized = PurePosixPath(path)
++    if normalized.is_absolute() or ".." in normalized.parts:
++        raise ValueError("asset path must stay inside the asset root")
++    return str(normalized)

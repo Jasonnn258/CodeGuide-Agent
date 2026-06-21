@@ -1,0 +1,32 @@
+{
+  "task_id": "task_046",
+  "bug_type": "string_normalization",
+  "difficulty": "easy",
+  "issue_path": "issue.md",
+  "public_test_cmd": "python -m pytest tests -q",
+  "hidden_test_cmd": "python -m pytest tests_hidden -q",
+  "target_files": [
+    "task_046_lib/slugs.py"
+  ],
+  "target_functions": [
+    "slugify"
+  ],
+  "expected_failure_mode": "Basic space replacement works, but punctuation and repeated separators are not normalized.",
+  "generalization_axis": "Public covers simple normalization; hidden covers punctuation and repeated separators.",
+  "repo_path": "data/mini_repo_debug/repos/task_046",
+  "source": "manual_p50_expansion",
+  "split": "train",
+  "scenario": "string_normalization public-hidden generalization",
+  "gold_patch": "gold.patch",
+  "gold_files": [
+    "task_046_lib/slugs.py"
+  ],
+  "gold_functions": [
+    "slugify"
+  ],
+  "forbidden_behaviors": [
+    "hard-code public examples",
+    "modify tests",
+    "ignore hidden edge cases"
+  ]
+}

@@ -1,0 +1,22 @@
+diff --git a/task_036_lib/formatters.py b/task_036_lib/formatters.py
+index b1586b2..934df85 100644
+--- a/task_036_lib/formatters.py
++++ b/task_036_lib/formatters.py
+@@ -2,4 +2,6 @@ from __future__ import annotations
+ 
+ 
+ def format_currency(cents: int) -> str:
+-    return f"${cents / 100:.2f}"
++    sign = "-" if cents < 0 else ""
++    cents = abs(cents)
++    return f"{sign}${cents // 100}.{cents % 100:02d}"
+diff --git a/task_036_lib/receipt.py b/task_036_lib/receipt.py
+index e4bcbbd..d5b4bc4 100644
+--- a/task_036_lib/receipt.py
++++ b/task_036_lib/receipt.py
+@@ -4,4 +4,4 @@ from .formatters import format_currency
+ 
+ 
+ def render_receipt(total_cents: int) -> str:
+-    return f"Total: {total_cents}"
++    return f"Total: {format_currency(total_cents)}"

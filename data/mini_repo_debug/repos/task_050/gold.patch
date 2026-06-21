@@ -1,0 +1,10 @@
+diff --git a/task_050_lib/cli.py b/task_050_lib/cli.py
+index 905022a..c800e0e 100644
+--- a/task_050_lib/cli.py
++++ b/task_050_lib/cli.py
+@@ -12,4 +12,4 @@ def main(argv: list[str] | None = None) -> str:
+     parser.add_argument("name")
+     parser.add_argument("--prefix", default="Hello")
+     args = parser.parse_args(argv)
+-    return render(args.name)
++    return render(args.name, prefix=args.prefix)

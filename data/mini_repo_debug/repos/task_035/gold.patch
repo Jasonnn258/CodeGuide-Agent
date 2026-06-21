@@ -1,0 +1,11 @@
+diff --git a/task_035_lib/roles.py b/task_035_lib/roles.py
+index b0f8a40..7e3d43b 100644
+--- a/task_035_lib/roles.py
++++ b/task_035_lib/roles.py
+@@ -2,4 +2,5 @@ from __future__ import annotations
+ 
+ 
+ def has_role(user_roles: list[str], required: str) -> bool:
+-    return required in user_roles
++    wanted = required.strip().casefold()
++    return any(role.strip().casefold() == wanted for role in user_roles)

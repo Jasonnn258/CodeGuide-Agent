@@ -1,0 +1,20 @@
+diff --git a/task_034_lib/discounts.py b/task_034_lib/discounts.py
+index eb39e7a..2b62f45 100644
+--- a/task_034_lib/discounts.py
++++ b/task_034_lib/discounts.py
+@@ -2,4 +2,4 @@ from __future__ import annotations
+ 
+ 
+ def apply_discount(amount: int, percent: int) -> int:
+-    return amount - (amount * percent // 100)
++    return amount - round(amount * percent / 100)
+diff --git a/task_034_lib/orders.py b/task_034_lib/orders.py
+index 2d7ab09..01c4716 100644
+--- a/task_034_lib/orders.py
++++ b/task_034_lib/orders.py
+@@ -5,4 +5,4 @@ from .discounts import apply_discount
+ 
+ def order_total(items: list[dict], discount_percent: int = 0) -> int:
+     subtotal = sum(item["price"] * item.get("quantity", 1) for item in items)
+-    return subtotal
++    return apply_discount(subtotal, discount_percent)

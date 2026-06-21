@@ -1,0 +1,32 @@
+{
+  "task_id": "task_048",
+  "bug_type": "date_boundary",
+  "difficulty": "easy",
+  "issue_path": "issue.md",
+  "public_test_cmd": "python -m pytest tests -q",
+  "hidden_test_cmd": "python -m pytest tests_hidden -q",
+  "target_files": [
+    "task_048_lib/dates.py"
+  ],
+  "target_functions": [
+    "is_due"
+  ],
+  "expected_failure_mode": "Past and future dates classify correctly, but today is treated as not due.",
+  "generalization_axis": "Public covers strict past/future; hidden covers equality boundary.",
+  "repo_path": "data/mini_repo_debug/repos/task_048",
+  "source": "manual_p50_expansion",
+  "split": "train",
+  "scenario": "date_boundary public-hidden generalization",
+  "gold_patch": "gold.patch",
+  "gold_files": [
+    "task_048_lib/dates.py"
+  ],
+  "gold_functions": [
+    "is_due"
+  ],
+  "forbidden_behaviors": [
+    "hard-code public examples",
+    "modify tests",
+    "ignore hidden edge cases"
+  ]
+}

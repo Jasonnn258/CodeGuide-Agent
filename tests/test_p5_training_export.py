@@ -40,6 +40,23 @@ def test_p5_export_writes_expected_files_and_schema(tmp_path: Path):
     assert sft_record["reward_summary"]["hidden_pass"] is True
 
 
+def test_p5_export_adds_gold_reference_sft_candidates(tmp_path: Path):
+    result = _export_training_candidates_for_test(tmp_path, tmp_path)
+    sft_records = _read_jsonl(tmp_path / "p5_sft_rollouts.jsonl")
+    gold_records = [record for record in sft_records if record["record_type"] == "gold_patch_sft_candidate"]
+
+    assert result["gold_patch_sft_records"] == len(gold_records)
+    assert gold_records
+    assert len(sft_records) > result["rollout_sft_records"]
+    record = gold_records[0]
+    assert record["source"] == "gold_patch"
+    assert record["final_patch"].startswith("diff --git")
+    assert record["reward_summary"]["public_pass"] is True
+    assert record["reward_summary"]["hidden_pass"] is True
+    assert "target_files" in record
+    assert "gold_functions" in record
+
+
 def test_p5_export_sanitizes_hidden_paths_and_outputs(tmp_path: Path):
     _export_training_candidates_for_test(tmp_path, tmp_path)
 

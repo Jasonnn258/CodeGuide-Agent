@@ -33,7 +33,10 @@ def test_prepare_training_package_writes_expected_files(tmp_path: Path):
     ]:
         assert (tmp_path / "package" / name).exists()
     assert result["quality_gate"]["passed"] is True
-    assert result["counts"]["sft_total"] == 19
+    assert result["counts"]["sft_total"] > 19
+    assert result["sft_source_counts"]["sft_rollout_candidate"] > 0
+    assert result["sft_source_counts"]["gold_patch_sft_candidate"] > 0
+    assert sum(result["sft_source_counts"].values()) == result["counts"]["sft_total"]
     assert result["counts"]["preference_total"] == 1
 
 
@@ -47,6 +50,22 @@ def test_training_package_schema_and_success_filter(tmp_path: Path):
     assert record["record_type"] == "codeguide_sft_v1"
     assert [message["role"] for message in record["messages"]] == ["system", "user", "assistant"]
     assert isinstance(record["tool_trace"], list)
+    assert record["final_patch"].startswith("diff --git")
+    assert record["reward_summary"]["public_pass"] is True
+    assert record["reward_summary"]["hidden_pass"] is True
+    assert record["quality"]["source_success"] is True
+
+
+def test_training_package_includes_gold_reference_sft_records(tmp_path: Path):
+    _export_training_candidates_for_test(tmp_path, tmp_path / "exports")
+    result = prepare_training_package("data/mini_repo_debug", tmp_path / "package", exports_dir=tmp_path / "exports")
+
+    sft_records = _read_jsonl(tmp_path / "package" / "sft_train.jsonl") + _read_jsonl(tmp_path / "package" / "sft_eval.jsonl")
+    gold_records = [record for record in sft_records if record["source_record_type"] == "gold_patch_sft_candidate"]
+
+    assert len(gold_records) == result["sft_source_counts"]["gold_patch_sft_candidate"]
+    assert gold_records
+    record = gold_records[0]
     assert record["final_patch"].startswith("diff --git")
     assert record["reward_summary"]["public_pass"] is True
     assert record["reward_summary"]["hidden_pass"] is True
