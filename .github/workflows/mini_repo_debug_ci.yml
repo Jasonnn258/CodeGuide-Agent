@@ -1,0 +1,31 @@
+name: Mini-Repo-Debug CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Compile key files
+        run: |
+          python -m py_compile codeguide_agent/testing/mini_repo_trajectory_fixture.py
+          python -m py_compile scripts/summarize_mini_repo_pipeline.py
+
+      - name: Run unit tests
+        run: make test
+
+      - name: Run clean-check
+        run: make clean-check
