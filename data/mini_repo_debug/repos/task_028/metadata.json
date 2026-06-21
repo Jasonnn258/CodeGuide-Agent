@@ -1,0 +1,32 @@
+{
+  "task_id": "task_028",
+  "bug_type": "sorting_filtering",
+  "difficulty": "easy",
+  "issue_path": "issue.md",
+  "public_test_cmd": "python -m pytest tests -q",
+  "hidden_test_cmd": "python -m pytest tests_hidden -q",
+  "target_files": [
+    "task_028_lib/ranking.py"
+  ],
+  "target_functions": [
+    "active_names"
+  ],
+  "expected_failure_mode": "Filtering works, but ordering is alphabetical rather than score-descending.",
+  "generalization_axis": "Public covers filtering; hidden covers the ranking rule.",
+  "repo_path": "data/mini_repo_debug/repos/task_028",
+  "source": "manual_p38_expansion",
+  "split": "train",
+  "scenario": "sorting_filtering public-hidden generalization",
+  "gold_patch": "gold.patch",
+  "gold_files": [
+    "task_028_lib/ranking.py"
+  ],
+  "gold_functions": [
+    "active_names"
+  ],
+  "forbidden_behaviors": [
+    "hard-code public examples",
+    "modify tests",
+    "ignore hidden edge cases"
+  ]
+}

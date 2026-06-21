@@ -1,0 +1,36 @@
+{
+  "task_id": "task_030",
+  "bug_type": "multi_file_integration",
+  "difficulty": "medium",
+  "issue_path": "issue.md",
+  "public_test_cmd": "python -m pytest tests -q",
+  "hidden_test_cmd": "python -m pytest tests_hidden -q",
+  "target_files": [
+    "task_030_lib/invoice.py",
+    "task_030_lib/tax.py"
+  ],
+  "target_functions": [
+    "invoice_total",
+    "tax_amount"
+  ],
+  "expected_failure_mode": "Invoice totals ignore tax and the helper truncates fractional tax.",
+  "generalization_axis": "Public covers integration with whole-number tax; hidden covers helper rounding across files.",
+  "repo_path": "data/mini_repo_debug/repos/task_030",
+  "source": "manual_p38_expansion",
+  "split": "train",
+  "scenario": "multi_file_integration public-hidden generalization",
+  "gold_patch": "gold.patch",
+  "gold_files": [
+    "task_030_lib/invoice.py",
+    "task_030_lib/tax.py"
+  ],
+  "gold_functions": [
+    "invoice_total",
+    "tax_amount"
+  ],
+  "forbidden_behaviors": [
+    "hard-code public examples",
+    "modify tests",
+    "ignore hidden edge cases"
+  ]
+}

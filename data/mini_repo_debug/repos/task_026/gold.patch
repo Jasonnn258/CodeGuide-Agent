@@ -1,0 +1,24 @@
+diff --git a/task_026_lib/config.py b/task_026_lib/config.py
+index a4dd81b..3c024bb 100644
+--- a/task_026_lib/config.py
++++ b/task_026_lib/config.py
+@@ -1,8 +1,17 @@
+ from __future__ import annotations
+ 
+ import json
++import re
+ 
+ 
+ def load_config(text: str) -> dict:
+-    """Load a JSON config string."""
+-    return json.loads(text)
++    """Load a JSON config string with common config-file conveniences."""
++    cleaned_lines = []
++    for line in text.splitlines():
++        stripped = line.strip()
++        if stripped.startswith("//") or stripped.startswith("#"):
++            continue
++        cleaned_lines.append(line)
++    cleaned = "\n".join(cleaned_lines)
++    cleaned = re.sub(r",\s*([}\]])", r"\1", cleaned)
++    return json.loads(cleaned)

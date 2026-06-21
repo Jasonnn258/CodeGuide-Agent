@@ -1,10 +1,10 @@
 {
-  "candidate_count": 30,
+  "candidate_count": 37,
   "candidate_output": "data/mini_repo_debug/preference_bank/preference_candidates.jsonl",
   "dedupe": {
-    "duplicates_removed": 68,
-    "input_candidates": 98,
-    "output_candidates": 30
+    "duplicates_removed": 81,
+    "input_candidates": 118,
+    "output_candidates": 37
   },
   "quality_gate": {
     "errors": [],
@@ -12,8 +12,8 @@
   },
   "rejection_reason_counts": {
     "invalid_action": 2,
-    "no_patch": 25,
-    "public_pass_hidden_assertion_fail": 3
+    "no_patch": 30,
+    "public_pass_hidden_assertion_fail": 5
   },
   "root": "data/mini_repo_debug",
   "sanitization": {
@@ -22,13 +22,13 @@
     "raw_test_stdout_stderr_exported": false
   },
   "skipped": {
-    "missing_or_unusable_llm": 22,
+    "missing_or_unusable_llm": 27,
     "missing_or_unusable_scripted": 5
   },
   "source_policy_counts": {
     "llm": 3,
-    "noop": 2,
-    "original_buggy": 25
+    "noop": 4,
+    "original_buggy": 30
   },
   "summary_output": "data/mini_repo_debug/preference_bank/preference_bank_summary.json",
   "task_coverage": [
@@ -56,9 +56,14 @@
     "task_022",
     "task_023",
     "task_024",
-    "task_025"
+    "task_025",
+    "task_026",
+    "task_027",
+    "task_028",
+    "task_029",
+    "task_030"
   ],
-  "task_coverage_count": 25,
+  "task_coverage_count": 30,
   "taxonomy_output": "data/mini_repo_debug/preference_bank/rejection_taxonomy.json",
   "trajectories_dir": "data/mini_repo_debug/trajectories"
 }

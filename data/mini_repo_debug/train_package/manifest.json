@@ -1,8 +1,8 @@
 {
   "counts": {
-    "preference_eval": 6,
-    "preference_total": 30,
-    "preference_train": 24,
+    "preference_eval": 7,
+    "preference_total": 37,
+    "preference_train": 30,
     "sft_eval": 3,
     "sft_total": 19,
     "sft_train": 16
@@ -30,7 +30,7 @@
     "errors": [],
     "passed": true,
     "replay": {
-      "checked_records": 79,
+      "checked_records": 93,
       "patch_inspection_failures": []
     },
     "warnings": []
@@ -43,7 +43,8 @@
       "task_010",
       "task_015",
       "task_020",
-      "task_025"
+      "task_025",
+      "task_030"
     ],
     "preference_train_task_ids": [
       "task_001",
@@ -69,7 +70,13 @@
       "task_022",
       "task_023",
       "task_024",
-      "task_024"
+      "task_024",
+      "task_026",
+      "task_026",
+      "task_027",
+      "task_028",
+      "task_028",
+      "task_029"
     ],
     "sft_eval_task_ids": [
       "task_005",

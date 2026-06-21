@@ -1,0 +1,11 @@
+diff --git a/task_028_lib/ranking.py b/task_028_lib/ranking.py
+index db6231d..31fbdcf 100644
+--- a/task_028_lib/ranking.py
++++ b/task_028_lib/ranking.py
+@@ -3,4 +3,5 @@ from __future__ import annotations
+ 
+ def active_names(users: list[dict], min_score: int = 0) -> list[str]:
+     active = [user for user in users if user.get("active") and user.get("score", 0) >= min_score]
+-    return [user["name"] for user in sorted(active, key=lambda user: user["name"])]
++    ranked = sorted(active, key=lambda user: (-user.get("score", 0), user["name"]))
++    return [user["name"] for user in ranked]

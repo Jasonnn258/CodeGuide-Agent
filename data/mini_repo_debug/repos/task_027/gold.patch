@@ -1,0 +1,10 @@
+diff --git a/task_027_lib/cli.py b/task_027_lib/cli.py
+index 8945b71..c4231eb 100644
+--- a/task_027_lib/cli.py
++++ b/task_027_lib/cli.py
+@@ -18,4 +18,4 @@ def render(name: str, limit: int = 10, uppercase: bool = False) -> str:
+ 
+ def main(argv: list[str] | None = None) -> str:
+     args = build_parser().parse_args(argv)
+-    return render(args.name)
++    return render(args.name, limit=args.limit, uppercase=args.uppercase)

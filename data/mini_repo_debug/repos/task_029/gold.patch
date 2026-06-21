@@ -1,0 +1,18 @@
+diff --git a/task_029_lib/parser.py b/task_029_lib/parser.py
+index af3c397..c1698aa 100644
+--- a/task_029_lib/parser.py
++++ b/task_029_lib/parser.py
+@@ -6,4 +6,12 @@ class ConfigError(ValueError):
+ 
+ 
+ def parse_timeout(config: dict) -> int:
+-    return int(config["timeout"])
++    try:
++        value = int(config["timeout"])
++    except KeyError as exc:
++        raise ConfigError("missing timeout") from exc
++    except (TypeError, ValueError) as exc:
++        raise ConfigError("timeout must be an integer") from exc
++    if value <= 0:
++        raise ConfigError("timeout must be positive")
++    return value

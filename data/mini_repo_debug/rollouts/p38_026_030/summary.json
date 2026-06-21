@@ -78,13 +78,25 @@
     "sft_total": 0
   },
   "failures": [],
-  "p34_succeeded": true,
+  "p38_succeeded": true,
+  "phase_baseline_counts": {
+    "hard_preference_total": 3,
+    "preference_bank_total": 30,
+    "preference_total": 30,
+    "sft_total": 19
+  },
+  "phase_deltas": {
+    "hard_preference_total": 2,
+    "preference_bank_total": 7,
+    "preference_total": 7,
+    "sft_total": 0
+  },
   "policies": [
     "noop",
     "heuristic",
     "scripted"
   ],
-  "rollout_dir": "data/mini_repo_debug/rollouts/p34_021_025",
+  "rollout_dir": "data/mini_repo_debug/rollouts/p38_026_030",
   "rollout_result_count": 15,
   "rollout_summary": {
     "average_llm_calls": 0.0,
@@ -95,11 +107,11 @@
     "success_rate": 0.0
   },
   "task_ids": [
-    "task_021",
-    "task_022",
-    "task_023",
-    "task_024",
-    "task_025"
+    "task_026",
+    "task_027",
+    "task_028",
+    "task_029",
+    "task_030"
   ],
   "trajectories_dir": "data/mini_repo_debug/trajectories"
 }

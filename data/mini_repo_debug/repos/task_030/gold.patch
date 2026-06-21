@@ -1,0 +1,20 @@
+diff --git a/task_030_lib/invoice.py b/task_030_lib/invoice.py
+index 0f1a30a..a30bd54 100644
+--- a/task_030_lib/invoice.py
++++ b/task_030_lib/invoice.py
+@@ -9,4 +9,4 @@ def subtotal(items: list[dict]) -> int:
+ 
+ def invoice_total(items: list[dict], rate_percent: int = 0) -> int:
+     amount = subtotal(items)
+-    return amount
++    return amount + tax_amount(amount, rate_percent)
+diff --git a/task_030_lib/tax.py b/task_030_lib/tax.py
+index 4d886cb..f13992a 100644
+--- a/task_030_lib/tax.py
++++ b/task_030_lib/tax.py
+@@ -2,4 +2,4 @@ from __future__ import annotations
+ 
+ 
+ def tax_amount(subtotal: int, rate_percent: int) -> int:
+-    return subtotal * rate_percent // 100
++    return round(subtotal * rate_percent / 100)
