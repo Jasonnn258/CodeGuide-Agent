@@ -104,7 +104,7 @@ def validate_training_package(root: str | Path, package_dir: str | Path) -> dict
         for record in records_by_split.get(split, []):
             _validate_preference_record(record, known_task_ids, errors)
             _inspect_patch(record["chosen"], root_path, replay, errors, task_id=record.get("task_id"))
-            if record.get("rejection_reason") == "no_patch" and not record["rejected"].get("final_patch"):
+            if record.get("rejection_reason") in {"no_patch", "public_pass_hidden_assertion_fail"} and not record["rejected"].get("final_patch"):
                 replay["checked_records"] += 1
             else:
                 _inspect_patch(record["rejected"], root_path, replay, errors, task_id=record.get("task_id"))
@@ -208,6 +208,26 @@ def _user_prompt(prompt_context: dict[str, Any]) -> str:
 
 
 def _split_by_task_id(records: list[dict[str, Any]], keep_singleton_train: bool = False) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    ordered = sorted(records, key=lambda record: str(record.get("task_id", "")))
+    if keep_singleton_train and len(ordered) <= 1:
+        return ordered, []
+    groups: dict[str, list[dict[str, Any]]] = {}
+    for record in ordered:
+        groups.setdefault(str(record.get("task_id", "")), []).append(record)
+    train: list[dict[str, Any]] = []
+    eval_records: list[dict[str, Any]] = []
+    for index, task_id in enumerate(sorted(groups)):
+        target = eval_records if index % 5 == 4 else train
+        target.extend(groups[task_id])
+    if not eval_records and len(groups) > 1:
+        last_task_id = sorted(groups)[-1]
+        moved = groups[last_task_id]
+        train = [record for record in train if str(record.get("task_id", "")) != last_task_id]
+        eval_records.extend(moved)
+    return train, eval_records
+
+
+def _legacy_split_by_row(records: list[dict[str, Any]], keep_singleton_train: bool = False) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     ordered = sorted(records, key=lambda record: str(record.get("task_id", "")))
     if keep_singleton_train and len(ordered) <= 1:
         return ordered, []
@@ -330,6 +350,8 @@ def _validate_preference_record(record: dict[str, Any], known_task_ids: set[str]
     if record.get("rejection_reason") == "no_patch":
         if rejected_patch:
             errors.append(f"preference record {record.get('task_id')} no_patch rejected side should not include a patch")
+    elif record.get("rejection_reason") == "public_pass_hidden_assertion_fail" and not rejected_patch:
+        pass
     elif not rejected_patch.startswith("diff --git"):
         errors.append(f"preference record {record.get('task_id')} rejected patch is missing")
 

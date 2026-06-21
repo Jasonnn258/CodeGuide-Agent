@@ -3,8 +3,9 @@ from pathlib import Path
 
 from codeguide_agent.testing.mini_repo_trajectory_fixture import build_mini_repo_trajectory_fixture
 
-from codeguide_agent.dataset.expand_preference_candidates import expand_preference_candidates
+from codeguide_agent.dataset.expand_preference_candidates import _rejection_reason, expand_preference_candidates
 from codeguide_agent.dataset.prepare_training_package import prepare_training_package, validate_training_package
+from codeguide_agent.eval.run_eval import discover_tasks
 
 
 FORBIDDEN_TERMS = ("tests_hidden", "metadata.json", "gold.patch", "apply_gold_patch", '"stdout"', '"stderr"')
@@ -60,6 +61,17 @@ def test_preference_bank_dedupes_identical_pairs(tmp_path: Path):
     assert len(keys) == len(set(keys))
 
 
+def test_public_pass_hidden_fail_no_patch_is_hard_preference_reason():
+    reward = {
+        "public_pass": True,
+        "hidden_pass": False,
+        "public_pass_hidden_fail": True,
+        "hidden_failure_type": "hidden_assertion_fail",
+    }
+
+    assert _rejection_reason(reward, "", {"gold_files": ["src/example.py"]}) == "public_pass_hidden_assertion_fail"
+
+
 def test_task_009_public_pass_hidden_fail_pair_is_preserved(tmp_path: Path):
     out = tmp_path / "preference_bank"
     expand_preference_candidates("data/mini_repo_debug", out, trajectories_dir=build_mini_repo_trajectory_fixture(tmp_path))
@@ -82,7 +94,7 @@ def test_original_buggy_vs_gold_pair_exists_for_each_task(tmp_path: Path):
     records = _read_jsonl(out / "preference_candidates.jsonl")
     original_pairs = [record for record in records if record["source_policy"] == "original_buggy"]
 
-    assert len(original_pairs) == 20
+    assert len(original_pairs) == len(discover_tasks("data/mini_repo_debug"))
     assert {record["rejection_reason"] for record in original_pairs} == {"no_patch"}
 
 

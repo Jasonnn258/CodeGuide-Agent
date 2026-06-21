@@ -20,8 +20,8 @@ DEV_INSTALL_MESSAGE = "pytest is required for Mini-Repo-Debug evaluation. Run: p
 def discover_tasks(root: str | Path, task_id: str | None = None) -> list[Path]:
     root_path = Path(root)
     tasks_jsonl = root_path / "tasks.jsonl"
+    discovered: dict[str, Path] = {}
     if tasks_jsonl.exists():
-        tasks: list[Path] = []
         for line in tasks_jsonl.read_text(encoding="utf-8").splitlines():
             if not line.strip():
                 continue
@@ -29,10 +29,19 @@ def discover_tasks(root: str | Path, task_id: str | None = None) -> list[Path]:
             if task_id and row.get("task_id") != task_id:
                 continue
             repo_path = Path(row["repo_path"])
-            tasks.append(repo_path if repo_path.is_absolute() else Path.cwd() / repo_path)
-        return tasks
+            resolved = repo_path if repo_path.is_absolute() else Path.cwd() / repo_path
+            discovered[str(row.get("task_id") or resolved.name)] = resolved
 
-    tasks = sorted(path for path in (root_path / "repos").iterdir() if path.is_dir())
+    repos_dir = root_path / "repos"
+    if repos_dir.exists():
+        for path in sorted(repos_dir.iterdir()):
+            if not path.is_dir():
+                continue
+            if task_id and path.name != task_id:
+                continue
+            discovered.setdefault(path.name, path)
+
+    tasks = [discovered[key] for key in sorted(discovered)]
     if task_id:
         tasks = [path for path in tasks if path.name == task_id]
     return tasks

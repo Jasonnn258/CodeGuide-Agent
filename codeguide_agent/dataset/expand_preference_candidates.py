@@ -221,14 +221,14 @@ def _rejection_reason(reward: dict[str, Any], patch: str, metadata: dict[str, An
         return "syntax_error"
     if reward.get("invalid_action_count", 0) > 0:
         return "invalid_action"
-    if reward.get("incomplete_stop"):
-        return "incomplete_stop"
-    if not patch.strip():
-        return "no_patch"
     if reward.get("public_pass_hidden_fail"):
         if reward.get("hidden_failure_type") == "hidden_assertion_fail":
             return "public_pass_hidden_assertion_fail"
         return "generalization_risk"
+    if not patch.strip():
+        return "no_patch"
+    if reward.get("incomplete_stop"):
+        return "incomplete_stop"
     if reward.get("patch_generalization_risk") in {"medium", "high"} and not reward.get("hidden_pass"):
         return "generalization_risk"
     if not reward.get("public_pass"):
@@ -307,6 +307,7 @@ def _dedupe(records: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], int]:
     for record in records:
         key = (
             record["task_id"],
+            record["rejection_reason"],
             record["chosen"]["final_patch"],
             record["rejected"].get("final_patch", ""),
         )
@@ -337,7 +338,7 @@ def _validate_bank(root: Path, records: list[dict[str, Any]]) -> dict[str, Any]:
         if not str(chosen_patch).startswith("diff --git"):
             errors.append(f"chosen patch missing for {task_id}")
         rejected_patch = record.get("rejected", {}).get("final_patch", "")
-        if record.get("rejection_reason") != "no_patch" and not str(rejected_patch).startswith("diff --git"):
+        if record.get("rejection_reason") not in {"no_patch", "public_pass_hidden_assertion_fail"} and not str(rejected_patch).startswith("diff --git"):
             errors.append(f"rejected patch missing for {task_id}")
         if not record.get("evaluator_metadata", {}).get("weaker_than_chosen"):
             errors.append(f"candidate is not marked weaker_than_chosen: {task_id}")

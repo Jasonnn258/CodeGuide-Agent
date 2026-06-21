@@ -33,9 +33,11 @@
     "task_019",
     "task_020"
   ],
-  "skipped": {},
+  "skipped": {
+    "missing_llm_trajectory": 5
+  },
   "summary_output": "data/mini_repo_debug/exports/p5_export_summary.json",
   "task_009_preference_pair_generated": true,
-  "tasks_seen": 20,
+  "tasks_seen": 25,
   "trajectories_dir": "data/mini_repo_debug/trajectories"
 }
