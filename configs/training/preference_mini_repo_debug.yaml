@@ -1,0 +1,19 @@
+dataset:
+  package_dir: data/mini_repo_debug/train_package
+  train_file: preference_train.jsonl
+  eval_file: preference_eval.jsonl
+  format: codeguide_preference_v1
+training:
+  mode: preference
+  dry_run_only: true
+  batch_size: 2
+  max_seq_length: 8192
+  learning_rate: null
+  model_name_or_path: null
+safety:
+  require_quality_gate: true
+  forbid_hidden_test_content: true
+  forbid_paid_api_calls: true
+  allow_hidden_reward_summary: true
+limitations:
+  preference_sample_count_is_tiny: true

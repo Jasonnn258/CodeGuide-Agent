@@ -1,0 +1,17 @@
+{
+  "batch_count": 1,
+  "batch_size": 4,
+  "dry_run": true,
+  "eval_records": 0,
+  "formatted_preview_path": "data/mini_repo_debug/train_package/dry_runs/preference/formatted_preview.json",
+  "mode": "preference",
+  "notes": [
+    "No model was downloaded.",
+    "No GPU was required.",
+    "No paid API was called."
+  ],
+  "package": "data/mini_repo_debug/train_package",
+  "quality_gate_passed": true,
+  "run_dir": "data/mini_repo_debug/train_package/dry_runs/preference",
+  "train_records": 1
+}

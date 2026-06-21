@@ -1,0 +1,10 @@
+{
+  "checked_records": 19,
+  "hidden_tests_run": false,
+  "mode": "sft",
+  "package": "data/mini_repo_debug/train_package",
+  "passed": true,
+  "patch_failures": [],
+  "quality_gate_passed": true,
+  "run_dir": "data/mini_repo_debug/train_package/dry_runs/sft"
+}

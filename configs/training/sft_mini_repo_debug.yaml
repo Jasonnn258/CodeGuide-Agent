@@ -1,0 +1,17 @@
+dataset:
+  package_dir: data/mini_repo_debug/train_package
+  train_file: sft_train.jsonl
+  eval_file: sft_eval.jsonl
+  format: codeguide_sft_v1
+training:
+  mode: sft
+  dry_run_only: true
+  batch_size: 4
+  max_seq_length: 8192
+  learning_rate: null
+  model_name_or_path: null
+safety:
+  require_quality_gate: true
+  forbid_hidden_test_content: true
+  forbid_paid_api_calls: true
+  allow_hidden_reward_summary: true
