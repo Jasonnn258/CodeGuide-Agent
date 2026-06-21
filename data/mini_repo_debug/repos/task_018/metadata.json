@@ -1,0 +1,16 @@
+{
+  "task_id": "task_018",
+  "scenario": "auto_repair",
+  "bug_type": "sorting_filtering",
+  "difficulty": "easy",
+  "repo_path": "data/mini_repo_debug/repos/task_018",
+  "issue_path": "issue.md",
+  "gold_files": ["src/ranking.py"],
+  "gold_functions": ["top_active"],
+  "gold_patch": "gold.patch",
+  "public_test_cmd": "python -m pytest tests -q",
+  "hidden_test_cmd": "python -m pytest tests_hidden -q",
+  "forbidden_behaviors": ["delete_tests", "hardcode_expected_output", "modify_unrelated_files"],
+  "source": "handcrafted",
+  "split": "train"
+}

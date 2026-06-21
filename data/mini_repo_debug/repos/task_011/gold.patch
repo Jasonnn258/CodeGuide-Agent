@@ -1,0 +1,9 @@
+diff --git a/src/email_utils.py b/src/email_utils.py
+--- a/src/email_utils.py
++++ b/src/email_utils.py
+@@ -2,4 +2,4 @@ from __future__ import annotations
+ 
+ 
+ def normalize_email(email: str) -> str:
+-    return email.lower()
++    return email.strip().lower()

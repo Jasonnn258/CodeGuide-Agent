@@ -1,0 +1,13 @@
+diff --git a/src/tags.py b/src/tags.py
+--- a/src/tags.py
++++ b/src/tags.py
+@@ -1,7 +1,8 @@
+ from __future__ import annotations
+ 
+ 
+-def collect_tags(items: list[dict], tags: list[str] = []) -> list[str]:
++def collect_tags(items: list[dict], tags: list[str] | None = None) -> list[str]:
++    tags = list(tags or [])
+     for item in items:
+         tag = item.get("tag")
+         if tag and tag not in tags:

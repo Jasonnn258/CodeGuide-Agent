@@ -1,0 +1,10 @@
+diff --git a/src/ranking.py b/src/ranking.py
+--- a/src/ranking.py
++++ b/src/ranking.py
+@@ -3,5 +3,5 @@ from __future__ import annotations
+ 
+ def top_active(users: list[dict], limit: int) -> list[str]:
+     active = [user for user in users if user.get("active")]
+-    ranked = sorted(active, key=lambda user: user["score"])
++    ranked = sorted(active, key=lambda user: user["score"], reverse=True)
+     return [user["name"] for user in ranked[:limit]]

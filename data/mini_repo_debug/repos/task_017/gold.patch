@@ -1,0 +1,10 @@
+diff --git a/src/metrics.py b/src/metrics.py
+--- a/src/metrics.py
++++ b/src/metrics.py
+@@ -2,4 +2,6 @@ from __future__ import annotations
+ 
+ 
+ def average(values: list[float]) -> float:
++    if not values:
++        return 0.0
+     return sum(values) / len(values)

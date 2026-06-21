@@ -1,0 +1,9 @@
+diff --git a/src/users.py b/src/users.py
+--- a/src/users.py
++++ b/src/users.py
+@@ -2,4 +2,4 @@ from __future__ import annotations
+ 
+ 
+ def find_user(users: list[dict], user_id: str) -> dict | None:
+-    return next(user for user in users if user["id"] == user_id)
++    return next((user for user in users if user["id"] == user_id), None)

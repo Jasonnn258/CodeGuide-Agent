@@ -1,0 +1,11 @@
+diff --git a/src/bounds.py b/src/bounds.py
+--- a/src/bounds.py
++++ b/src/bounds.py
+@@ -7,6 +7,6 @@ def clamp_index(index: int, size: int) -> int:
+         raise ValueError("size must be positive")
+     if index < 0:
+         return 0
+-    if index > size:
++    if index >= size:
+         return size - 1
+     return index

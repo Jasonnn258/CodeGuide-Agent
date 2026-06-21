@@ -1,0 +1,10 @@
+diff --git a/src/access.py b/src/access.py
+--- a/src/access.py
++++ b/src/access.py
+@@ -2,4 +2,5 @@ from __future__ import annotations
+ 
+ 
+ def role_allowed(role: str, allowed_roles: list[str]) -> bool:
+-    return role in allowed_roles
++    normalized = {allowed.lower() for allowed in allowed_roles}
++    return role.lower() in normalized

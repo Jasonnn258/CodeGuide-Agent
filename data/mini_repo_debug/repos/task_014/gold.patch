@@ -1,0 +1,10 @@
+diff --git a/src/jsonl_loader.py b/src/jsonl_loader.py
+--- a/src/jsonl_loader.py
++++ b/src/jsonl_loader.py
+@@ -7,4 +7,6 @@ def load_json_lines(text: str) -> list[dict]:
+     rows = []
+     for line in text.splitlines():
++        if not line.strip():
++            continue
+         rows.append(json.loads(line))
+     return rows

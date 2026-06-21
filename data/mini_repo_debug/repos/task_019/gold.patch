@@ -1,0 +1,9 @@
+diff --git a/src/invoice_service.py b/src/invoice_service.py
+--- a/src/invoice_service.py
++++ b/src/invoice_service.py
+@@ -5,4 +5,4 @@ from pricing_helpers import add_tax, subtotal
+ 
+ def make_invoice(items: list[dict], tax: int = 0) -> dict:
+     amount = subtotal(items)
+-    return {"total": amount}
++    return {"total": add_tax(amount, tax)}

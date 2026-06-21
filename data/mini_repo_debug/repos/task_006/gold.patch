@@ -1,0 +1,11 @@
+diff --git a/src/pair_parser.py b/src/pair_parser.py
+--- a/src/pair_parser.py
++++ b/src/pair_parser.py
+@@ -6,6 +6,6 @@ def parse_pairs(text: str) -> dict[str, str]:
+     for line in text.splitlines():
+         if not line.strip():
+             continue
+-        key, value = line.split("=")
++        key, value = line.split("=", 1)
+         result[key.strip()] = value.strip()
+     return result

@@ -1,0 +1,12 @@
+diff --git a/src/greet_cli.py b/src/greet_cli.py
+--- a/src/greet_cli.py
++++ b/src/greet_cli.py
+@@ -17,7 +17,7 @@ def build_parser() -> argparse.ArgumentParser:
+ 
+ def main(argv: list[str] | None = None) -> int:
+     args = build_parser().parse_args(argv)
+-    print(build_message(args.name))
++    print(build_message(args.name, excited=args.excited))
+     return 0
+ 
+ 

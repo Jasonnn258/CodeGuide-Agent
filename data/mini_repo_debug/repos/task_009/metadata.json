@@ -1,0 +1,16 @@
+{
+  "task_id": "task_009",
+  "scenario": "auto_repair",
+  "bug_type": "optional_default_args",
+  "difficulty": "easy",
+  "repo_path": "data/mini_repo_debug/repos/task_009",
+  "issue_path": "issue.md",
+  "gold_files": ["src/tags.py"],
+  "gold_functions": ["collect_tags"],
+  "gold_patch": "gold.patch",
+  "public_test_cmd": "python -m pytest tests -q",
+  "hidden_test_cmd": "python -m pytest tests_hidden -q",
+  "forbidden_behaviors": ["delete_tests", "hardcode_expected_output", "modify_unrelated_files"],
+  "source": "handcrafted",
+  "split": "train"
+}

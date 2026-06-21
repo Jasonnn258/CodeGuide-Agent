@@ -1,0 +1,12 @@
+diff --git a/src/config_defaults.py b/src/config_defaults.py
+--- a/src/config_defaults.py
++++ b/src/config_defaults.py
+@@ -2,5 +2,6 @@ from __future__ import annotations
+ 
+ 
+ def merge_defaults(config: dict, defaults: dict) -> dict:
+-    defaults.update(config)
+-    return defaults
++    merged = defaults.copy()
++    merged.update(config)
++    return merged

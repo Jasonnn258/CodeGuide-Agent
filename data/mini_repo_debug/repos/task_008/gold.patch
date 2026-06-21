@@ -1,0 +1,16 @@
+diff --git a/src/greetings.py b/src/greetings.py
+--- a/src/greetings.py
++++ b/src/greetings.py
+@@ -4,9 +4,9 @@
+ class GreetingService:
+     def __init__(self, templates: dict[str, str]):
+         self.templates = templates
+-        self.cache: dict[str, str] = {}
++        self.cache: dict[tuple[str, str], str] = {}
+ 
+     def greeting_for(self, user_id: str, locale: str) -> str:
+-        key = user_id
++        key = (user_id, locale)
+         if key not in self.cache:
+             self.cache[key] = self.templates[locale].format(user=user_id)
+         return self.cache[key]
