@@ -1,0 +1,66 @@
+{
+  "counts": {
+    "preference_eval": 0,
+    "preference_total": 1,
+    "preference_train": 1,
+    "sft_eval": 3,
+    "sft_total": 19,
+    "sft_train": 16
+  },
+  "exports_dir": "data/mini_repo_debug/exports",
+  "limitations": [
+    "No model training is included.",
+    "Preference data is intentionally tiny and currently useful only for pipeline checks.",
+    "Evaluator-only pass/fail reward summaries are retained, but hidden verifier content is not model-facing."
+  ],
+  "outputs": {
+    "data_card": "data/mini_repo_debug/train_package/data_card.md",
+    "manifest": "data/mini_repo_debug/train_package/manifest.json",
+    "preference_eval": "data/mini_repo_debug/train_package/preference_eval.jsonl",
+    "preference_train": "data/mini_repo_debug/train_package/preference_train.jsonl",
+    "sft_eval": "data/mini_repo_debug/train_package/sft_eval.jsonl",
+    "sft_train": "data/mini_repo_debug/train_package/sft_train.jsonl"
+  },
+  "package_version": "codeguide-mini-repo-debug-p6-v1",
+  "quality_gate": {
+    "errors": [],
+    "passed": true,
+    "replay": {
+      "checked_records": 21,
+      "patch_inspection_failures": []
+    },
+    "warnings": [
+      "preference dataset is tiny; use only for pipeline checks until more rejected trajectories exist"
+    ]
+  },
+  "root": "data/mini_repo_debug",
+  "splits": {
+    "preference_eval_task_ids": [],
+    "preference_train_task_ids": [
+      "task_009"
+    ],
+    "sft_eval_task_ids": [
+      "task_005",
+      "task_011",
+      "task_016"
+    ],
+    "sft_train_task_ids": [
+      "task_001",
+      "task_002",
+      "task_003",
+      "task_004",
+      "task_006",
+      "task_007",
+      "task_008",
+      "task_010",
+      "task_012",
+      "task_013",
+      "task_014",
+      "task_015",
+      "task_017",
+      "task_018",
+      "task_019",
+      "task_020"
+    ]
+  }
+}
