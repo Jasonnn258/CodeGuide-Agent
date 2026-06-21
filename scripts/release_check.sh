@@ -8,6 +8,12 @@ echo "== compile =="
 python -m py_compile codeguide_agent/testing/mini_repo_trajectory_fixture.py
 python -m py_compile scripts/summarize_mini_repo_pipeline.py
 
+echo "== docs-check =="
+make docs-check
+
+echo "== canonical-check =="
+make canonical-check
+
 echo "== test =="
 make test
 

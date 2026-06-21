@@ -106,3 +106,22 @@
 - 新增 tests/test_trajectory_logger_metadata.py，确保 trajectory JSONL 写入 model_config。
 
 注意：这只是可追溯性元信息，不参与 reward、eval 或训练标签。
+
+
+## 最新状态
+
+已完成：
+
+- P0-1 Markdown 字面 backslash-n 渲染修复。
+- P0-1 docs-check 防回归。
+- P0-2 canonical training data pipeline 文档。
+- P0-2 canonical-check 防止 public docs 继续引用 legacy SFT builder。
+- P1-1 docs/INDEX.md。
+- P1-2 trajectory model_config provenance。
+- P1-3 eval_mini_repo.py diagnostic-only 注释。
+- release_check.sh 接入 docs-check 和 canonical-check。
+
+剩余：
+
+- legacy SFT builder 可以后续继续 wrapper 化，但当前 public docs 和 Makefile 已不再把它作为主入口。
+- 真正下一步应优先扩数据：100+ tasks、150+ SFT、100+ preference、30+ hard preference。
