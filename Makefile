@@ -1,4 +1,4 @@
-.PHONY: test clean-check audit scale-report task-skeletons promotion-report promotion-check validate-pipeline clean-generated p5 p6 p9 dry-run-sft dry-run-pref promote-task rollout-plan readiness training-data training-preflight train-sft train-sft-smoke dpo-readiness docs-check canonical-check
+.PHONY: test clean-check audit scale-report task-skeletons promotion-report promotion-check validate-pipeline clean-generated p5 p6 p9 dry-run-sft dry-run-pref promote-task rollout-plan readiness training-data training-preflight train-sft train-sft-smoke dpo-readiness docs-check canonical-check expansion-check
 
 test:
 	python -m codeguide_agent.testing.simple_pytest tests -q
@@ -71,3 +71,6 @@ docs-check:
 
 canonical-check:
 	python scripts/check_canonical_training_pipeline.py
+
+expansion-check:
+	python scripts/check_expansion_backlog.py
