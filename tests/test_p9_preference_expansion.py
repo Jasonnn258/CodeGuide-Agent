@@ -1,6 +1,8 @@
 import json
 from pathlib import Path
 
+from codeguide_agent.testing.mini_repo_trajectory_fixture import build_mini_repo_trajectory_fixture
+
 from codeguide_agent.dataset.expand_preference_candidates import expand_preference_candidates
 from codeguide_agent.dataset.prepare_training_package import prepare_training_package, validate_training_package
 
@@ -14,7 +16,7 @@ def _read_jsonl(path: Path) -> list[dict]:
 
 def test_expand_preference_candidates_smoke_and_schema(tmp_path: Path):
     out = tmp_path / "preference_bank"
-    summary = expand_preference_candidates("data/mini_repo_debug", out)
+    summary = expand_preference_candidates("data/mini_repo_debug", out, trajectories_dir=build_mini_repo_trajectory_fixture(tmp_path))
     records = _read_jsonl(out / "preference_candidates.jsonl")
 
     assert summary["candidate_count"] == len(records)
@@ -33,7 +35,7 @@ def test_expand_preference_candidates_smoke_and_schema(tmp_path: Path):
 
 def test_preference_bank_is_sanitized(tmp_path: Path):
     out = tmp_path / "preference_bank"
-    expand_preference_candidates("data/mini_repo_debug", out)
+    expand_preference_candidates("data/mini_repo_debug", out, trajectories_dir=build_mini_repo_trajectory_fixture(tmp_path))
     text = (out / "preference_candidates.jsonl").read_text(encoding="utf-8")
 
     for term in FORBIDDEN_TERMS:
@@ -42,7 +44,7 @@ def test_preference_bank_is_sanitized(tmp_path: Path):
 
 def test_preference_bank_dedupes_identical_pairs(tmp_path: Path):
     out = tmp_path / "preference_bank"
-    expand_preference_candidates("data/mini_repo_debug", out)
+    expand_preference_candidates("data/mini_repo_debug", out, trajectories_dir=build_mini_repo_trajectory_fixture(tmp_path))
     records = _read_jsonl(out / "preference_candidates.jsonl")
     keys = [
         (
@@ -60,7 +62,7 @@ def test_preference_bank_dedupes_identical_pairs(tmp_path: Path):
 
 def test_task_009_public_pass_hidden_fail_pair_is_preserved(tmp_path: Path):
     out = tmp_path / "preference_bank"
-    expand_preference_candidates("data/mini_repo_debug", out)
+    expand_preference_candidates("data/mini_repo_debug", out, trajectories_dir=build_mini_repo_trajectory_fixture(tmp_path))
     records = _read_jsonl(out / "preference_candidates.jsonl")
 
     task_009 = [
@@ -76,7 +78,7 @@ def test_task_009_public_pass_hidden_fail_pair_is_preserved(tmp_path: Path):
 
 def test_original_buggy_vs_gold_pair_exists_for_each_task(tmp_path: Path):
     out = tmp_path / "preference_bank"
-    expand_preference_candidates("data/mini_repo_debug", out)
+    expand_preference_candidates("data/mini_repo_debug", out, trajectories_dir=build_mini_repo_trajectory_fixture(tmp_path))
     records = _read_jsonl(out / "preference_candidates.jsonl")
     original_pairs = [record for record in records if record["source_policy"] == "original_buggy"]
 

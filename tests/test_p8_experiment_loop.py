@@ -1,6 +1,8 @@
 import json
 from pathlib import Path
 
+from codeguide_agent.testing.mini_repo_trajectory_fixture import build_mini_repo_trajectory_fixture
+
 from codeguide_agent.dataset.export_training_candidates import export_training_candidates
 from codeguide_agent.dataset.prepare_training_package import prepare_training_package
 from codeguide_agent.training.create_experiment import create_experiment
@@ -12,7 +14,7 @@ from codeguide_agent.training.trained_policy import TrainedPatchPolicy
 def _prepare_package(tmp_path: Path) -> Path:
     exports = tmp_path / "exports"
     package = tmp_path / "train_package"
-    export_training_candidates("data/mini_repo_debug", exports)
+    export_training_candidates("data/mini_repo_debug", exports, trajectories_dir=build_mini_repo_trajectory_fixture(tmp_path))
     prepare_training_package("data/mini_repo_debug", package, exports_dir=exports)
     return package
 
