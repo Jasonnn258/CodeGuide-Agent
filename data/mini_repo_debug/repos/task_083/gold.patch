@@ -1,0 +1,19 @@
+diff --git a/task_083_lib/hashing.py b/task_083_lib/hashing.py
+index 72508aa..cef52cb 100644
+--- a/task_083_lib/hashing.py
++++ b/task_083_lib/hashing.py
+@@ -4,5 +4,13 @@ import hashlib
+ 
+ 
+ def hash_args(*args: object) -> str:
+-    raw = ":".join(str(a) for a in args)
++    parts = []
++    for a in args:
++        if isinstance(a, (list, tuple)):
++            parts.append("[" + ",".join(str(x) for x in a) + "]")
++        elif isinstance(a, dict):
++            parts.append("{" + ",".join(f"{k}={v}" for k, v in sorted(a.items())) + "}")
++        else:
++            parts.append(str(a))
++    raw = ":".join(parts)
+     return hashlib.sha256(raw.encode()).hexdigest()[:16]

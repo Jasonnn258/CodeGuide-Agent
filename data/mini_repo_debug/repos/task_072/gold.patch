@@ -1,0 +1,10 @@
+diff --git a/task_072_lib/math_utils.py b/task_072_lib/math_utils.py
+index 79c566e..75ffe94 100644
+--- a/task_072_lib/math_utils.py
++++ b/task_072_lib/math_utils.py
+@@ -4,4 +4,4 @@ from __future__ import annotations
+ def safe_percentage(part: float, whole: float) -> float:
+     if whole == 0:
+         return 0.0
+-    return (part / whole) * 100
++    return round(part / whole * 100, 2)

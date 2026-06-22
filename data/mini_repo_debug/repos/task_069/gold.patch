@@ -1,0 +1,10 @@
+diff --git a/task_069_lib/config.py b/task_069_lib/config.py
+index 6b9e8a1..767363f 100644
+--- a/task_069_lib/config.py
++++ b/task_069_lib/config.py
+@@ -5,4 +5,4 @@ import json
+ 
+ def get_list(config_json: str, key: str) -> list:
+     config = json.loads(config_json)
+-    return config.get(key)
++    return config.get(key, [])

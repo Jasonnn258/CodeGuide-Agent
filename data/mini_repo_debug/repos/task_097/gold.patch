@@ -1,0 +1,22 @@
+diff --git a/task_097_lib/limiter.py b/task_097_lib/limiter.py
+index 53f0b15..fefe157 100644
+--- a/task_097_lib/limiter.py
++++ b/task_097_lib/limiter.py
+@@ -8,6 +8,7 @@ class RateLimiter:
+         self.max_calls = max_calls
+         self.window = window_seconds
+         self._timestamps: list[float] = []
++        self._blocked_count: int = 0
+ 
+     def allow(self) -> bool:
+         now = time.time()
+@@ -16,7 +17,9 @@ class RateLimiter:
+         if len(self._timestamps) < self.max_calls:
+             self._timestamps.append(now)
+             return True
++        self._blocked_count += 1
+         return False
+ 
+     def reset(self) -> None:
+         self._timestamps = []
++        self._blocked_count = 0

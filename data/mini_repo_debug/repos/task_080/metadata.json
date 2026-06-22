@@ -1,0 +1,32 @@
+{
+  "task_id": "task_080",
+  "bug_type": "config_merge",
+  "difficulty": "easy",
+  "issue_path": "issue.md",
+  "public_test_cmd": "python -m pytest tests -q",
+  "hidden_test_cmd": "python -m pytest tests_hidden -q",
+  "target_files": [
+    "task_080_lib/merge.py"
+  ],
+  "target_functions": [
+    "merge_lists"
+  ],
+  "expected_failure_mode": "Simple concatenation works, but overlapping values appear twice.",
+  "generalization_axis": "Public covers disjoint lists; hidden covers deduplication of overlaps.",
+  "repo_path": "data/mini_repo_debug/repos/task_080",
+  "source": "manual_p61_expansion",
+  "split": "train",
+  "scenario": "config_merge public-hidden generalization",
+  "gold_patch": "gold.patch",
+  "gold_files": [
+    "task_080_lib/merge.py"
+  ],
+  "gold_functions": [
+    "merge_lists"
+  ],
+  "forbidden_behaviors": [
+    "hard-code public examples",
+    "modify tests",
+    "ignore hidden edge cases"
+  ]
+}

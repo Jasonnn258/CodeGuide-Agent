@@ -1,0 +1,12 @@
+diff --git a/task_063_lib/keys.py b/task_063_lib/keys.py
+index ff55a7b..c035ddd 100644
+--- a/task_063_lib/keys.py
++++ b/task_063_lib/keys.py
+@@ -2,4 +2,6 @@ from __future__ import annotations
+ 
+ 
+ def make_cache_key(func_name: str, *args: object) -> str:
+-    return func_name + ":" + ":".join(str(a) for a in args)
++    return func_name + ":" + ":".join(
++        f"{type(a).__name__}:{a}" for a in args
++    )

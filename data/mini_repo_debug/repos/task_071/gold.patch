@@ -1,0 +1,11 @@
+diff --git a/task_071_lib/reader.py b/task_071_lib/reader.py
+index 63adaa3..83847e1 100644
+--- a/task_071_lib/reader.py
++++ b/task_071_lib/reader.py
+@@ -5,5 +5,5 @@ def read_file(path: str) -> str:
+     try:
+         with open(path) as f:
+             return f.read()
+-    except OSError:
++    except FileNotFoundError:
+         return ""

@@ -1,0 +1,15 @@
+diff --git a/task_068_lib/months.py b/task_068_lib/months.py
+index 5691187..6d3a068 100644
+--- a/task_068_lib/months.py
++++ b/task_068_lib/months.py
+@@ -1,8 +1,7 @@
+ from __future__ import annotations
+ 
+-
+-_DAYS = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
++import calendar
+ 
+ 
+ def days_in_month(year: int, month: int) -> int:
+-    return _DAYS[month - 1]
++    return calendar.monthrange(year, month)[1]

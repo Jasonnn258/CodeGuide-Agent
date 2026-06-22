@@ -1,0 +1,10 @@
+diff --git a/task_090_lib/repeat.py b/task_090_lib/repeat.py
+index 132c502..a24ed6e 100644
+--- a/task_090_lib/repeat.py
++++ b/task_090_lib/repeat.py
+@@ -13,4 +13,4 @@ def main(argv: list[str] | None = None) -> str:
+     parser.add_argument("--count", type=int, default=1)
+     parser.add_argument("--sep", default=" ")
+     args = parser.parse_args(argv)
+-    return repeat(args.text, count=1, sep=args.sep)
++    return repeat(args.text, count=args.count, sep=args.sep)

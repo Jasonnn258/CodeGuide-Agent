@@ -1,0 +1,36 @@
+{
+  "task_id": "task_096",
+  "bug_type": "multi_file_integration",
+  "difficulty": "easy",
+  "issue_path": "issue.md",
+  "public_test_cmd": "python -m pytest tests -q",
+  "hidden_test_cmd": "python -m pytest tests_hidden -q",
+  "target_files": [
+    "task_096_lib/models.py",
+    "task_096_lib/cart.py"
+  ],
+  "target_functions": [
+    "Item",
+    "cart_total"
+  ],
+  "expected_failure_mode": "Sum-of-prices works, but quantity is missing from both model and computation.",
+  "generalization_axis": "Public covers price-only sums; hidden covers quantity-weighted totals.",
+  "repo_path": "data/mini_repo_debug/repos/task_096",
+  "source": "manual_p61_expansion",
+  "split": "train",
+  "scenario": "multi_file_integration public-hidden generalization",
+  "gold_patch": "gold.patch",
+  "gold_files": [
+    "task_096_lib/models.py",
+    "task_096_lib/cart.py"
+  ],
+  "gold_functions": [
+    "Item",
+    "cart_total"
+  ],
+  "forbidden_behaviors": [
+    "hard-code public examples",
+    "modify tests",
+    "ignore hidden edge cases"
+  ]
+}

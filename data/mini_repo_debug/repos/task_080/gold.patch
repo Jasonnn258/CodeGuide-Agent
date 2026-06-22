@@ -1,0 +1,16 @@
+diff --git a/task_080_lib/merge.py b/task_080_lib/merge.py
+index 94189c7..f38d191 100644
+--- a/task_080_lib/merge.py
++++ b/task_080_lib/merge.py
+@@ -2,4 +2,10 @@ from __future__ import annotations
+ 
+ 
+ def merge_lists(a: list, b: list) -> list:
+-    return a + b
++    seen = set()
++    result = []
++    for item in a + b:
++        if item not in seen:
++            seen.add(item)
++            result.append(item)
++    return result

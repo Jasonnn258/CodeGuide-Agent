@@ -1,0 +1,11 @@
+diff --git a/task_088_lib/dates.py b/task_088_lib/dates.py
+index fe642a1..db08488 100644
+--- a/task_088_lib/dates.py
++++ b/task_088_lib/dates.py
+@@ -4,4 +4,5 @@ from datetime import date, timedelta
+ 
+ 
+ def weeks_between(start: date, end: date) -> int:
+-    return (end - start).days // 7
++    delta = abs((end - start).days)
++    return delta // 7

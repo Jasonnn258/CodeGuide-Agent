@@ -1,0 +1,17 @@
+diff --git a/task_082_lib/extension.py b/task_082_lib/extension.py
+index 2a7c7ea..56c1f2d 100644
+--- a/task_082_lib/extension.py
++++ b/task_082_lib/extension.py
+@@ -1,7 +1,12 @@
+ from __future__ import annotations
+ 
++_KNOWN_COMPOUND = {".tar.gz", ".tar.bz2", ".tar.xz"}
++
+ 
+ def split_extension(path: str) -> tuple[str, str]:
++    for comp in sorted(_KNOWN_COMPOUND, key=len, reverse=True):
++        if path.endswith(comp):
++            return path[:-len(comp)], comp
+     if "." in path:
+         base, ext = path.rsplit(".", 1)
+         return base, "." + ext

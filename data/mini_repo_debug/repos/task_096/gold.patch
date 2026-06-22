@@ -1,0 +1,19 @@
+diff --git a/task_096_lib/cart.py b/task_096_lib/cart.py
+index 8ea174d..ab463d8 100644
+--- a/task_096_lib/cart.py
++++ b/task_096_lib/cart.py
+@@ -4,4 +4,4 @@ from task_096_lib.models import Item
+ 
+ 
+ def cart_total(items: list[Item]) -> float:
+-    return sum(item.price for item in items)
++    return sum(item.price * item.quantity for item in items)
+diff --git a/task_096_lib/models.py b/task_096_lib/models.py
+index 95578db..5def780 100644
+--- a/task_096_lib/models.py
++++ b/task_096_lib/models.py
+@@ -7,3 +7,4 @@ from dataclasses import dataclass
+ class Item:
+     name: str
+     price: float
++    quantity: int = 1

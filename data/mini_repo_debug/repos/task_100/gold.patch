@@ -1,0 +1,24 @@
+diff --git a/task_100_lib/layered.py b/task_100_lib/layered.py
+index 40be61c..d9c75cb 100644
+--- a/task_100_lib/layered.py
++++ b/task_100_lib/layered.py
+@@ -5,8 +5,18 @@ def layered_merge(*layers: dict) -> dict:
+     result: dict = {}
+     for layer in layers:
+         for key, value in layer.items():
+-            if isinstance(value, list) and key in result and isinstance(result[key], list):
++            if (
++                isinstance(value, list)
++                and key in result
++                and isinstance(result[key], list)
++            ):
+                 result[key] = result[key] + value
++            elif (
++                isinstance(value, dict)
++                and key in result
++                and isinstance(result[key], dict)
++            ):
++                result[key] = layered_merge(result[key], value)
+             else:
+                 result[key] = value
+     return result

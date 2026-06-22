@@ -1,0 +1,16 @@
+diff --git a/task_089_lib/settings.py b/task_089_lib/settings.py
+index e0fb5c9..6ae8ef8 100644
+--- a/task_089_lib/settings.py
++++ b/task_089_lib/settings.py
+@@ -6,5 +6,10 @@ import json
+ def get_nested(config_json: str, path: str) -> object:
+     data = json.loads(config_json)
+     for key in path.split("."):
+-        data = data[key]
++        if isinstance(data, dict):
++            data = data.get(key)
++        else:
++            raise KeyError(f"cannot descend into non-dict at {key!r}")
++        if data is None:
++            return None
+     return data

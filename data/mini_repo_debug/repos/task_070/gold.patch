@@ -1,0 +1,10 @@
+diff --git a/task_070_lib/transform.py b/task_070_lib/transform.py
+index 0cbe99a..c198358 100644
+--- a/task_070_lib/transform.py
++++ b/task_070_lib/transform.py
+@@ -16,4 +16,4 @@ def main(argv: list[str] | None = None) -> str:
+     parser.add_argument("text")
+     parser.add_argument("--mode", default="upper", choices=["upper", "lower"])
+     args = parser.parse_args(argv)
+-    return transform(args.text, mode="upper")
++    return transform(args.text, mode=args.mode)

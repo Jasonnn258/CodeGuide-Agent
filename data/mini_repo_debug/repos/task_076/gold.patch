@@ -1,0 +1,12 @@
+diff --git a/task_076_lib/validator.py b/task_076_lib/validator.py
+index 51161ec..8146874 100644
+--- a/task_076_lib/validator.py
++++ b/task_076_lib/validator.py
+@@ -3,3 +3,7 @@ from __future__ import annotations
+ 
+ def is_positive(n: int) -> bool:
+     return n > 0
++
++
++def is_even(n: int) -> bool:
++    return n % 2 == 0

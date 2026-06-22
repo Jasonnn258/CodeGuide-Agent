@@ -1,0 +1,32 @@
+{
+  "task_id": "task_089",
+  "bug_type": "json_config_parsing",
+  "difficulty": "easy",
+  "issue_path": "issue.md",
+  "public_test_cmd": "python -m pytest tests -q",
+  "hidden_test_cmd": "python -m pytest tests_hidden -q",
+  "target_files": [
+    "task_089_lib/settings.py"
+  ],
+  "target_functions": [
+    "get_nested"
+  ],
+  "expected_failure_mode": "Existing paths work, but missing keys raise KeyError instead of returning None.",
+  "generalization_axis": "Public covers existing paths; hidden covers missing-key fallback.",
+  "repo_path": "data/mini_repo_debug/repos/task_089",
+  "source": "manual_p61_expansion",
+  "split": "train",
+  "scenario": "json_config_parsing public-hidden generalization",
+  "gold_patch": "gold.patch",
+  "gold_files": [
+    "task_089_lib/settings.py"
+  ],
+  "gold_functions": [
+    "get_nested"
+  ],
+  "forbidden_behaviors": [
+    "hard-code public examples",
+    "modify tests",
+    "ignore hidden edge cases"
+  ]
+}

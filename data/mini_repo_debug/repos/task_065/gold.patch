@@ -1,0 +1,10 @@
+diff --git a/task_065_lib/pages.py b/task_065_lib/pages.py
+index 4afab17..2fdc3f8 100644
+--- a/task_065_lib/pages.py
++++ b/task_065_lib/pages.py
+@@ -2,4 +2,4 @@ from __future__ import annotations
+ 
+ 
+ def page_count(total: int, per_page: int) -> int:
+-    return total // per_page
++    return (total + per_page - 1) // per_page

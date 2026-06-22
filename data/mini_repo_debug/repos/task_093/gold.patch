@@ -1,0 +1,15 @@
+diff --git a/task_093_lib/matchers.py b/task_093_lib/matchers.py
+index 73e2ded..6a20faf 100644
+--- a/task_093_lib/matchers.py
++++ b/task_093_lib/matchers.py
+@@ -1,5 +1,8 @@
+ from __future__ import annotations
+ 
+ 
+-def filter_by_prefix(items: list[str], prefix: str) -> list[str]:
+-    return [item for item in items if item.startswith(prefix)]
++def filter_by_prefix(items: list[str], prefix: str, case_sensitive: bool = True) -> list[str]:
++    if case_sensitive:
++        return [item for item in items if item.startswith(prefix)]
++    lower_pfx = prefix.lower()
++    return [item for item in items if item.lower().startswith(lower_pfx)]

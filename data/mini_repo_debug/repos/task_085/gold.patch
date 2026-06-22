@@ -1,0 +1,27 @@
+diff --git a/task_085_lib/wrap.py b/task_085_lib/wrap.py
+index 937769a..c3d511e 100644
+--- a/task_085_lib/wrap.py
++++ b/task_085_lib/wrap.py
+@@ -6,11 +6,19 @@ def wrap_text(text: str, width: int) -> list[str]:
+     lines: list[str] = []
+     current = ""
+     for word in words:
+-        if len(current) + len(word) + 1 <= width:
+-            current = (current + " " + word).strip()
+-        else:
++        while len(word) > width:
++            if current:
++                lines.append(current)
++                current = ""
++            lines.append(word[:width])
++            word = word[width:]
++        if current and len(current) + len(word) + 1 <= width:
++            current = current + " " + word
++        elif current:
+             lines.append(current)
+             current = word
++        else:
++            current = word
+     if current:
+         lines.append(current)
+     return lines

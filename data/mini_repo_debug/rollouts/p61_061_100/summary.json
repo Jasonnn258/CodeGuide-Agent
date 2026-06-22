@@ -1,0 +1,152 @@
+{
+  "after_counts": {
+    "hard_preference_total": 64,
+    "preference_bank_total": 169,
+    "preference_total": 169,
+    "sft_total": 100
+  },
+  "before_counts": {
+    "hard_preference_total": 64,
+    "preference_bank_total": 169,
+    "preference_total": 169,
+    "sft_total": 100
+  },
+  "command_results": [
+    {
+      "command": [
+        "/Users/yjx/miniconda3/envs/codeguide/bin/python",
+        "-m",
+        "codeguide_agent.dataset.export_training_candidates",
+        "--root",
+        "data/mini_repo_debug",
+        "--out",
+        "data/mini_repo_debug/exports"
+      ],
+      "returncode": 0,
+      "stderr_tail": "",
+      "stdout_tail": "stderr_exported\": false\n  },\n  \"sft_output\": \"data/mini_repo_debug/exports/p5_sft_rollouts.jsonl\",\n  \"sft_records\": 100,\n  \"sft_task_ids\": [\n    \"task_001\",\n    \"task_002\",\n    \"task_003\",\n    \"task_004\",\n    \"task_005\",\n    \"task_006\",\n    \"task_007\",\n    \"task_008\",\n    \"task_010\",\n    \"task_011\",\n    \"task_012\",\n    \"task_013\",\n    \"task_014\",\n    \"task_015\",\n    \"task_016\",\n    \"task_017\",\n    \"task_018\",\n    \"task_019\",\n    \"task_020\",\n    \"task_009\",\n    \"task_021\",\n    \"task_022\",\n    \"task_023\",\n    \"task_024\",\n    \"task_025\",\n    \"task_026\",\n    \"task_027\",\n    \"task_028\",\n    \"task_029\",\n    \"task_030\",\n    \"task_031\",\n    \"task_032\",\n    \"task_033\",\n    \"task_034\",\n    \"task_035\",\n    \"task_036\",\n    \"task_037\",\n    \"task_038\",\n    \"task_039\",\n    \"task_040\",\n    \"task_041\",\n    \"task_042\",\n    \"task_043\",\n    \"task_044\",\n    \"task_045\",\n    \"task_046\",\n    \"task_047\",\n    \"task_048\",\n    \"task_049\",\n    \"task_050\",\n    \"task_051\",\n    \"task_052\",\n    \"task_053\",\n    \"task_054\",\n    \"task_055\",\n    \"task_056\",\n    \"task_057\",\n    \"task_058\",\n    \"task_059\",\n    \"task_060\",\n    \"task_061\",\n    \"task_062\",\n    \"task_063\",\n    \"task_064\",\n    \"task_065\",\n    \"task_066\",\n    \"task_067\",\n    \"task_068\",\n    \"task_069\",\n    \"task_070\",\n    \"task_071\",\n    \"task_072\",\n    \"task_073\",\n    \"task_074\",\n    \"task_075\",\n    \"task_076\",\n    \"task_077\",\n    \"task_078\",\n    \"task_079\",\n    \"task_080\",\n    \"task_081\",\n    \"task_082\",\n    \"task_083\",\n    \"task_084\",\n    \"task_085\",\n    \"task_086\",\n    \"task_087\",\n    \"task_088\",\n    \"task_089\",\n    \"task_090\",\n    \"task_091\",\n    \"task_092\",\n    \"task_093\",\n    \"task_094\",\n    \"task_095\",\n    \"task_096\",\n    \"task_097\",\n    \"task_098\",\n    \"task_099\",\n    \"task_100\"\n  ],\n  \"skipped\": {\n    \"missing_llm_trajectory\": 80\n  },\n  \"summary_output\": \"data/mini_repo_debug/exports/p5_export_summary.json\",\n  \"task_009_preference_pair_generated\": true,\n  \"tasks_seen\": 100,\n  \"trajectories_dir\": \"data/mini_repo_debug/trajectories\"\n}\n"
+    },
+    {
+      "command": [
+        "/Users/yjx/miniconda3/envs/codeguide/bin/python",
+        "-m",
+        "codeguide_agent.dataset.expand_preference_candidates",
+        "--root",
+        "data/mini_repo_debug",
+        "--out",
+        "data/mini_repo_debug/preference_bank"
+      ],
+      "returncode": 1,
+      "stderr_tail": "",
+      "stdout_tail": "le_scripted\": 16\n  },\n  \"source_policy_counts\": {\n    \"llm\": 3,\n    \"noop\": 66,\n    \"original_buggy\": 100\n  },\n  \"summary_output\": \"data/mini_repo_debug/preference_bank/preference_bank_summary.json\",\n  \"task_coverage\": [\n    \"task_001\",\n    \"task_002\",\n    \"task_003\",\n    \"task_004\",\n    \"task_005\",\n    \"task_006\",\n    \"task_007\",\n    \"task_008\",\n    \"task_009\",\n    \"task_010\",\n    \"task_011\",\n    \"task_012\",\n    \"task_013\",\n    \"task_014\",\n    \"task_015\",\n    \"task_016\",\n    \"task_017\",\n    \"task_018\",\n    \"task_019\",\n    \"task_020\",\n    \"task_021\",\n    \"task_022\",\n    \"task_023\",\n    \"task_024\",\n    \"task_025\",\n    \"task_026\",\n    \"task_027\",\n    \"task_028\",\n    \"task_029\",\n    \"task_030\",\n    \"task_031\",\n    \"task_032\",\n    \"task_033\",\n    \"task_034\",\n    \"task_035\",\n    \"task_036\",\n    \"task_037\",\n    \"task_038\",\n    \"task_039\",\n    \"task_040\",\n    \"task_041\",\n    \"task_042\",\n    \"task_043\",\n    \"task_044\",\n    \"task_045\",\n    \"task_046\",\n    \"task_047\",\n    \"task_048\",\n    \"task_049\",\n    \"task_050\",\n    \"task_051\",\n    \"task_052\",\n    \"task_053\",\n    \"task_054\",\n    \"task_055\",\n    \"task_056\",\n    \"task_057\",\n    \"task_058\",\n    \"task_059\",\n    \"task_060\",\n    \"task_061\",\n    \"task_062\",\n    \"task_063\",\n    \"task_064\",\n    \"task_065\",\n    \"task_066\",\n    \"task_067\",\n    \"task_068\",\n    \"task_069\",\n    \"task_070\",\n    \"task_071\",\n    \"task_072\",\n    \"task_073\",\n    \"task_074\",\n    \"task_075\",\n    \"task_076\",\n    \"task_077\",\n    \"task_078\",\n    \"task_079\",\n    \"task_080\",\n    \"task_081\",\n    \"task_082\",\n    \"task_083\",\n    \"task_084\",\n    \"task_085\",\n    \"task_086\",\n    \"task_087\",\n    \"task_088\",\n    \"task_089\",\n    \"task_090\",\n    \"task_091\",\n    \"task_092\",\n    \"task_093\",\n    \"task_094\",\n    \"task_095\",\n    \"task_096\",\n    \"task_097\",\n    \"task_098\",\n    \"task_099\",\n    \"task_100\"\n  ],\n  \"task_coverage_count\": 100,\n  \"taxonomy_output\": \"data/mini_repo_debug/preference_bank/rejection_taxonomy.json\",\n  \"trajectories_dir\": \"data/mini_repo_debug/trajectories\"\n}\n"
+    },
+    {
+      "command": [
+        "/Users/yjx/miniconda3/envs/codeguide/bin/python",
+        "-m",
+        "codeguide_agent.dataset.prepare_training_package",
+        "--root",
+        "data/mini_repo_debug",
+        "--out",
+        "data/mini_repo_debug/train_package",
+        "--preference-bank",
+        "data/mini_repo_debug/preference_bank/preference_candidates.jsonl"
+      ],
+      "returncode": 0,
+      "stderr_tail": "",
+      "stdout_tail": "  \"task_096\",\n      \"task_097\",\n      \"task_097\",\n      \"task_098\",\n      \"task_098\",\n      \"task_099\",\n      \"task_099\"\n    ],\n    \"sft_eval_task_ids\": [\n      \"task_005\",\n      \"task_010\",\n      \"task_015\",\n      \"task_020\",\n      \"task_025\",\n      \"task_030\",\n      \"task_035\",\n      \"task_040\",\n      \"task_045\",\n      \"task_050\",\n      \"task_055\",\n      \"task_060\",\n      \"task_065\",\n      \"task_070\",\n      \"task_075\",\n      \"task_080\",\n      \"task_085\",\n      \"task_090\",\n      \"task_095\",\n      \"task_100\"\n    ],\n    \"sft_train_task_ids\": [\n      \"task_001\",\n      \"task_002\",\n      \"task_003\",\n      \"task_004\",\n      \"task_006\",\n      \"task_007\",\n      \"task_008\",\n      \"task_009\",\n      \"task_011\",\n      \"task_012\",\n      \"task_013\",\n      \"task_014\",\n      \"task_016\",\n      \"task_017\",\n      \"task_018\",\n      \"task_019\",\n      \"task_021\",\n      \"task_022\",\n      \"task_023\",\n      \"task_024\",\n      \"task_026\",\n      \"task_027\",\n      \"task_028\",\n      \"task_029\",\n      \"task_031\",\n      \"task_032\",\n      \"task_033\",\n      \"task_034\",\n      \"task_036\",\n      \"task_037\",\n      \"task_038\",\n      \"task_039\",\n      \"task_041\",\n      \"task_042\",\n      \"task_043\",\n      \"task_044\",\n      \"task_046\",\n      \"task_047\",\n      \"task_048\",\n      \"task_049\",\n      \"task_051\",\n      \"task_052\",\n      \"task_053\",\n      \"task_054\",\n      \"task_056\",\n      \"task_057\",\n      \"task_058\",\n      \"task_059\",\n      \"task_061\",\n      \"task_062\",\n      \"task_063\",\n      \"task_064\",\n      \"task_066\",\n      \"task_067\",\n      \"task_068\",\n      \"task_069\",\n      \"task_071\",\n      \"task_072\",\n      \"task_073\",\n      \"task_074\",\n      \"task_076\",\n      \"task_077\",\n      \"task_078\",\n      \"task_079\",\n      \"task_081\",\n      \"task_082\",\n      \"task_083\",\n      \"task_084\",\n      \"task_086\",\n      \"task_087\",\n      \"task_088\",\n      \"task_089\",\n      \"task_091\",\n      \"task_092\",\n      \"task_093\",\n      \"task_094\",\n      \"task_096\",\n      \"task_097\",\n      \"task_098\",\n      \"task_099\"\n    ]\n  }\n}\n"
+    },
+    {
+      "command": [
+        "/Users/yjx/miniconda3/envs/codeguide/bin/python",
+        "-m",
+        "codeguide_agent.training.build_hf_training_data",
+        "--package",
+        "data/mini_repo_debug/train_package",
+        "--out",
+        "data/mini_repo_debug/hf_training"
+      ],
+      "returncode": 0,
+      "stderr_tail": "",
+      "stdout_tail": "{\n  \"package\": \"data/mini_repo_debug/train_package\",\n  \"out\": \"data/mini_repo_debug/hf_training\",\n  \"sft_train\": 80,\n  \"sft_eval\": 20,\n  \"sft_total\": 100,\n  \"dpo_train\": 135,\n  \"dpo_eval\": 34,\n  \"dpo_total\": 169,\n  \"note\": \"HF-style files are training inputs. Current data is suitable for smoke training, not final performance claims.\"\n}\n"
+    }
+  ],
+  "deltas": {
+    "hard_preference_total": 0,
+    "preference_bank_total": 0,
+    "preference_total": 0,
+    "sft_total": 0
+  },
+  "failures": [],
+  "p61_succeeded": false,
+  "phase_baseline_counts": {
+    "hard_preference_total": 27,
+    "preference_bank_total": 89,
+    "preference_total": 89,
+    "sft_total": 60
+  },
+  "phase_deltas": {
+    "hard_preference_total": 37,
+    "preference_bank_total": 80,
+    "preference_total": 80,
+    "sft_total": 40
+  },
+  "policies": [
+    "noop",
+    "heuristic",
+    "scripted"
+  ],
+  "rollout_dir": "data/mini_repo_debug/rollouts/p61_061_100",
+  "rollout_result_count": 120,
+  "rollout_summary": {
+    "average_llm_calls": 0.0,
+    "average_steps": 6.3333,
+    "invalid_action_rate": 0.0,
+    "num_tasks": 120,
+    "original_repo_unchanged_rate": 1.0,
+    "success_rate": 0.0
+  },
+  "task_ids": [
+    "task_061",
+    "task_062",
+    "task_063",
+    "task_064",
+    "task_065",
+    "task_066",
+    "task_067",
+    "task_068",
+    "task_069",
+    "task_070",
+    "task_071",
+    "task_072",
+    "task_073",
+    "task_074",
+    "task_075",
+    "task_076",
+    "task_077",
+    "task_078",
+    "task_079",
+    "task_080",
+    "task_081",
+    "task_082",
+    "task_083",
+    "task_084",
+    "task_085",
+    "task_086",
+    "task_087",
+    "task_088",
+    "task_089",
+    "task_090",
+    "task_091",
+    "task_092",
+    "task_093",
+    "task_094",
+    "task_095",
+    "task_096",
+    "task_097",
+    "task_098",
+    "task_099",
+    "task_100"
+  ],
+  "trajectories_dir": "data/mini_repo_debug/trajectories"
+}

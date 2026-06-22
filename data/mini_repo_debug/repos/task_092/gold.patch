@@ -1,0 +1,13 @@
+diff --git a/task_092_lib/bounds.py b/task_092_lib/bounds.py
+index d6f2a9e..10f897f 100644
+--- a/task_092_lib/bounds.py
++++ b/task_092_lib/bounds.py
+@@ -2,6 +2,8 @@ from __future__ import annotations
+ 
+ 
+ def clamp(value: float, low: float, high: float) -> float:
++    if high < low:
++        raise ValueError(f"low ({low}) must not exceed high ({high})")
+     if value < low:
+         return low
+     if value > high:

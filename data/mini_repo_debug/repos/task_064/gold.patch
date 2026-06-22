@@ -1,0 +1,11 @@
+diff --git a/task_064_lib/query.py b/task_064_lib/query.py
+index 6f8e88d..784e98f 100644
+--- a/task_064_lib/query.py
++++ b/task_064_lib/query.py
+@@ -2,5 +2,5 @@ from __future__ import annotations
+ 
+ 
+ def build_query(**params: object) -> str:
+-    parts = [f"{k}={v}" for k, v in params.items()]
++    parts = [f"{k}={v}" for k, v in params.items() if v is not None]
+     return "&".join(parts)

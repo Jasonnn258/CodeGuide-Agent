@@ -1,0 +1,10 @@
+diff --git a/task_073_lib/ranking.py b/task_073_lib/ranking.py
+index f33a500..a8e1f2f 100644
+--- a/task_073_lib/ranking.py
++++ b/task_073_lib/ranking.py
+@@ -2,4 +2,4 @@ from __future__ import annotations
+ 
+ 
+ def top_by_score(items: list[dict], key: str, n: int) -> list[dict]:
+-    return sorted(items, key=lambda d: d[key], reverse=True)[:n]
++    return sorted(items, key=lambda d: d.get(key, 0), reverse=True)[:n]

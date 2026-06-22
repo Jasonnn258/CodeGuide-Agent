@@ -1,0 +1,32 @@
+{
+  "task_id": "task_093",
+  "bug_type": "sorting_filtering",
+  "difficulty": "easy",
+  "issue_path": "issue.md",
+  "public_test_cmd": "python -m pytest tests -q",
+  "hidden_test_cmd": "python -m pytest tests_hidden -q",
+  "target_files": [
+    "task_093_lib/matchers.py"
+  ],
+  "target_functions": [
+    "filter_by_prefix"
+  ],
+  "expected_failure_mode": "Case-sensitive filtering works, but case-insensitive mode is not implemented.",
+  "generalization_axis": "Public covers case-sensitive filtering; hidden covers case-insensitive mode.",
+  "repo_path": "data/mini_repo_debug/repos/task_093",
+  "source": "manual_p61_expansion",
+  "split": "train",
+  "scenario": "sorting_filtering public-hidden generalization",
+  "gold_patch": "gold.patch",
+  "gold_files": [
+    "task_093_lib/matchers.py"
+  ],
+  "gold_functions": [
+    "filter_by_prefix"
+  ],
+  "forbidden_behaviors": [
+    "hard-code public examples",
+    "modify tests",
+    "ignore hidden edge cases"
+  ]
+}

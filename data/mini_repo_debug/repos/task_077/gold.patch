@@ -1,0 +1,9 @@
+diff --git a/task_077_lib/stack.py b/task_077_lib/stack.py
+index 8894b92..3493e00 100644
+--- a/task_077_lib/stack.py
++++ b/task_077_lib/stack.py
+@@ -24,3 +24,4 @@ class IntStack:
+ 
+     def clear(self) -> None:
+         self._items.clear()
++        self._popped.clear()

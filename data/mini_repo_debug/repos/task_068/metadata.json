@@ -1,0 +1,32 @@
+{
+  "task_id": "task_068",
+  "bug_type": "date_boundary",
+  "difficulty": "easy",
+  "issue_path": "issue.md",
+  "public_test_cmd": "python -m pytest tests -q",
+  "hidden_test_cmd": "python -m pytest tests_hidden -q",
+  "target_files": [
+    "task_068_lib/months.py"
+  ],
+  "target_functions": [
+    "days_in_month"
+  ],
+  "expected_failure_mode": "Non-February months work, but February always returns 28.",
+  "generalization_axis": "Public covers non-February months; hidden covers February with leap-year rules.",
+  "repo_path": "data/mini_repo_debug/repos/task_068",
+  "source": "manual_p61_expansion",
+  "split": "train",
+  "scenario": "date_boundary public-hidden generalization",
+  "gold_patch": "gold.patch",
+  "gold_files": [
+    "task_068_lib/months.py"
+  ],
+  "gold_functions": [
+    "days_in_month"
+  ],
+  "forbidden_behaviors": [
+    "hard-code public examples",
+    "modify tests",
+    "ignore hidden edge cases"
+  ]
+}

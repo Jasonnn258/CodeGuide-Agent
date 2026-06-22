@@ -1,0 +1,12 @@
+diff --git a/task_061_lib/version.py b/task_061_lib/version.py
+index 9779d5e..7237504 100644
+--- a/task_061_lib/version.py
++++ b/task_061_lib/version.py
+@@ -2,5 +2,6 @@ from __future__ import annotations
+ 
+ 
+ def parse_version(version_str: str) -> tuple[int, ...]:
+-    parts = version_str.split(".")
++    clean = version_str.split("-")[0]
++    parts = clean.split(".")
+     return tuple(int(p) for p in parts)

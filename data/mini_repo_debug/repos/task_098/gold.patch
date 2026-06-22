@@ -1,0 +1,21 @@
+diff --git a/task_098_lib/seed.py b/task_098_lib/seed.py
+index c56d59a..e70b542 100644
+--- a/task_098_lib/seed.py
++++ b/task_098_lib/seed.py
+@@ -1,11 +1,13 @@
+ from __future__ import annotations
+ 
+-_SEEDED: bool = False
++_SEEDED: int | None = None
+ 
+ 
+ def ensure_seeded(seed: int = 42) -> None:
+     global _SEEDED
+-    if not _SEEDED:
++    if _SEEDED is None:
+         import random
+         random.seed(seed)
+-        _SEEDED = True
++        _SEEDED = seed
++    elif _SEEDED != seed:
++        raise RuntimeError(f"already seeded with {_SEEDED}, refusing {seed}")

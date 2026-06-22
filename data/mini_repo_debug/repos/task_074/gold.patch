@@ -1,0 +1,11 @@
+diff --git a/task_074_lib/service.py b/task_074_lib/service.py
+index d1dab20..3c5cc3b 100644
+--- a/task_074_lib/service.py
++++ b/task_074_lib/service.py
+@@ -7,4 +7,6 @@ def fetch_user(users_db: dict[str, dict], user_id: str) -> dict | None:
+ 
+ def format_name(users_db: dict[str, dict], user_id: str) -> str:
+     user = fetch_user(users_db, user_id)
++    if user is None:
++        return "Unknown"
+     return f"{user['first']} {user['last']}"

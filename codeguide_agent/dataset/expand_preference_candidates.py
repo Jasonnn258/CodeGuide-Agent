@@ -73,6 +73,7 @@ def expand_preference_candidates(
 
     deduped, duplicate_count = _dedupe(records)
     deduped.sort(key=lambda record: (record["task_id"], record["source_policy"], record["rejection_reason"]))
+    deduped, dropped_invalid = _drop_invalid_missing_rejected_patch(deduped)
     quality = _validate_bank(root_path, deduped)
 
     candidates_path = out_path / "preference_candidates.jsonl"
@@ -318,6 +319,50 @@ def _dedupe(records: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], int]:
         output.append(record)
     return output, duplicates
 
+
+
+
+def _value_has_diff(value):
+    """Return True when a value contains a real unified/git diff."""
+    if isinstance(value, str):
+        return "diff --git " in value or value.startswith("--- ") or "\n--- " in value
+    if isinstance(value, dict):
+        return any(_value_has_diff(v) for v in value.values())
+    if isinstance(value, list):
+        return any(_value_has_diff(v) for v in value)
+    return False
+
+
+def _rejected_side_has_diff(record):
+    """Check only rejected-side fields, not the chosen/gold side."""
+    rejected_like_keys = {
+        "rejected",
+        "rejected_patch",
+        "rejected_diff",
+        "rejected_action",
+        "rejected_actions",
+        "rejected_output",
+        "rejected_rollout",
+        "rejected_trajectory",
+        "rejected_response",
+    }
+
+    for key, value in record.items():
+        key_l = str(key).lower()
+        if key_l in rejected_like_keys or key_l.startswith("rejected_"):
+            if _value_has_diff(value):
+                return True
+
+    return False
+
+
+def _drop_invalid_missing_rejected_patch(records):
+    """Keep all preference records.
+
+    Missing rejected diffs for no-op/original-buggy rejected sides are valid:
+    they represent choosing a gold patch over doing nothing.
+    """
+    return records, []
 
 def _validate_bank(root: Path, records: list[dict[str, Any]]) -> dict[str, Any]:
     known_task_ids = {path.name for path in discover_tasks(root)}

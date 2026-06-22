@@ -1,0 +1,15 @@
+diff --git a/task_078_lib/init_once.py b/task_078_lib/init_once.py
+index 6095f42..51f44fd 100644
+--- a/task_078_lib/init_once.py
++++ b/task_078_lib/init_once.py
+@@ -9,3 +9,10 @@ def initialize(key: str, factory: Any) -> Any:
+     if key not in _INITIALIZED:
+         _INITIALIZED[key] = factory() if callable(factory) else factory
+     return _INITIALIZED[key]
++
++
++def reset_initialized(key: str | None = None) -> None:
++    if key is None:
++        _INITIALIZED.clear()
++    else:
++        _INITIALIZED.pop(key, None)

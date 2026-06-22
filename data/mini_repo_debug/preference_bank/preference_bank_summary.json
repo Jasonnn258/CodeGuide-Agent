@@ -1,34 +1,40 @@
 {
-  "candidate_count": 89,
+  "candidate_count": 169,
   "candidate_output": "data/mini_repo_debug/preference_bank/preference_candidates.jsonl",
   "dedupe": {
-    "duplicates_removed": 148,
-    "input_candidates": 237,
-    "output_candidates": 89
+    "duplicates_removed": 213,
+    "input_candidates": 382,
+    "output_candidates": 169
   },
   "quality_gate": {
-    "errors": [],
-    "passed": true
+    "errors": [
+      "rejected patch missing for task_076",
+      "rejected patch missing for task_078",
+      "rejected patch missing for task_091"
+    ],
+    "passed": false
   },
   "rejection_reason_counts": {
+    "generalization_risk": 3,
     "invalid_action": 2,
-    "no_patch": 60,
-    "public_pass_hidden_assertion_fail": 27
+    "no_patch": 100,
+    "public_pass_hidden_assertion_fail": 64
   },
   "root": "data/mini_repo_debug",
   "sanitization": {
     "forbidden_path_terms_redacted": 4,
-    "passed": true,
+    "passed": false,
     "raw_test_stdout_stderr_exported": false
   },
   "skipped": {
-    "missing_or_unusable_llm": 57,
-    "missing_or_unusable_scripted": 6
+    "missing_or_unusable_heuristic": 5,
+    "missing_or_unusable_llm": 97,
+    "missing_or_unusable_scripted": 16
   },
   "source_policy_counts": {
     "llm": 3,
-    "noop": 26,
-    "original_buggy": 60
+    "noop": 66,
+    "original_buggy": 100
   },
   "summary_output": "data/mini_repo_debug/preference_bank/preference_bank_summary.json",
   "task_coverage": [
@@ -91,9 +97,49 @@
     "task_057",
     "task_058",
     "task_059",
-    "task_060"
+    "task_060",
+    "task_061",
+    "task_062",
+    "task_063",
+    "task_064",
+    "task_065",
+    "task_066",
+    "task_067",
+    "task_068",
+    "task_069",
+    "task_070",
+    "task_071",
+    "task_072",
+    "task_073",
+    "task_074",
+    "task_075",
+    "task_076",
+    "task_077",
+    "task_078",
+    "task_079",
+    "task_080",
+    "task_081",
+    "task_082",
+    "task_083",
+    "task_084",
+    "task_085",
+    "task_086",
+    "task_087",
+    "task_088",
+    "task_089",
+    "task_090",
+    "task_091",
+    "task_092",
+    "task_093",
+    "task_094",
+    "task_095",
+    "task_096",
+    "task_097",
+    "task_098",
+    "task_099",
+    "task_100"
   ],
-  "task_coverage_count": 60,
+  "task_coverage_count": 100,
   "taxonomy_output": "data/mini_repo_debug/preference_bank/rejection_taxonomy.json",
   "trajectories_dir": "data/mini_repo_debug/trajectories"
 }

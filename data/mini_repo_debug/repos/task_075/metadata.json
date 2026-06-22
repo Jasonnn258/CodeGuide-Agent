@@ -1,0 +1,32 @@
+{
+  "task_id": "task_075",
+  "bug_type": "case_insensitive_handling",
+  "difficulty": "easy",
+  "issue_path": "issue.md",
+  "public_test_cmd": "python -m pytest tests -q",
+  "hidden_test_cmd": "python -m pytest tests_hidden -q",
+  "target_files": [
+    "task_075_lib/lookup.py"
+  ],
+  "target_functions": [
+    "case_insensitive_get"
+  ],
+  "expected_failure_mode": "Exact string match works, but case-insensitive lookup is not performed.",
+  "generalization_axis": "Public covers exact match; hidden covers case-insensitive matching.",
+  "repo_path": "data/mini_repo_debug/repos/task_075",
+  "source": "manual_p61_expansion",
+  "split": "train",
+  "scenario": "case_insensitive_handling public-hidden generalization",
+  "gold_patch": "gold.patch",
+  "gold_files": [
+    "task_075_lib/lookup.py"
+  ],
+  "gold_functions": [
+    "case_insensitive_get"
+  ],
+  "forbidden_behaviors": [
+    "hard-code public examples",
+    "modify tests",
+    "ignore hidden edge cases"
+  ]
+}

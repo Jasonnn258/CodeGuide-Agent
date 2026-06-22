@@ -1,0 +1,32 @@
+{
+  "task_id": "task_078",
+  "bug_type": "idempotency",
+  "difficulty": "easy",
+  "issue_path": "issue.md",
+  "public_test_cmd": "python -m pytest tests -q",
+  "hidden_test_cmd": "python -m pytest tests_hidden -q",
+  "target_files": [
+    "task_078_lib/init_once.py"
+  ],
+  "target_functions": [
+    "initialize"
+  ],
+  "expected_failure_mode": "Initialization works, but the hidden test can only pass if reset exists.",
+  "generalization_axis": "Public covers basic initialize behaviour; hidden covers reset for idempotency testing.",
+  "repo_path": "data/mini_repo_debug/repos/task_078",
+  "source": "manual_p61_expansion",
+  "split": "train",
+  "scenario": "idempotency public-hidden generalization",
+  "gold_patch": "gold.patch",
+  "gold_files": [
+    "task_078_lib/init_once.py"
+  ],
+  "gold_functions": [
+    "initialize"
+  ],
+  "forbidden_behaviors": [
+    "hard-code public examples",
+    "modify tests",
+    "ignore hidden edge cases"
+  ]
+}

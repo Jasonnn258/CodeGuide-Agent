@@ -1,0 +1,15 @@
+diff --git a/task_095_lib/commands.py b/task_095_lib/commands.py
+index c3b1c8e..779109f 100644
+--- a/task_095_lib/commands.py
++++ b/task_095_lib/commands.py
+@@ -5,8 +5,8 @@ _COMMANDS: dict[str, str] = {}
+ 
+ 
+ def register(name: str, handler: str) -> None:
+-    _COMMANDS[name] = handler
++    _COMMANDS[name.lower()] = handler
+ 
+ 
+ def dispatch(name: str) -> str | None:
+-    return _COMMANDS.get(name)
++    return _COMMANDS.get(name.lower())

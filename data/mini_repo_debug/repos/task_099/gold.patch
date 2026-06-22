@@ -1,0 +1,10 @@
+diff --git a/task_099_lib/password_check.py b/task_099_lib/password_check.py
+index 0a4a60b..d79123f 100644
+--- a/task_099_lib/password_check.py
++++ b/task_099_lib/password_check.py
+@@ -7,4 +7,5 @@ def is_strong_password(password: str) -> bool:
+         and any(c.isupper() for c in password)
+         and any(c.islower() for c in password)
+         and any(c.isdigit() for c in password)
++        and not password.isalnum()
+     )

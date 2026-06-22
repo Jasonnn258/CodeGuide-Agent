@@ -1,0 +1,18 @@
+diff --git a/task_062_lib/resolve.py b/task_062_lib/resolve.py
+index deb430e..cd259c4 100644
+--- a/task_062_lib/resolve.py
++++ b/task_062_lib/resolve.py
+@@ -4,4 +4,12 @@ from __future__ import annotations
+ def resolve_path(base: str, relative: str) -> str:
+     if relative.startswith("/"):
+         return relative
+-    return base.rstrip("/") + "/" + relative
++    parts = relative.split("/")
++    base_parts = [p for p in base.split("/") if p]
++    for part in parts:
++        if part == "..":
++            if base_parts:
++                base_parts.pop()
++        elif part and part != ".":
++            base_parts.append(part)
++    return "/" + "/".join(base_parts)

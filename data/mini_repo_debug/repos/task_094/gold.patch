@@ -1,0 +1,14 @@
+diff --git a/task_094_lib/orchestrator.py b/task_094_lib/orchestrator.py
+index 965220b..e07d2c9 100644
+--- a/task_094_lib/orchestrator.py
++++ b/task_094_lib/orchestrator.py
+@@ -1,7 +1,7 @@
+ from __future__ import annotations
+ 
+ 
+-def enrich(record: dict, lookup: dict[str, str]) -> dict:
++def enrich(record: dict, lookup: dict[str, str], id_key: str = "id") -> dict:
+     result = dict(record)
+-    result["full_name"] = lookup.get(record.get("id", ""), "Unknown")
++    result["full_name"] = lookup.get(record.get(id_key, ""), "Unknown")
+     return result

@@ -1,0 +1,32 @@
+{
+  "task_id": "task_086",
+  "bug_type": "string_normalization",
+  "difficulty": "easy",
+  "issue_path": "issue.md",
+  "public_test_cmd": "python -m pytest tests -q",
+  "hidden_test_cmd": "python -m pytest tests_hidden -q",
+  "target_files": [
+    "task_086_lib/unicode_utils.py"
+  ],
+  "target_functions": [
+    "strip_accents"
+  ],
+  "expected_failure_mode": "Accents are removed, but the output is in decomposed form instead of composed NFC.",
+  "generalization_axis": "Public covers basic stripping; hidden covers normalization form.",
+  "repo_path": "data/mini_repo_debug/repos/task_086",
+  "source": "manual_p61_expansion",
+  "split": "train",
+  "scenario": "string_normalization public-hidden generalization",
+  "gold_patch": "gold.patch",
+  "gold_files": [
+    "task_086_lib/unicode_utils.py"
+  ],
+  "gold_functions": [
+    "strip_accents"
+  ],
+  "forbidden_behaviors": [
+    "hard-code public examples",
+    "modify tests",
+    "ignore hidden edge cases"
+  ]
+}

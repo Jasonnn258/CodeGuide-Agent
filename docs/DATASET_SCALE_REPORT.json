@@ -1,15 +1,15 @@
 {
-  "existing_task_dirs": 60,
-  "planned_backlog_tasks": 40,
+  "existing_task_dirs": 100,
+  "planned_backlog_tasks": 0,
   "target_total_tasks": 100,
-  "sft_total": 60,
-  "preference_total": 89,
-  "preference_bank_total": 89,
-  "hard_preference_total": 27,
+  "sft_total": 100,
+  "preference_total": 169,
+  "preference_bank_total": 169,
+  "hard_preference_total": 64,
   "training_readiness": {
     "task_count_ge_100": true,
     "sft_total_ge_150": false,
-    "preference_total_ge_100": false,
-    "hard_preference_total_ge_30": false
+    "preference_total_ge_100": true,
+    "hard_preference_total_ge_30": true
   }
 }

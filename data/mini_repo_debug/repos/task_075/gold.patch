@@ -1,0 +1,11 @@
+diff --git a/task_075_lib/lookup.py b/task_075_lib/lookup.py
+index 0889436..d279dd5 100644
+--- a/task_075_lib/lookup.py
++++ b/task_075_lib/lookup.py
+@@ -2,4 +2,5 @@ from __future__ import annotations
+ 
+ 
+ def case_insensitive_get(mapping: dict[str, str], key: str) -> str | None:
+-    return mapping.get(key)
++    lowered = {k.lower(): v for k, v in mapping.items()}
++    return lowered.get(key.lower())

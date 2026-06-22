@@ -356,10 +356,8 @@ def _validate_preference_record(record: dict[str, Any], known_task_ids: set[str]
     if record.get("rejection_reason") == "no_patch":
         if rejected_patch:
             errors.append(f"preference record {record.get('task_id')} no_patch rejected side should not include a patch")
-    elif record.get("rejection_reason") == "public_pass_hidden_assertion_fail" and not rejected_patch:
-        pass
-    elif not rejected_patch.startswith("diff --git"):
-        errors.append(f"preference record {record.get('task_id')} rejected patch is missing")
+    elif rejected_patch and not rejected_patch.startswith("diff --git"):
+        errors.append(f"preference record {record.get('task_id')} rejected patch is malformed")
 
 
 def _validate_task_id(record: dict[str, Any], known_task_ids: set[str], errors: list[str]) -> None:
@@ -385,6 +383,13 @@ def _inspect_patch(
     patch = str(record.get("final_patch", ""))
     changed_files = changed_files_from_diff(patch)
     replay["checked_records"] += 1
+    if not patch:
+        reward = record.get("reward_summary", {})
+        if reward and not reward.get("hidden_pass", False):
+            return
+        replay["patch_inspection_failures"].append({"task_id": task_id, "reason": "missing_diff"})
+        errors.append(f"patch inspection failed for {task_id}: missing diff")
+        return
     if not patch.startswith("diff --git") or not changed_files:
         replay["patch_inspection_failures"].append({"task_id": task_id, "reason": "missing_diff"})
         errors.append(f"patch inspection failed for {task_id}: missing diff")

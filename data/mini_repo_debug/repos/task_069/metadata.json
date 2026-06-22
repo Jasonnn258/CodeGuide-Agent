@@ -1,0 +1,32 @@
+{
+  "task_id": "task_069",
+  "bug_type": "json_config_parsing",
+  "difficulty": "easy",
+  "issue_path": "issue.md",
+  "public_test_cmd": "python -m pytest tests -q",
+  "hidden_test_cmd": "python -m pytest tests_hidden -q",
+  "target_files": [
+    "task_069_lib/config.py"
+  ],
+  "target_functions": [
+    "get_list"
+  ],
+  "expected_failure_mode": "Existing keys work, but missing keys return None instead of [].",
+  "generalization_axis": "Public covers key-present cases; hidden covers key-absent default.",
+  "repo_path": "data/mini_repo_debug/repos/task_069",
+  "source": "manual_p61_expansion",
+  "split": "train",
+  "scenario": "json_config_parsing public-hidden generalization",
+  "gold_patch": "gold.patch",
+  "gold_files": [
+    "task_069_lib/config.py"
+  ],
+  "gold_functions": [
+    "get_list"
+  ],
+  "forbidden_behaviors": [
+    "hard-code public examples",
+    "modify tests",
+    "ignore hidden edge cases"
+  ]
+}

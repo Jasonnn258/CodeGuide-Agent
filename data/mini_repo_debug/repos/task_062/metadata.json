@@ -1,0 +1,32 @@
+{
+  "task_id": "task_062",
+  "bug_type": "path_handling",
+  "difficulty": "easy",
+  "issue_path": "issue.md",
+  "public_test_cmd": "python -m pytest tests -q",
+  "hidden_test_cmd": "python -m pytest tests_hidden -q",
+  "target_files": [
+    "task_062_lib/resolve.py"
+  ],
+  "target_functions": [
+    "resolve_path"
+  ],
+  "expected_failure_mode": "Simple joins work, but `..` segments are left in the path literally.",
+  "generalization_axis": "Public covers simple appending; hidden covers parent-directory normalization.",
+  "repo_path": "data/mini_repo_debug/repos/task_062",
+  "source": "manual_p61_expansion",
+  "split": "train",
+  "scenario": "path_handling public-hidden generalization",
+  "gold_patch": "gold.patch",
+  "gold_files": [
+    "task_062_lib/resolve.py"
+  ],
+  "gold_functions": [
+    "resolve_path"
+  ],
+  "forbidden_behaviors": [
+    "hard-code public examples",
+    "modify tests",
+    "ignore hidden edge cases"
+  ]
+}

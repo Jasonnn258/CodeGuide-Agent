@@ -1,0 +1,13 @@
+diff --git a/task_066_lib/whitespace.py b/task_066_lib/whitespace.py
+index 23671c8..48392ae 100644
+--- a/task_066_lib/whitespace.py
++++ b/task_066_lib/whitespace.py
+@@ -2,7 +2,4 @@ from __future__ import annotations
+ 
+ 
+ def collapse_whitespace(text: str) -> str:
+-    result = text.replace("  ", " ")
+-    while "  " in result:
+-        result = result.replace("  ", " ")
+-    return result.strip()
++    return " ".join(text.split())

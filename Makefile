@@ -1,4 +1,4 @@
-.PHONY: test clean-check audit scale-report task-skeletons promotion-report promotion-check validate-pipeline clean-generated p5 p6 p9 dry-run-sft dry-run-pref promote-task rollout-plan readiness training-data training-preflight train-sft train-sft-smoke dpo-readiness docs-check canonical-check expansion-check backlog-check p34-check p38-check p42-check p50-check p55-check
+.PHONY: test clean-check audit scale-report task-skeletons promotion-report promotion-check validate-pipeline clean-generated p5 p6 p9 dry-run-sft dry-run-pref promote-task rollout-plan readiness training-data training-preflight train-sft train-sft-smoke dpo-readiness docs-check canonical-check expansion-check backlog-check p34-check p38-check p42-check p50-check p55-check p61-check
 
 test:
 	python -m codeguide_agent.testing.simple_pytest tests -q
@@ -92,3 +92,6 @@ p50-check:
 
 p55-check:
 	python scripts/p55_check_rollout_exports.py
+
+p61-check:
+	python scripts/p61_check_rollout_exports.py

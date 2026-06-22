@@ -1,0 +1,11 @@
+diff --git a/task_091_lib/gateway.py b/task_091_lib/gateway.py
+index bbdf9d2..4a2ba19 100644
+--- a/task_091_lib/gateway.py
++++ b/task_091_lib/gateway.py
+@@ -6,5 +6,5 @@ def fetch_with_timeout(url: str, timeout: float = 5.0) -> str:
+     try:
+         with urllib.request.urlopen(url, timeout=timeout) as resp:
+             return resp.read().decode()
+-    except Exception:
++    except (OSError, ValueError):
+         return ""

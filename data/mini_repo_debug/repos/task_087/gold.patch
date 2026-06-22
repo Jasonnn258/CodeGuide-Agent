@@ -1,0 +1,16 @@
+diff --git a/task_087_lib/defaults.py b/task_087_lib/defaults.py
+index 58ec8c9..3eddeb9 100644
+--- a/task_087_lib/defaults.py
++++ b/task_087_lib/defaults.py
+@@ -4,7 +4,8 @@ from typing import Any
+ 
+ 
+ def apply_defaults(target: dict[str, Any], defaults: dict[str, Any]) -> dict[str, Any]:
++    result = dict(target)
+     for key, value in defaults.items():
+-        if key not in target:
+-            target[key] = value
+-    return target
++        if key not in result:
++            result[key] = value
++    return result

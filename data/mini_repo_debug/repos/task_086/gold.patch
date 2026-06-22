@@ -1,0 +1,18 @@
+diff --git a/task_086_lib/unicode_utils.py b/task_086_lib/unicode_utils.py
+index 7226c42..6ecdbda 100644
+--- a/task_086_lib/unicode_utils.py
++++ b/task_086_lib/unicode_utils.py
+@@ -1,8 +1,9 @@
+ from __future__ import annotations
+ 
++import unicodedata
++
+ 
+ def strip_accents(text: str) -> str:
+-    replacements = {"\u00e9": "e", "\u00fc": "u", "\u00e0": "a"}
+-    for accented, plain in replacements.items():
+-        text = text.replace(accented, plain)
+-    return text
++    nfd = unicodedata.normalize("NFD", text)
++    result = "".join(c for c in nfd if not unicodedata.combining(c))
++    return unicodedata.normalize("NFC", result)
