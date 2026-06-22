@@ -1,0 +1,10 @@
+diff --git a/task_058_lib/fs.py b/task_058_lib/fs.py
+index 0001dc8..80678ee 100644
+--- a/task_058_lib/fs.py
++++ b/task_058_lib/fs.py
+@@ -4,4 +4,4 @@ import os
+ 
+ 
+ def ensure_dir(path: str) -> None:
+-    os.makedirs(path)
++    os.makedirs(path, exist_ok=True)

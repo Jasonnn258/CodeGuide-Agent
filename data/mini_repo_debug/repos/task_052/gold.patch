@@ -1,0 +1,10 @@
+diff --git a/task_052_lib/temperature.py b/task_052_lib/temperature.py
+index 1b3e88b..bdef46a 100644
+--- a/task_052_lib/temperature.py
++++ b/task_052_lib/temperature.py
+@@ -2,4 +2,4 @@ from __future__ import annotations
+ 
+ 
+ def celsius_to_fahrenheit(celsius: float) -> float:
+-    return celsius * 9 // 5 + 32
++    return celsius * 9.0 / 5.0 + 32

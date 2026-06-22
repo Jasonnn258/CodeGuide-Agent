@@ -1,0 +1,25 @@
+diff --git a/task_056_lib/helpers.py b/task_056_lib/helpers.py
+index 3ed5e51..66d23b1 100644
+--- a/task_056_lib/helpers.py
++++ b/task_056_lib/helpers.py
+@@ -2,4 +2,6 @@ from __future__ import annotations
+ 
+ 
+ def aggregate(values: list[float]) -> dict:
++    if not values:
++        return {"sum": 0.0, "count": 0}
+     return {"sum": sum(values), "count": len(values)}
+diff --git a/task_056_lib/stats.py b/task_056_lib/stats.py
+index ab0a381..52d0ed7 100644
+--- a/task_056_lib/stats.py
++++ b/task_056_lib/stats.py
+@@ -5,5 +5,8 @@ from task_056_lib.helpers import aggregate
+ 
+ def report(values: list[float]) -> dict:
+     result = aggregate(values)
+-    result["mean"] = result["sum"] / result["count"]
++    if result["count"] == 0:
++        result["mean"] = 0.0
++    else:
++        result["mean"] = result["sum"] / result["count"]
+     return result

@@ -1,0 +1,32 @@
+{
+  "task_id": "task_052",
+  "bug_type": "numeric_edge_case",
+  "difficulty": "easy",
+  "issue_path": "issue.md",
+  "public_test_cmd": "python -m pytest tests -q",
+  "hidden_test_cmd": "python -m pytest tests_hidden -q",
+  "target_files": [
+    "task_052_lib/temperature.py"
+  ],
+  "target_functions": [
+    "celsius_to_fahrenheit"
+  ],
+  "expected_failure_mode": "Values that divide evenly work, but fractional results are truncated by integer division.",
+  "generalization_axis": "Public covers multiples of 5 that divide evenly; hidden covers values that require floating-point precision.",
+  "repo_path": "data/mini_repo_debug/repos/task_052",
+  "source": "manual_p55_expansion",
+  "split": "train",
+  "scenario": "numeric_edge_case public-hidden generalization",
+  "gold_patch": "gold.patch",
+  "gold_files": [
+    "task_052_lib/temperature.py"
+  ],
+  "gold_functions": [
+    "celsius_to_fahrenheit"
+  ],
+  "forbidden_behaviors": [
+    "hard-code public examples",
+    "modify tests",
+    "ignore hidden edge cases"
+  ]
+}

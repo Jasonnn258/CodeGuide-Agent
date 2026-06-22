@@ -13,11 +13,11 @@ SFT records may come from successful model rollouts or from gold/reference patch
 
 ## Counts
 
-- SFT train: 40
-- SFT eval: 10
-- Preference train: 55
-- Preference eval: 14
-- Gold/reference SFT: 31
+- SFT train: 48
+- SFT eval: 12
+- Preference train: 71
+- Preference eval: 18
+- Gold/reference SFT: 41
 - Rollout SFT: 19
 
 ## Safety

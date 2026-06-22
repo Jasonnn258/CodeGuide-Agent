@@ -1,0 +1,15 @@
+diff --git a/task_060_lib/config.py b/task_060_lib/config.py
+index 85ad130..82265b6 100644
+--- a/task_060_lib/config.py
++++ b/task_060_lib/config.py
+@@ -3,5 +3,9 @@ from __future__ import annotations
+ 
+ def merge_config(base: dict, override: dict) -> dict:
+     result = dict(base)
+-    result.update(override)
++    for key, value in override.items():
++        if key in result and isinstance(result[key], dict) and isinstance(value, dict):
++            result[key] = merge_config(result[key], value)
++        else:
++            result[key] = value
+     return result

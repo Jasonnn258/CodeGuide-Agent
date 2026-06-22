@@ -1,0 +1,10 @@
+diff --git a/task_055_lib/tags.py b/task_055_lib/tags.py
+index 55ee897..bb0e854 100644
+--- a/task_055_lib/tags.py
++++ b/task_055_lib/tags.py
+@@ -2,4 +2,4 @@ from __future__ import annotations
+ 
+ 
+ def normalize_tag(tag: str) -> str:
+-    return tag.lower()
++    return tag.strip().lower()

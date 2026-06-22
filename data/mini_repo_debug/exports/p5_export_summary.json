@@ -1,5 +1,5 @@
 {
-  "gold_patch_sft_records": 31,
+  "gold_patch_sft_records": 41,
   "gold_patch_sft_task_ids": [
     "task_009",
     "task_021",
@@ -31,7 +31,17 @@
     "task_047",
     "task_048",
     "task_049",
-    "task_050"
+    "task_050",
+    "task_051",
+    "task_052",
+    "task_053",
+    "task_054",
+    "task_055",
+    "task_056",
+    "task_057",
+    "task_058",
+    "task_059",
+    "task_060"
   ],
   "preference_output": "data/mini_repo_debug/exports/p5_preference_pairs.jsonl",
   "preference_pairs": 1,
@@ -46,7 +56,7 @@
     "raw_test_stdout_stderr_exported": false
   },
   "sft_output": "data/mini_repo_debug/exports/p5_sft_rollouts.jsonl",
-  "sft_records": 50,
+  "sft_records": 60,
   "sft_task_ids": [
     "task_001",
     "task_002",
@@ -97,13 +107,23 @@
     "task_047",
     "task_048",
     "task_049",
-    "task_050"
+    "task_050",
+    "task_051",
+    "task_052",
+    "task_053",
+    "task_054",
+    "task_055",
+    "task_056",
+    "task_057",
+    "task_058",
+    "task_059",
+    "task_060"
   ],
   "skipped": {
-    "missing_llm_trajectory": 30
+    "missing_llm_trajectory": 40
   },
   "summary_output": "data/mini_repo_debug/exports/p5_export_summary.json",
   "task_009_preference_pair_generated": true,
-  "tasks_seen": 50,
+  "tasks_seen": 60,
   "trajectories_dir": "data/mini_repo_debug/trajectories"
 }

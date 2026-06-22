@@ -1,0 +1,12 @@
+diff --git a/task_054_lib/pipeline.py b/task_054_lib/pipeline.py
+index 02ef13f..e080131 100644
+--- a/task_054_lib/pipeline.py
++++ b/task_054_lib/pipeline.py
+@@ -8,7 +8,6 @@ def build_pipeline(steps: list[Callable]) -> Callable:
+         result = data
+         for step in steps:
+             result = step(result)
+-            break
+         return result
+ 
+     return run

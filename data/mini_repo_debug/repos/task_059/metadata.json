@@ -1,0 +1,32 @@
+{
+  "task_id": "task_059",
+  "bug_type": "validation_logic",
+  "difficulty": "easy",
+  "issue_path": "issue.md",
+  "public_test_cmd": "python -m pytest tests -q",
+  "hidden_test_cmd": "python -m pytest tests_hidden -q",
+  "target_files": [
+    "task_059_lib/validators.py"
+  ],
+  "target_functions": [
+    "is_valid_username"
+  ],
+  "expected_failure_mode": "Valid names and invalid short names work, but whitespace-padded valid names are incorrectly rejected.",
+  "generalization_axis": "Public covers valid/invalid strings; hidden covers whitespace normalization.",
+  "repo_path": "data/mini_repo_debug/repos/task_059",
+  "source": "manual_p55_expansion",
+  "split": "train",
+  "scenario": "validation_logic public-hidden generalization",
+  "gold_patch": "gold.patch",
+  "gold_files": [
+    "task_059_lib/validators.py"
+  ],
+  "gold_functions": [
+    "is_valid_username"
+  ],
+  "forbidden_behaviors": [
+    "hard-code public examples",
+    "modify tests",
+    "ignore hidden edge cases"
+  ]
+}

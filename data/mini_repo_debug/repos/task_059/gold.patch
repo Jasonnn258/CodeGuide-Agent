@@ -1,0 +1,11 @@
+diff --git a/task_059_lib/validators.py b/task_059_lib/validators.py
+index bdcd106..657ed14 100644
+--- a/task_059_lib/validators.py
++++ b/task_059_lib/validators.py
+@@ -2,4 +2,5 @@ from __future__ import annotations
+ 
+ 
+ def is_valid_username(name: str) -> bool:
+-    return len(name) >= 3 and name.isalnum()
++    cleaned = name.strip()
++    return len(cleaned) >= 3 and cleaned.isalnum()

@@ -1,0 +1,10 @@
+diff --git a/task_053_lib/sorting.py b/task_053_lib/sorting.py
+index eb3f843..9263677 100644
+--- a/task_053_lib/sorting.py
++++ b/task_053_lib/sorting.py
+@@ -2,4 +2,4 @@ from __future__ import annotations
+ 
+ 
+ def sort_names(names: list[str]) -> list[str]:
+-    return sorted(names)
++    return sorted(names, key=str.lower)

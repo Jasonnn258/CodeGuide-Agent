@@ -1,0 +1,15 @@
+diff --git a/task_051_lib/parser.py b/task_051_lib/parser.py
+index c1ec164..28ae8b1 100644
+--- a/task_051_lib/parser.py
++++ b/task_051_lib/parser.py
+@@ -2,7 +2,9 @@ from __future__ import annotations
+ 
+ 
+ def parse_int(value) -> int | None:
++    if not isinstance(value, str):
++        raise TypeError("value must be a string")
+     try:
+         return int(value)
+-    except (ValueError, TypeError):
++    except ValueError:
+         return None

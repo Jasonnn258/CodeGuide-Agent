@@ -1,0 +1,9 @@
+diff --git a/task_057_lib/counter.py b/task_057_lib/counter.py
+index db09768..948e60e 100644
+--- a/task_057_lib/counter.py
++++ b/task_057_lib/counter.py
+@@ -14,3 +14,4 @@ class HitCounter:
+ 
+     def reset(self) -> None:
+         self.count = 0
++        self.overflow = False
