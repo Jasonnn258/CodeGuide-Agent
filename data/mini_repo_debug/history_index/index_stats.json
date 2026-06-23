@@ -1,0 +1,14 @@
+{
+  "total_records": 200,
+  "by_split": {
+    "train": 200
+  },
+  "by_generator_family": {
+    "": 200
+  },
+  "retrieval_view_leakage_check": {
+    "passed": true,
+    "violations": []
+  },
+  "output_path": "data/mini_repo_debug/history_index/experience_records.jsonl"
+}

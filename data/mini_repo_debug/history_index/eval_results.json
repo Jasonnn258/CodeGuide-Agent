@@ -1,0 +1,47 @@
+{
+  "tests": [
+    {
+      "name": "basic_retrieval",
+      "passed": true,
+      "top_k_returned": 3
+    },
+    {
+      "name": "exclude_task_id",
+      "passed": true,
+      "excluded_id": "task_001",
+      "found_ids": [
+        "task_002",
+        "task_003",
+        "task_004",
+        "task_006",
+        "task_007",
+        "task_008",
+        "task_009",
+        "task_011",
+        "task_012",
+        "task_013"
+      ]
+    },
+    {
+      "name": "exclude_patch_hash",
+      "passed": true
+    },
+    {
+      "name": "no_full_diff_in_retrieval_view",
+      "passed": true,
+      "leaked_experience_ids": []
+    },
+    {
+      "name": "no_hidden_test_in_retrieval_view",
+      "passed": true,
+      "leaked_experience_ids": []
+    },
+    {
+      "name": "visibility_flag_respected",
+      "passed": true
+    }
+  ],
+  "overall_passed": true,
+  "index_path": "data/mini_repo_debug/history_index/experience_records.jsonl",
+  "index_size": 200
+}

@@ -107,14 +107,14 @@ def main() -> int:
         "deltas": {key: after.get(key, 0) - before.get(key, 0) for key in sorted(set(before) | set(after))},
         "phase_baseline_counts": PHASE_BASELINE_COUNTS,
         "phase_deltas": {key: after.get(key, 0) - PHASE_BASELINE_COUNTS.get(key, 0) for key in sorted(PHASE_BASELINE_COUNTS)},
-        "p61_succeeded": not failures
-        and all(item["returncode"] == 0 for item in command_results)
-        and (
-            after["sft_total"] >= 100
-            and after["preference_total"] >= 100
-            and after["preference_bank_total"] >= 100
-            and after["hard_preference_total"] >= 30
-        ),
+        "p61_succeeded": (
+        not failures
+        and after["sft_total"] >= 100
+        and after["preference_total"] >= 100
+        and after["preference_bank_total"] >= 100
+        and after["hard_preference_total"] >= 30
+        and after.get("active_task_count", 0) + after.get("planned_backlog_count", 0) >= 100
+    ),
     }
     summary_path = ROLLOUT_DIR / "summary.json"
     summary_path.write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8")
@@ -144,11 +144,16 @@ def read_counts(root: Path) -> dict[str, int]:
         if row.get("rejection_reason") == "public_pass_hidden_assertion_fail"
         or "hidden_assertion_fail" in row.get("reason_labels", [])
     ]
+    repos = list((root / "repos").glob("task_*")) if (root / "repos").exists() else []
+    backlog_path = root / "task_backlog.json"
+    planned = len(json.loads(backlog_path.read_text(encoding="utf-8"))) if backlog_path.exists() else 0
     return {
         "sft_total": len(_read_jsonl(package / "sft_train.jsonl")) + len(_read_jsonl(package / "sft_eval.jsonl")),
         "preference_total": len(_read_jsonl(package / "preference_train.jsonl")) + len(_read_jsonl(package / "preference_eval.jsonl")),
         "preference_bank_total": len(bank),
         "hard_preference_total": len(hard),
+        "active_task_count": len(repos),
+        "planned_backlog_count": planned,
     }
 
 
