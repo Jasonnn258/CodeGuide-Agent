@@ -29,3 +29,11 @@ data/mini_repo_debug/planned_task_skeletons/
 models/
 data/mini_repo_debug/hf_training/
 docs/TRAINING_PREFLIGHT_REPORT.json
+
+# local training artifacts
+models/
+logs/
+outputs/
+data/mini_repo_debug/hf_training/
+__pycache__/
+.pytest_cache/
