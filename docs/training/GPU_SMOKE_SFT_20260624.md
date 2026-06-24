@@ -43,6 +43,30 @@ This validates:
 
 This does not validate final model quality and should not be reported as performance improvement.
 
+## Qwen LoRA Smoke
+
+- model: Qwen/Qwen2.5-Coder-7B-Instruct
+- max_steps: 3
+- config: configs/training/sft_qwen2_5_coder_lora.json
+- log: logs/sft_qwen_lora_smoke_20260624_223433.log
+- result: BLOCKED (network error during model download)
+
+### Details
+
+- Data loading: 80 train / 20 eval rows mapped successfully.
+- Model download failed with `httpx.RemoteProtocolError`:
+  HuggingFace peer closed connection during `snapshot_download`,
+  received 2.5 GB of a 4.8 GB shard file.
+- HuggingFace cache grew from ~31G to ~37G during the attempt,
+  confirming the process was actively downloading.
+- Training never reached GPU or first step.
+
+### Root cause
+
+Transient network error from HuggingFace CDN — not a code or
+pipeline bug. A retry should succeed once connectivity is stable.
+
 ## Remaining Note
 
-The tiny-gpt2 smoke saved full model weights. A target LoRA/QLoRA smoke should be run separately to verify adapter saving.
+The tiny-gpt2 smoke saved full model weights. The Qwen LoRA smoke
+needs a retry to verify adapter saving.
