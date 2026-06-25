@@ -4,7 +4,29 @@
     "train": 200
   },
   "by_generator_family": {
-    "": 200
+    "advanced_repair": 7,
+    "basic_repair": 6,
+    "complex_repair": 19,
+    "config_parsing": 12,
+    "data_parsing": 3,
+    "edge_case_empty": 3,
+    "edge_case_none": 2,
+    "error_handling": 5,
+    "filtering": 2,
+    "formatting": 4,
+    "helper_function": 8,
+    "import_handling": 3,
+    "intermediate_repair": 3,
+    "llm": 3,
+    "missing_implementation": 1,
+    "noop": 66,
+    "original_buggy": 31,
+    "parsing": 8,
+    "path_handling": 3,
+    "sorting": 4,
+    "text_transform": 4,
+    "validation": 2,
+    "version_handling": 1
   },
   "retrieval_view_leakage_check": {
     "passed": true,

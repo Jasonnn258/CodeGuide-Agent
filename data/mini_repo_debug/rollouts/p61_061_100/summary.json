@@ -1,12 +1,16 @@
 {
   "after_counts": {
+    "active_task_count": 100,
     "hard_preference_total": 64,
+    "planned_backlog_count": 0,
     "preference_bank_total": 169,
     "preference_total": 169,
     "sft_total": 100
   },
   "before_counts": {
+    "active_task_count": 100,
     "hard_preference_total": 64,
+    "planned_backlog_count": 0,
     "preference_bank_total": 169,
     "preference_total": 169,
     "sft_total": 100
@@ -14,7 +18,7 @@
   "command_results": [
     {
       "command": [
-        "/Users/yjx/miniconda3/envs/codeguide/bin/python",
+        "/home/yjx/miniconda3/envs/codeguide/bin/python",
         "-m",
         "codeguide_agent.dataset.export_training_candidates",
         "--root",
@@ -28,7 +32,7 @@
     },
     {
       "command": [
-        "/Users/yjx/miniconda3/envs/codeguide/bin/python",
+        "/home/yjx/miniconda3/envs/codeguide/bin/python",
         "-m",
         "codeguide_agent.dataset.expand_preference_candidates",
         "--root",
@@ -42,7 +46,7 @@
     },
     {
       "command": [
-        "/Users/yjx/miniconda3/envs/codeguide/bin/python",
+        "/home/yjx/miniconda3/envs/codeguide/bin/python",
         "-m",
         "codeguide_agent.dataset.prepare_training_package",
         "--root",
@@ -58,7 +62,7 @@
     },
     {
       "command": [
-        "/Users/yjx/miniconda3/envs/codeguide/bin/python",
+        "/home/yjx/miniconda3/envs/codeguide/bin/python",
         "-m",
         "codeguide_agent.training.build_hf_training_data",
         "--package",
@@ -72,24 +76,31 @@
     }
   ],
   "deltas": {
+    "active_task_count": 0,
     "hard_preference_total": 0,
+    "planned_backlog_count": 0,
     "preference_bank_total": 0,
     "preference_total": 0,
     "sft_total": 0
   },
   "failures": [],
-  "p61_succeeded": false,
+  "idempotent": true,
+  "p61_succeeded": true,
   "phase_baseline_counts": {
-    "hard_preference_total": 27,
-    "preference_bank_total": 89,
-    "preference_total": 89,
-    "sft_total": 60
+    "active_task_count": 100,
+    "hard_preference_total": 64,
+    "planned_backlog_count": 0,
+    "preference_bank_total": 169,
+    "preference_total": 169,
+    "sft_total": 100
   },
   "phase_deltas": {
-    "hard_preference_total": 37,
-    "preference_bank_total": 80,
-    "preference_total": 80,
-    "sft_total": 40
+    "active_task_count": 0,
+    "hard_preference_total": 0,
+    "planned_backlog_count": 0,
+    "preference_bank_total": 0,
+    "preference_total": 0,
+    "sft_total": 0
   },
   "policies": [
     "noop",

@@ -144,6 +144,91 @@ def build_experience_records(
     return index
 
 
+def _extract_issue_text(source: dict[str, Any]) -> str:
+    """Extract issue text from SFT or preference record."""
+    # Preference records have a direct 'prompt' field
+    prompt = source.get("prompt", "")
+    if prompt:
+        return prompt
+    # SFT records have messages array with user content
+    messages = source.get("messages", [])
+    for msg in messages:
+        if msg.get("role") == "user":
+            return msg.get("content", "")
+    return ""
+
+
+def _extract_issue_summary(issue_text: str) -> str:
+    """Extract just the issue description parts, stripping agent instruction prefix."""
+    # Look for the "Issue:\n" section
+    parts = issue_text.split("Issue:\n", 1)
+    if len(parts) > 1:
+        return parts[1].strip()
+    # Fallback: try to find "# " title line
+    for line in issue_text.splitlines():
+        line = line.strip()
+        if line.startswith("# "):
+            return line[2:].strip()
+    return issue_text.strip()
+
+
+def _derive_generator_family(source: dict[str, Any], task_id: str) -> str:
+    """Derive generator_family from source data or task characteristics."""
+    # Preference records may have source_policy
+    policy = source.get("source_policy", "")
+    if policy:
+        return policy
+
+    # Try to derive from issue title keywords
+    issue_text = _extract_issue_text(source)
+    summary = _extract_issue_summary(issue_text).lower()
+
+    # Keyword-based categorization
+    keyword_map = {
+        "yaml": "config_parsing",
+        "config": "config_parsing",
+        "json": "data_parsing",
+        "csv": "data_parsing",
+        "parse": "parsing",
+        "path": "path_handling",
+        "import": "import_handling",
+        "validate": "validation",
+        "email": "validation",
+        "sort": "sorting",
+        "filter": "filtering",
+        "empty": "edge_case_empty",
+        "none": "edge_case_none",
+        "null": "edge_case_null",
+        "upper": "text_transform",
+        "lower": "text_transform",
+        "text": "text_transform",
+        "crash": "error_handling",
+        "error": "error_handling",
+        "format": "formatting",
+        "version": "version_handling",
+        "missing": "missing_implementation",
+        "helper": "helper_function",
+        "nested": "nested_structure",
+    }
+    for keyword, family in keyword_map.items():
+        if keyword in summary:
+            return family
+
+    # Fallback: derive from task_id range
+    try:
+        num = int(task_id.split("_")[-1])
+        if num <= 20:
+            return "basic_repair"
+        elif num <= 40:
+            return "intermediate_repair"
+        elif num <= 60:
+            return "advanced_repair"
+        else:
+            return "complex_repair"
+    except (ValueError, IndexError):
+        return "unknown"
+
+
 def _make_experience_record(
     task_id: str,
     source: dict[str, Any],
@@ -154,29 +239,63 @@ def _make_experience_record(
     if not exp_id:
         exp_id = f"{task_id}_gold_reference"
 
+    # Gold patch: try train_package data first, then repo file
     gold_patch = ""
+    if kind == "sft":
+        gold_patch = source.get("final_patch", "")
+    elif kind == "preference":
+        chosen = source.get("chosen", {})
+        gold_patch = chosen.get("final_patch", "")
+
     gold_patch_path = repos / task_id / "gold.patch"
-    if gold_patch_path.exists():
+    if not gold_patch and gold_patch_path.exists():
         gold_patch = gold_patch_path.read_text(encoding="utf-8")
 
     patch_hash = hashlib.sha256(gold_patch.encode()).hexdigest()[:16] if gold_patch else ""
-    issue_text = source.get("issue", source.get("issue_text", ""))
+
+    # Extract issue text from actual data schema
+    issue_text = _extract_issue_text(source)
+    issue_summary = _extract_issue_summary(issue_text)
     issue_pattern_hash = hashlib.sha256(issue_text.encode()[:200]).hexdigest()[:16] if issue_text else ""
 
-    generator_family = source.get("bug_type", source.get("scenario", ""))
-    failure_signal = source.get("expected_failure_mode", source.get("failure_signal", ""))
-    target_files = source.get("target_files", source.get("changed_files", []))
+    generator_family = _derive_generator_family(source, task_id)
 
-    # Build a patch_summary from the diff without including the full diff
+    # Extract failure signal
+    if kind == "preference":
+        rejection_reason = source.get("rejection_reason", "")
+        reason_labels = source.get("reason_labels", [])
+        failure_signal = rejection_reason or (", ".join(reason_labels) if reason_labels else "")
+    else:
+        reward = source.get("reward_summary", {})
+        failure_signal = reward.get("hidden_failure_type", "")
+        if not failure_signal or failure_signal == "none":
+            failure_signal = "public_passes"
+
+    # Target files from localization
+    localization = source.get("localization", {})
+    target_files = localization.get("gold_files", [])
+
+    # Build patch_summary from the diff without including the full diff
     patch_summary = _summarize_patch(gold_patch)
+
+    # Negative rollouts for preference records
+    negative_rollouts = []
+    if kind == "preference":
+        rejected = source.get("rejected", {})
+        if rejected:
+            negative_rollouts.append({
+                "trajectory_id": rejected.get("trajectory_id", ""),
+                "rejection_reason": source.get("rejection_reason", ""),
+                "reason_labels": source.get("reason_labels", []),
+            })
 
     storage_view = {
         "gold_patch": gold_patch,
-        "negative_rollouts": source.get("negative_rollouts", []),
+        "negative_rollouts": negative_rollouts,
     }
 
     retrieval_view = {
-        "issue_summary": _truncate(issue_text, 500),
+        "issue_summary": _truncate(issue_summary, 500),
         "failure_signal": failure_signal,
         "patch_summary": patch_summary,
         "changed_files": target_files,
