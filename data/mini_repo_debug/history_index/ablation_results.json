@@ -1,0 +1,68 @@
+{
+  "modes": {
+    "quality": {
+      "mode": "quality",
+      "family_hit_at_1": 0.27,
+      "family_hit_at_3": 0.43,
+      "family_hit_at_5": 0.46,
+      "file_hit_at_1": 0.0,
+      "file_hit_at_3": 0.0,
+      "file_hit_at_5": 0.0,
+      "avg_top5": 5.0,
+      "total_queries": 100,
+      "family_queries": 100,
+      "file_queries": 100,
+      "coverage_empty_count": 0,
+      "coverage_empty_pct": 0.0,
+      "leakage_safe": true,
+      "leakage_violations": [],
+      "passed": true
+    },
+    "strict": {
+      "mode": "strict",
+      "family_hit_at_1": 0.0,
+      "family_hit_at_3": 0.0,
+      "family_hit_at_5": 0.0,
+      "file_hit_at_1": 0.0,
+      "file_hit_at_3": 0.0,
+      "file_hit_at_5": 0.0,
+      "avg_top5": 5.0,
+      "total_queries": 100,
+      "family_queries": 100,
+      "file_queries": 100,
+      "coverage_empty_count": 0,
+      "coverage_empty_pct": 0.0,
+      "leakage_safe": true,
+      "leakage_violations": [],
+      "passed": true
+    },
+    "strict_full": {
+      "mode": "strict_full",
+      "family_hit_at_1": 0.0,
+      "family_hit_at_3": 0.0,
+      "family_hit_at_5": 0.0,
+      "file_hit_at_1": 0.0,
+      "file_hit_at_3": 0.0,
+      "file_hit_at_5": 0.0,
+      "avg_top5": 0.0,
+      "total_queries": 100,
+      "family_queries": 100,
+      "file_queries": 100,
+      "coverage_empty_count": 100,
+      "coverage_empty_pct": 100.0,
+      "leakage_safe": true,
+      "leakage_violations": [],
+      "passed": false
+    }
+  },
+  "overall_passed": true,
+  "leakage": {
+    "passed": true,
+    "violations": [],
+    "total_checked": 200
+  },
+  "index_path": "data/mini_repo_debug/history_index/experience_records.jsonl",
+  "total_records": 200,
+  "unique_tasks": 100,
+  "unique_families": 23
+}

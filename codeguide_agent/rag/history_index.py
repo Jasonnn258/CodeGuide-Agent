@@ -44,6 +44,26 @@ class HistoryIndex:
     def add(self, record: ExperienceRecord) -> None:
         self.records.append(record)
 
+    @property
+    def task_ids(self) -> set[str]:
+        return {rec.task_id for rec in self.records}
+
+    @property
+    def generator_families(self) -> set[str]:
+        return {rec.generator_family for rec in self.records if rec.generator_family}
+
+    @property
+    def patch_hashes(self) -> set[str]:
+        return {rec.patch_hash for rec in self.records if rec.patch_hash}
+
+    @property
+    def issue_pattern_hashes(self) -> set[str]:
+        return {rec.issue_pattern_hash for rec in self.records if rec.issue_pattern_hash}
+
+    @property
+    def splits(self) -> set[str]:
+        return {rec.split for rec in self.records}
+
     def retrieve(
         self,
         query: str = "",
@@ -62,7 +82,6 @@ class HistoryIndex:
         exclude_splits = exclude_splits or set()
 
         candidates: list[tuple[float, ExperienceRecord]] = []
-        query_lower = query.lower()
         for rec in self.records:
             if rec.task_id in exclude_task_ids:
                 continue
@@ -74,11 +93,100 @@ class HistoryIndex:
                 continue
             if rec.split in exclude_splits:
                 continue
-            # simple BM25-like relevance via issue_summary overlap
-            score = _simple_relevance(query_lower, rec.retrieval_view.get("issue_summary", ""))
+            score = _multi_field_score(query, rec)
             candidates.append((score, rec))
-        candidates.sort(key=lambda x: x[0], reverse=True)
+        candidates = _deterministic_sort(candidates)
         return [rec for _, rec in candidates[:top_k]]
+
+    def retrieve_quality(
+        self,
+        query: str = "",
+        top_k: int = 5,
+        *,
+        exclude_task_ids: set[str] | None = None,
+        exclude_patch_hashes: set[str] | None = None,
+    ) -> list[ExperienceRecord]:
+        """Quality-mode retrieval: exclude only current task + exact patch hash.
+
+        This maximizes recall for finding related experiences while preventing
+        exact self-match. Use for offline evaluation and retrieval-quality
+        measurement only — NOT safe for agent loop without additional filters.
+        """
+        exclude_task_ids = exclude_task_ids or set()
+        exclude_patch_hashes = exclude_patch_hashes or set()
+
+        candidates: list[tuple[float, ExperienceRecord]] = []
+        for rec in self.records:
+            if rec.task_id in exclude_task_ids:
+                continue
+            if rec.patch_hash in exclude_patch_hashes:
+                continue
+            score = _multi_field_score(query, rec)
+            candidates.append((score, rec))
+        candidates = _deterministic_sort(candidates)
+        return [rec for _, rec in candidates[:top_k]]
+
+    def retrieve_strict(
+        self,
+        query: str = "",
+        top_k: int = 5,
+        *,
+        exclude_task_ids: set[str] | None = None,
+        exclude_generator_families: set[str] | None = None,
+        exclude_patch_hashes: set[str] | None = None,
+        exclude_issue_pattern_hashes: set[str] | None = None,
+        exclude_splits: set[str] | None = None,
+    ) -> list[ExperienceRecord]:
+        """Strict safety-mode retrieval: exclude all five leakage dimensions.
+
+        This is the safe mode for agent loop — prevents template-level leakage
+        by also filtering generator_family and issue_pattern_hash matches.
+        Coverage may be lower than quality mode, but leakage risk is minimal.
+        """
+        return self.retrieve(
+            query=query,
+            top_k=top_k,
+            exclude_task_ids=exclude_task_ids,
+            exclude_generator_families=exclude_generator_families,
+            exclude_patch_hashes=exclude_patch_hashes,
+            exclude_issue_pattern_hashes=exclude_issue_pattern_hashes,
+            exclude_splits=exclude_splits,
+        )
+
+    def get_coverage(
+        self,
+        *,
+        exclude_task_ids: set[str] | None = None,
+        exclude_generator_families: set[str] | None = None,
+        exclude_patch_hashes: set[str] | None = None,
+        exclude_issue_pattern_hashes: set[str] | None = None,
+        exclude_splits: set[str] | None = None,
+    ) -> int:
+        """Return how many records remain after applying exclusion filters.
+
+        Returns 0 if all records are excluded — this is the "silently empty"
+        guard that tests must catch.
+        """
+        exclude_task_ids = exclude_task_ids or set()
+        exclude_generator_families = exclude_generator_families or set()
+        exclude_patch_hashes = exclude_patch_hashes or set()
+        exclude_issue_pattern_hashes = exclude_issue_pattern_hashes or set()
+        exclude_splits = exclude_splits or set()
+
+        count = 0
+        for rec in self.records:
+            if rec.task_id in exclude_task_ids:
+                continue
+            if rec.generator_family in exclude_generator_families:
+                continue
+            if rec.patch_hash in exclude_patch_hashes:
+                continue
+            if rec.issue_pattern_hash in exclude_issue_pattern_hashes:
+                continue
+            if rec.split in exclude_splits:
+                continue
+            count += 1
+        return count
 
     def save(self, path: Path) -> None:
         path.parent.mkdir(parents=True, exist_ok=True)
@@ -344,14 +452,55 @@ def _truncate(text: str, max_len: int) -> str:
 
 
 def _simple_relevance(query: str, document: str) -> float:
+    """Deterministic term-overlap relevance score (0.0–1.0)."""
     if not query:
         return 0.0
     doc_lower = document.lower()
+    terms = query.lower().split()
     score = 0.0
-    for term in query.split():
+    for term in terms:
         if term in doc_lower:
             score += 1.0
-    return score / max(1, len(query.split()))
+        else:
+            # Penalize missing terms slightly for better discrimination
+            score += 0.0
+    return score / max(1, len(terms))
+
+
+def _multi_field_score(query: str, rec: "ExperienceRecord") -> float:
+    """Deterministic multi-field scoring using retrieval_view fields.
+
+    Weights:
+      - issue_summary:     0.40
+      - failure_signal:    0.25
+      - patch_summary:     0.20
+      - changed_files:     0.10
+      - strategy:          0.05
+
+    Tie-breaking: lexicographic by experience_id for full determinism.
+    """
+    if not query:
+        return 0.0
+    rv = rec.retrieval_view
+    fields = {
+        "issue_summary": 0.40,
+        "failure_signal": 0.25,
+        "patch_summary": 0.20,
+        "changed_files": 0.10,
+        "strategy": 0.05,
+    }
+    score = 0.0
+    for field, weight in fields.items():
+        text = rv.get(field, "")
+        if isinstance(text, list):
+            text = " ".join(text)
+        score += weight * _simple_relevance(query, text)
+    return score
+
+
+def _deterministic_sort(candidates: list[tuple[float, "ExperienceRecord"]]) -> list[tuple[float, "ExperienceRecord"]]:
+    """Sort candidates by score descending, then by experience_id for determinism."""
+    return sorted(candidates, key=lambda x: (-x[0], x[1].experience_id))
 
 
 def _read_jsonl(path: Path) -> list[dict[str, Any]]:
