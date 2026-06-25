@@ -37,3 +37,4 @@ outputs/
 data/mini_repo_debug/hf_training/
 __pycache__/
 .pytest_cache/
+checkpoints/
