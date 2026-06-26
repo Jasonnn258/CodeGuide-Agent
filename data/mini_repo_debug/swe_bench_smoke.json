@@ -1,0 +1,81 @@
+{
+  "total": 5,
+  "resolved": 5,
+  "unresolved": 0,
+  "error_count": 0,
+  "resolve_rate": 1.0,
+  "all_gold_resolved": true,
+  "all_empty_unresolved": true,
+  "passed": true,
+  "per_task_gold": [
+    {
+      "instance_id": "task_082",
+      "resolved": true,
+      "repo_setup_ok": true,
+      "patch_applied_ok": true,
+      "error": ""
+    },
+    {
+      "instance_id": "task_015",
+      "resolved": true,
+      "repo_setup_ok": true,
+      "patch_applied_ok": true,
+      "error": ""
+    },
+    {
+      "instance_id": "task_004",
+      "resolved": true,
+      "repo_setup_ok": true,
+      "patch_applied_ok": true,
+      "error": ""
+    },
+    {
+      "instance_id": "task_095",
+      "resolved": true,
+      "repo_setup_ok": true,
+      "patch_applied_ok": true,
+      "error": ""
+    },
+    {
+      "instance_id": "task_036",
+      "resolved": true,
+      "repo_setup_ok": true,
+      "patch_applied_ok": true,
+      "error": ""
+    }
+  ],
+  "per_task_empty": [
+    {
+      "instance_id": "task_082",
+      "resolved": false,
+      "error": "empty agent patch"
+    },
+    {
+      "instance_id": "task_015",
+      "resolved": false,
+      "error": "empty agent patch"
+    },
+    {
+      "instance_id": "task_004",
+      "resolved": false,
+      "error": "empty agent patch"
+    },
+    {
+      "instance_id": "task_095",
+      "resolved": false,
+      "error": "empty agent patch"
+    },
+    {
+      "instance_id": "task_036",
+      "resolved": false,
+      "error": "empty agent patch"
+    }
+  ],
+  "task_ids": [
+    "task_082",
+    "task_015",
+    "task_004",
+    "task_095",
+    "task_036"
+  ]
+}

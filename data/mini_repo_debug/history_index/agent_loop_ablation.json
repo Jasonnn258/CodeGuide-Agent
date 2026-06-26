@@ -1,0 +1,2448 @@
+{
+  "disabled": {
+    "total_tasks": 100,
+    "total_snippets": 0,
+    "avg_snippets_per_task": 0.0,
+    "avg_chars_per_snippet": 0,
+    "same_family_warnings": 0,
+    "leakage_safe": true,
+    "leakage_violations": [],
+    "safety_report": {
+      "total_calls": 100,
+      "built_count": 0,
+      "disabled_count": 100,
+      "same_family_warnings": 0,
+      "leakage_events": 0,
+      "safe": true
+    },
+    "per_task": [
+      {
+        "task_id": "task_001",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_002",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_003",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_004",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_006",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_007",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_008",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_009",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_011",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_012",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_013",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_014",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_016",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_017",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_018",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_019",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_021",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_022",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_023",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_024",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_026",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_027",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_028",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_029",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_031",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_032",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_033",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_034",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_036",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_037",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_038",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_039",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_041",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_042",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_043",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_044",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_046",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_047",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_048",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_049",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_051",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_052",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_053",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_054",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_056",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_057",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_058",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_059",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_061",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_062",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_063",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_064",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_066",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_067",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_068",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_069",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_071",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_072",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_073",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_074",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_076",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_077",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_078",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_079",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_081",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_082",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_083",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_084",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_086",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_087",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_088",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_089",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_091",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_092",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_093",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_094",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_096",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_097",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_098",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_099",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_005",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_010",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_015",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_020",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_025",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_030",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_035",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_040",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_045",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_050",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_055",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_060",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_065",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_070",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_075",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_080",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_085",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_090",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_095",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_100",
+        "snippet_count": 0,
+        "retrieved_ids": [],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      }
+    ]
+  },
+  "enabled": {
+    "total_tasks": 100,
+    "total_snippets": 300,
+    "avg_snippets_per_task": 3.0,
+    "avg_chars_per_snippet": 412.2,
+    "same_family_warnings": 0,
+    "leakage_safe": true,
+    "leakage_violations": [],
+    "safety_report": {
+      "total_calls": 100,
+      "built_count": 100,
+      "disabled_count": 0,
+      "same_family_warnings": 0,
+      "leakage_events": 0,
+      "safe": true
+    },
+    "per_task": [
+      {
+        "task_id": "task_001",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_026_gold_reference",
+          "task_026_unknown",
+          "task_049_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_002",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_027_gold_reference",
+          "task_027_unknown",
+          "task_015_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_003",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_014_gold_reference",
+          "task_049_gold_reference",
+          "task_049_unknown"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_004",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_023_gold_reference",
+          "task_023_unknown",
+          "task_008_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_006",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_041_unknown",
+          "task_041_gold_reference",
+          "task_075_unknown"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_007",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_042_gold_reference",
+          "task_042_unknown",
+          "task_022_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_008",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_023_gold_reference",
+          "task_023_unknown",
+          "task_028_unknown"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_009",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_024_gold_reference",
+          "task_024_unknown",
+          "task_038_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_011",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_059_gold_reference",
+          "task_059_unknown",
+          "task_079_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_012",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_047_gold_reference",
+          "task_047_unknown",
+          "task_026_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_013",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_048_gold_reference",
+          "task_048_unknown",
+          "task_021_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_014",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_026_gold_reference",
+          "task_026_unknown",
+          "task_003_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_016",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_074_unknown",
+          "task_074_gold_reference",
+          "task_031_unknown"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_017",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_056_gold_reference",
+          "task_056_unknown",
+          "task_074_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_018",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_028_gold_reference",
+          "task_028_unknown",
+          "task_073_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_019",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_030_gold_reference",
+          "task_030_unknown",
+          "task_034_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_021",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_026_unknown",
+          "task_026_gold_reference",
+          "task_024_unknown"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_022",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_042_gold_reference",
+          "task_042_unknown",
+          "task_007_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_023",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_063_gold_reference",
+          "task_063_unknown",
+          "task_021_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_024",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_037_gold_reference",
+          "task_009_gold_reference",
+          "task_037_unknown"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_026",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_021_gold_reference",
+          "task_049_gold_reference",
+          "task_049_unknown"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_027",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_015_gold_reference",
+          "task_050_gold_reference",
+          "task_015_unknown"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_028",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_018_gold_reference",
+          "task_074_gold_reference",
+          "task_033_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_029",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_031_gold_reference",
+          "task_031_unknown",
+          "task_074_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_031",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_029_gold_reference",
+          "task_029_unknown",
+          "task_034_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_032",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_006_gold_reference",
+          "task_022_gold_reference",
+          "task_022_unknown"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_033",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_028_gold_reference",
+          "task_028_unknown",
+          "task_021_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_034",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_030_gold_reference",
+          "task_030_unknown",
+          "task_019_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_036",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_006_gold_reference",
+          "task_021_gold_reference",
+          "task_025_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_037",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_024_gold_reference",
+          "task_024_unknown",
+          "task_009_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_038",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_024_gold_reference",
+          "task_024_unknown",
+          "task_009_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_039",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_078_gold_reference",
+          "task_078_unknown",
+          "task_033_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_041",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_006_gold_reference",
+          "task_006_unknown",
+          "task_026_unknown"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_042",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_022_gold_reference",
+          "task_007_gold_reference",
+          "task_022_unknown"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_043",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_063_gold_reference",
+          "task_063_unknown",
+          "task_083_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_044",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_037_gold_reference",
+          "task_037_unknown",
+          "task_024_unknown"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_046",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_059_unknown",
+          "task_059_gold_reference",
+          "task_021_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_047",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_012_gold_reference",
+          "task_012_unknown",
+          "task_024_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_048",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_013_gold_reference",
+          "task_013_unknown",
+          "task_065_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_049",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_026_gold_reference",
+          "task_026_unknown",
+          "task_051_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_051",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_071_gold_reference",
+          "task_071_unknown",
+          "task_029_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_052",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_051_gold_reference",
+          "task_051_unknown",
+          "task_029_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_053",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_073_gold_reference",
+          "task_028_gold_reference",
+          "task_028_unknown"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_054",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_028_gold_reference",
+          "task_028_unknown",
+          "task_041_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_056",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_069_unknown",
+          "task_069_gold_reference",
+          "task_017_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_057",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_077_gold_reference",
+          "task_077_unknown",
+          "task_078_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_058",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_071_unknown",
+          "task_074_unknown",
+          "task_074_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_059",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_011_gold_reference",
+          "task_039_gold_reference",
+          "task_039_unknown"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_061",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_026_unknown",
+          "task_041_unknown",
+          "task_026_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_062",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_042_gold_reference",
+          "task_042_unknown",
+          "task_022_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_063",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_023_gold_reference",
+          "task_043_gold_reference",
+          "task_023_unknown"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_064",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_072_gold_reference",
+          "task_072_unknown",
+          "task_053_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_066",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_025_gold_reference",
+          "task_046_gold_reference",
+          "task_046_unknown"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_067",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_024_gold_reference",
+          "task_024_unknown",
+          "task_057_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_068",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_028_gold_reference",
+          "task_028_unknown",
+          "task_008_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_069",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_089_gold_reference",
+          "task_089_unknown",
+          "task_056_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_071",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_051_gold_reference",
+          "task_051_unknown",
+          "task_074_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_072",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_023_gold_reference",
+          "task_034_gold_reference",
+          "task_059_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_073",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_089_gold_reference",
+          "task_089_unknown",
+          "task_074_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_074",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_016_gold_reference",
+          "task_016_unknown",
+          "task_089_unknown"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_076",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_019_gold_reference",
+          "task_019_unknown",
+          "task_024_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_077",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_057_gold_reference",
+          "task_057_unknown",
+          "task_097_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_078",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_021_gold_reference",
+          "task_021_unknown",
+          "task_076_unknown"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_079",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_076_gold_reference",
+          "task_076_unknown",
+          "task_005_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_081",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_076_gold_reference",
+          "task_009_gold_reference",
+          "task_009_unknown"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_082",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_074_gold_reference",
+          "task_074_unknown",
+          "task_024_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_083",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_084_gold_reference",
+          "task_084_unknown",
+          "task_005_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_084",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_024_gold_reference",
+          "task_024_unknown",
+          "task_009_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_086",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_097_gold_reference",
+          "task_097_unknown",
+          "task_024_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_087",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_012_gold_reference",
+          "task_012_unknown",
+          "task_047_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_088",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_047_gold_reference",
+          "task_031_gold_reference",
+          "task_031_unknown"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_089",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_073_unknown",
+          "task_073_gold_reference",
+          "task_069_unknown"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_091",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_051_gold_reference",
+          "task_051_unknown",
+          "task_071_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_092",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_071_gold_reference",
+          "task_071_unknown",
+          "task_062_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_093",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_053_gold_reference",
+          "task_053_unknown",
+          "task_075_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_094",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_075_unknown",
+          "task_075_gold_reference",
+          "task_073_unknown"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_096",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_054_unknown",
+          "task_054_gold_reference",
+          "task_019_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_097",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_077_gold_reference",
+          "task_077_unknown",
+          "task_057_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_098",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_092_gold_reference",
+          "task_092_unknown",
+          "task_020_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_099",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_079_gold_reference",
+          "task_079_unknown",
+          "task_059_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_005",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_034_gold_reference",
+          "task_034_unknown",
+          "task_019_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_010",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_076_unknown",
+          "task_076_gold_reference",
+          "task_024_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_015",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_050_gold_reference",
+          "task_050_unknown",
+          "task_027_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_020",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_035_gold_reference",
+          "task_035_unknown",
+          "task_007_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_025",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_024_gold_reference",
+          "task_024_unknown",
+          "task_021_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_030",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_019_gold_reference",
+          "task_019_unknown",
+          "task_034_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_035",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_020_gold_reference",
+          "task_020_unknown",
+          "task_098_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_040",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_060_gold_reference",
+          "task_060_unknown",
+          "task_012_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_045",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_025_gold_reference",
+          "task_025_unknown",
+          "task_022_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_050",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_015_gold_reference",
+          "task_027_gold_reference",
+          "task_015_unknown"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_055",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_095_gold_reference",
+          "task_095_unknown",
+          "task_053_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_060",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_100_gold_reference",
+          "task_100_unknown",
+          "task_040_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_065",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_053_gold_reference",
+          "task_053_unknown",
+          "task_034_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_070",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_050_gold_reference",
+          "task_015_gold_reference",
+          "task_050_unknown"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_075",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_095_gold_reference",
+          "task_095_unknown",
+          "task_053_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_080",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_038_gold_reference",
+          "task_038_unknown",
+          "task_100_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_085",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_023_gold_reference",
+          "task_045_gold_reference",
+          "task_045_unknown"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_090",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_050_gold_reference",
+          "task_050_unknown",
+          "task_070_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_095",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_053_gold_reference",
+          "task_053_unknown",
+          "task_075_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      },
+      {
+        "task_id": "task_100",
+        "snippet_count": 3,
+        "retrieved_ids": [
+          "task_060_gold_reference",
+          "task_060_unknown",
+          "task_040_gold_reference"
+        ],
+        "same_family_warning": false,
+        "same_family_warning_detail": "",
+        "leakage_safe": true,
+        "leakage_violations": [],
+        "total_available": 200
+      }
+    ]
+  },
+  "overall_passed": true,
+  "config": {
+    "mode": "quality",
+    "max_snippets": 3,
+    "max_chars_per_snippet": 600
+  },
+  "index_path": "data/mini_repo_debug/history_index/experience_records.jsonl",
+  "total_records": 200
+}

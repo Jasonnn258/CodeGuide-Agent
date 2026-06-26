@@ -1,0 +1,621 @@
+{
+  "total_chunks": 428,
+  "unique_files": 209,
+  "unique_terms": 1087,
+  "files": [
+    "data/mini_repo_debug/repos/task_001/src/config_loader.py",
+    "data/mini_repo_debug/repos/task_001/tests/test_config_loader.py",
+    "data/mini_repo_debug/repos/task_002/src/text_cli.py",
+    "data/mini_repo_debug/repos/task_002/tests/test_text_cli.py",
+    "data/mini_repo_debug/repos/task_003/src/summarizer.py",
+    "data/mini_repo_debug/repos/task_003/tests/test_summarizer.py",
+    "data/mini_repo_debug/repos/task_004/src/pricing.py",
+    "data/mini_repo_debug/repos/task_004/tests/test_pricing.py",
+    "data/mini_repo_debug/repos/task_005/src/calculator.py",
+    "data/mini_repo_debug/repos/task_005/src/formatter.py",
+    "data/mini_repo_debug/repos/task_005/src/service.py",
+    "data/mini_repo_debug/repos/task_005/tests/test_service.py",
+    "data/mini_repo_debug/repos/task_006/src/pair_parser.py",
+    "data/mini_repo_debug/repos/task_006/tests/test_pair_parser.py",
+    "data/mini_repo_debug/repos/task_007/src/assets.py",
+    "data/mini_repo_debug/repos/task_007/tests/test_assets.py",
+    "data/mini_repo_debug/repos/task_008/src/greetings.py",
+    "data/mini_repo_debug/repos/task_008/tests/test_greetings.py",
+    "data/mini_repo_debug/repos/task_009/src/tags.py",
+    "data/mini_repo_debug/repos/task_009/tests/test_tags.py",
+    "data/mini_repo_debug/repos/task_010/src/bounds.py",
+    "data/mini_repo_debug/repos/task_010/tests/test_bounds.py",
+    "data/mini_repo_debug/repos/task_011/src/email_utils.py",
+    "data/mini_repo_debug/repos/task_011/tests/test_email_utils.py",
+    "data/mini_repo_debug/repos/task_012/src/config_defaults.py",
+    "data/mini_repo_debug/repos/task_012/tests/test_config_defaults.py",
+    "data/mini_repo_debug/repos/task_013/src/due_dates.py",
+    "data/mini_repo_debug/repos/task_013/tests/test_due_dates.py",
+    "data/mini_repo_debug/repos/task_014/src/jsonl_loader.py",
+    "data/mini_repo_debug/repos/task_014/tests/test_jsonl_loader.py",
+    "data/mini_repo_debug/repos/task_015/src/greet_cli.py",
+    "data/mini_repo_debug/repos/task_015/tests/test_greet_cli.py",
+    "data/mini_repo_debug/repos/task_016/src/users.py",
+    "data/mini_repo_debug/repos/task_016/tests/test_users.py",
+    "data/mini_repo_debug/repos/task_017/src/metrics.py",
+    "data/mini_repo_debug/repos/task_017/tests/test_metrics.py",
+    "data/mini_repo_debug/repos/task_018/src/ranking.py",
+    "data/mini_repo_debug/repos/task_018/tests/test_ranking.py",
+    "data/mini_repo_debug/repos/task_019/src/invoice_service.py",
+    "data/mini_repo_debug/repos/task_019/src/pricing_helpers.py",
+    "data/mini_repo_debug/repos/task_019/tests/test_invoice_service.py",
+    "data/mini_repo_debug/repos/task_020/src/access.py",
+    "data/mini_repo_debug/repos/task_020/tests/test_access.py",
+    "data/mini_repo_debug/repos/task_021/task_021_lib/normalizer.py",
+    "data/mini_repo_debug/repos/task_021/tests/test_task_021_public.py",
+    "data/mini_repo_debug/repos/task_022/task_022_lib/paths.py",
+    "data/mini_repo_debug/repos/task_022/tests/test_task_022_public.py",
+    "data/mini_repo_debug/repos/task_023/task_023_lib/cache.py",
+    "data/mini_repo_debug/repos/task_023/tests/test_task_023_public.py",
+    "data/mini_repo_debug/repos/task_024/task_024_lib/tags.py",
+    "data/mini_repo_debug/repos/task_024/tests/test_task_024_public.py",
+    "data/mini_repo_debug/repos/task_025/task_025_lib/stats.py",
+    "data/mini_repo_debug/repos/task_025/tests/test_task_025_public.py",
+    "data/mini_repo_debug/repos/task_026/task_026_lib/config.py",
+    "data/mini_repo_debug/repos/task_026/tests/test_task_026_public.py",
+    "data/mini_repo_debug/repos/task_027/task_027_lib/cli.py",
+    "data/mini_repo_debug/repos/task_027/tests/test_task_027_public.py",
+    "data/mini_repo_debug/repos/task_028/task_028_lib/ranking.py",
+    "data/mini_repo_debug/repos/task_028/tests/test_task_028_public.py",
+    "data/mini_repo_debug/repos/task_029/task_029_lib/parser.py",
+    "data/mini_repo_debug/repos/task_029/tests/test_task_029_public.py",
+    "data/mini_repo_debug/repos/task_030/task_030_lib/invoice.py",
+    "data/mini_repo_debug/repos/task_030/task_030_lib/tax.py",
+    "data/mini_repo_debug/repos/task_030/tests/test_task_030_public.py",
+    "data/mini_repo_debug/repos/task_031/task_031_lib/ports.py",
+    "data/mini_repo_debug/repos/task_031/tests/test_task_031_public.py",
+    "data/mini_repo_debug/repos/task_032/task_032_lib/percent.py",
+    "data/mini_repo_debug/repos/task_032/tests/test_task_032_public.py",
+    "data/mini_repo_debug/repos/task_033/task_033_lib/catalog.py",
+    "data/mini_repo_debug/repos/task_033/tests/test_task_033_public.py",
+    "data/mini_repo_debug/repos/task_034/task_034_lib/discounts.py",
+    "data/mini_repo_debug/repos/task_034/task_034_lib/orders.py",
+    "data/mini_repo_debug/repos/task_034/tests/test_task_034_public.py",
+    "data/mini_repo_debug/repos/task_035/task_035_lib/roles.py",
+    "data/mini_repo_debug/repos/task_035/tests/test_task_035_public.py",
+    "data/mini_repo_debug/repos/task_036/task_036_lib/formatters.py",
+    "data/mini_repo_debug/repos/task_036/task_036_lib/receipt.py",
+    "data/mini_repo_debug/repos/task_036/tests/test_task_036_public.py",
+    "data/mini_repo_debug/repos/task_037/task_037_lib/batches.py",
+    "data/mini_repo_debug/repos/task_037/tests/test_task_037_public.py",
+    "data/mini_repo_debug/repos/task_038/task_038_lib/tags.py",
+    "data/mini_repo_debug/repos/task_038/tests/test_task_038_public.py",
+    "data/mini_repo_debug/repos/task_039/task_039_lib/usernames.py",
+    "data/mini_repo_debug/repos/task_039/tests/test_task_039_public.py",
+    "data/mini_repo_debug/repos/task_040/task_040_lib/merge.py",
+    "data/mini_repo_debug/repos/task_040/tests/test_task_040_public.py",
+    "data/mini_repo_debug/repos/task_041/task_041_lib/parser.py",
+    "data/mini_repo_debug/repos/task_041/tests/test_task_041_public.py",
+    "data/mini_repo_debug/repos/task_042/task_042_lib/paths.py",
+    "data/mini_repo_debug/repos/task_042/tests/test_task_042_public.py",
+    "data/mini_repo_debug/repos/task_043/task_043_lib/cache.py",
+    "data/mini_repo_debug/repos/task_043/tests/test_task_043_public.py",
+    "data/mini_repo_debug/repos/task_044/task_044_lib/options.py",
+    "data/mini_repo_debug/repos/task_044/tests/test_task_044_public.py",
+    "data/mini_repo_debug/repos/task_045/task_045_lib/windows.py",
+    "data/mini_repo_debug/repos/task_045/tests/test_task_045_public.py",
+    "data/mini_repo_debug/repos/task_046/task_046_lib/slugs.py",
+    "data/mini_repo_debug/repos/task_046/tests/test_task_046_public.py",
+    "data/mini_repo_debug/repos/task_047/task_047_lib/profiles.py",
+    "data/mini_repo_debug/repos/task_047/tests/test_task_047_public.py",
+    "data/mini_repo_debug/repos/task_048/task_048_lib/dates.py",
+    "data/mini_repo_debug/repos/task_048/tests/test_task_048_public.py",
+    "data/mini_repo_debug/repos/task_049/task_049_lib/config.py",
+    "data/mini_repo_debug/repos/task_049/tests/test_task_049_public.py",
+    "data/mini_repo_debug/repos/task_050/task_050_lib/cli.py",
+    "data/mini_repo_debug/repos/task_050/tests/test_task_050_public.py",
+    "data/mini_repo_debug/repos/task_051/task_051_lib/parser.py",
+    "data/mini_repo_debug/repos/task_051/tests/test_task_051_public.py",
+    "data/mini_repo_debug/repos/task_052/task_052_lib/temperature.py",
+    "data/mini_repo_debug/repos/task_052/tests/test_task_052_public.py",
+    "data/mini_repo_debug/repos/task_053/task_053_lib/sorting.py",
+    "data/mini_repo_debug/repos/task_053/tests/test_task_053_public.py",
+    "data/mini_repo_debug/repos/task_054/task_054_lib/pipeline.py",
+    "data/mini_repo_debug/repos/task_054/tests/test_task_054_public.py",
+    "data/mini_repo_debug/repos/task_055/task_055_lib/tags.py",
+    "data/mini_repo_debug/repos/task_055/tests/test_task_055_public.py",
+    "data/mini_repo_debug/repos/task_056/task_056_lib/helpers.py",
+    "data/mini_repo_debug/repos/task_056/task_056_lib/stats.py",
+    "data/mini_repo_debug/repos/task_056/tests/test_task_056_public.py",
+    "data/mini_repo_debug/repos/task_057/task_057_lib/counter.py",
+    "data/mini_repo_debug/repos/task_057/tests/test_task_057_public.py",
+    "data/mini_repo_debug/repos/task_058/task_058_lib/fs.py",
+    "data/mini_repo_debug/repos/task_058/tests/test_task_058_public.py",
+    "data/mini_repo_debug/repos/task_059/task_059_lib/validators.py",
+    "data/mini_repo_debug/repos/task_059/tests/test_task_059_public.py",
+    "data/mini_repo_debug/repos/task_060/task_060_lib/config.py",
+    "data/mini_repo_debug/repos/task_060/tests/test_task_060_public.py",
+    "data/mini_repo_debug/repos/task_061/task_061_lib/version.py",
+    "data/mini_repo_debug/repos/task_061/tests/test_task_061_public.py",
+    "data/mini_repo_debug/repos/task_062/task_062_lib/resolve.py",
+    "data/mini_repo_debug/repos/task_062/tests/test_task_062_public.py",
+    "data/mini_repo_debug/repos/task_063/task_063_lib/keys.py",
+    "data/mini_repo_debug/repos/task_063/tests/test_task_063_public.py",
+    "data/mini_repo_debug/repos/task_064/task_064_lib/query.py",
+    "data/mini_repo_debug/repos/task_064/tests/test_task_064_public.py",
+    "data/mini_repo_debug/repos/task_065/task_065_lib/pages.py",
+    "data/mini_repo_debug/repos/task_065/tests/test_task_065_public.py",
+    "data/mini_repo_debug/repos/task_066/task_066_lib/whitespace.py",
+    "data/mini_repo_debug/repos/task_066/tests/test_task_066_public.py",
+    "data/mini_repo_debug/repos/task_067/task_067_lib/frequencies.py",
+    "data/mini_repo_debug/repos/task_067/tests/test_task_067_public.py",
+    "data/mini_repo_debug/repos/task_068/task_068_lib/months.py",
+    "data/mini_repo_debug/repos/task_068/tests/test_task_068_public.py",
+    "data/mini_repo_debug/repos/task_069/task_069_lib/config.py",
+    "data/mini_repo_debug/repos/task_069/tests/test_task_069_public.py",
+    "data/mini_repo_debug/repos/task_070/task_070_lib/transform.py",
+    "data/mini_repo_debug/repos/task_070/tests/test_task_070_public.py",
+    "data/mini_repo_debug/repos/task_071/task_071_lib/reader.py",
+    "data/mini_repo_debug/repos/task_071/tests/test_task_071_public.py",
+    "data/mini_repo_debug/repos/task_072/task_072_lib/math_utils.py",
+    "data/mini_repo_debug/repos/task_072/tests/test_task_072_public.py",
+    "data/mini_repo_debug/repos/task_073/task_073_lib/ranking.py",
+    "data/mini_repo_debug/repos/task_073/tests/test_task_073_public.py",
+    "data/mini_repo_debug/repos/task_074/task_074_lib/service.py",
+    "data/mini_repo_debug/repos/task_074/tests/test_task_074_public.py",
+    "data/mini_repo_debug/repos/task_075/task_075_lib/lookup.py",
+    "data/mini_repo_debug/repos/task_075/tests/test_task_075_public.py",
+    "data/mini_repo_debug/repos/task_076/task_076_lib/filtering.py",
+    "data/mini_repo_debug/repos/task_076/task_076_lib/validator.py",
+    "data/mini_repo_debug/repos/task_076/tests/test_task_076_public.py",
+    "data/mini_repo_debug/repos/task_077/task_077_lib/stack.py",
+    "data/mini_repo_debug/repos/task_077/tests/test_task_077_public.py",
+    "data/mini_repo_debug/repos/task_078/task_078_lib/init_once.py",
+    "data/mini_repo_debug/repos/task_078/tests/test_task_078_public.py",
+    "data/mini_repo_debug/repos/task_079/task_079_lib/email_check.py",
+    "data/mini_repo_debug/repos/task_079/tests/test_task_079_public.py",
+    "data/mini_repo_debug/repos/task_080/task_080_lib/merge.py",
+    "data/mini_repo_debug/repos/task_080/tests/test_task_080_public.py",
+    "data/mini_repo_debug/repos/task_081/task_081_lib/ini_reader.py",
+    "data/mini_repo_debug/repos/task_081/tests/test_task_081_public.py",
+    "data/mini_repo_debug/repos/task_082/task_082_lib/extension.py",
+    "data/mini_repo_debug/repos/task_082/tests/test_task_082_public.py",
+    "data/mini_repo_debug/repos/task_083/task_083_lib/hashing.py",
+    "data/mini_repo_debug/repos/task_083/tests/test_task_083_public.py",
+    "data/mini_repo_debug/repos/task_084/task_084_lib/formatting.py",
+    "data/mini_repo_debug/repos/task_084/tests/test_task_084_public.py",
+    "data/mini_repo_debug/repos/task_085/task_085_lib/wrap.py",
+    "data/mini_repo_debug/repos/task_085/tests/test_task_085_public.py",
+    "data/mini_repo_debug/repos/task_086/task_086_lib/unicode_utils.py",
+    "data/mini_repo_debug/repos/task_086/tests/test_task_086_public.py",
+    "data/mini_repo_debug/repos/task_087/task_087_lib/defaults.py",
+    "data/mini_repo_debug/repos/task_087/tests/test_task_087_public.py",
+    "data/mini_repo_debug/repos/task_088/task_088_lib/dates.py",
+    "data/mini_repo_debug/repos/task_088/tests/test_task_088_public.py",
+    "data/mini_repo_debug/repos/task_089/task_089_lib/settings.py",
+    "data/mini_repo_debug/repos/task_089/tests/test_task_089_public.py",
+    "data/mini_repo_debug/repos/task_090/task_090_lib/repeat.py",
+    "data/mini_repo_debug/repos/task_090/tests/test_task_090_public.py",
+    "data/mini_repo_debug/repos/task_091/task_091_lib/gateway.py",
+    "data/mini_repo_debug/repos/task_091/tests/test_task_091_public.py",
+    "data/mini_repo_debug/repos/task_092/task_092_lib/bounds.py",
+    "data/mini_repo_debug/repos/task_092/tests/test_task_092_public.py",
+    "data/mini_repo_debug/repos/task_093/task_093_lib/matchers.py",
+    "data/mini_repo_debug/repos/task_093/tests/test_task_093_public.py",
+    "data/mini_repo_debug/repos/task_094/task_094_lib/orchestrator.py",
+    "data/mini_repo_debug/repos/task_094/tests/test_task_094_public.py",
+    "data/mini_repo_debug/repos/task_095/task_095_lib/commands.py",
+    "data/mini_repo_debug/repos/task_095/tests/test_task_095_public.py",
+    "data/mini_repo_debug/repos/task_096/task_096_lib/cart.py",
+    "data/mini_repo_debug/repos/task_096/task_096_lib/models.py",
+    "data/mini_repo_debug/repos/task_096/tests/test_task_096_public.py",
+    "data/mini_repo_debug/repos/task_097/task_097_lib/limiter.py",
+    "data/mini_repo_debug/repos/task_097/tests/test_task_097_public.py",
+    "data/mini_repo_debug/repos/task_098/task_098_lib/seed.py",
+    "data/mini_repo_debug/repos/task_098/tests/test_task_098_public.py",
+    "data/mini_repo_debug/repos/task_099/task_099_lib/password_check.py",
+    "data/mini_repo_debug/repos/task_099/tests/test_task_099_public.py",
+    "data/mini_repo_debug/repos/task_100/task_100_lib/layered.py",
+    "data/mini_repo_debug/repos/task_100/tests/test_task_100_public.py"
+  ],
+  "import_graph": {},
+  "imported_by": {},
+  "per_task": {
+    "task_001": {
+      "chunks": 5,
+      "files": 2
+    },
+    "task_002": {
+      "chunks": 8,
+      "files": 2
+    },
+    "task_003": {
+      "chunks": 5,
+      "files": 2
+    },
+    "task_004": {
+      "chunks": 6,
+      "files": 2
+    },
+    "task_005": {
+      "chunks": 8,
+      "files": 4
+    },
+    "task_006": {
+      "chunks": 4,
+      "files": 2
+    },
+    "task_007": {
+      "chunks": 5,
+      "files": 2
+    },
+    "task_008": {
+      "chunks": 6,
+      "files": 2
+    },
+    "task_009": {
+      "chunks": 4,
+      "files": 2
+    },
+    "task_010": {
+      "chunks": 4,
+      "files": 2
+    },
+    "task_011": {
+      "chunks": 4,
+      "files": 2
+    },
+    "task_012": {
+      "chunks": 4,
+      "files": 2
+    },
+    "task_013": {
+      "chunks": 5,
+      "files": 2
+    },
+    "task_014": {
+      "chunks": 5,
+      "files": 2
+    },
+    "task_015": {
+      "chunks": 8,
+      "files": 2
+    },
+    "task_016": {
+      "chunks": 4,
+      "files": 2
+    },
+    "task_017": {
+      "chunks": 4,
+      "files": 2
+    },
+    "task_018": {
+      "chunks": 4,
+      "files": 2
+    },
+    "task_019": {
+      "chunks": 7,
+      "files": 3
+    },
+    "task_020": {
+      "chunks": 4,
+      "files": 2
+    },
+    "task_021": {
+      "chunks": 3,
+      "files": 2
+    },
+    "task_022": {
+      "chunks": 5,
+      "files": 2
+    },
+    "task_023": {
+      "chunks": 4,
+      "files": 2
+    },
+    "task_024": {
+      "chunks": 3,
+      "files": 2
+    },
+    "task_025": {
+      "chunks": 4,
+      "files": 2
+    },
+    "task_026": {
+      "chunks": 4,
+      "files": 2
+    },
+    "task_027": {
+      "chunks": 6,
+      "files": 2
+    },
+    "task_028": {
+      "chunks": 3,
+      "files": 2
+    },
+    "task_029": {
+      "chunks": 4,
+      "files": 2
+    },
+    "task_030": {
+      "chunks": 6,
+      "files": 3
+    },
+    "task_031": {
+      "chunks": 4,
+      "files": 2
+    },
+    "task_032": {
+      "chunks": 3,
+      "files": 2
+    },
+    "task_033": {
+      "chunks": 2,
+      "files": 2
+    },
+    "task_034": {
+      "chunks": 5,
+      "files": 3
+    },
+    "task_035": {
+      "chunks": 3,
+      "files": 2
+    },
+    "task_036": {
+      "chunks": 4,
+      "files": 3
+    },
+    "task_037": {
+      "chunks": 2,
+      "files": 2
+    },
+    "task_038": {
+      "chunks": 3,
+      "files": 2
+    },
+    "task_039": {
+      "chunks": 3,
+      "files": 2
+    },
+    "task_040": {
+      "chunks": 3,
+      "files": 2
+    },
+    "task_041": {
+      "chunks": 3,
+      "files": 2
+    },
+    "task_042": {
+      "chunks": 4,
+      "files": 2
+    },
+    "task_043": {
+      "chunks": 4,
+      "files": 2
+    },
+    "task_044": {
+      "chunks": 2,
+      "files": 2
+    },
+    "task_045": {
+      "chunks": 3,
+      "files": 2
+    },
+    "task_046": {
+      "chunks": 3,
+      "files": 2
+    },
+    "task_047": {
+      "chunks": 3,
+      "files": 2
+    },
+    "task_048": {
+      "chunks": 5,
+      "files": 2
+    },
+    "task_049": {
+      "chunks": 4,
+      "files": 2
+    },
+    "task_050": {
+      "chunks": 5,
+      "files": 2
+    },
+    "task_051": {
+      "chunks": 3,
+      "files": 2
+    },
+    "task_052": {
+      "chunks": 3,
+      "files": 2
+    },
+    "task_053": {
+      "chunks": 3,
+      "files": 2
+    },
+    "task_054": {
+      "chunks": 4,
+      "files": 2
+    },
+    "task_055": {
+      "chunks": 3,
+      "files": 2
+    },
+    "task_056": {
+      "chunks": 5,
+      "files": 3
+    },
+    "task_057": {
+      "chunks": 7,
+      "files": 2
+    },
+    "task_058": {
+      "chunks": 4,
+      "files": 2
+    },
+    "task_059": {
+      "chunks": 4,
+      "files": 2
+    },
+    "task_060": {
+      "chunks": 3,
+      "files": 2
+    },
+    "task_061": {
+      "chunks": 3,
+      "files": 2
+    },
+    "task_062": {
+      "chunks": 3,
+      "files": 2
+    },
+    "task_063": {
+      "chunks": 3,
+      "files": 2
+    },
+    "task_064": {
+      "chunks": 3,
+      "files": 2
+    },
+    "task_065": {
+      "chunks": 4,
+      "files": 2
+    },
+    "task_066": {
+      "chunks": 4,
+      "files": 2
+    },
+    "task_067": {
+      "chunks": 3,
+      "files": 2
+    },
+    "task_068": {
+      "chunks": 5,
+      "files": 2
+    },
+    "task_069": {
+      "chunks": 4,
+      "files": 2
+    },
+    "task_070": {
+      "chunks": 5,
+      "files": 2
+    },
+    "task_071": {
+      "chunks": 4,
+      "files": 2
+    },
+    "task_072": {
+      "chunks": 4,
+      "files": 2
+    },
+    "task_073": {
+      "chunks": 3,
+      "files": 2
+    },
+    "task_074": {
+      "chunks": 4,
+      "files": 2
+    },
+    "task_075": {
+      "chunks": 3,
+      "files": 2
+    },
+    "task_076": {
+      "chunks": 5,
+      "files": 3
+    },
+    "task_077": {
+      "chunks": 10,
+      "files": 2
+    },
+    "task_078": {
+      "chunks": 4,
+      "files": 2
+    },
+    "task_079": {
+      "chunks": 4,
+      "files": 2
+    },
+    "task_080": {
+      "chunks": 4,
+      "files": 2
+    },
+    "task_081": {
+      "chunks": 3,
+      "files": 2
+    },
+    "task_082": {
+      "chunks": 4,
+      "files": 2
+    },
+    "task_083": {
+      "chunks": 4,
+      "files": 2
+    },
+    "task_084": {
+      "chunks": 5,
+      "files": 2
+    },
+    "task_085": {
+      "chunks": 4,
+      "files": 2
+    },
+    "task_086": {
+      "chunks": 3,
+      "files": 2
+    },
+    "task_087": {
+      "chunks": 5,
+      "files": 2
+    },
+    "task_088": {
+      "chunks": 6,
+      "files": 2
+    },
+    "task_089": {
+      "chunks": 5,
+      "files": 2
+    },
+    "task_090": {
+      "chunks": 6,
+      "files": 2
+    },
+    "task_091": {
+      "chunks": 3,
+      "files": 2
+    },
+    "task_092": {
+      "chunks": 5,
+      "files": 2
+    },
+    "task_093": {
+      "chunks": 4,
+      "files": 2
+    },
+    "task_094": {
+      "chunks": 3,
+      "files": 2
+    },
+    "task_095": {
+      "chunks": 6,
+      "files": 2
+    },
+    "task_096": {
+      "chunks": 7,
+      "files": 3
+    },
+    "task_097": {
+      "chunks": 8,
+      "files": 2
+    },
+    "task_098": {
+      "chunks": 3,
+      "files": 2
+    },
+    "task_099": {
+      "chunks": 5,
+      "files": 2
+    },
+    "task_100": {
+      "chunks": 4,
+      "files": 2
+    }
+  },
+  "chunks_path": "data/mini_repo_debug/code_index/code_chunks.jsonl"
+}

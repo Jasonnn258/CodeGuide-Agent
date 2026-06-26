@@ -1,0 +1,1638 @@
+{
+  "num_tasks": 100,
+  "valid_tasks": 80,
+  "avg_chunks_per_task": 4.225,
+  "file_hit_at_1": 0.0,
+  "file_hit_at_3": 0.0,
+  "file_hit_at_5": 0.0,
+  "symbol_hit_at_1": 0.3,
+  "symbol_hit_at_3": 0.8625,
+  "symbol_hit_at_5": 0.9625,
+  "passed": true,
+  "per_task": [
+    {
+      "task_id": "task_001",
+      "total_chunks": 5,
+      "gold_files": [
+        "src/config_loader.py"
+      ],
+      "gold_functions": [
+        "load_config"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_001/src/config_loader.py",
+        "data/mini_repo_debug/repos/task_001/tests/test_config_loader.py"
+      ],
+      "top5_symbols": [
+        "config_loader__L1",
+        "load_config",
+        "test_config_loader__L1",
+        "test_loads_json_config",
+        "test_loads_yaml_config"
+      ]
+    },
+    {
+      "task_id": "task_002",
+      "total_chunks": 8,
+      "gold_files": [
+        "src/text_cli.py"
+      ],
+      "gold_functions": [
+        "transform"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_002/src/text_cli.py",
+        "data/mini_repo_debug/repos/task_002/tests/test_text_cli.py"
+      ],
+      "top5_symbols": [
+        "build_parser",
+        "main",
+        "test_default_lowercase_still_works",
+        "test_uppercase_flag_transforms_text",
+        "transform"
+      ]
+    },
+    {
+      "task_id": "task_003",
+      "total_chunks": 5,
+      "gold_files": [
+        "src/summarizer.py"
+      ],
+      "gold_functions": [
+        "total_amount"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_003/src/summarizer.py",
+        "data/mini_repo_debug/repos/task_003/tests/test_summarizer.py"
+      ],
+      "top5_symbols": [
+        "summarizer__L1",
+        "test_ignores_empty_amount_rows",
+        "test_normal_csv_still_sums",
+        "test_summarizer__L1",
+        "total_amount"
+      ]
+    },
+    {
+      "task_id": "task_004",
+      "total_chunks": 6,
+      "gold_files": [
+        "src/pricing.py"
+      ],
+      "gold_functions": [
+        "get_price"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_004/src/pricing.py",
+        "data/mini_repo_debug/repos/task_004/tests/test_pricing.py"
+      ],
+      "top5_symbols": [
+        "PriceService",
+        "__init__",
+        "get_price",
+        "test_cache_key_includes_region",
+        "test_reuses_cached_exact_item_region"
+      ]
+    },
+    {
+      "task_id": "task_006",
+      "total_chunks": 4,
+      "gold_files": [
+        "src/pair_parser.py"
+      ],
+      "gold_functions": [
+        "parse_pairs"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_006/src/pair_parser.py",
+        "data/mini_repo_debug/repos/task_006/tests/test_pair_parser.py"
+      ],
+      "top5_symbols": [
+        "parse_pairs",
+        "test_pair_parser__L1",
+        "test_simple_pairs_still_parse",
+        "test_value_may_contain_equals_signs"
+      ]
+    },
+    {
+      "task_id": "task_007",
+      "total_chunks": 5,
+      "gold_files": [
+        "src/assets.py"
+      ],
+      "gold_functions": [
+        "asset_path"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_007/src/assets.py",
+        "data/mini_repo_debug/repos/task_007/tests/test_assets.py"
+      ],
+      "top5_symbols": [
+        "asset_path",
+        "assets__L1",
+        "test_assets__L1",
+        "test_leading_slash_stays_under_base_dir",
+        "test_relative_asset_path_still_joins"
+      ]
+    },
+    {
+      "task_id": "task_008",
+      "total_chunks": 6,
+      "gold_files": [
+        "src/greetings.py"
+      ],
+      "gold_functions": [
+        "greeting_for"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_008/src/greetings.py",
+        "data/mini_repo_debug/repos/task_008/tests/test_greetings.py"
+      ],
+      "top5_symbols": [
+        "GreetingService",
+        "__init__",
+        "greeting_for",
+        "test_cache_key_includes_locale",
+        "test_reuses_same_user_and_locale"
+      ]
+    },
+    {
+      "task_id": "task_009",
+      "total_chunks": 4,
+      "gold_files": [
+        "src/tags.py"
+      ],
+      "gold_functions": [
+        "collect_tags"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_009/src/tags.py",
+        "data/mini_repo_debug/repos/task_009/tests/test_tags.py"
+      ],
+      "top5_symbols": [
+        "collect_tags",
+        "test_collects_unique_tags_from_one_call",
+        "test_default_tags_do_not_leak_between_calls",
+        "test_tags__L1"
+      ]
+    },
+    {
+      "task_id": "task_011",
+      "total_chunks": 4,
+      "gold_files": [
+        "src/email_utils.py"
+      ],
+      "gold_functions": [
+        "normalize_email"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_011/src/email_utils.py",
+        "data/mini_repo_debug/repos/task_011/tests/test_email_utils.py"
+      ],
+      "top5_symbols": [
+        "normalize_email",
+        "test_email_utils__L1",
+        "test_lowercases_email_still_works",
+        "test_strips_surrounding_whitespace"
+      ]
+    },
+    {
+      "task_id": "task_012",
+      "total_chunks": 4,
+      "gold_files": [
+        "src/config_defaults.py"
+      ],
+      "gold_functions": [
+        "merge_defaults"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_012/src/config_defaults.py",
+        "data/mini_repo_debug/repos/task_012/tests/test_config_defaults.py"
+      ],
+      "top5_symbols": [
+        "merge_defaults",
+        "test_config_defaults__L1",
+        "test_defaults_are_not_mutated",
+        "test_user_config_overrides_defaults"
+      ]
+    },
+    {
+      "task_id": "task_013",
+      "total_chunks": 5,
+      "gold_files": [
+        "src/due_dates.py"
+      ],
+      "gold_functions": [
+        "is_expired"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_013/src/due_dates.py",
+        "data/mini_repo_debug/repos/task_013/tests/test_due_dates.py"
+      ],
+      "top5_symbols": [
+        "due_dates__L1",
+        "is_expired",
+        "test_due_dates__L1",
+        "test_due_today_is_expired",
+        "test_future_date_is_not_expired"
+      ]
+    },
+    {
+      "task_id": "task_014",
+      "total_chunks": 5,
+      "gold_files": [
+        "src/jsonl_loader.py"
+      ],
+      "gold_functions": [
+        "load_json_lines"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_014/src/jsonl_loader.py",
+        "data/mini_repo_debug/repos/task_014/tests/test_jsonl_loader.py"
+      ],
+      "top5_symbols": [
+        "jsonl_loader__L1",
+        "load_json_lines",
+        "test_blank_lines_are_skipped",
+        "test_jsonl_loader__L1",
+        "test_normal_json_lines_still_load"
+      ]
+    },
+    {
+      "task_id": "task_016",
+      "total_chunks": 4,
+      "gold_files": [
+        "src/users.py"
+      ],
+      "gold_functions": [
+        "find_user"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_016/src/users.py",
+        "data/mini_repo_debug/repos/task_016/tests/test_users.py"
+      ],
+      "top5_symbols": [
+        "find_user",
+        "test_existing_user_is_returned",
+        "test_missing_user_returns_none",
+        "test_users__L1"
+      ]
+    },
+    {
+      "task_id": "task_017",
+      "total_chunks": 4,
+      "gold_files": [
+        "src/metrics.py"
+      ],
+      "gold_functions": [
+        "average"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_017/src/metrics.py",
+        "data/mini_repo_debug/repos/task_017/tests/test_metrics.py"
+      ],
+      "top5_symbols": [
+        "average",
+        "test_average_of_values_still_works",
+        "test_empty_average_returns_zero",
+        "test_metrics__L1"
+      ]
+    },
+    {
+      "task_id": "task_018",
+      "total_chunks": 4,
+      "gold_files": [
+        "src/ranking.py"
+      ],
+      "gold_functions": [
+        "top_active"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_018/src/ranking.py",
+        "data/mini_repo_debug/repos/task_018/tests/test_ranking.py"
+      ],
+      "top5_symbols": [
+        "test_filters_inactive_users",
+        "test_ranking__L1",
+        "test_returns_highest_scoring_active_users_first",
+        "top_active"
+      ]
+    },
+    {
+      "task_id": "task_019",
+      "total_chunks": 7,
+      "gold_files": [
+        "src/invoice_service.py"
+      ],
+      "gold_functions": [
+        "make_invoice"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_019/src/invoice_service.py",
+        "data/mini_repo_debug/repos/task_019/src/pricing_helpers.py",
+        "data/mini_repo_debug/repos/task_019/tests/test_invoice_service.py"
+      ],
+      "top5_symbols": [
+        "add_tax",
+        "invoice_service__L1",
+        "make_invoice",
+        "test_invoice_adds_tax",
+        "test_invoice_without_tax_still_uses_subtotal"
+      ]
+    },
+    {
+      "task_id": "task_021",
+      "total_chunks": 3,
+      "gold_files": [
+        "task_021_lib/normalizer.py"
+      ],
+      "gold_functions": [
+        "normalize_label"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_021/task_021_lib/normalizer.py",
+        "data/mini_repo_debug/repos/task_021/tests/test_task_021_public.py"
+      ],
+      "top5_symbols": [
+        "normalize_label",
+        "test_lowercase_and_strip",
+        "test_simple_case_insensitive_match"
+      ]
+    },
+    {
+      "task_id": "task_022",
+      "total_chunks": 5,
+      "gold_files": [
+        "task_022_lib/paths.py"
+      ],
+      "gold_functions": [
+        "safe_join"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_022/task_022_lib/paths.py",
+        "data/mini_repo_debug/repos/task_022/tests/test_task_022_public.py"
+      ],
+      "top5_symbols": [
+        "paths__L1",
+        "safe_join",
+        "test_nested_relative_path",
+        "test_normalizes_simple_relative_path",
+        "test_task_022_public__L1"
+      ]
+    },
+    {
+      "task_id": "task_023",
+      "total_chunks": 4,
+      "gold_files": [
+        "task_023_lib/cache.py"
+      ],
+      "gold_functions": [
+        "make_cache_key"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_023/task_023_lib/cache.py",
+        "data/mini_repo_debug/repos/task_023/tests/test_task_023_public.py"
+      ],
+      "top5_symbols": [
+        "cache__L1",
+        "make_cache_key",
+        "test_different_params_do_not_collide",
+        "test_same_params_have_same_key_even_if_order_differs"
+      ]
+    },
+    {
+      "task_id": "task_024",
+      "total_chunks": 3,
+      "gold_files": [
+        "task_024_lib/tags.py"
+      ],
+      "gold_functions": [
+        "add_tag"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_024/task_024_lib/tags.py",
+        "data/mini_repo_debug/repos/task_024/tests/test_task_024_public.py"
+      ],
+      "top5_symbols": [
+        "add_tag",
+        "test_appends_to_existing_tags",
+        "test_omitted_tags_do_not_share_state"
+      ]
+    },
+    {
+      "task_id": "task_026",
+      "total_chunks": 4,
+      "gold_files": [
+        "task_026_lib/config.py"
+      ],
+      "gold_functions": [
+        "load_config"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_026/task_026_lib/config.py",
+        "data/mini_repo_debug/repos/task_026/tests/test_task_026_public.py"
+      ],
+      "top5_symbols": [
+        "config__L1",
+        "load_config",
+        "test_loads_nested_plain_json",
+        "test_loads_plain_json_object"
+      ]
+    },
+    {
+      "task_id": "task_027",
+      "total_chunks": 6,
+      "gold_files": [
+        "task_027_lib/cli.py"
+      ],
+      "gold_functions": [
+        "main"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_027/task_027_lib/cli.py",
+        "data/mini_repo_debug/repos/task_027/tests/test_task_027_public.py"
+      ],
+      "top5_symbols": [
+        "build_parser",
+        "main",
+        "render",
+        "test_default_limit_still_works",
+        "test_limit_flag_reaches_renderer"
+      ]
+    },
+    {
+      "task_id": "task_028",
+      "total_chunks": 3,
+      "gold_files": [
+        "task_028_lib/ranking.py"
+      ],
+      "gold_functions": [
+        "active_names"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_028/task_028_lib/ranking.py",
+        "data/mini_repo_debug/repos/task_028/tests/test_task_028_public.py"
+      ],
+      "top5_symbols": [
+        "active_names",
+        "test_applies_min_score",
+        "test_filters_inactive_users"
+      ]
+    },
+    {
+      "task_id": "task_029",
+      "total_chunks": 4,
+      "gold_files": [
+        "task_029_lib/parser.py"
+      ],
+      "gold_functions": [
+        "parse_timeout"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_029/task_029_lib/parser.py",
+        "data/mini_repo_debug/repos/task_029/tests/test_task_029_public.py"
+      ],
+      "top5_symbols": [
+        "ConfigError",
+        "parse_timeout",
+        "test_missing_timeout_raises_config_error",
+        "test_valid_timeout_string"
+      ]
+    },
+    {
+      "task_id": "task_031",
+      "total_chunks": 4,
+      "gold_files": [
+        "task_031_lib/ports.py"
+      ],
+      "gold_functions": [
+        "parse_port"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_031/task_031_lib/ports.py",
+        "data/mini_repo_debug/repos/task_031/tests/test_task_031_public.py"
+      ],
+      "top5_symbols": [
+        "ConfigError",
+        "parse_port",
+        "test_default_port",
+        "test_string_port"
+      ]
+    },
+    {
+      "task_id": "task_032",
+      "total_chunks": 3,
+      "gold_files": [
+        "task_032_lib/percent.py"
+      ],
+      "gold_functions": [
+        "percent_change"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_032/task_032_lib/percent.py",
+        "data/mini_repo_debug/repos/task_032/tests/test_task_032_public.py"
+      ],
+      "top5_symbols": [
+        "percent_change",
+        "test_percent_decrease",
+        "test_percent_increase"
+      ]
+    },
+    {
+      "task_id": "task_033",
+      "total_chunks": 2,
+      "gold_files": [
+        "task_033_lib/catalog.py"
+      ],
+      "gold_functions": [
+        "visible_titles"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_033/task_033_lib/catalog.py",
+        "data/mini_repo_debug/repos/task_033/tests/test_task_033_public.py"
+      ],
+      "top5_symbols": [
+        "test_filters_visibility_and_category",
+        "visible_titles"
+      ]
+    },
+    {
+      "task_id": "task_034",
+      "total_chunks": 5,
+      "gold_files": [
+        "task_034_lib/discounts.py",
+        "task_034_lib/orders.py"
+      ],
+      "gold_functions": [
+        "apply_discount",
+        "order_total"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_034/task_034_lib/discounts.py",
+        "data/mini_repo_debug/repos/task_034/task_034_lib/orders.py",
+        "data/mini_repo_debug/repos/task_034/tests/test_task_034_public.py"
+      ],
+      "top5_symbols": [
+        "apply_discount",
+        "order_total",
+        "orders__L1",
+        "test_order_total_applies_discount",
+        "test_quantity_still_counts"
+      ]
+    },
+    {
+      "task_id": "task_036",
+      "total_chunks": 4,
+      "gold_files": [
+        "task_036_lib/formatters.py",
+        "task_036_lib/receipt.py"
+      ],
+      "gold_functions": [
+        "format_currency",
+        "render_receipt"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_036/task_036_lib/formatters.py",
+        "data/mini_repo_debug/repos/task_036/task_036_lib/receipt.py",
+        "data/mini_repo_debug/repos/task_036/tests/test_task_036_public.py"
+      ],
+      "top5_symbols": [
+        "format_currency",
+        "receipt__L1",
+        "render_receipt",
+        "test_receipt_formats_positive_total"
+      ]
+    },
+    {
+      "task_id": "task_037",
+      "total_chunks": 2,
+      "gold_files": [
+        "task_037_lib/batches.py"
+      ],
+      "gold_functions": [
+        "add_batch_item"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_037/task_037_lib/batches.py",
+        "data/mini_repo_debug/repos/task_037/tests/test_task_037_public.py"
+      ],
+      "top5_symbols": [
+        "add_batch_item",
+        "test_default_batch_is_not_shared"
+      ]
+    },
+    {
+      "task_id": "task_038",
+      "total_chunks": 3,
+      "gold_files": [
+        "task_038_lib/tags.py"
+      ],
+      "gold_functions": [
+        "ensure_tag"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_038/task_038_lib/tags.py",
+        "data/mini_repo_debug/repos/task_038/tests/test_task_038_public.py"
+      ],
+      "top5_symbols": [
+        "ensure_tag",
+        "test_adds_missing_tag",
+        "test_does_not_mutate_input_when_adding"
+      ]
+    },
+    {
+      "task_id": "task_039",
+      "total_chunks": 3,
+      "gold_files": [
+        "task_039_lib/usernames.py"
+      ],
+      "gold_functions": [
+        "is_valid_username"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_039/task_039_lib/usernames.py",
+        "data/mini_repo_debug/repos/task_039/tests/test_task_039_public.py"
+      ],
+      "top5_symbols": [
+        "is_valid_username",
+        "test_accepts_normal_name",
+        "test_rejects_too_short_name"
+      ]
+    },
+    {
+      "task_id": "task_041",
+      "total_chunks": 3,
+      "gold_files": [
+        "task_041_lib/parser.py"
+      ],
+      "gold_functions": [
+        "parse_assignment"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_041/task_041_lib/parser.py",
+        "data/mini_repo_debug/repos/task_041/tests/test_task_041_public.py"
+      ],
+      "top5_symbols": [
+        "parse_assignment",
+        "test_parses_simple_assignment",
+        "test_strips_outer_whitespace"
+      ]
+    },
+    {
+      "task_id": "task_042",
+      "total_chunks": 4,
+      "gold_files": [
+        "task_042_lib/paths.py"
+      ],
+      "gold_functions": [
+        "safe_asset_path"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_042/task_042_lib/paths.py",
+        "data/mini_repo_debug/repos/task_042/tests/test_task_042_public.py"
+      ],
+      "top5_symbols": [
+        "paths__L1",
+        "safe_asset_path",
+        "test_keeps_simple_relative_path",
+        "test_normalizes_current_directory"
+      ]
+    },
+    {
+      "task_id": "task_043",
+      "total_chunks": 4,
+      "gold_files": [
+        "task_043_lib/cache.py"
+      ],
+      "gold_functions": [
+        "make_cache_key"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_043/task_043_lib/cache.py",
+        "data/mini_repo_debug/repos/task_043/tests/test_task_043_public.py"
+      ],
+      "top5_symbols": [
+        "cache__L1",
+        "make_cache_key",
+        "test_kwargs_affect_cache_key",
+        "test_kwargs_order_is_stable"
+      ]
+    },
+    {
+      "task_id": "task_044",
+      "total_chunks": 2,
+      "gold_files": [
+        "task_044_lib/options.py"
+      ],
+      "gold_functions": [
+        "add_flag"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_044/task_044_lib/options.py",
+        "data/mini_repo_debug/repos/task_044/tests/test_task_044_public.py"
+      ],
+      "top5_symbols": [
+        "add_flag",
+        "test_default_flags_are_independent"
+      ]
+    },
+    {
+      "task_id": "task_046",
+      "total_chunks": 3,
+      "gold_files": [
+        "task_046_lib/slugs.py"
+      ],
+      "gold_functions": [
+        "slugify"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_046/task_046_lib/slugs.py",
+        "data/mini_repo_debug/repos/task_046/tests/test_task_046_public.py"
+      ],
+      "top5_symbols": [
+        "slugify",
+        "test_outer_whitespace",
+        "test_simple_words"
+      ]
+    },
+    {
+      "task_id": "task_047",
+      "total_chunks": 3,
+      "gold_files": [
+        "task_047_lib/profiles.py"
+      ],
+      "gold_functions": [
+        "with_status"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_047/task_047_lib/profiles.py",
+        "data/mini_repo_debug/repos/task_047/tests/test_task_047_public.py"
+      ],
+      "top5_symbols": [
+        "test_original_profile_is_unchanged",
+        "test_returns_updated_profile",
+        "with_status"
+      ]
+    },
+    {
+      "task_id": "task_048",
+      "total_chunks": 5,
+      "gold_files": [
+        "task_048_lib/dates.py"
+      ],
+      "gold_functions": [
+        "is_due"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_048/task_048_lib/dates.py",
+        "data/mini_repo_debug/repos/task_048/tests/test_task_048_public.py"
+      ],
+      "top5_symbols": [
+        "dates__L1",
+        "is_due",
+        "test_future_date_is_not_due",
+        "test_past_date_is_due",
+        "test_task_048_public__L1"
+      ]
+    },
+    {
+      "task_id": "task_049",
+      "total_chunks": 4,
+      "gold_files": [
+        "task_049_lib/config.py"
+      ],
+      "gold_functions": [
+        "is_enabled"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_049/task_049_lib/config.py",
+        "data/mini_repo_debug/repos/task_049/tests/test_task_049_public.py"
+      ],
+      "top5_symbols": [
+        "config__L1",
+        "is_enabled",
+        "test_boolean_false",
+        "test_boolean_true"
+      ]
+    },
+    {
+      "task_id": "task_051",
+      "total_chunks": 3,
+      "gold_files": [
+        "task_051_lib/parser.py"
+      ],
+      "gold_functions": [
+        "parse_int"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_051/task_051_lib/parser.py",
+        "data/mini_repo_debug/repos/task_051/tests/test_task_051_public.py"
+      ],
+      "top5_symbols": [
+        "parse_int",
+        "test_parses_integer_string",
+        "test_returns_none_for_garbage"
+      ]
+    },
+    {
+      "task_id": "task_052",
+      "total_chunks": 3,
+      "gold_files": [
+        "task_052_lib/temperature.py"
+      ],
+      "gold_functions": [
+        "celsius_to_fahrenheit"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_052/task_052_lib/temperature.py",
+        "data/mini_repo_debug/repos/task_052/tests/test_task_052_public.py"
+      ],
+      "top5_symbols": [
+        "celsius_to_fahrenheit",
+        "test_boiling_point",
+        "test_freezing_point"
+      ]
+    },
+    {
+      "task_id": "task_053",
+      "total_chunks": 3,
+      "gold_files": [
+        "task_053_lib/sorting.py"
+      ],
+      "gold_functions": [
+        "sort_names"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_053/task_053_lib/sorting.py",
+        "data/mini_repo_debug/repos/task_053/tests/test_task_053_public.py"
+      ],
+      "top5_symbols": [
+        "sort_names",
+        "test_sorts_lowercase_names",
+        "test_sorts_numeric_prefixes"
+      ]
+    },
+    {
+      "task_id": "task_054",
+      "total_chunks": 4,
+      "gold_files": [
+        "task_054_lib/pipeline.py"
+      ],
+      "gold_functions": [
+        "build_pipeline"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_054/task_054_lib/pipeline.py",
+        "data/mini_repo_debug/repos/task_054/tests/test_task_054_public.py"
+      ],
+      "top5_symbols": [
+        "build_pipeline",
+        "pipeline__L1",
+        "test_single_step_identity",
+        "test_single_step_pipeline"
+      ]
+    },
+    {
+      "task_id": "task_056",
+      "total_chunks": 5,
+      "gold_files": [
+        "task_056_lib/helpers.py",
+        "task_056_lib/stats.py"
+      ],
+      "gold_functions": [
+        "aggregate",
+        "report"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_056/task_056_lib/helpers.py",
+        "data/mini_repo_debug/repos/task_056/task_056_lib/stats.py",
+        "data/mini_repo_debug/repos/task_056/tests/test_task_056_public.py"
+      ],
+      "top5_symbols": [
+        "aggregate",
+        "report",
+        "stats__L1",
+        "test_report_single_value",
+        "test_report_with_values"
+      ]
+    },
+    {
+      "task_id": "task_057",
+      "total_chunks": 7,
+      "gold_files": [
+        "task_057_lib/counter.py"
+      ],
+      "gold_functions": [
+        "HitCounter.hit",
+        "HitCounter.reset"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_057/task_057_lib/counter.py",
+        "data/mini_repo_debug/repos/task_057/tests/test_task_057_public.py"
+      ],
+      "top5_symbols": [
+        "HitCounter",
+        "hit",
+        "reset",
+        "test_no_overflow_within_limit",
+        "test_reset_zeroes_count"
+      ]
+    },
+    {
+      "task_id": "task_058",
+      "total_chunks": 4,
+      "gold_files": [
+        "task_058_lib/fs.py"
+      ],
+      "gold_functions": [
+        "ensure_dir"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_058/task_058_lib/fs.py",
+        "data/mini_repo_debug/repos/task_058/tests/test_task_058_public.py"
+      ],
+      "top5_symbols": [
+        "ensure_dir",
+        "fs__L1",
+        "test_creates_new_directory",
+        "test_task_058_public__L1"
+      ]
+    },
+    {
+      "task_id": "task_059",
+      "total_chunks": 4,
+      "gold_files": [
+        "task_059_lib/validators.py"
+      ],
+      "gold_functions": [
+        "is_valid_username"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_059/task_059_lib/validators.py",
+        "data/mini_repo_debug/repos/task_059/tests/test_task_059_public.py"
+      ],
+      "top5_symbols": [
+        "is_valid_username",
+        "test_special_characters_rejected",
+        "test_too_short_username_rejected",
+        "test_valid_username_accepted"
+      ]
+    },
+    {
+      "task_id": "task_061",
+      "total_chunks": 3,
+      "gold_files": [
+        "task_061_lib/version.py"
+      ],
+      "gold_functions": [
+        "parse_version"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_061/task_061_lib/version.py",
+        "data/mini_repo_debug/repos/task_061/tests/test_task_061_public.py"
+      ],
+      "top5_symbols": [
+        "parse_version",
+        "test_stable_version",
+        "test_zero_version"
+      ]
+    },
+    {
+      "task_id": "task_062",
+      "total_chunks": 3,
+      "gold_files": [
+        "task_062_lib/resolve.py"
+      ],
+      "gold_functions": [
+        "resolve_path"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_062/task_062_lib/resolve.py",
+        "data/mini_repo_debug/repos/task_062/tests/test_task_062_public.py"
+      ],
+      "top5_symbols": [
+        "resolve_path",
+        "test_absolute_override",
+        "test_simple_child"
+      ]
+    },
+    {
+      "task_id": "task_063",
+      "total_chunks": 3,
+      "gold_files": [
+        "task_063_lib/keys.py"
+      ],
+      "gold_functions": [
+        "make_cache_key"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_063/task_063_lib/keys.py",
+        "data/mini_repo_debug/repos/task_063/tests/test_task_063_public.py"
+      ],
+      "top5_symbols": [
+        "make_cache_key",
+        "test_different_names_produce_different_keys",
+        "test_different_values_produce_different_keys"
+      ]
+    },
+    {
+      "task_id": "task_064",
+      "total_chunks": 3,
+      "gold_files": [
+        "task_064_lib/query.py"
+      ],
+      "gold_functions": [
+        "build_query"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_064/task_064_lib/query.py",
+        "data/mini_repo_debug/repos/task_064/tests/test_task_064_public.py"
+      ],
+      "top5_symbols": [
+        "build_query",
+        "test_all_parameters_present",
+        "test_single_parameter"
+      ]
+    },
+    {
+      "task_id": "task_066",
+      "total_chunks": 4,
+      "gold_files": [
+        "task_066_lib/whitespace.py"
+      ],
+      "gold_functions": [
+        "collapse_whitespace"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_066/task_066_lib/whitespace.py",
+        "data/mini_repo_debug/repos/task_066/tests/test_task_066_public.py"
+      ],
+      "top5_symbols": [
+        "collapse_whitespace",
+        "test_leading_trailing_stripped",
+        "test_multiple_spaces_collapsed",
+        "test_single_spaces_unchanged"
+      ]
+    },
+    {
+      "task_id": "task_067",
+      "total_chunks": 3,
+      "gold_files": [
+        "task_067_lib/frequencies.py"
+      ],
+      "gold_functions": [
+        "word_freq"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_067/task_067_lib/frequencies.py",
+        "data/mini_repo_debug/repos/task_067/tests/test_task_067_public.py"
+      ],
+      "top5_symbols": [
+        "test_counts_correctly",
+        "test_empty_list",
+        "word_freq"
+      ]
+    },
+    {
+      "task_id": "task_068",
+      "total_chunks": 5,
+      "gold_files": [
+        "task_068_lib/months.py"
+      ],
+      "gold_functions": [
+        "days_in_month"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_068/task_068_lib/months.py",
+        "data/mini_repo_debug/repos/task_068/tests/test_task_068_public.py"
+      ],
+      "top5_symbols": [
+        "days_in_month",
+        "months__L1",
+        "test_april",
+        "test_january",
+        "test_march"
+      ]
+    },
+    {
+      "task_id": "task_069",
+      "total_chunks": 4,
+      "gold_files": [
+        "task_069_lib/config.py"
+      ],
+      "gold_functions": [
+        "get_list"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_069/task_069_lib/config.py",
+        "data/mini_repo_debug/repos/task_069/tests/test_task_069_public.py"
+      ],
+      "top5_symbols": [
+        "config__L1",
+        "get_list",
+        "test_retrieves_empty_list",
+        "test_retrieves_existing_list"
+      ]
+    },
+    {
+      "task_id": "task_071",
+      "total_chunks": 4,
+      "gold_files": [
+        "task_071_lib/reader.py"
+      ],
+      "gold_functions": [
+        "read_file"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_071/task_071_lib/reader.py",
+        "data/mini_repo_debug/repos/task_071/tests/test_task_071_public.py"
+      ],
+      "top5_symbols": [
+        "read_file",
+        "test_missing_file_returns_empty",
+        "test_reads_existing_file",
+        "test_task_071_public__L1"
+      ]
+    },
+    {
+      "task_id": "task_072",
+      "total_chunks": 4,
+      "gold_files": [
+        "task_072_lib/math_utils.py"
+      ],
+      "gold_functions": [
+        "safe_percentage"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_072/task_072_lib/math_utils.py",
+        "data/mini_repo_debug/repos/task_072/tests/test_task_072_public.py"
+      ],
+      "top5_symbols": [
+        "safe_percentage",
+        "test_exact_percentage",
+        "test_fifty_percent",
+        "test_zero_whole_is_safe"
+      ]
+    },
+    {
+      "task_id": "task_073",
+      "total_chunks": 3,
+      "gold_files": [
+        "task_073_lib/ranking.py"
+      ],
+      "gold_functions": [
+        "top_by_score"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_073/task_073_lib/ranking.py",
+        "data/mini_repo_debug/repos/task_073/tests/test_task_073_public.py"
+      ],
+      "top5_symbols": [
+        "test_all_have_key",
+        "test_picks_top_by_score",
+        "top_by_score"
+      ]
+    },
+    {
+      "task_id": "task_074",
+      "total_chunks": 4,
+      "gold_files": [
+        "task_074_lib/service.py"
+      ],
+      "gold_functions": [
+        "fetch_user",
+        "format_name"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_074/task_074_lib/service.py",
+        "data/mini_repo_debug/repos/task_074/tests/test_task_074_public.py"
+      ],
+      "top5_symbols": [
+        "fetch_user",
+        "format_name",
+        "test_formats_another_user",
+        "test_formats_existing_user"
+      ]
+    },
+    {
+      "task_id": "task_076",
+      "total_chunks": 5,
+      "gold_files": [
+        "task_076_lib/filtering.py",
+        "task_076_lib/validator.py"
+      ],
+      "gold_functions": [
+        "filter_valid",
+        "is_even",
+        "is_positive"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_076/task_076_lib/filtering.py",
+        "data/mini_repo_debug/repos/task_076/task_076_lib/validator.py",
+        "data/mini_repo_debug/repos/task_076/tests/test_task_076_public.py"
+      ],
+      "top5_symbols": [
+        "filter_valid",
+        "filtering__L1",
+        "is_positive",
+        "test_is_positive_false",
+        "test_is_positive_true"
+      ]
+    },
+    {
+      "task_id": "task_077",
+      "total_chunks": 10,
+      "gold_files": [
+        "task_077_lib/stack.py"
+      ],
+      "gold_functions": [
+        "IntStack.clear",
+        "IntStack.pop",
+        "IntStack.popped_count",
+        "IntStack.push"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_077/task_077_lib/stack.py",
+        "data/mini_repo_debug/repos/task_077/tests/test_task_077_public.py"
+      ],
+      "top5_symbols": [
+        "clear",
+        "popped_count",
+        "test_clear_empties_stack",
+        "test_push_and_pop",
+        "test_size_after_operations"
+      ]
+    },
+    {
+      "task_id": "task_078",
+      "total_chunks": 4,
+      "gold_files": [
+        "task_078_lib/init_once.py"
+      ],
+      "gold_functions": [
+        "initialize"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_078/task_078_lib/init_once.py",
+        "data/mini_repo_debug/repos/task_078/tests/test_task_078_public.py"
+      ],
+      "top5_symbols": [
+        "init_once__L1",
+        "initialize",
+        "test_different_keys_are_independent",
+        "test_returns_same_value_on_repeated_call"
+      ]
+    },
+    {
+      "task_id": "task_079",
+      "total_chunks": 4,
+      "gold_files": [
+        "task_079_lib/email_check.py"
+      ],
+      "gold_functions": [
+        "is_valid_email"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_079/task_079_lib/email_check.py",
+        "data/mini_repo_debug/repos/task_079/tests/test_task_079_public.py"
+      ],
+      "top5_symbols": [
+        "is_valid_email",
+        "test_no_at_sign",
+        "test_no_dot",
+        "test_valid_email"
+      ]
+    },
+    {
+      "task_id": "task_081",
+      "total_chunks": 3,
+      "gold_files": [
+        "task_081_lib/ini_reader.py"
+      ],
+      "gold_functions": [
+        "parse_ini_section"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_081/task_081_lib/ini_reader.py",
+        "data/mini_repo_debug/repos/task_081/tests/test_task_081_public.py"
+      ],
+      "top5_symbols": [
+        "parse_ini_section",
+        "test_parses_simple_keys",
+        "test_skips_hash_comments"
+      ]
+    },
+    {
+      "task_id": "task_082",
+      "total_chunks": 4,
+      "gold_files": [
+        "task_082_lib/extension.py"
+      ],
+      "gold_functions": [
+        "split_extension"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_082/task_082_lib/extension.py",
+        "data/mini_repo_debug/repos/task_082/tests/test_task_082_public.py"
+      ],
+      "top5_symbols": [
+        "split_extension",
+        "test_multiple_dots_returns_last_ext",
+        "test_no_extension",
+        "test_simple_extension"
+      ]
+    },
+    {
+      "task_id": "task_083",
+      "total_chunks": 4,
+      "gold_files": [
+        "task_083_lib/hashing.py"
+      ],
+      "gold_functions": [
+        "hash_args"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_083/task_083_lib/hashing.py",
+        "data/mini_repo_debug/repos/task_083/tests/test_task_083_public.py"
+      ],
+      "top5_symbols": [
+        "hash_args",
+        "hashing__L1",
+        "test_different_args_different_hash",
+        "test_same_args_same_hash"
+      ]
+    },
+    {
+      "task_id": "task_084",
+      "total_chunks": 5,
+      "gold_files": [
+        "task_084_lib/formatting.py"
+      ],
+      "gold_functions": [
+        "format_table"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_084/task_084_lib/formatting.py",
+        "data/mini_repo_debug/repos/task_084/tests/test_task_084_public.py"
+      ],
+      "top5_symbols": [
+        "format_table",
+        "formatting__L1",
+        "test_empty_rows",
+        "test_formats_with_default_columns",
+        "test_formats_with_explicit_columns"
+      ]
+    },
+    {
+      "task_id": "task_086",
+      "total_chunks": 3,
+      "gold_files": [
+        "task_086_lib/unicode_utils.py"
+      ],
+      "gold_functions": [
+        "strip_accents"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_086/task_086_lib/unicode_utils.py",
+        "data/mini_repo_debug/repos/task_086/tests/test_task_086_public.py"
+      ],
+      "top5_symbols": [
+        "strip_accents",
+        "test_accented_e_removed",
+        "test_plain_ascii_unchanged"
+      ]
+    },
+    {
+      "task_id": "task_087",
+      "total_chunks": 5,
+      "gold_files": [
+        "task_087_lib/defaults.py"
+      ],
+      "gold_functions": [
+        "apply_defaults"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_087/task_087_lib/defaults.py",
+        "data/mini_repo_debug/repos/task_087/tests/test_task_087_public.py"
+      ],
+      "top5_symbols": [
+        "apply_defaults",
+        "defaults__L1",
+        "test_empty_defaults_is_noop",
+        "test_fills_missing_keys",
+        "test_keeps_existing_keys"
+      ]
+    },
+    {
+      "task_id": "task_088",
+      "total_chunks": 6,
+      "gold_files": [
+        "task_088_lib/dates.py"
+      ],
+      "gold_functions": [
+        "weeks_between"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_088/task_088_lib/dates.py",
+        "data/mini_repo_debug/repos/task_088/tests/test_task_088_public.py"
+      ],
+      "top5_symbols": [
+        "test_one_week",
+        "test_positive_range",
+        "test_same_date",
+        "test_task_088_public__L1",
+        "weeks_between"
+      ]
+    },
+    {
+      "task_id": "task_089",
+      "total_chunks": 5,
+      "gold_files": [
+        "task_089_lib/settings.py"
+      ],
+      "gold_functions": [
+        "get_nested"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_089/task_089_lib/settings.py",
+        "data/mini_repo_debug/repos/task_089/tests/test_task_089_public.py"
+      ],
+      "top5_symbols": [
+        "get_nested",
+        "settings__L1",
+        "test_nested_path",
+        "test_numeric_value",
+        "test_single_level"
+      ]
+    },
+    {
+      "task_id": "task_091",
+      "total_chunks": 3,
+      "gold_files": [
+        "task_091_lib/gateway.py"
+      ],
+      "gold_functions": [
+        "fetch_with_timeout"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_091/task_091_lib/gateway.py",
+        "data/mini_repo_debug/repos/task_091/tests/test_task_091_public.py"
+      ],
+      "top5_symbols": [
+        "fetch_with_timeout",
+        "test_invalid_url_returns_empty",
+        "test_nonexistent_host_returns_empty"
+      ]
+    },
+    {
+      "task_id": "task_092",
+      "total_chunks": 5,
+      "gold_files": [
+        "task_092_lib/bounds.py"
+      ],
+      "gold_functions": [
+        "clamp"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_092/task_092_lib/bounds.py",
+        "data/mini_repo_debug/repos/task_092/tests/test_task_092_public.py"
+      ],
+      "top5_symbols": [
+        "clamp",
+        "test_value_above_range",
+        "test_value_at_lower_boundary",
+        "test_value_below_range",
+        "test_value_within_range"
+      ]
+    },
+    {
+      "task_id": "task_093",
+      "total_chunks": 4,
+      "gold_files": [
+        "task_093_lib/matchers.py"
+      ],
+      "gold_functions": [
+        "filter_by_prefix"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_093/task_093_lib/matchers.py",
+        "data/mini_repo_debug/repos/task_093/tests/test_task_093_public.py"
+      ],
+      "top5_symbols": [
+        "filter_by_prefix",
+        "test_case_sensitive_match",
+        "test_empty_list",
+        "test_no_matches"
+      ]
+    },
+    {
+      "task_id": "task_094",
+      "total_chunks": 3,
+      "gold_files": [
+        "task_094_lib/orchestrator.py"
+      ],
+      "gold_functions": [
+        "enrich"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_094/task_094_lib/orchestrator.py",
+        "data/mini_repo_debug/repos/task_094/tests/test_task_094_public.py"
+      ],
+      "top5_symbols": [
+        "enrich",
+        "test_enriches_with_default_id",
+        "test_missing_id_returns_unknown"
+      ]
+    },
+    {
+      "task_id": "task_096",
+      "total_chunks": 7,
+      "gold_files": [
+        "task_096_lib/cart.py",
+        "task_096_lib/models.py"
+      ],
+      "gold_functions": [
+        "Item",
+        "cart_total"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_096/task_096_lib/cart.py",
+        "data/mini_repo_debug/repos/task_096/task_096_lib/models.py",
+        "data/mini_repo_debug/repos/task_096/tests/test_task_096_public.py"
+      ],
+      "top5_symbols": [
+        "Item",
+        "cart_total",
+        "test_multiple_items",
+        "test_single_item",
+        "test_task_096_public__L1"
+      ]
+    },
+    {
+      "task_id": "task_097",
+      "total_chunks": 8,
+      "gold_files": [
+        "task_097_lib/limiter.py"
+      ],
+      "gold_functions": [
+        "RateLimiter.allow",
+        "RateLimiter.reset"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_097/task_097_lib/limiter.py",
+        "data/mini_repo_debug/repos/task_097/tests/test_task_097_public.py"
+      ],
+      "top5_symbols": [
+        "RateLimiter",
+        "reset",
+        "test_allows_within_limit",
+        "test_blocks_over_limit",
+        "test_reset_clears_window"
+      ]
+    },
+    {
+      "task_id": "task_098",
+      "total_chunks": 3,
+      "gold_files": [
+        "task_098_lib/seed.py"
+      ],
+      "gold_functions": [
+        "ensure_seeded"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_098/task_098_lib/seed.py",
+        "data/mini_repo_debug/repos/task_098/tests/test_task_098_public.py"
+      ],
+      "top5_symbols": [
+        "ensure_seeded",
+        "seed__L1",
+        "test_first_call_works"
+      ]
+    },
+    {
+      "task_id": "task_099",
+      "total_chunks": 5,
+      "gold_files": [
+        "task_099_lib/password_check.py"
+      ],
+      "gold_functions": [
+        "is_strong_password"
+      ],
+      "top5_files": [
+        "data/mini_repo_debug/repos/task_099/task_099_lib/password_check.py",
+        "data/mini_repo_debug/repos/task_099/tests/test_task_099_public.py"
+      ],
+      "top5_symbols": [
+        "is_strong_password",
+        "test_missing_digit",
+        "test_missing_uppercase",
+        "test_strong_password",
+        "test_too_short"
+      ]
+    }
+  ],
+  "eval_config": {
+    "root": "data/mini_repo_debug",
+    "num_tasks": 100
+  }
+}

@@ -10,38 +10,34 @@
       "passed": true,
       "excluded_id": "task_001",
       "found_ids": [
+        "task_014",
         "task_026",
         "task_029",
-        "task_031",
         "task_049",
-        "task_069",
-        "task_071"
+        "task_060",
+        "task_069"
       ]
     },
     {
       "name": "exclude_generator_family",
       "passed": true,
-      "excluded_family": "basic_repair",
+      "excluded_family": "validation",
       "found_families": [
-        "advanced_repair",
-        "complex_repair",
+        "basic_repair",
         "config_parsing",
         "data_parsing",
         "edge_case_empty",
         "edge_case_none",
-        "error_handling",
-        "filtering",
         "formatting",
         "helper_function",
         "import_handling",
-        "intermediate_repair",
-        "missing_implementation",
+        "llm",
+        "noop",
+        "original_buggy",
         "parsing",
         "path_handling",
         "sorting",
-        "text_transform",
-        "validation",
-        "version_handling"
+        "text_transform"
       ]
     },
     {
