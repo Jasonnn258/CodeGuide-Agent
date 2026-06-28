@@ -21,7 +21,7 @@
     {
       "name": "exclude_generator_family",
       "passed": true,
-      "excluded_family": "validation",
+      "excluded_family": "helper_function",
       "found_families": [
         "basic_repair",
         "config_parsing",
@@ -29,7 +29,6 @@
         "edge_case_empty",
         "edge_case_none",
         "formatting",
-        "helper_function",
         "import_handling",
         "llm",
         "noop",
@@ -37,7 +36,8 @@
         "parsing",
         "path_handling",
         "sorting",
-        "text_transform"
+        "text_transform",
+        "validation"
       ]
     },
     {
