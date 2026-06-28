@@ -26,5 +26,6 @@
 - [PASS] P1.5 eval harness: unified offline status reporter (JSON + Markdown, make eval-report)
 - [PASS] P1.6 dataset quality diagnostics: local offline scan of metadata + history_index (make quality-report)
 - [PASS] P1.7 phase-succeeded idempotent logic: compute_phase_succeeded helper + regression tests
+- [PASS] P1.7 consolidated offline report: eval harness + dataset quality + 3 RAG ablation outputs in one JSON + Markdown report (make offline-report)
 
-Passed: 26 / 26
+Passed: 27 / 27
