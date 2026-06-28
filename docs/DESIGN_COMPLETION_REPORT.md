@@ -24,5 +24,6 @@
 - [PASS] P14 docs tag: mini-repo-debug-p14-interview-docs
 - [PASS] P15 audit tag: mini-repo-debug-p15-audit
 - [PASS] P1.5 eval harness: unified offline status reporter (JSON + Markdown, make eval-report)
+- [PASS] P1.6 dataset quality diagnostics: local offline scan of metadata + history_index (make quality-report)
 
-Passed: 24 / 24
+Passed: 25 / 25
