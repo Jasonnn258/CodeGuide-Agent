@@ -25,5 +25,6 @@
 - [PASS] P15 audit tag: mini-repo-debug-p15-audit
 - [PASS] P1.5 eval harness: unified offline status reporter (JSON + Markdown, make eval-report)
 - [PASS] P1.6 dataset quality diagnostics: local offline scan of metadata + history_index (make quality-report)
+- [PASS] P1.7 phase-succeeded idempotent logic: compute_phase_succeeded helper + regression tests
 
-Passed: 25 / 25
+Passed: 26 / 26

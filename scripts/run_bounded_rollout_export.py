@@ -22,6 +22,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
+from codeguide_agent.eval.phase_succeeded import compute_phase_succeeded
 from codeguide_agent.eval.run_eval import DEFAULT_TEMP_ROOT, discover_tasks
 from codeguide_agent.rollout.collector import RolloutCollector
 from codeguide_agent.rollout.policy import make_policy
@@ -108,17 +109,10 @@ def main() -> int:
 
     # ----- summary -----
     after = read_counts(root)
-    commands_ok = all(item["returncode"] == 0 for item in command_results)
-    final_state_good = (
-        after["sft_total"] >= 100
-        and after["preference_total"] >= 100
-        and after["preference_bank_total"] >= 100
-        and after["hard_preference_total"] >= 30
-        and after.get("active_task_count", 0) + after.get("planned_backlog_count", 0) >= 100
-    )
+    final_state_good = compute_phase_succeeded(failures, after)
     # Idempotent: succeed if final state meets thresholds and no rollout failures,
     # even if refresh commands return non-zero when no work is needed.
-    succeeded = not failures and final_state_good
+    succeeded = final_state_good
 
     delta_keys = sorted(set(before) | set(after))
     summary = {
