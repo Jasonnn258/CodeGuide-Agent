@@ -52,6 +52,7 @@ checks = [
     ('P13 release check', exists('scripts/release_check.sh'), 'release_check.sh'),
     ('P14 interview docs', exists('docs/INTERVIEW_PROJECT_BRIEF.md') and exists('docs/RESUME_BULLETS.md'), 'interview brief + resume bullets'),
     ('P15 model-facing audit', exists('scripts/audit_model_facing_artifacts.sh') and grep('audit:', ['Makefile']), 'make audit'),
+    ('P1.5 eval harness', exists('codeguide_agent/eval/harness_reporter.py') and exists('scripts/run_eval_harness_report.py'), 'make eval-report'),
 ]
 
 tags = run(['git', 'tag', '--list'])
