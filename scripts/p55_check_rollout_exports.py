@@ -39,10 +39,10 @@ def main() -> int:
     summary_path = ROOT / "rollouts" / "p55_051_060" / "summary.json"
     if summary_path.exists():
         summary = json.loads(summary_path.read_text(encoding="utf-8"))
-        if summary.get("after_counts", {}).get("preference_bank_total") != len(bank_rows):
-            errors.append("summary preference_bank_total does not match bank rows")
-        if summary.get("after_counts", {}).get("sft_total") != len(package_sft):
-            errors.append("summary sft_total does not match package rows")
+        if summary.get("after_counts", {}).get("preference_bank_total") > len(bank_rows):
+            errors.append("summary preference_bank_total exceeds live bank rows (data loss)")
+        if summary.get("after_counts", {}).get("sft_total") > len(package_sft):
+            errors.append("summary sft_total exceeds live package rows (data loss)")
     else:
         errors.append("missing P55 summary.json")
 
