@@ -404,7 +404,6 @@ codeguide_agent/context/
   manager.py
   budget.py
   compaction.py
-  memory_store.py
   pack_builder.py
 ```
 
@@ -414,7 +413,6 @@ codeguide_agent/context/
 ContextItem
 ContextPack
 ContextBudget
-ToolObservationSummary
 ```
 
 最小能力：
@@ -434,6 +432,8 @@ tests/test_context_pack.py
 tests/test_context_compaction.py
 tests/test_context_no_leakage.py
 ```
+
+注：早期草案提到 `memory_store.py` 与 `ToolObservationSummary`，但 P0 范围内不落地 session/project memory store，tool trace 由 `ContextItem(role=TOOL_TRACE)` 承载，避免引入未使用的抽象。
 
 ---
 
