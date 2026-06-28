@@ -38,3 +38,9 @@ data/mini_repo_debug/hf_training/
 __pycache__/
 .pytest_cache/
 checkpoints/
+
+# History RAG generated index
+data/mini_repo_debug/history_index/
+
+# SWE-bench smoke artifacts
+data/mini_repo_debug/swe_bench_smoke/
