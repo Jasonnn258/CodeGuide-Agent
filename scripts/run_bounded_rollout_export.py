@@ -28,7 +28,7 @@ from codeguide_agent.rollout.policy import make_policy
 from codeguide_agent.rollout.run_rollout import summarize_rollouts
 
 
-def main() -> int:
+def _build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Bounded rollout + canonical export")
     parser.add_argument("--root", default="data/mini_repo_debug")
     parser.add_argument("--phase", default="p99")
@@ -37,7 +37,11 @@ def main() -> int:
     parser.add_argument("--policies", default="noop,heuristic,scripted")
     parser.add_argument("--timeout", type=int, default=120)
     parser.add_argument("--max-steps", type=int, default=8)
-    args = parser.parse_args()
+    return parser
+
+
+def main() -> int:
+    args = _build_parser().parse_args()
 
     root = Path(args.root)
     task_ids = tuple(f"task_{i:03d}" for i in range(args.task_start, args.task_end + 1))

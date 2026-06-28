@@ -35,4 +35,24 @@
 - scripts/p55_rollout_export_051_060.py: thin wrapper
 - scripts/p61_rollout_export_061_100.py: thin wrapper
 - scripts/__init__.py: new (enables package imports)
-- shared/: new coordination files
+- scripts/test_wrapper_delegation.py: new (smoke test)
+- scripts/run_bounded_rollout_export.py: extracted _build_parser()
+- shared/: new/updated coordination files
+
+## Cycle 2 (2026-06-28) — Codex review fixes
+
+### Must-fix items addressed
+1. Added wrapper delegation smoke test (scripts/test_wrapper_delegation.py)
+   - Monkeypatches run_bounded_rollout_export.main, captures parsed args
+   - Extracted _build_parser() from main() for testability
+   - Result: 6/6 wrappers delegate correct --task-start, --task-end, --phase
+2. Updated AGENT_STATE.md: P0-3 PARTIAL → DONE
+3. Updated PLAN.md: removed completed wrapper conversion, updated to current state
+4. Updated HANDOFF_TO_CODEX.md: documented behavioral differences per review feedback
+
+### Validation (Cycle 2)
+| Command | Result |
+|---------|--------|
+| `python scripts/test_wrapper_delegation.py` | 6/6 PASS |
+| `make test` | 198 passed |
+| `python -m compileall scripts/*.py` | PASS |

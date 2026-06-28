@@ -11,7 +11,7 @@
 |------|--------|----------|
 | P0-1 Commit+tag 100-task v1 | DONE | Committed on main |
 | P0-2 p61_succeeded fix | DONE | Idempotent logic in run_bounded_rollout_export.py |
-| P0-3 Unified rollout scripts | PARTIAL | Unified runner exists, old scripts not yet thin wrappers |
+| P0-3 Unified rollout scripts | DONE | 6 legacy scripts converted to thin wrappers (each ~12 lines, delegate to run_bounded_rollout_export.py); smoke test verifies arg delegation |
 | P0-4 GPU smoke SFT | DONE | Documented |
 | P0-5 Context Management v0 | DONE | codeguide_agent/context/ with tests |
 | P0-6 ExperienceRecord extractor | DONE | codeguide_agent/rag/history_index.py with tests |

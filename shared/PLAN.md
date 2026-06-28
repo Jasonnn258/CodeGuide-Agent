@@ -7,6 +7,8 @@
 - Audit: PASS
 - Scale: 100 tasks, 100 SFT, 169 preference, 64 hard preference
 - P0/P1 roadmap items: ALL complete
+- Wrapper conversion: 6 legacy scripts → thin wrappers (committed)
+- Wrapper delegation smoke test: scripts/test_wrapper_delegation.py (6/6 PASS)
 
 ## Verification baseline (all PASS)
 - `make test`: 198 passed
@@ -18,20 +20,14 @@
 
 ## Planned Work (this cycle)
 
-### 1. Shared workspace initialization
-- Create AGENT_STATE.md, EXECUTION_LOG.md, HANDOFF_TO_CODEX.md
+### 1. Codex review fixes (post-P1 hardening)
+- Add smoke test for wrapper delegation (scripts/test_wrapper_delegation.py)
+- Update AGENT_STATE.md: P0-3 PARTIAL → DONE
+- Update PLAN.md to reflect completed wrapper conversion
+- Update HANDOFF_TO_CODEX.md with fix details
 
-### 2. Legacy per-phase rollout script cleanup (P0-3 completion)
-- The roadmap P0-3 says old phase scripts should be thin wrappers around `run_bounded_rollout_export.py`
-- Current state: old scripts (p34_rollout_export_021_025.py, etc.) are still standalone ~180-200 line duplicates
-- Convert them to thin wrappers that delegate to `run_bounded_rollout_export.py`
-
-### 3. Update stale CODEX_REVIEW.md
-- Current review references P3C work that is already completed
-- Update to reflect current P1 milestone state
-
-### 4. Validation and commit
-- Run full validation suite after changes
+### 2. Validation and commit
+- Run wrapper delegation smoke test plus existing validation suite
 - Commit to `claude` branch
 - Push to `origin/claude`
 
